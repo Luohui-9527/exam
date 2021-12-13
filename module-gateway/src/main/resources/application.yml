@@ -1,0 +1,246 @@
+server:
+  port: 8766
+eureka:
+  instance:
+    prefer-ip-address: false
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+  #    prefer-ip-address: true
+  #    ip-address: 192.168.1.103
+  #    non-secure-port: 8766
+  client:
+    serviceUrl:
+      #      defaultZone: http://118.31.7.229:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 5
+
+
+spring:
+  #云上
+  #  datasource:
+  #    url: jdbc:mysql://118.31.7.229:3307/user?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+  #    username: root
+  #    password: xym123
+  #    driverClassName: com.mysql.cj.jdbc.Driver
+  #  application:
+  #    name: gateway
+  #  redis:
+  #    database: 8
+  #    host: 118.31.7.229
+  #    port: 6379
+  #    password: xym123
+  datasource:
+    url: jdbc:mysql://localhost:3306/exam?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driverClassName: com.mysql.cj.jdbc.Driver
+  application:
+    name: gateway
+  redis:
+    database: 8
+    host: localhost
+    port: 6379
+    password: xym123
+  cloud:
+    gateway:
+      ################################
+      # 配置允许跨域请求
+      ################################
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+      discovery:
+        locator:
+          enabled: true
+      #    路由定义
+      routes:
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - name: Retry
+              args:
+                retries: 5
+                statuses: BAD_GATEWAY
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@ipKeyResolver}"
+
+        - id: baseinfo
+          uri: lb://baseinfo
+          predicates:
+            - Path=/baseinfo/**
+          filters:
+            #            - StripPrefix=3
+            - name: Retry
+              args:
+                retries: 5
+                statuses: BAD_GATEWAY
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@ipKeyResolver}"
+
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: Retry
+              args:
+                retries: 5
+                statuses: BAD_GATEWAY
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@ipKeyResolver}"
+
+        - id: paper
+          uri: lb://paper
+          predicates:
+            - Path=/paper/**
+          filters:
+            - name: Retry
+              args:
+                retries: 5
+                statuses: BAD_GATEWAY
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@ipKeyResolver}"
+
+        - id: exam
+          uri: lb://exam
+          predicates:
+            - Path=/exam/**
+          filters:
+            - name: Retry
+              args:
+                retries: 5
+                statuses: BAD_GATEWAY
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@ipKeyResolver}"
+      httpclient:
+        response-timeout: 5000
+    loadbalancer:
+      cache:
+        ttl: 5s
+  main:
+    allow-bean-definition-overriding: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+      circuitBreaker:
+        # 当在配置时间窗口内达到此数量的失败后，进行短路。默认20个
+        requestVolumeThreshold: 20
+        # 触发短路的时间值，当该值设为5000时，则当触发 circuit break 后的5000毫秒内都会拒绝request
+        # 也就是5000毫秒后才会关闭circuit。默认5000
+        sleepWindowInMilliseconds: 5000
+        # 强制打开熔断器，如果打开这个开关，那么拒绝所有request，默认false
+        forceOpen: false
+        # 强制关闭熔断器 如果这个开关打开，circuit将一直关闭且忽略，默认false
+        forceClosed: false
+
+
+org:
+  my:
+    jwt:
+      #跳过认证的路由
+      skipAuthUrls:
+        - /auth/login
+        - /auth/getInfo
+        - /auth/getMenu
+        - /auth/logout
+        - /user/login/logout
+        - /baseinfo/querySubjectTypeUpdateForm
+        - /baseinfo/queryCategoryInfo
+        - /baseinfo/getCategoryTree
+        - /baseinfo/queryDictionaryValue
+        - /baseinfo/queryAnswer
+        - /baseinfo/subjectType/querySubjectTypeUpdateForm
+        - /baseinfo/category/queryCategoryInfo
+        - /baseinfo/category/getCategoryTree
+        - /baseinfo/dictionary/queryDictionaryValue
+        - /baseinfo/subject/querySubject
+        - /baseinfo/combExamConfig/queryCombExamConfig
+        - /baseinfo/combExamConfig/queryCombExamConfigItem
+        - /user/org/getOrgUpdateForm
+        - /user/company/getCompanyList
+        - /user/company/getCompanyUpdateForm
+        - /user/department/getDepartmentList
+        - /user/department/queryDepartmentLevel
+        - /user/department/getDepartmentUpdateForm
+        - /user/resource/getResourceList
+        - /user/resource/getResourceUpdateForm
+        - /user/role/getRoleList
+        - /user/usermanagement/existCode
+        - /user/role/getRoleUpdateForm
+        - /user/role/updateResourceForRole
+        - /user/role/getUserForRoleForm
+        - /user/role/getResourceForRoleForm
+        - /user/resource/getResourceList
+        - /user/position/queryPositionOptions
+        - /user/position/getPositionUpdateForm
+        - /user/systemparam/getSystemParamUpdateForm
+        - /user/usermanagement/getUserManagementList
+        - /user/usermanagement/queryUserManagementOptions
+        - /user/usermanagement/getUserManagementUpdateForm
+        - /user/department/queryDepartmentParent
+        - /user/usermanagement/queryUserManagementRole
+        - /paper/template/query
+        - /paper/create/standard/gen
+        - /exam/exampublishrecord/getpaperinfo
+        - /exam/exampublishrecord/getuserinfo
+        - /bes/exam/exampublishrecord/getuserinfo
+        - /bes/exam/grade/markingPaper
+        - /bes/exam/dopaper/getPaper
+        - /bes/exam/grade/getPaperAnswer
+      ############################################
+      #   有效时长
+      #     单位：d:天、h:小时、m:分钟、s:秒
+      ###########################################
+      effective-time: 1m
+aaron:
+  data-center-id: 5
+  machine-id: 1
+  version: 1
