@@ -1,6 +1,7 @@
 package exam.demo.server.dto;
 
 import exam.demo.modulecommon.common.BaseDataBaseDto;
+import lombok.Data;
 
 import javax.validation.constraints.Max;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  *
  * @author luohui
  */
+@Data
 public class CategoryDto extends BaseDataBaseDto implements Serializable {
     private static final long serialVersionUID = 1645491693425153066L;
 
@@ -26,7 +28,7 @@ public class CategoryDto extends BaseDataBaseDto implements Serializable {
     /**
      * 父亲节点id
      */
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 父亲名
@@ -39,66 +41,5 @@ public class CategoryDto extends BaseDataBaseDto implements Serializable {
     @Max(2)
     private Byte status;
 
-    public CategoryDto() {
-    }
 
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryDto{" +
-                "name='" + name + '\'' +
-                ", remark='" + remark + '\'' +
-                ", parentId=" + parentId +
-                ", parentName='" + parentName + '\'' +
-                ", status=" + status +
-                ", judgeId=" + judgeId +
-                ", id=" + id +
-                ", orgId=" + orgId +
-                ", companyId=" + companyId +
-                ", createdBy=" + createdBy +
-                ", createdTime=" + createdTime +
-                ", updatedBy=" + updatedBy +
-                ", updatedTime=" + updatedTime +
-                ", version=" + version +
-                '}';
-    }
 }

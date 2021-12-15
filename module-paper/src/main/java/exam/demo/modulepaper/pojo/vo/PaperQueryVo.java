@@ -23,7 +23,7 @@ public class PaperQueryVo extends BaseQueryVo {
     /**
      * 难度
      */
-    private Long difficulty;
+    private Integer difficulty;
     /**
      * 开始时间
      */
@@ -49,11 +49,11 @@ public class PaperQueryVo extends BaseQueryVo {
         this.createdBy = createdBy;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 

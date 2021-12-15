@@ -17,7 +17,7 @@ public class CombExamConfigListVo extends BaseListVo implements Serializable {
      * 试卷难度id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 试卷难度
@@ -33,7 +33,7 @@ public class CombExamConfigListVo extends BaseListVo implements Serializable {
      * 更新人id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long updatedBy;
+    private Integer updatedBy;
 
     /**
      * 公司
@@ -44,17 +44,17 @@ public class CombExamConfigListVo extends BaseListVo implements Serializable {
      * 公司id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
 
     public CombExamConfigListVo() {
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -74,11 +74,11 @@ public class CombExamConfigListVo extends BaseListVo implements Serializable {
         this.company = company;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 
@@ -90,11 +90,11 @@ public class CombExamConfigListVo extends BaseListVo implements Serializable {
         this.updatedByName = updatedByName;
     }
 
-    public Long getUpdatedBy() {
+    public Integer getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(Long updatedBy) {
+    public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
     }
 

@@ -13,7 +13,7 @@ public class ExamGradeRecordTableDataVO implements Serializable {
      * 考试记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 交卷时间
      */
@@ -38,7 +38,7 @@ public class ExamGradeRecordTableDataVO implements Serializable {
      * 试卷id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperId;
+    private Integer paperId;
     /**
      * 试卷名
      */

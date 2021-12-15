@@ -20,27 +20,27 @@ public class CombExamConfigItemVo implements Serializable {
      * 组卷配置明细id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 题目类型id
      */
     @NotNull(message = "题目类型不能为空！")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
 
     /**
      * 组卷配置id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long combExamId;
+    private Integer combExamId;
 
     /**
      * 题目类别id
      */
     @NotNull(message = "题目类别不能为空！")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private Integer categoryId;
 
     /**
      * 题目数量
@@ -52,7 +52,7 @@ public class CombExamConfigItemVo implements Serializable {
      */
     @NotNull(message = "题目难度不能为空！")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 题目分数
@@ -69,27 +69,27 @@ public class CombExamConfigItemVo implements Serializable {
     public CombExamConfigItemVo() {
     }
 
-    public Long getSubjectTypeId() {
+    public Integer getSubjectTypeId() {
         return subjectTypeId;
     }
 
-    public void setSubjectTypeId(Long subjectTypeId) {
+    public void setSubjectTypeId(Integer subjectTypeId) {
         this.subjectTypeId = subjectTypeId;
     }
 
-    public Long getCombExamId() {
+    public Integer getCombExamId() {
         return combExamId;
     }
 
-    public void setCombExamId(Long combExamId) {
+    public void setCombExamId(Integer combExamId) {
         this.combExamId = combExamId;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -101,11 +101,11 @@ public class CombExamConfigItemVo implements Serializable {
         this.num = num;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -117,11 +117,11 @@ public class CombExamConfigItemVo implements Serializable {
         this.score = score;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

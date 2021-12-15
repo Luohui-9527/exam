@@ -84,7 +84,7 @@ public class MaintainPaperController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstant.MAINTAIN_DELETE_PAPER)
-    public CommonResponse deletePaper(@RequestBody List<Long> paperIds) {
+    public CommonResponse deletePaper(@RequestBody List<Integer> paperIds) {
         if (paperService.paperDelete(paperIds)) {
             baseService.evictPaper(paperIds);
             return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, true);
@@ -100,7 +100,7 @@ public class MaintainPaperController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstant.MAINTAIN_PAPER_DETAIL)
-    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Integer paperId) {
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperId));
     }
 

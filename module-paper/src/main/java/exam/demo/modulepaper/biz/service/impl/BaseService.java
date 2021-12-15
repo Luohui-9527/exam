@@ -163,7 +163,7 @@ public class BaseService {
             throw new PaperException(PaperError.PAPER_SUBJECT_IS_NULL);
         }
         // 获取试题id，然后去查询这些id对应的答案
-        List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<Integer> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         List<PaperSubjectAnswer> paperSubjectAnswerList = paperSubjectAnswerService.listAnswerBySubjectIdList(subjectIdList);
         // 复制答案
         // 创建复制的答案集合
@@ -257,7 +257,7 @@ public class BaseService {
      * @return
      */
     @Nullable
-    public String getBaseInfoCache(long id, int type) {
+    public String getBaseInfoCache(Integer id, int type) {
         if (type == CATEGORY) {
             Cache cache = cacheManager.getCache(CacheConstants.CATEGORY_VAL);
             Cache.ValueWrapper valueWrapper = cache.get(id);
@@ -295,14 +295,14 @@ public class BaseService {
     }
 
     @Nullable
-    public String getUserInfoCache(long id, int type) {
+    public String getUserInfoCache(Integer id, int type) {
         if (type == COMPANY) {
             Cache companyCache = cacheManager.getCache(CacheConstants.COMPANY_VAL);
             Cache.ValueWrapper wrapper = companyCache.get(id);
             if (wrapper != null) {
                 return (String) wrapper.get();
             } else {
-                CommonResponse response = userInfoApi.getCompanyById(new CommonRequest<>(commonState.getVersion(), TokenUtils.getToken(), id));
+                CommonResponse response = userInfoApi.getCompanyById(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.USER);
                 companyCache.put(id, val);
                 return val;
@@ -314,7 +314,7 @@ public class BaseService {
             if (wrapper != null) {
                 return (String) wrapper.get();
             } else {
-                CommonResponse response = userInfoApi.getUserNameById(new CommonRequest<>(commonState.getVersion(), TokenUtils.getToken(), id));
+                CommonResponse response = userInfoApi.getUserNameById(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.USER);
                 userCache.put(id, val);
                 return val;
@@ -330,14 +330,14 @@ public class BaseService {
      * @param paperIdList
      * @return
      */
-    public void evictPaper(List<Long> paperIdList) {
-        for (Long id : paperIdList) {
+    public void evictPaper(List<Integer> paperIdList) {
+        for (Integer id : paperIdList) {
             Cache cache = cacheManager.getCache(CacheConstants.PAPER_DETAIL);
             cache.evict(id);
         }
     }
 
-    public void evictPaper(long id) {
+    public void evictPaper(Integer id) {
         Cache cache = cacheManager.getCache(CacheConstants.PAPER_DETAIL);
         cache.evict(id);
     }
@@ -347,14 +347,14 @@ public class BaseService {
      *
      * @param id
      */
-    public void published(Long id) {
+    public void published(Integer id) {
         CommonResponse response = examInfoApi.checkEditable(id);
         if (!RPCUtils.parseResponse(response, Boolean.class, RPCUtils.EXAM)) {
             throw new PaperException(PaperError.PAPER_PUBLISHED_CANT_DELETE);
         }
     }
 
-    public PaperDetail queryDetailByPaperId(Long paperId) {
+    public PaperDetail queryDetailByPaperId(Integer paperId) {
         Cache cache = cacheManager.getCache(CacheConstants.PAPER);
         PaperDetail detail;
         if (cache != null && cache.get(paperId) != null) {

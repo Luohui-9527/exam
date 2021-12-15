@@ -25,7 +25,7 @@ public class SubjectQueryVo extends BaseQueryVo implements Serializable {
      * 题目id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 题目
      */
@@ -35,19 +35,19 @@ public class SubjectQueryVo extends BaseQueryVo implements Serializable {
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private Integer categoryId;
 
 
     /**
@@ -88,19 +88,19 @@ public class SubjectQueryVo extends BaseQueryVo implements Serializable {
     public SubjectQueryVo() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -112,19 +112,19 @@ public class SubjectQueryVo extends BaseQueryVo implements Serializable {
         this.name = name;
     }
 
-    public Long getSubjectTypeId() {
+    public Integer getSubjectTypeId() {
         return subjectTypeId;
     }
 
-    public void setSubjectTypeId(Long subjectTypeId) {
+    public void setSubjectTypeId(Integer subjectTypeId) {
         this.subjectTypeId = subjectTypeId;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 

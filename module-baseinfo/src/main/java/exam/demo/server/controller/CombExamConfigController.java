@@ -15,7 +15,7 @@ import exam.demo.server.constant.ControllerConstant;
 import exam.demo.server.constant.EnumUserInfoType;
 import exam.demo.server.dto.CombExamConfigDto;
 import exam.demo.server.pojo.model.CombExamConfig;
-import exam.demo.server.pojo.model.CombExamConfigItem;
+import exam.demo.server.pojo.model.CombExamConfigDetail;
 import exam.demo.server.pojo.vo.CombExamConfigItemListVo;
 import exam.demo.server.pojo.vo.CombExamConfigListVo;
 import exam.demo.server.pojo.vo.CombExamConfigQueryVo;
@@ -102,10 +102,10 @@ public class CombExamConfigController {
     @PostMapping(ControllerConstant.QUERY_CONFIG_ITEM)
     public CommonResponse<PageVo<CombExamConfigItemListVo>> queryCombExamConfigItem(@RequestBody CombExamConfigQueryVo queryVo) {
         Page<CombExamConfigQueryVo> page = new Page<>(queryVo.getPageNum(), queryVo.getPageSize());
-        CombExamConfigItem item = CommonUtils.copyProperties(queryVo, CombExamConfigItem.class);
-        item.setCombExamId(queryVo.getId());
-        List<CombExamConfigItem> combExamConfigItemList = combExamConfigItemService.listByCombExamId(item);
-        List<CombExamConfigItemListVo> voList = CommonUtils.convertList(combExamConfigItemList, CombExamConfigItemListVo.class);
+        CombExamConfigDetail item = CommonUtils.copyProperties(queryVo, CombExamConfigDetail.class);
+        item.setCombExamConfigId(queryVo.getId());
+        List<CombExamConfigDetail> combExamConfigDetailList = combExamConfigItemService.listByCombExamId(item);
+        List<CombExamConfigItemListVo> voList = CommonUtils.convertList(combExamConfigDetailList, CombExamConfigItemListVo.class);
         PageVo<CombExamConfigItemListVo> pageVo = PageMapUtil.getPageMap(voList, page);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }

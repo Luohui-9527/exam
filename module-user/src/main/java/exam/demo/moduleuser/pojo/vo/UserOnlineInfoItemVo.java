@@ -18,13 +18,13 @@ public class UserOnlineInfoItemVo extends BaseVo implements Serializable {
      * 在线ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 用户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long userId;
+    private Integer userId;
 
     /**
      * 工号
@@ -61,19 +61,19 @@ public class UserOnlineInfoItemVo extends BaseVo implements Serializable {
      */
     private Byte status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

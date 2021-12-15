@@ -21,7 +21,7 @@ public interface SubjectTypeService extends IService<SubjectType> {
 
     List<SubjectType> querySubjectTypeUpdateForm(SubjectType subjectType);
 
-    List<String> getTypeName(List<Long> idList);
+    List<String> getTypeName(List<Integer> idList);
 
-    String getTypeName(Long id);
+    String getTypeName(Integer id);
 }

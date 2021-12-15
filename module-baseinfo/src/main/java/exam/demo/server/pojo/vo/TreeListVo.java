@@ -2,12 +2,14 @@ package exam.demo.server.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * 树列表VO
  */
+@Data
 public class TreeListVo implements Serializable {
 
 
@@ -16,7 +18,7 @@ public class TreeListVo implements Serializable {
      * id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 名字
@@ -27,53 +29,11 @@ public class TreeListVo implements Serializable {
      * 父亲id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 版本
      */
     @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    @Override
-    public String toString() {
-        return "TreeListVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", parentId=" + parentId +
-                ", version=" + version +
-                '}';
-    }
 }

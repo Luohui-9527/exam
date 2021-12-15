@@ -19,13 +19,13 @@ public class CombExamConfigItemListVo implements Serializable {
      */
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
 
     /**
      * 题目类型
@@ -36,13 +36,13 @@ public class CombExamConfigItemListVo implements Serializable {
      * 组卷配置id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long combExamId;
+    private Integer combExamId;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private Integer categoryId;
 
     /**
      * 题目类别
@@ -58,7 +58,7 @@ public class CombExamConfigItemListVo implements Serializable {
      * 题目难度id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 题目难度
@@ -73,19 +73,19 @@ public class CombExamConfigItemListVo implements Serializable {
     public CombExamConfigItemListVo() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getCombExamId() {
+    public Integer getCombExamId() {
         return combExamId;
     }
 
-    public void setCombExamId(Long combExamId) {
+    public void setCombExamId(Integer combExamId) {
         this.combExamId = combExamId;
     }
 
@@ -121,27 +121,27 @@ public class CombExamConfigItemListVo implements Serializable {
         this.category = category;
     }
 
-    public Long getSubjectTypeId() {
+    public Integer getSubjectTypeId() {
         return subjectTypeId;
     }
 
-    public void setSubjectTypeId(Long subjectTypeId) {
+    public void setSubjectTypeId(Integer subjectTypeId) {
         this.subjectTypeId = subjectTypeId;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 

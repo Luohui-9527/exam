@@ -16,20 +16,20 @@ public class SubjectType extends Model<SubjectType> {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private Integer id;
     /**
      * 机构id
      */
-    public Long orgId;
+    public Integer orgId;
     /**
      * 机构下公司id
      */
     @TableField(exist = false)
-    public Long companyId;
+    public Integer companyId;
     /**
      * 通过id到数据字典中查询创建者
      */
-    public Long createdBy;
+    public Integer createdBy;
     /**
      * 创建日期
      */
@@ -37,7 +37,7 @@ public class SubjectType extends Model<SubjectType> {
     /**
      * 通过id到数据字典中查询修改者
      */
-    public Long updatedBy;
+    public Integer updatedBy;
     /**
      * 修改日期
      */
@@ -64,7 +64,7 @@ public class SubjectType extends Model<SubjectType> {
     private String remark;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private Integer judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

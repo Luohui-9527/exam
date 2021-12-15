@@ -100,16 +100,16 @@ public class JwtUtil {
         Map<String, Claim> map = jwt.getClaims();
         Map<String, String> resultMap = new HashMap<>();
         map.forEach((k, v) -> resultMap.put(k, v.asString()));
-        userPermission.setId(Long.valueOf(resultMap.get(ID)));
+        userPermission.setId(Integer.valueOf(resultMap.get(ID)));
         userPermission.setUserName(resultMap.get(USERNAME));
         // 通过size判断是否存在companyId
         if (resultMap.size() > 6) {
-            userPermission.setOrgId(Long.valueOf(resultMap.get(ORGANIZATION_ID)));
+            userPermission.setOrgId(Integer.valueOf(resultMap.get(ORGANIZATION_ID)));
         }
         if (resultMap.size() > 7) {
-            userPermission.setCompanyId(Long.valueOf(resultMap.get(COMPANY_ID)));
+            userPermission.setCompanyId(Integer.valueOf(resultMap.get(COMPANY_ID)));
         }
-        userPermission.setUserOnlineId(Long.valueOf(resultMap.get(USERONLINE_ID)));
+        userPermission.setUserOnlineId(Integer.valueOf(resultMap.get(USERONLINE_ID)));
         return userPermission;
     }
 }

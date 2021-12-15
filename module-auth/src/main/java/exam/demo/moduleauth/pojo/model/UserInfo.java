@@ -9,11 +9,11 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserInfo {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     private String name;
     private String profilePicture;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
     public String getName() {
         return name;
@@ -31,19 +31,19 @@ public class UserInfo {
         this.profilePicture = profilePicture;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

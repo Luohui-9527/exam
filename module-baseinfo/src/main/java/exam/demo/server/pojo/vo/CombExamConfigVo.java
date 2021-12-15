@@ -30,12 +30,12 @@ public class CombExamConfigVo extends BaseItemVo implements Serializable {
      */
     @NotNull(message = "难度不能为空！")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 删除的组卷配置明细id
      */
-    private List<Long> deleteIds;
+    private List<Integer> deleteIds;
 
     /**
      * 组卷配置明细VO
@@ -54,19 +54,19 @@ public class CombExamConfigVo extends BaseItemVo implements Serializable {
         this.name = name;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
-    public List<Long> getDeleteIds() {
+    public List<Integer> getDeleteIds() {
         return deleteIds;
     }
 
-    public void setDeleteIds(List<Long> deleteIds) {
+    public void setDeleteIds(List<Integer> deleteIds) {
         this.deleteIds = deleteIds;
     }
 

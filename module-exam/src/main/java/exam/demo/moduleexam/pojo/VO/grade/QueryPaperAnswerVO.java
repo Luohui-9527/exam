@@ -13,10 +13,10 @@ public class QueryPaperAnswerVO implements Serializable {
      * 试卷id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperId;
+    private Integer paperId;
     /**
      * 考试记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long examRecordId;
+    private Integer examRecordId;
 }

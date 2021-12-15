@@ -18,7 +18,7 @@ public interface PaperSubjectAnswerService extends IService<PaperSubjectAnswer> 
      * @param list
      * @return
      */
-    List<PaperSubjectAnswer> listAnswerBySubjectIdList(List<Long> list);
+    List<PaperSubjectAnswer> listAnswerBySubjectIdList(List<Integer> list);
 
     /**
      * 通过试题Id删除答案
@@ -26,5 +26,5 @@ public interface PaperSubjectAnswerService extends IService<PaperSubjectAnswer> 
      * @param idList
      * @return
      */
-    boolean deleteBySubjectId(List<Long> idList);
+    boolean deleteBySubjectId(List<Integer> idList);
 }

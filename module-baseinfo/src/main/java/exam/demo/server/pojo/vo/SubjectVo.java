@@ -31,7 +31,7 @@ public class SubjectVo extends BaseItemVo implements Serializable {
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "题型不能为空！")
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
 
     /**
      * 题目类型名
@@ -43,14 +43,14 @@ public class SubjectVo extends BaseItemVo implements Serializable {
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "题目难度不能为空！")
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "题目类别不能为空！")
-    private Long categoryId;
+    private Integer categoryId;
 
     /**
      * 题目类别名
@@ -71,11 +71,11 @@ public class SubjectVo extends BaseItemVo implements Serializable {
         this.name = name;
     }
 
-    public Long getSubjectTypeId() {
+    public Integer getSubjectTypeId() {
         return subjectTypeId;
     }
 
-    public void setSubjectTypeId(Long subjectTypeId) {
+    public void setSubjectTypeId(Integer subjectTypeId) {
         this.subjectTypeId = subjectTypeId;
     }
 
@@ -87,19 +87,19 @@ public class SubjectVo extends BaseItemVo implements Serializable {
         this.subjectTypeName = subjectTypeName;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 

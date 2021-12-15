@@ -1,94 +1,93 @@
 package exam.demo.moduleuser.pojo.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * t_position
- * @author
+ * 职位表 - 数据对象定义
+ *
+ * @author gpmscloud
  */
 @Data
-@Accessors(chain = true)
-public class Position extends Model<Position> implements Serializable {
-    private static final long serialVersionUID = 8834918461504763913L;
+@TableName("position")
+public class Position implements Serializable {
+
     /**
      * 职位ID
      */
-    private Long id;
-
+    @ApiModelProperty(value = "职位ID")
+    private Integer id;
     /**
      * 公司ID
      */
-    private Long companyId;
-
+    @ApiModelProperty(value = "公司ID")
+    private Integer companyId;
     /**
      * 职位名称
      */
+    @ApiModelProperty(value = "职位名称")
     private String name;
-
     /**
      * 职位编号
      */
+    @ApiModelProperty(value = "职位编号")
     private String code;
-
     /**
      * 备注
      */
+    @ApiModelProperty(value = "备注")
     private String remark;
-
     /**
      * 状态位
      */
-    private Byte status;
-
+    @ApiModelProperty(value = "状态位")
+    private Integer status;
     /**
      * 创建人
      */
-    private Long createdBy;
-
+    @ApiModelProperty(value = "创建人")
+    private Integer createdBy;
     /**
      * 创建时间
      */
-    private Date createdTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private java.util.Date createdTime;
     /**
      * 修改人
      */
-    private Long updatedBy;
-
+    @ApiModelProperty(value = "修改人")
+    private Integer updatedBy;
     /**
-     * 修改时间
+     * 更新时间
      */
-    private Date updatedTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "更新时间")
+    private java.util.Date updatedTime;
     /**
      * 版本
      */
+    @ApiModelProperty(value = "版本")
     private Long version;
 
     /**
-     *所属公司
+     * 所属公司
      */
     @TableField(exist = false)
     private String companyName;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private Integer judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;
 
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
 }

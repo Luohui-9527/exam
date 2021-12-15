@@ -15,7 +15,7 @@ public class ExamPublishRecordDeleteFormVO implements Serializable {
      */
     @NotNull(message = "发布记录id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 版本
      */

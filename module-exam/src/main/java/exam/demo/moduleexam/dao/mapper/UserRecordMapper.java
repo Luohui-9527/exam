@@ -10,5 +10,5 @@ import java.util.List;
 public interface UserRecordMapper extends BaseMapper<UserRecord> {
 
 
-    List<UserRecord> listExaminers(Long examPublishRecordId);
+    List<UserRecord> listExaminers(Integer examPublishRecordId);
 }

@@ -15,7 +15,7 @@ import exam.demo.server.dto.CombExamConfigDto;
 import exam.demo.server.exception.BaseInfoError;
 import exam.demo.server.exception.BaseInfoException;
 import exam.demo.server.pojo.model.CombExamConfig;
-import exam.demo.server.pojo.model.CombExamConfigItem;
+import exam.demo.server.pojo.model.CombExamConfigDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,12 +47,12 @@ public class CombExamConfigServiceImpl extends ServiceImpl<CombExamConfigDao, Co
     @FullCommonField
     @Override
     public boolean saveCombExamConfigItem(CombExamConfigDto combExamConfigDto) {
-        List<CombExamConfigItem> itemList = CommonUtils.convertList(combExamConfigDto.getCombExamConfigItemDtoList(), CombExamConfigItem.class);
-        for (CombExamConfigItem item : itemList) {
+        List<CombExamConfigDetail> itemList = CommonUtils.convertList(combExamConfigDto.getCombExamConfigItemDtoList(), CombExamConfigDetail.class);
+        for (CombExamConfigDetail item : itemList) {
             // 需要判断该题数目是否满足
             subjectService.isEnough(item.getCategoryId(), item.getSubjectTypeId(), item.getNum());
             item.setId(snowFlake.nextId());
-            item.setCombExamId(combExamConfigDto.getId());
+            item.setCombExamConfigId(combExamConfigDto.getId());
         }
         CombExamConfig config = CommonUtils.copyProperties(combExamConfigDto, CombExamConfig.class);
         try {
@@ -94,34 +94,34 @@ public class CombExamConfigServiceImpl extends ServiceImpl<CombExamConfigDao, Co
     @Override
     public boolean updateCombExamConfig(CombExamConfigDto dto) {
         CombExamConfig config = CommonUtils.copyProperties(dto, CombExamConfig.class);
-        List<CombExamConfigItem> saveCombExamConfigItemList = new ArrayList<>();
-        List<CombExamConfigItem> updateCombExamConfigItemList = new ArrayList<>();
+        List<CombExamConfigDetail> saveCombExamConfigDetailList = new ArrayList<>();
+        List<CombExamConfigDetail> updateCombExamConfigDetailList = new ArrayList<>();
         for (CombExamConfigItemDto itemDto : dto.getCombExamConfigItemDtoList()) {
             subjectService.isEnough(itemDto.getCategoryId(), itemDto.getSubjectTypeId(), itemDto.getNum());
-            CombExamConfigItem item = CommonUtils.copyProperties(itemDto, CombExamConfigItem.class);
+            CombExamConfigDetail item = CommonUtils.copyProperties(itemDto, CombExamConfigDetail.class);
             if (itemDto.getSave()) {
                 item.setId(snowFlake.nextId());
-                item.setCombExamId(config.getId());
-                saveCombExamConfigItemList.add(item);
+                item.setCombExamConfigId(config.getId());
+                saveCombExamConfigDetailList.add(item);
             } else {
-                updateCombExamConfigItemList.add(item);
+                updateCombExamConfigDetailList.add(item);
             }
         }
 
         // 拿出删除的配置
-        List<Long> deleted = dto.getDeleteIds();
+        List<Integer> deleted = dto.getDeleteIds();
         try {
             // 删除配置
             if (CommonUtils.notNull(deleted)) {
                 itemService.removeByIds(deleted);
             }
             // 更新配置
-            if (CommonUtils.notNull(updateCombExamConfigItemList)) {
-                itemService.updateBatchById(updateCombExamConfigItemList);
+            if (CommonUtils.notNull(updateCombExamConfigDetailList)) {
+                itemService.updateBatchById(updateCombExamConfigDetailList);
             }
             // 插入的配置
-            if (CommonUtils.notNull(saveCombExamConfigItemList)) {
-                itemService.saveBatch(saveCombExamConfigItemList);
+            if (CommonUtils.notNull(saveCombExamConfigDetailList)) {
+                itemService.saveBatch(saveCombExamConfigDetailList);
             }
         } catch (Exception e) {
             throw new BaseInfoException(BaseInfoError.COMB_EXAM_CONFIG_UPDATE_FAIL);

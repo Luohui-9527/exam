@@ -8,16 +8,16 @@ import java.util.Date;
 @Data
 @SuppressWarnings("unused")
 public class ExamAnswerSheetRecordTableDataDTO {
-    private Long id;
+    private Integer id;
     private Date actualEndTime;
     private Date actualStartTime;
     private Date endTime;
     private Integer examSession;
-    private Long publisher;
+    private Integer publisher;
     private String examiner;
     private Double objectiveSubjectScore;
     private Double subjectvieSubjectScore;
     private String tel;
     private String title;
-    private Long paperId;
+    private Integer paperId;
 }

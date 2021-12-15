@@ -9,7 +9,7 @@ public class AnswerRecord {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     /**
      * 我的答案
@@ -37,17 +37,17 @@ public class AnswerRecord {
      * 题目ID
      */
     @Column(name = "paper_subject_id")
-    private Long paperSubjectId;
+    private Integer paperSubjectId;
 
     @Column(name = "exam_record_id")
-    private Long examRecordId;
+    private Integer examRecordId;
 
     /**
      * 获取答卷明细ID
      *
      * @return id - 答卷明细ID
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -56,7 +56,7 @@ public class AnswerRecord {
      *
      * @param id 答卷明细ID
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -137,7 +137,7 @@ public class AnswerRecord {
      *
      * @return paper_subject_id - 题目ID
      */
-    public Long getPaperSubjectId() {
+    public Integer getPaperSubjectId() {
         return paperSubjectId;
     }
 
@@ -146,21 +146,21 @@ public class AnswerRecord {
      *
      * @param paperSubjectId 题目ID
      */
-    public void setPaperSubjectId(Long paperSubjectId) {
+    public void setPaperSubjectId(Integer paperSubjectId) {
         this.paperSubjectId = paperSubjectId;
     }
 
     /**
      * @return exam_record_id
      */
-    public Long getExamRecordId() {
+    public Integer getExamRecordId() {
         return examRecordId;
     }
 
     /**
      * @param examRecordId
      */
-    public void setExamRecordId(Long examRecordId) {
+    public void setExamRecordId(Integer examRecordId) {
         this.examRecordId = examRecordId;
     }
 }

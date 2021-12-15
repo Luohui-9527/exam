@@ -8,13 +8,13 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.SystemParamService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.SystemParamDto;
 import exam.demo.moduleuser.pojo.model.SystemParam;
 import exam.demo.moduleuser.pojo.vo.SystemParamItemVo;
 import exam.demo.moduleuser.pojo.vo.SystemParamListVo;
 import exam.demo.moduleuser.pojo.vo.SystemParamQueryVo;
+import exam.demo.moduleuser.service.ISystemParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ import java.util.List;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class SystemParamController {
     @Autowired
-    SystemParamService systemParamService;
+    ISystemParamService systemParamService;
 
     @Autowired
     CommonState state;
@@ -73,7 +73,7 @@ public class SystemParamController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_SP)
-    public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid CommonRequest<Long> request) {
+    public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid CommonRequest<Integer> request) {
         SystemParam systemParam = systemParamService.getById(request.getData());
         SystemParamListVo systemParamListVo = CommonUtils.copyProperties(systemParam, SystemParamListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, systemParamListVo);

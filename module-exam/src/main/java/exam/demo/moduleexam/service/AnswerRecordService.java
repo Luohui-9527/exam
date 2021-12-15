@@ -29,7 +29,7 @@ public interface AnswerRecordService extends IService<AnswerRecord> {
      * @Author: luohui
      * @date: 2021-12-10
      */
-    AnswerRecord getOneByPaperSubjectIdAndExamRecordId(Long paperSubjectId, Long examRecordId);
+    AnswerRecord getOneByPaperSubjectIdAndExamRecordId(Integer paperSubjectId, Integer examRecordId);
 
     /**
      * 功能描述: 根据考试记录id获取答卷明细
@@ -39,5 +39,5 @@ public interface AnswerRecordService extends IService<AnswerRecord> {
      * @Author: luohui
      * @date: 2021-12-10
      */
-    List<AnswerRecord> getListByExamRecordId(Long examRecordId);
+    List<AnswerRecord> getListByExamRecordId(Integer examRecordId);
 }

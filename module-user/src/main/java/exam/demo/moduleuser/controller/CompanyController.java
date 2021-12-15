@@ -8,7 +8,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.CompanyService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.CompanyDto;
 import exam.demo.moduleuser.dto.TreeListDto;
@@ -19,6 +18,7 @@ import exam.demo.moduleuser.pojo.vo.CompanyItemVo;
 import exam.demo.moduleuser.pojo.vo.CompanyListVo;
 import exam.demo.moduleuser.pojo.vo.CompanyQueryVo;
 import exam.demo.moduleuser.pojo.vo.TreeListVo;
+import exam.demo.moduleuser.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class CompanyController {
     @Autowired
-    CompanyService companyService;
+    ICompanyService companyService;
 
     @Autowired
     CommonState state;
@@ -53,7 +53,7 @@ public class CompanyController {
     @DeleteMapping(ControllerConstants.DELETE_C)
     public CommonResponse<Boolean> deleteCompany(@RequestBody @Valid CommonRequest<List<CompanyItemVo>> request) {
         List<CompanyItemVo> itemVoList = request.getData();
-        List<Long> idList = itemVoList.stream().map(CompanyItemVo::getId).collect(Collectors.toList());
+        List<Integer> idList = itemVoList.stream().map(CompanyItemVo::getId).collect(Collectors.toList());
         companyService.removeByIds(idList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -69,7 +69,7 @@ public class CompanyController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UPDATE_FORM_C)
-    public CommonResponse<CompanyListVo> getUpdateFormCompany(@RequestBody @Valid CommonRequest<Long> request) {
+    public CommonResponse<CompanyListVo> getUpdateFormCompany(@RequestBody @Valid CommonRequest<Integer> request) {
         Company company = companyService.getById(request.getData());
         if (company == null) {
             throw new UserException(UserError.DATA_NOT_EXIST);
@@ -93,7 +93,7 @@ public class CompanyController {
     @MethodEnhancer
     @GetMapping(ControllerConstants.GET_COMPANY_LIST)
     public CommonResponse<List> getCompanyList() {
-        Long judgeId = CommonUtils.judgeCompanyAndOrg();
+        Integer judgeId = CommonUtils.judgeCompanyAndOrg();
         List<TreeListDto> dtoList = companyService.getCompanyTree(judgeId);
         List<TreeListVo> voList = CommonUtils.convertList(dtoList, TreeListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, voList);

@@ -16,13 +16,13 @@ public class PaperSubjectAnswer extends Model<PaperSubjectAnswer> {
     /**
      * 答案id
      */
-    private Long id;
+    private Integer id;
 
 
     /**
      * 试题id
      */
-    private Long paperSubjectId;
+    private Integer paperSubjectId;
 
     /**
      * 答案

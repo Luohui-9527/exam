@@ -15,10 +15,10 @@ public class SubjectAnswerQueryVo implements Serializable {
     private static final long serialVersionUID = 9123798642099490489L;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectAnswerId;
+    private Integer subjectAnswerId;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectId;
+    private Integer subjectId;
 
     /**
      * 答案
@@ -32,19 +32,19 @@ public class SubjectAnswerQueryVo implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getSubjectAnswerId() {
+    public Integer getSubjectAnswerId() {
         return subjectAnswerId;
     }
 
-    public void setSubjectAnswerId(Long subjectAnswerId) {
+    public void setSubjectAnswerId(Integer subjectAnswerId) {
         this.subjectAnswerId = subjectAnswerId;
     }
 
-    public Long getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(Long subjectId) {
+    public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
 

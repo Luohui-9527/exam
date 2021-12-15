@@ -18,7 +18,7 @@ public class DepartmentQueryVo extends BaseQueryVo implements Serializable {
      * 部门id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 部门名
      */
@@ -49,11 +49,11 @@ public class DepartmentQueryVo extends BaseQueryVo implements Serializable {
         this.level = level;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

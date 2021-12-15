@@ -23,7 +23,7 @@ public class PaperSubjectAnswerServiceImpl extends ServiceImpl<PaperSubjectAnswe
      * @return
      */
     @Override
-    public List<PaperSubjectAnswer> listAnswerBySubjectIdList(List<Long> list) {
+    public List<PaperSubjectAnswer> listAnswerBySubjectIdList(List<Integer> list) {
         return baseMapper.batchQueryAnswerBySubjectId(list);
     }
 
@@ -34,7 +34,7 @@ public class PaperSubjectAnswerServiceImpl extends ServiceImpl<PaperSubjectAnswe
      * @return
      */
     @Override
-    public boolean deleteBySubjectId(List<Long> idList) {
+    public boolean deleteBySubjectId(List<Integer> idList) {
         return baseMapper.deleteBySubjectIdList(idList);
     }
 }

@@ -14,43 +14,43 @@ import java.io.Serializable;
 public class RoleUserVo implements Serializable {
     private static final long serialVersionUID = -7978436944833582391L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long userId;
+    private Integer userId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long roleId;
+    private Integer roleId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

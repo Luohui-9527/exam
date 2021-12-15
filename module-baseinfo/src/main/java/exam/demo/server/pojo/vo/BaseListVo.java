@@ -3,6 +3,7 @@ package exam.demo.server.pojo.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
@@ -12,6 +13,7 @@ import java.util.Date;
 /**
  * @author luohui
  */
+@Data
 public class BaseListVo implements Serializable {
 
 
@@ -21,7 +23,7 @@ public class BaseListVo implements Serializable {
      */
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    protected Long id;
+    protected Integer id;
 
     /**
      * 类名
@@ -50,67 +52,4 @@ public class BaseListVo implements Serializable {
      * 备注
      */
     protected String remark;
-
-    public BaseListVo() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Date getUpdatedTime() {
-        return updatedTime;
-    }
-
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseListVo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", version=" + version +
-                ", status=" + status +
-                ", updatedTime=" + updatedTime +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
 }

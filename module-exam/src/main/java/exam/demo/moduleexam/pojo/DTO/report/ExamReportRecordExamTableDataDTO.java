@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 @SuppressWarnings("unused")
 public class ExamReportRecordExamTableDataDTO {
-    private Long id;
+    private Integer id;
     private Integer actualPepoleNum;
     private Date endTime;
     private Integer examSession;

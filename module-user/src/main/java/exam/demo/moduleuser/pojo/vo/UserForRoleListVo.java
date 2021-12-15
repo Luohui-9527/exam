@@ -11,7 +11,7 @@ public class UserForRoleListVo implements Serializable {
      * 用户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 用户工号
      */
@@ -36,13 +36,13 @@ public class UserForRoleListVo implements Serializable {
      * 标记位：是否已有此角色
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long flag;
+    private Integer flag;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -86,11 +86,11 @@ public class UserForRoleListVo implements Serializable {
         this.positionName = positionName;
     }
 
-    public Long getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(Long flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 

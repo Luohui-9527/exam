@@ -1,18 +1,33 @@
 package exam.demo.moduleauth.pojo.model;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
- * @author luohui
- * @version 1.0
- * @since 2020-04-17
+ * 用户权限关联表 - 数据对象定义
+ *
+ * @author gpmscloud
  */
 @Data
-@Accessors(chain = true)
-public class UserRole extends Model<UserRole> {
-    long id;
-    long userId;
-    long roleId;
+@TableName("user_role")
+public class UserRole implements Serializable {
+
+    /**
+     * 用户权限关联id
+     */
+    @ApiModelProperty(value = "用户权限关联id")
+    private Integer id;
+    /**
+     * 用户id
+     */
+    @ApiModelProperty(value = "用户id")
+    private Integer userId;
+    /**
+     * 权限id
+     */
+    @ApiModelProperty(value = "权限id")
+    private Integer roleId;
 }

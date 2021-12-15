@@ -77,7 +77,7 @@ public class ExamPublishRecordController {
                 tableDataVO.setStatus(tableDataDTO.getStatus().toString());
             // get publishTimes
             if (tableDataDTO.getPaperId() != null) {
-                CommonRequest<Long> request = new CommonRequest<>();
+                CommonRequest<Integer> request = new CommonRequest<>();
                 request.setVersion(state.getVersion());
                 request.setToken(TokenUtils.getToken());
                 request.setData(tableDataDTO.getPaperId());
@@ -105,7 +105,7 @@ public class ExamPublishRecordController {
     public CommonResponse<Boolean> save(@RequestBody @Valid CommonRequest<ExamPublishRecordPublishFormVO> commonRequest) {
         ExamPublishRecordPublishFormDTO examPublishRecordPublishFormDTO = CommonUtils.copyProperties(commonRequest.getData(), ExamPublishRecordPublishFormDTO.class);
         if (examPublishRecordService.addExamPublishRecord(examPublishRecordPublishFormDTO)) {
-            CommonRequest<Long> paperRequest = new CommonRequest<>();
+            CommonRequest<Integer> paperRequest = new CommonRequest<>();
             paperRequest.setVersion(state.getVersion());
             paperRequest.setData(examPublishRecordPublishFormDTO.getPaperId());
             paperRequest.setToken(TokenUtils.getToken());
@@ -190,12 +190,12 @@ public class ExamPublishRecordController {
      * @param commonRequest
      * @return
      */
-    private String getExaminersName(List<Long> ids, CommonRequest commonRequest) {
+    private String getExaminersName(List<Integer> ids, CommonRequest commonRequest) {
         if (ids != null) {
             List<String> names = new ArrayList<>();
             StringBuffer examiners = new StringBuffer();
             //去用户服务获取姓名
-            for (Long id : ids) {
+            for (Integer id : ids) {
                 return getPublisherName(id, commonRequest);
             }
             for (String name : names) {
@@ -213,9 +213,9 @@ public class ExamPublishRecordController {
      * @param commonRequest
      * @return
      */
-    private String getPublisherName(Long id, CommonRequest commonRequest) {
+    private String getPublisherName(Integer id, CommonRequest commonRequest) {
         if (id != null) {
-            CommonRequest<Long> request = new CommonRequest<>();
+            CommonRequest<Integer> request = new CommonRequest<>();
             request.setToken(commonRequest.getToken());
             request.setData(id);
             request.setVersion(state.getVersion());
@@ -231,13 +231,13 @@ public class ExamPublishRecordController {
      * @param commonRequest
      * @return
      */
-    private Long getPublisherId(String name, CommonRequest commonRequest) {
+    private Integer getPublisherId(String name, CommonRequest commonRequest) {
         if (name != null) {
             CommonRequest<String> request = new CommonRequest<>();
             request.setToken(commonRequest.getToken());
             request.setData(name);
             request.setVersion(state.getVersion());
-            return RPCUtils.parseResponse(userApi.getUserIdByName(request), Long.class, RPCUtils.USER);
+            return RPCUtils.parseResponse(userApi.getUserIdByName(request), Integer.class, RPCUtils.USER);
         }
         return null;
     }

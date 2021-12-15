@@ -18,7 +18,7 @@ public class CombExamConfigQueryVo extends BaseQueryVo implements Serializable {
      * 组卷配置id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 组卷配置名
@@ -36,11 +36,11 @@ public class CombExamConfigQueryVo extends BaseQueryVo implements Serializable {
         this.name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

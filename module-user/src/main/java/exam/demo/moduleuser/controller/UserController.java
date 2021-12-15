@@ -5,18 +5,16 @@ import exam.demo.modulecommon.common.*;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.PositionService;
-import exam.demo.moduleuser.biz.service.RoleService;
-import exam.demo.moduleuser.biz.service.UserService;
 import exam.demo.moduleuser.constant.ControllerConstants;
+import exam.demo.moduleuser.dto.RoleDto;
 import exam.demo.moduleuser.dto.UserOptionsDto;
 import exam.demo.moduleuser.dto.UserRoleDto;
 import exam.demo.moduleuser.pojo.model.TreeList;
 import exam.demo.moduleuser.pojo.model.User;
-import exam.demo.moduleuser.pojo.vo.TreeListVo;
-import exam.demo.moduleuser.pojo.vo.UserItemVo;
-import exam.demo.moduleuser.pojo.vo.UserListVo;
-import exam.demo.moduleuser.pojo.vo.UserQueryVo;
+import exam.demo.moduleuser.pojo.vo.*;
+import exam.demo.moduleuser.service.IPositionService;
+import exam.demo.moduleuser.service.IRoleService;
+import exam.demo.moduleuser.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -41,13 +39,13 @@ public class UserController {
     CacheManager cacheManager;
 
     @Autowired
-    UserService userService;
+    IUserService userService;
 
     @Autowired
-    RoleService roleService;
+    IRoleService roleService;
 
     @Autowired
-    PositionService positionService;
+    IPositionService positionService;
 
     @Autowired
     CommonState state;
@@ -71,7 +69,7 @@ public class UserController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_U)
-    public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid CommonRequest<Long> request) {
+    public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid CommonRequest<Integer> request) {
         User user = userService.getById(request.getData());
         UserListVo userListVo = CommonUtils.copyProperties(user, UserListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userListVo);
@@ -110,7 +108,7 @@ public class UserController {
 
     @MethodEnhancer
     @GetMapping(ControllerConstants.GET_LIST_U)
-    public CommonResponse<List> queryUserTree() {
+    public CommonResponse<List<TreeListVo>> queryUserTree() {
         List<TreeList> treeListDtoList = userService.getQueryListData(CommonUtils.judgeCompanyAndOrg());
         List<TreeListVo> treeListVos = CommonUtils.convertList(treeListDtoList, TreeListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, treeListVos);
@@ -132,10 +130,10 @@ public class UserController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_USER_ROLE)
-    public CommonResponse<List> queryRoleOfUser(@RequestBody CommonRequest<Long> commonRequest) {
-        List<UserDto> userDTOList = userService.queryRoleOfUser(commonRequest.getData());
-        List<UserListVo> userRoleDTOS = CommonUtils.convertList(userDTOList, UserListVo.class);
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userRoleDTOS);
+    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody CommonRequest<Integer> commonRequest) {
+        List<RoleDto> roleDtoList = userService.queryRoleOfUser(commonRequest.getData());
+        List<RoleListVo> roleListVoList = CommonUtils.convertList(roleDtoList, RoleListVo.class);
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, roleListVoList);
     }
 
     @MethodEnhancer

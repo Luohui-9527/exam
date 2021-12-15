@@ -52,7 +52,7 @@ public interface ExamPublishRecordService extends IService<ExamPublishRecord> {
      * @Author: luohui
      * @date: 2021-12-10
      */
-    List<ExamPublishRecord> getListByIdVersion(Long id, Long version);
+    List<ExamPublishRecord> getListByIdVersion(Integer id, Long version);
 
     /**
      * 功能描述

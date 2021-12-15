@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface UserRecordService extends IService<UserRecord> {
 
-    List<UserRecord> listExaminers(Long examPublishRecordId);
+    List<UserRecord> listExaminers(Integer examPublishRecordId);
 }

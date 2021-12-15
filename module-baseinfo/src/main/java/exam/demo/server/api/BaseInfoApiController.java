@@ -9,7 +9,7 @@ import exam.demo.server.biz.service.*;
 import exam.demo.server.constant.ApiConstant;
 import exam.demo.server.constant.EnumInfoType;
 import exam.demo.server.exception.BaseInfoException;
-import exam.demo.server.pojo.model.CombExamConfigItem;
+import exam.demo.server.pojo.model.CombExamConfigDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,7 +58,7 @@ public class BaseInfoApiController {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, getBaseInfo(baseDataDto, EnumInfoType.CATEGORY));
     }
 
-    private Map<Long, String> resolve(List<Long> idList, List<String> valueList, Map<Long, String> map) {
+    private Map<Integer, String> resolve(List<Integer> idList, List<String> valueList, Map<Integer, String> map) {
         for (int i = 0; i < idList.size(); i++) {
             map.put(idList.get(i), valueList.get(i));
         }
@@ -80,13 +80,13 @@ public class BaseInfoApiController {
     /**
      * 通过Id获取对应字典值
      *
-     * @param request
+     * @param dictionaryId
      * @return
      */
     @MethodEnhancer
     @PostMapping(ApiConstant.GET_BASE_DATA)
-    public CommonResponse<String> getBaseData(@RequestBody @Valid CommonRequest<Long> request) {
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, dictionaryService.getDictionaryValue(request.getData()));
+    public CommonResponse<String> getBaseData(@RequestBody @Valid Integer dictionaryId) {
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, dictionaryService.getDictionaryValue(dictionaryId));
     }
 
     /**
@@ -97,10 +97,10 @@ public class BaseInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.GET_SUBJECT_AND_ANSWER)
-    public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestParam("combExamConfigId") Long combExamConfigId) {
-        CombExamConfigItem config = new CombExamConfigItem();
-        config.setCombExamId(combExamConfigId);
-        List<CombExamConfigItem> itemList = combExamConfigItemService.listByCombExamId(config);
+    public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestParam("combExamConfigId") Integer combExamConfigId) {
+        CombExamConfigDetail config = new CombExamConfigDetail();
+        config.setCombExamConfigId(combExamConfigId);
+        List<CombExamConfigDetail> itemList = combExamConfigItemService.listByCombExamId(config);
         SubjectPackage subjectPackage = subjectService.getSubject(itemList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectPackage);
     }
@@ -114,8 +114,8 @@ public class BaseInfoApiController {
     @MethodEnhancer
     @PostMapping(ApiConstant.GET_SUBJECT_CUSTOMIZED)
     public CommonResponse<SubjectPackage> getSubjectAndAnswerCustomized(@RequestBody @Valid List<CombExamConfigItemDto> combExamConfigItemDtoList) {
-        List<CombExamConfigItem> combExamConfigItemList = CommonUtils.convertList(combExamConfigItemDtoList, CombExamConfigItem.class);
-        SubjectPackage subjectPackage = subjectService.getSubject(combExamConfigItemList);
+        List<CombExamConfigDetail> combExamConfigDetailList = CommonUtils.convertList(combExamConfigItemDtoList, CombExamConfigDetail.class);
+        SubjectPackage subjectPackage = subjectService.getSubject(combExamConfigDetailList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectPackage);
     }
 
@@ -127,7 +127,7 @@ public class BaseInfoApiController {
      */
     @MethodEnhancer
     @PostMapping(ApiConstant.GET_SUBJECT_BY_ID)
-    public CommonResponse<SubjectPackage> getSubjectById(@RequestBody @Valid List<Long> subjectIdList) {
+    public CommonResponse<SubjectPackage> getSubjectById(@RequestBody @Valid List<Integer> subjectIdList) {
         SubjectPackage subjectPackage = subjectService.getSubjectById(subjectIdList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectPackage);
     }
@@ -145,7 +145,7 @@ public class BaseInfoApiController {
     }
 
     private BaseDataDto getBaseInfo(BaseDataDto baseDataDto, EnumInfoType type) {
-        List<Long> idList = new ArrayList<>(baseDataDto.getBaseInfoMap().keySet());
+        List<Integer> idList = new ArrayList<>(baseDataDto.getBaseInfoMap().keySet());
         List<String> values;
         switch (type) {
             case CATEGORY:
@@ -160,18 +160,18 @@ public class BaseInfoApiController {
             default:
                 throw new BaseInfoException(StarterError.SYSTEM_PARAMETER_VALUE_INVALID);
         }
-        Map<Long, String> map = resolve(idList, values, baseDataDto.getBaseInfoMap());
+        Map<Integer, String> map = resolve(idList, values, baseDataDto.getBaseInfoMap());
         baseDataDto.setBaseInfoMap(map);
         return baseDataDto;
     }
 
     @PostMapping(ApiConstant.GET_CATEGORY_VAL)
-    public CommonResponse<String> getCategory(@RequestBody Long id) {
+    public CommonResponse<String> getCategory(@RequestBody Integer id) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, categoryService.getCategoryNameById(id));
     }
 
     @PostMapping(ApiConstant.GET_SUBJECT_TYPE)
-    public CommonResponse<String> getSubjectType(@RequestBody Long id) {
+    public CommonResponse<String> getSubjectType(@RequestBody Integer id) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectTypeService.getTypeName(id));
     }
 }

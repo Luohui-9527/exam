@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.demo.moduleuser.mapper.ResourceMapper">
+
+    <select id="query" resultType="exam.demo.moduleuser.pojo.model.Resource">
+        SELECT * FROM resource
+        <where>
+            <if test="id!=null and id!=''">
+                AND id = #{id} UNION SELECT * FROM resource WHERE parent_id = #{id}
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
+</mapper>

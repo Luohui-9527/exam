@@ -8,13 +8,13 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.PositionService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.PositionDto;
 import exam.demo.moduleuser.pojo.model.Position;
 import exam.demo.moduleuser.pojo.vo.PositionItemVo;
 import exam.demo.moduleuser.pojo.vo.PositionListVo;
 import exam.demo.moduleuser.pojo.vo.PositionQueryVo;
+import exam.demo.moduleuser.service.IPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ import java.util.List;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class PositionController {
     @Autowired
-    PositionService positionService;
+    IPositionService positionService;
 
     @Autowired
     CommonState state;
@@ -64,7 +64,7 @@ public class PositionController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_P)
-    public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid CommonRequest<Long> request) {
+    public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid CommonRequest<Integer> request) {
         Position position = positionService.getById(request.getData());
         PositionListVo positionListVo = CommonUtils.copyProperties(position, PositionListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, positionListVo);

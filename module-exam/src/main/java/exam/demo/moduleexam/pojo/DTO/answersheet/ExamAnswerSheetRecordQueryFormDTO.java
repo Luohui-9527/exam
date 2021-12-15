@@ -11,7 +11,7 @@ public class ExamAnswerSheetRecordQueryFormDTO {
 
     private Integer examSession;
     private List<String> examTimeRange;
-    private Long publisher;
+    private Integer publisher;
     private String title;
 
 }

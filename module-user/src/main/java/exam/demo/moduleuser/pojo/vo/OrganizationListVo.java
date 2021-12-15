@@ -16,7 +16,7 @@ public class OrganizationListVo extends BaseVo implements Serializable {
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 机构名
@@ -52,11 +52,11 @@ public class OrganizationListVo extends BaseVo implements Serializable {
     public OrganizationListVo() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

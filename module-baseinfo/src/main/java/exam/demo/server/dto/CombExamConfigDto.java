@@ -26,7 +26,7 @@ public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
      * 试卷难度id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 试卷难度
@@ -36,7 +36,7 @@ public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
     /**
      * 删除id
      */
-    private List<Long> deleteIds;
+    private List<Integer> deleteIds;
 
     /**
      * 组卷配置明细DTO
@@ -66,11 +66,11 @@ public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
         this.name = name;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -98,11 +98,11 @@ public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
         this.difficultyName = difficultyName;
     }
 
-    public List<Long> getDeleteIds() {
+    public List<Integer> getDeleteIds() {
         return deleteIds;
     }
 
-    public void setDeleteIds(List<Long> deleteIds) {
+    public void setDeleteIds(List<Integer> deleteIds) {
         this.deleteIds = deleteIds;
     }
 

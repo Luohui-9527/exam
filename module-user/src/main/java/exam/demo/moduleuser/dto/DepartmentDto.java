@@ -15,12 +15,12 @@ public class DepartmentDto extends BaseDto implements Serializable {
     /**
      * 部门ID
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 公司ID
      */
-    private Long companyId;
+    private Integer companyId;
 
     /**
      * 部门名称
@@ -45,7 +45,7 @@ public class DepartmentDto extends BaseDto implements Serializable {
     /**
      * 上级部门
      */
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 上级部门名
@@ -76,7 +76,7 @@ public class DepartmentDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private Integer judgeId;
 
     public DepartmentDto() {
     }
@@ -129,11 +129,11 @@ public class DepartmentDto extends BaseDto implements Serializable {
         this.level = level;
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
@@ -191,11 +191,11 @@ public class DepartmentDto extends BaseDto implements Serializable {
                 '}';
     }
 
-    public Long getJudgeId() {
+    public Integer getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Long judgeId) {
+    public void setJudgeId(Integer judgeId) {
         this.judgeId = judgeId;
     }
 }

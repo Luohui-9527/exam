@@ -1,15 +1,13 @@
 package exam.demo.server.biz.service.impl;
 
-import exam.demo.server.constant.EnumUserInfoType;
-import exam.demo.server.exception.BaseInfoException;
-import exam.demo.server.manage.UserApi;
 import exam.demo.modulecommon.common.CacheConstants;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.modulecommon.utils.TokenUtils;
+import exam.demo.server.constant.EnumUserInfoType;
+import exam.demo.server.exception.BaseInfoException;
+import exam.demo.server.manage.UserApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -38,7 +36,7 @@ public class BaseService {
      * @param type
      * @return
      */
-    public String getUserInfo(long id, EnumUserInfoType type) {
+    public String getUserInfo(Integer id, EnumUserInfoType type) {
         Cache cache;
         switch (type) {
             case ORG:
@@ -65,18 +63,18 @@ public class BaseService {
         return (String) wrapper.get();
     }
 
-    public String queryFromApi(long id, EnumUserInfoType type) {
+    public String queryFromApi(Integer id, EnumUserInfoType type) {
         CommonResponse<String> response;
         switch (type) {
             case COMPANY:
-                response = userApi.getCompanyById(new CommonRequest<>(state.getVersion(), TokenUtils.getToken(), id));
+                response = userApi.getCompanyById(id);
                 if (CommonUtils.isSuccess(response)) {
                     return response.getData();
                 } else {
                     throw new BaseInfoException(StarterError.SYSTEM_API_ERROR, response.getMsg());
                 }
             case USER:
-                response = userApi.getUserNameById(new CommonRequest<>(state.getVersion(), TokenUtils.getToken(), id));
+                response = userApi.getUserNameById(id);
                 if (CommonUtils.isSuccess(response)) {
                     return response.getData();
                 } else {

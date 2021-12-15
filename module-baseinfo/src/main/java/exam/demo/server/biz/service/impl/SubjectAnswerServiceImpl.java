@@ -20,9 +20,9 @@ public class SubjectAnswerServiceImpl extends ServiceImpl<SubjectAnswerDao, Subj
      * @return
      */
     @Override
-    public void removeBatchBySubjectId(List<Long> subjectIdList) {
+    public void removeBatchBySubjectId(List<Integer> subjectIdList) {
 //        Map<String,Object> map = new HashMap<>();
-//        for (Long id : subjectIdList) {
+//        for (Integer id : subjectIdList) {
 //            map.put("subject_id",id);
 //        }
 //        removeByMap(map);
@@ -43,7 +43,7 @@ public class SubjectAnswerServiceImpl extends ServiceImpl<SubjectAnswerDao, Subj
     }
 
     @Override
-    public List<SubjectAnswer> listAnswer(List<Long> subjectList) {
+    public List<SubjectAnswer> listAnswer(List<Integer> subjectList) {
         return baseMapper.querySubjectAnswerBySubjectId(subjectList);
     }
 }

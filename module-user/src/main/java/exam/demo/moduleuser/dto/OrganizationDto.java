@@ -17,7 +17,7 @@ public class OrganizationDto extends BaseDto implements Serializable {
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 机构名
@@ -59,7 +59,7 @@ public class OrganizationDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private Integer judgeId;
 
     public int getCurrentPage() {
         return currentPage;
@@ -77,11 +77,11 @@ public class OrganizationDto extends BaseDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Long getJudgeId() {
+    public Integer getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Long judgeId) {
+    public void setJudgeId(Integer judgeId) {
         this.judgeId = judgeId;
     }
 

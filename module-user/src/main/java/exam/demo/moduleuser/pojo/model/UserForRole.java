@@ -10,7 +10,7 @@ public class UserForRole implements Serializable {
     /**
      * 用户ID
      */
-    private Long id;
+    private Integer id;
     /**
      * 用户工号
      */
@@ -34,7 +34,7 @@ public class UserForRole implements Serializable {
     /**
      * 标记位：是否已有此角色
      */
-    private Long flag;
+    private Integer flag;
 
 
 }

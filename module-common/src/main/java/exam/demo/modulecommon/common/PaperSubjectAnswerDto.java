@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaperSubjectAnswerDto {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     private String answer;
     private Byte rightAnswer;
 }

@@ -1,82 +1,86 @@
 package exam.demo.moduleuser.pojo.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * t_role
- * @author
+ * 权限表 - 数据对象定义
+ *
+ * @author gpmscloud
  */
 @Data
-@Accessors(chain = true)
-public class Role extends Model<Role> implements Serializable {
-    private static final long serialVersionUID = -4264166198464071246L;
-    /**
-     * 角色ID
-     */
-    private Long id;
+@TableName("role")
+public class Role implements Serializable {
 
     /**
-     * 公司ID
+     * 权限id
      */
-    private Long companyId;
-
+    @ApiModelProperty(value = "权限id")
+    private Integer id;
     /**
-     * 组织机构ID
+     * 公司id
      */
-    private Long orgId;
-
+    @ApiModelProperty(value = "公司id")
+    private Integer companyId;
+    /**
+     * 组织机构id
+     */
+    @ApiModelProperty(value = "组织机构id")
+    private Integer orgId;
     /**
      * 角色名
      */
+    @ApiModelProperty(value = "角色名")
     private String name;
-
     /**
      * 角色代码
      */
+    @ApiModelProperty(value = "角色代码")
     private String code;
-
     /**
      * 备注
      */
+    @ApiModelProperty(value = "备注")
     private String remark;
-
     /**
      * 状态位
      */
-    private Byte status;
-
+    @ApiModelProperty(value = "状态位")
+    private Integer status;
     /**
      * 创建人
      */
-    private Long createdBy;
-
+    @ApiModelProperty(value = "创建人")
+    private Integer createdBy;
     /**
      * 创建时间
      */
-    private Date createdTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private java.util.Date createdTime;
     /**
      * 修改人
      */
-    private Long updatedBy;
-
+    @ApiModelProperty(value = "修改人")
+    private Integer updatedBy;
     /**
      * 修改时间
      */
-    private Date updatedTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "修改时间")
+    private java.util.Date updatedTime;
     /**
      * 版本
      */
+    @ApiModelProperty(value = "版本")
     private Long version;
 
     /**
@@ -86,7 +90,7 @@ public class Role extends Model<Role> implements Serializable {
     private String orgName;
 
     /**
-     *所属公司
+     * 所属公司
      */
     @TableField(exist = false)
     private String companyName;
@@ -95,22 +99,17 @@ public class Role extends Model<Role> implements Serializable {
      * 资源节点ID
      */
     @TableField(exist = false)
-    private Long resourceId;
+    private Integer resourceId;
 
     /**
      * 用户ID
      */
     @TableField(exist = false)
-    private Long userId;
+    private Integer userId;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private Integer judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
 }

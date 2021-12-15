@@ -42,7 +42,7 @@ public class DictionaryDto extends BaseDataBaseDto implements Serializable {
     /**
      * 判断公司、组织机构
      */
-    private Long judgeId;
+    private Integer judgeId;
 
     public DictionaryDto() {
     }

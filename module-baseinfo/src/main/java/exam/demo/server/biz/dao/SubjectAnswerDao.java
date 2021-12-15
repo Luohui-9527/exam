@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface SubjectAnswerDao extends BaseMapper<SubjectAnswer> {
-    boolean removeBatchBySubjectId(@Param(value = "idList") List<Long> subjectIdList);
+    boolean removeBatchBySubjectId(@Param(value = "idList") List<Integer> subjectIdList);
 
 
     boolean removeBySubjectId(@Param(value = "id") long id);
@@ -24,5 +24,5 @@ public interface SubjectAnswerDao extends BaseMapper<SubjectAnswer> {
     @Select("<script> SELECT id,subject_id,answer,right_answer FROM subject_answer WHERE subject_id IN " +
             "<foreach item = 'subjectId' index = 'index' collection = 'subjectIdList' open='(' separator=',' close=')'>" +
             "#{subjectId} </foreach> </script>")
-    List<SubjectAnswer> querySubjectAnswerBySubjectId(@Param("subjectIdList") List<Long> subjectIdList);
+    List<SubjectAnswer> querySubjectAnswerBySubjectId(@Param("subjectIdList") List<Integer> subjectIdList);
 }

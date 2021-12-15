@@ -32,5 +32,5 @@ public class UserInfoFormVO implements Serializable {
      * 考试发布记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long examPublishRecordId;
+    private Integer examPublishRecordId;
 }

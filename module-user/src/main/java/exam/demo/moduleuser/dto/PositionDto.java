@@ -17,13 +17,13 @@ public class PositionDto extends BaseDto implements Serializable {
      * 职位ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
     /**
      * 职位名称
@@ -58,7 +58,7 @@ public class PositionDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private Integer judgeId;
 
     public String getName() {
         return name;
@@ -116,11 +116,11 @@ public class PositionDto extends BaseDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Long getJudgeId() {
+    public Integer getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Long judgeId) {
+    public void setJudgeId(Integer judgeId) {
         this.judgeId = judgeId;
     }
 

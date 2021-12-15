@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubjectAnswerDto {
-    private Long subjectId;
+    private Integer subjectId;
 
     private String answer;
 

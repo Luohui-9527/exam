@@ -19,10 +19,10 @@ public class SubjectAnswerVo implements Serializable {
 
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectId;
+    private Integer subjectId;
 
     @NotBlank(message = "答案不能为空！")
     private String answer;
@@ -30,19 +30,19 @@ public class SubjectAnswerVo implements Serializable {
     @NotNull(message = "答案是否正确不能为空！")
     private Byte rightAnswer;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(Long subjectId) {
+    public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
 

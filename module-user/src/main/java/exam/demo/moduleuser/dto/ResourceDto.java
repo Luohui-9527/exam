@@ -25,7 +25,7 @@ public class ResourceDto extends BaseDto implements Serializable {
     /**
      * 父亲节点
      */
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * URL
@@ -75,7 +75,7 @@ public class ResourceDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private Integer judgeId;
 
     public int getCurrentPage() {
         return currentPage;
@@ -93,11 +93,11 @@ public class ResourceDto extends BaseDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Long getJudgeId() {
+    public Integer getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Long judgeId) {
+    public void setJudgeId(Integer judgeId) {
         this.judgeId = judgeId;
     }
 
@@ -137,11 +137,11 @@ public class ResourceDto extends BaseDto implements Serializable {
         this.code = code;
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 

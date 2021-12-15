@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.demo.moduleuser.mapper.RoleMapper">
+
+    <select id="query" resultType="exam.demo.moduleuser.pojo.model.Role">
+        SELECT a.*,b.name AS orgName,c.name AS companyName FROM role a
+        LEFT JOIN organization b ON a.org_id = b.id
+        LEFT JOIN company c ON a.company_id = c.id
+        <where>
+            <if test="name!=null and name!=''">
+                AND a.name LIKE CONCAT(#{name},'%')
+            </if>
+            AND (a.company_id = #{judgeId} or a.org_id = #{judgeId})
+        </where>
+        ORDER BY a.updated_time DESC
+    </select>
+    <select id="queryUserForRoleSP" resultType="exam.demo.moduleuser.pojo.model.UserForRole">
+        SELECT e.id,e.code,e.name,e.roleName,e.departmentName,e.positionName,f.flag FROM
+            (SELECT a.id,a.code,a.name,GROUP_CONCAT(b.name SEPARATOR ',') AS roleName,c.name AS departmentName,d.name AS positionName
+            FROM user a
+            LEFT JOIN user_role e ON a.id = e.user_id
+            LEFT JOIN role b ON e.role_id = b.id
+            LEFT JOIN department c ON c.id = a.department_id
+            LEFT JOIN position d ON d.id = a.position_id
+            GROUP BY a.id ORDER BY a.updated_time DESC) e
+            LEFT JOIN (SELECT user_id,CONCAT(user_id) as flag
+            FROM user_role) f ON e.id = f.user_id
+    </select>
+    <select id="queryUserForRole" resultType="exam.demo.moduleuser.pojo.model.UserForRole">
+        SELECT e.id,e.code,e.name,e.roleName,e.departmentName,e.positionName,f.flag FROM
+        (SELECT a.id,a.code,a.name,GROUP_CONCAT(b.name SEPARATOR ',') AS roleName,c.name AS departmentName,d.name AS
+        positionName
+        FROM user a
+        LEFT JOIN user_role e ON a.id = e.user_id
+        LEFT JOIN role b ON e.role_id = b.id
+        LEFT JOIN department c ON c.id = a.department_id
+        LEFT JOIN position d ON d.id = a.position_id
+        WHERE (b.company_id = #{judgeId} or b.org_id = #{judgeId})
+        <if test="companyId!=null and companyId!=''">
+            AND a.company_id = #{companyId}
+        </if>
+        GROUP BY a.id ORDER BY a.updated_time DESC) e
+        LEFT JOIN (SELECT user_id,CONCAT(user_id) as flag
+        FROM user_role
+        WHERE role_id = #{id}) f
+        ON e.id = f.user_id
+        <where>
+            <if test="name!=null and name!=''">
+                AND e.name LIKE CONCAT(#{name},'%')
+            </if>
+            <if test="code!=null and code!=''">
+                AND e.code LIKE CONCAT(#{code},'%')
+            </if>
+        </where>
+    </select>
+    <select id="queryResourceForRole" resultType="exam.demo.moduleuser.pojo.model.TreeList">
+        SELECT a.id,a.name,a.parent_id,a.version from resource a,role_resource b where b.role_id = #{id} and a.id = b.resource_id and b.type = 0
+    </select>
+    <select id="queryRole" resultType="exam.demo.moduleuser.dto.UserOptionsDto">
+        SELECT id AS roleId,name AS roleName,company_id FROM role ORDER BY LENGTH(name)
+    </select>
+    <select id="queryRoleByCompany" resultType="exam.demo.moduleuser.dto.UserOptionsDto">
+        SELECT id AS roleId,name AS roleName,company_id FROM role where company_id = #{id}
+    </select>
+    <select id="queryRoleByOrg" resultType="exam.demo.moduleuser.dto.UserOptionsDto">
+        SELECT id AS roleId,name AS roleName,company_id FROM role where org_id = #{id}
+    </select>
+</mapper>

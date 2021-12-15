@@ -1,67 +1,88 @@
 package exam.demo.moduleauth.pojo.model;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author luohui
- * @version V1.0.0
- * @date 2019/9/9
+ * 权限表 - 数据对象定义
+ *
+ * @author gpmscloud
  */
 @Data
-@Accessors(chain = true)
-public class Role extends Model<Role> implements Serializable {
-    private static final long serialVersionUID = 3372896897477467061L;
+@TableName("role")
+public class Role implements Serializable {
+
     /**
-     * 角色ID
+     * 权限id
      */
-    private Long id;
+    @ApiModelProperty(value = "权限id")
+    private Integer id;
+    /**
+     * 公司id
+     */
+    @ApiModelProperty(value = "公司id")
+    private Integer companyId;
+    /**
+     * 组织机构id
+     */
+    @ApiModelProperty(value = "组织机构id")
+    private Integer orgId;
     /**
      * 角色名
      */
+    @ApiModelProperty(value = "角色名")
     private String name;
+    /**
+     * 角色代码
+     */
+    @ApiModelProperty(value = "角色代码")
+    private String code;
+    /**
+     * 备注
+     */
+    @ApiModelProperty(value = "备注")
+    private String remark;
+    /**
+     * 状态位
+     */
+    @ApiModelProperty(value = "状态位")
+    private Integer status;
+    /**
+     * 创建人
+     */
+    @ApiModelProperty(value = "创建人")
+    private Integer createdBy;
+    /**
+     * 创建时间
+     */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private java.util.Date createdTime;
+    /**
+     * 修改人
+     */
+    @ApiModelProperty(value = "修改人")
+    private Integer updatedBy;
+    /**
+     * 修改时间
+     */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "修改时间")
+    private java.util.Date updatedTime;
+    /**
+     * 版本
+     */
+    @ApiModelProperty(value = "版本")
+    private Long version;
 
     private Set<Resource> resources = new HashSet<>();
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    public Set<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(Set<Resource> resources) {
-        this.resources = resources;
-    }
 }

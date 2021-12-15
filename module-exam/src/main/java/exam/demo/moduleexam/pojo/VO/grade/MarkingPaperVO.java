@@ -28,7 +28,7 @@ public class MarkingPaperVO implements Serializable {
      */
     @NotNull(message = "考试记录id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long examRecordId;
+    private Integer examRecordId;
     /**
      * 题目评分列表
      */

@@ -4,18 +4,20 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 题目类别实体
  * t_category
- * @author 
+ *
+ * @author
  */
 
 @Data
 @Accessors(chain = true)
-public class Category extends Model<Category>{
+public class Category extends Model<Category> {
 
     private static final long serialVersionUID = -5495980585809940272L;
 
@@ -23,20 +25,20 @@ public class Category extends Model<Category>{
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private Integer id;
     /**
      * 机构id
      */
-    private Long orgId;
+    private Integer orgId;
     /**
      * 机构下公司id
      */
     @TableField(exist = false)
-    private Long companyId;
+    private Integer companyId;
     /**
      * 通过id到数据字典中查询创建者
      */
-    private Long createdBy;
+    private Integer createdBy;
     /**
      * 创建日期
      */
@@ -44,7 +46,7 @@ public class Category extends Model<Category>{
     /**
      * 通过id到数据字典中查询修改者
      */
-    private Long updatedBy;
+    private Integer updatedBy;
     /**
      * 修改日期
      */
@@ -63,7 +65,7 @@ public class Category extends Model<Category>{
      * 父类别
      */
 
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 状态位
@@ -73,7 +75,7 @@ public class Category extends Model<Category>{
     private String remark;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private Integer judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

@@ -16,19 +16,19 @@ import java.util.List;
 @Data
 public class PaperDetail {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     private String name;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long createdBy;
+    private Integer createdBy;
     private String paperCreator;
     /**
      * 试卷类型
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long category;
+    private Integer category;
     private String categoryValue;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
     private String difficultyValue;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date combExamTime;
@@ -40,5 +40,5 @@ public class PaperDetail {
     /**
      * 在前端删除的试题的Id
      */
-    private List<Long> deletedId;
+    private List<Integer> deletedId;
 }

@@ -111,8 +111,8 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
             // 递归查找子节点
             DFS dfs = new DFS(category.getId());
             dfs.dfs();
-            List<Long> res = dfs.getRes();
-            for (Long id : res) {
+            List<Integer> res = dfs.getRes();
+            for (Integer id : res) {
                 subjectInfoList.addAll(baseMapper.queryByCategory(id));
             }
         } else {
@@ -134,11 +134,11 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
 
 
     class DFS {
-        List<Long> res = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
 
-        long cur;
+        Integer cur;
 
-        DFS(long cur) {
+        DFS(Integer cur) {
             this.cur = cur;
             res.add(cur);
         }
@@ -147,28 +147,28 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
             dfs0(cur);
         }
 
-        private void dfs0(long cur1) {
+        private void dfs0(Integer cur1) {
             List<Category> list = categoryService.queryChildNode(cur1);
             if (CommonUtils.isEmpty(list)) {
                 return;
             }
-            List<Long> idList = list.stream().map(Category::getId).collect(Collectors.toList());
+            List<Integer> idList = list.stream().map(Category::getId).collect(Collectors.toList());
             res.addAll(idList);
             idList.forEach(this::dfs0);
         }
 
-        public List<Long> getRes() {
+        public List<Integer> getRes() {
             return res;
         }
     }
 
 
     @Override
-    public SubjectPackage getSubject(List<CombExamConfigItem> itemList) {
+    public SubjectPackage getSubject(List<CombExamConfigDetail> itemList) {
         List<SubjectPackageDto> dtoList = new ArrayList<>();
-        for (CombExamConfigItem item : itemList) {
+        for (CombExamConfigDetail item : itemList) {
             // 随机取题
-            List<Long> subjectIdList = getAssignedIdList(item);
+            List<Integer> subjectIdList = getAssignedIdList(item);
             // 获取试题
             List<Subject> subjectList = baseMapper.querySubjectByPrimaryKeyList(subjectIdList);
             // 获取答案
@@ -197,7 +197,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
     }
 
     @Override
-    public SubjectPackage getSubjectById(List<Long> idList) {
+    public SubjectPackage getSubjectById(List<Integer> idList) {
         List<SubjectPackageDto> dtoList = new ArrayList<>();
         // 获取试题
         List<Subject> subjectList = baseMapper.querySubjectByPrimaryKeyList(idList);
@@ -229,9 +229,9 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
      * @param item
      * @return
      */
-    private List<Long> getAssignedIdList(CombExamConfigItem item) {
+    private List<Integer> getAssignedIdList(CombExamConfigDetail item) {
         Subject subject = CommonUtils.copyProperties(item, Subject.class);
-        List<Long> currentConfigId = baseMapper.querySubjectIdList(subject);
+        List<Integer> currentConfigId = baseMapper.querySubjectIdList(subject);
         if (currentConfigId.size() > item.getNum()) {
             return new RandomTask(item.getNum(), currentConfigId).gen();
         }
@@ -239,7 +239,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
     }
 
     @Override
-    public void isEnough(Long category, Long subjectType, int count) {
+    public void isEnough(Integer category, Integer subjectType, int count) {
         QueryWrapper<Subject> wrapper = new QueryWrapper<>();
         if (category == null || subjectType == null) {
             throw new BaseInfoException(BaseInfoError.CONFIG_INVALID);

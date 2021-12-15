@@ -20,13 +20,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ModifyPaperSubjectVo {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private Integer categoryId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
     private String subject;
     private String categoryValue;
     private String difficultyValue;

@@ -19,17 +19,17 @@ import java.util.List;
 @FeignClient(ApiConstant.SERVICE_NAME)
 public interface UserApi {
     @PostMapping({"/get/user/name"})
-    CommonResponse<CompanyAndUserVo> getUserInfo(CommonRequest<List<Long>> request);
+    CommonResponse<CompanyAndUserVo> getUserInfo(CommonRequest<List<Integer>> request);
 
     @PostMapping({"/get/company/name/by/id"})
-    CommonResponse<String> getUserNameById(CommonRequest<Long> request);
+    CommonResponse<String> getUserNameById(CommonRequest<Integer> request);
 
     @PostMapping({"/get/scoring/officer"})
     CommonResponse<List<UserDto>> queryScoringOfficer(CommonRequest<UserDto> request);
 
     @PostMapping({"/get/id/by/name"})
-    CommonResponse<Long> getUserIdByName(CommonRequest<String> request);
+    CommonResponse<Integer> getUserIdByName(CommonRequest<String> request);
 
     @PostMapping({"/get/company/name"})
-    CommonResponse<String> getCompanyById(CommonRequest<Long> request);
+    CommonResponse<String> getCompanyById(CommonRequest<Integer> request);
 }

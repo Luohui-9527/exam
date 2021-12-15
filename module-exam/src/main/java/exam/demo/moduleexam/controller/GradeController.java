@@ -91,8 +91,8 @@ public class GradeController {
      */
     @MethodEnhancer
     @RequestMapping(value = "getPaperAnswer")
-    public CommonResponse<List> getPaperAnswer(@RequestBody CommonRequest<Long> commonRequest) {
-        Long examRecordId = commonRequest.getData();
+    public CommonResponse<List> getPaperAnswer(@RequestBody CommonRequest<Integer> commonRequest) {
+        Integer examRecordId = commonRequest.getData();
         List<MyAnswerDTO> myAnswerDTOS = gradeService.getMyAnswer(examRecordId);
         List<MyAnswerVO> myAnswerVOS = CommonUtils.convertList(myAnswerDTOS, MyAnswerVO.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, myAnswerVOS);
@@ -110,9 +110,9 @@ public class GradeController {
         }
     }
 
-    private String getPaperName(Long id, CommonRequest commonRequest) {
+    private String getPaperName(Integer id, CommonRequest commonRequest) {
         if (id != null) {
-            CommonRequest<Long> request = new CommonRequest<>();
+            CommonRequest<Integer> request = new CommonRequest<>();
             request.setToken(commonRequest.getToken());
             request.setData(id);
             request.setVersion(commonRequest.getVersion());

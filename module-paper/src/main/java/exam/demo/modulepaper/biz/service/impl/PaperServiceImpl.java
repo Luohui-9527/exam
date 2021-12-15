@@ -204,7 +204,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
      * @return 删除成功的条数
      */
     @Override
-    public boolean paperDelete(List<Long> delList) {
+    public boolean paperDelete(List<Integer> delList) {
         List<Paper> deletedPaperList = listByIds(delList);
         // 已经发布的试卷不能删除
         deletedPaperList.forEach(paper -> {
@@ -213,13 +213,13 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
             }
         });
         List<PaperSubject> paperSubjectList = paperSubjectService.listSubjectByPaperIdList(delList);
-        List<Long> delSubjectIdList = paperSubjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<Integer> delSubjectIdList = paperSubjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         PaperServiceImpl service = (PaperServiceImpl) AopContext.currentProxy();
         return service.deletePaper(delList, delSubjectIdList);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean deletePaper(List<Long> paperIdList, List<Long> subjectIdList) {
+    public boolean deletePaper(List<Integer> paperIdList, List<Integer> subjectIdList) {
         try {
             return paperSubjectAnswerService.deleteBySubjectId(subjectIdList) &&
                     paperSubjectService.removeByIds(subjectIdList) &&
@@ -240,7 +240,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
         PaperServiceImpl paperService = (PaperServiceImpl) AopContext.currentProxy();
         Paper paper = handlePaper(paperDto);
         // 处理已经删除的试题
-        List<Long> deletedIdList = paperDto.getDeletedId();
+        List<Integer> deletedIdList = paperDto.getDeletedId();
         double deletedScore = 0;
         boolean hasDelete = false;
         // 获取删除的题目分值
@@ -258,7 +258,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
         List<ModifyPaperSubjectDto> modifyPaperDtoList = paperDto.getCurrentPaperSubjectDtoList();
         if (!CommonUtils.isEmpty(modifyPaperDtoList)) {
             // 获取mark不为9999的试题Id,9999是存在的试题
-            List<Long> addedSubjectIdList = modifyPaperDtoList.stream().filter(s ->
+            List<Integer> addedSubjectIdList = modifyPaperDtoList.stream().filter(s ->
                     s.getMark() == null || 9999 != (s.getMark())
             ).map(ModifyPaperSubjectDto::getId).collect(Collectors.toList());
             double addedScore = 0;
@@ -303,7 +303,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean modifyPaper(Paper paper, List<Long> deletedIdList, List<PaperSubject> addedSubject,
+    public boolean modifyPaper(Paper paper, List<Integer> deletedIdList, List<PaperSubject> addedSubject,
                                List<PaperSubjectAnswer> addedAnswer, boolean hasDel, boolean hasNew) {
         if (hasDel && hasNew) {
             boolean f1 = paperSubjectAnswerService.deleteBySubjectId(deletedIdList);
@@ -358,7 +358,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
             throw new PaperException(PaperError.PAPER_SUBJECT_IS_NULL);
         }
         // 根据题目查询答案
-        List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<Integer> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         List<PaperSubjectAnswer> answerList = paperSubjectAnswerService.listAnswerBySubjectIdList(subjectIdList);
         if (CommonUtils.isEmpty(answerList)) {
             throw new PaperException(PaperError.PAPER_ANSWER_IS_EMPTY);
@@ -390,10 +390,10 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
      * @param id
      * @return
      */
-    private Boolean checkObjectiveSubject(Long id) {
-        Long objectiveSubject1 = 616293886733721600L;
-        Long objectiveSubject2 = 616293908820926464L;
-        Long objectiveSubject3 = 616954547683860480L;
+    private Boolean checkObjectiveSubject(Integer id) {
+        Integer objectiveSubject1 = 616293886733721600;
+        Integer objectiveSubject2 = 616293908820926464;
+        Integer objectiveSubject3 = 616954547683860480;
         return (objectiveSubject1.equals(id) || objectiveSubject2.equals(id) || objectiveSubject3.equals(id));
     }
 
@@ -437,7 +437,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
      * @return the count of removed paper
      */
     @Override
-    public boolean deleteTemplate(List<Long> paperTemplateIds) {
+    public boolean deleteTemplate(List<Integer> paperTemplateIds) {
         List<Paper> templates = listByIds(paperTemplateIds);
         // 检查参数是否合法
         templates.forEach(p -> {
@@ -446,7 +446,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
             }
         });
         List<PaperSubject> subjectList = paperSubjectService.listSubjectByPaperIdList(paperTemplateIds);
-        List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<Integer> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         if (CommonUtils.isEmpty(subjectList)) {
             return false;
         }
@@ -455,7 +455,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperDao, Paper> implements Pa
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteTemplate(List<Long> paperIdList, List<Long> subjectIdList) {
+    public boolean deleteTemplate(List<Integer> paperIdList, List<Integer> subjectIdList) {
         return paperSubjectAnswerService.deleteBySubjectId(subjectIdList) && paperSubjectService.removeByIds(subjectIdList) && removeByIds(paperIdList);
     }
 

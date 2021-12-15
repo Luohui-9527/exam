@@ -8,14 +8,14 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author luohui
  */
 public class RandomTask {
-    private List<Long> data;
+    private List<Integer> data;
     private int n;
     private int sum;
     private int[] book;
-    private List<Long> result;
+    private List<Integer> result;
     private ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    public RandomTask(int n, List<Long> idList) {
+    public RandomTask(int n, List<Integer> idList) {
         this.n = n;
         sum = idList.size();
         book = new int[sum];
@@ -26,7 +26,7 @@ public class RandomTask {
         result = new ArrayList<>(n);
     }
 
-    public List<Long> gen() {
+    public List<Integer> gen() {
         for (int i = 0; i < n; i++) {
             int index = random.nextInt(sum);
             //如果已取出，则需要再生成一个不重复的

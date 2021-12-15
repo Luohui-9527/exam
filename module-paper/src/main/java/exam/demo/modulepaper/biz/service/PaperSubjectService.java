@@ -26,5 +26,5 @@ public interface PaperSubjectService extends IService<PaperSubject> {
      * @param list
      * @return
      */
-    List<PaperSubject> listSubjectByPaperIdList(List<Long> list);
+    List<PaperSubject> listSubjectByPaperIdList(List<Integer> list);
 }

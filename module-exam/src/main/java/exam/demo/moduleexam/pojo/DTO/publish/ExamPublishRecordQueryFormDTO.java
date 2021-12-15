@@ -11,7 +11,7 @@ public class ExamPublishRecordQueryFormDTO {
 
     private List<String> examTimeRange;
     private List<String> publishTimeRange;
-    private Long publisher;
+    private Integer publisher;
     private String title;
 
 }

@@ -27,5 +27,5 @@ public interface ExamRecordService extends IService<ExamRecord> {
      * @Author: luohui
      * @date: 2021-12-13
      */
-    List<ExamRecord> getListByExamPublishRecordId(Long examPublishRecordId);
+    List<ExamRecord> getListByExamPublishRecordId(Integer examPublishRecordId);
 }

@@ -13,7 +13,7 @@ public class ExamPublishRecordTableDataVO implements Serializable {
      * 考试发布记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 发布人
      */
@@ -67,5 +67,5 @@ public class ExamPublishRecordTableDataVO implements Serializable {
      * 试卷id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperId;
+    private Integer paperId;
 }

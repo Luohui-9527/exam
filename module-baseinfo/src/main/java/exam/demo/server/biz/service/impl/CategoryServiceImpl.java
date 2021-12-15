@@ -105,10 +105,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, Category> impl
      * @return
      */
     @Override
-    public List<String> getCategoryName(List<Long> categoryIdList) {
+    public List<String> getCategoryName(List<Integer> categoryIdList) {
         Cache cache = cacheManager.getCache(CacheConstants.CATEGORY);
         List<String> res = new ArrayList<>();
-        for (Long id : categoryIdList) {
+        for (Integer id : categoryIdList) {
             Cache.ValueWrapper wrapper = cache.get(id);
             Category category;
             if (wrapper == null) {
@@ -132,14 +132,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, Category> impl
      * @return
      */
     @Override
-    public List<Category> queryChildNode(Long parentId) {
+    public List<Category> queryChildNode(Integer parentId) {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         wrapper.eq("parent_id", parentId);
         return list(wrapper);
     }
 
     @Override
-    public String getCategoryNameById(Long id) {
+    public String getCategoryNameById(Integer id) {
         Cache cache = cacheManager.getCache(CacheConstants.CATEGORY_VAL);
         Cache.ValueWrapper wrapper = cache.get(id);
         if (wrapper == null) {

@@ -43,7 +43,7 @@ public class ExamPublishRecordPublishFormVO implements Serializable {
      */
     @NotNull(message = "阅卷方式不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long markingMode;
+    private Integer markingMode;
     /**
      * 阅卷截止时间
      */
@@ -54,7 +54,7 @@ public class ExamPublishRecordPublishFormVO implements Serializable {
      */
     @NotNull(message = "试卷id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperId;
+    private Integer paperId;
     /**
      * 计划考试人数
      */
@@ -69,5 +69,5 @@ public class ExamPublishRecordPublishFormVO implements Serializable {
      * 阅卷官列表
      */
     @NotEmpty(message = "阅卷官不能为空")
-    private List<Long> examinersId;
+    private List<Integer> examinersId;
 }

@@ -14,7 +14,7 @@ public class TreeList extends Model<TreeList> {
     /**
      * id
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 名字
@@ -24,7 +24,7 @@ public class TreeList extends Model<TreeList> {
     /**
      * 父亲id
      */
-    private Long parentId;
+    private Integer parentId;
 
     private Long version;
 

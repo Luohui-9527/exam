@@ -6,9 +6,9 @@ public class SubjectAnswerDto implements Serializable {
 
     private static final long serialVersionUID = -1859606015049770782L;
 
-    private Long subjectAnswerId;
+    private Integer subjectAnswerId;
 
-    private Long subjectId;
+    private Integer subjectId;
 
     private String answer;
 
@@ -20,19 +20,19 @@ public class SubjectAnswerDto implements Serializable {
 
     private Object field3;
 
-    public Long getSubjectAnswerId() {
+    public Integer getSubjectAnswerId() {
         return subjectAnswerId;
     }
 
-    public void setSubjectAnswerId(Long subjectAnswerId) {
+    public void setSubjectAnswerId(Integer subjectAnswerId) {
         this.subjectAnswerId = subjectAnswerId;
     }
 
-    public Long getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(Long subjectId) {
+    public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
 

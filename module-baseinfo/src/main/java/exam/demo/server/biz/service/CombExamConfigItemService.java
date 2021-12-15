@@ -1,12 +1,12 @@
 package exam.demo.server.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import exam.demo.server.pojo.model.CombExamConfigItem;
+import exam.demo.server.pojo.model.CombExamConfigDetail;
 
 import java.util.List;
 
 
-public interface CombExamConfigItemService extends IService<CombExamConfigItem> {
+public interface CombExamConfigItemService extends IService<CombExamConfigDetail> {
     /**
      * 根据组卷配置删除配置项
      *
@@ -21,6 +21,6 @@ public interface CombExamConfigItemService extends IService<CombExamConfigItem> 
      * @param item
      * @return
      */
-    List<CombExamConfigItem> listByCombExamId(CombExamConfigItem item);
+    List<CombExamConfigDetail> listByCombExamId(CombExamConfigDetail item);
 
 }

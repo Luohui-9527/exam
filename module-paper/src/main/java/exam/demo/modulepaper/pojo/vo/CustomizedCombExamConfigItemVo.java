@@ -21,12 +21,12 @@ public class CustomizedCombExamConfigItemVo {
      * 试题类别id 如java C
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private Integer categoryId;
     /**
      * 试题类型id 如选择填空
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
     /**
      * 试题数量
      */
@@ -35,7 +35,7 @@ public class CustomizedCombExamConfigItemVo {
      * 试题难度
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
     /**
      * 每道试题分数
      */

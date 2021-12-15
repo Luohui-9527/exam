@@ -13,7 +13,7 @@ public class ExamReportRecordExamTableDataVO implements Serializable {
      * 考试记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 实际考试人数
      */

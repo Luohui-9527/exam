@@ -13,11 +13,11 @@ public class ExamPublishRecordPublishFormDTO extends BaseDto {
     private Date endTime;
     private Integer examSession;
     private Integer limitTime;
-    private Long markingMode;
+    private Integer markingMode;
     private Date markingStopTime;
-    private Long paperId;
+    private Integer paperId;
     private Integer planPepoleNum;
     private String title;
-    private List<Long> examinersId;
-    private Long publisher;
+    private List<Integer> examinersId;
+    private Integer publisher;
 }

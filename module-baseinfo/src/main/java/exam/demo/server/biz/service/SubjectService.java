@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import exam.demo.modulecommon.common.SubjectAnswerDto;
 import exam.demo.modulecommon.common.SubjectDto;
 import exam.demo.modulecommon.common.SubjectPackage;
-import exam.demo.server.pojo.model.CombExamConfigItem;
+import exam.demo.server.pojo.model.CombExamConfigDetail;
 import exam.demo.server.pojo.model.Subject;
 import exam.demo.server.pojo.model.SubjectInfo;
 
@@ -45,9 +45,9 @@ public interface SubjectService extends IService<Subject> {
      */
     List<SubjectInfo> listSubject(Subject subject);
 
-    SubjectPackage getSubject(List<CombExamConfigItem> itemList);
+    SubjectPackage getSubject(List<CombExamConfigDetail> itemList);
 
-    SubjectPackage getSubjectById(List<Long> idList);
+    SubjectPackage getSubjectById(List<Integer> idList);
 
     /**
      * 判断当前配置是否满足题目数目
@@ -57,5 +57,5 @@ public interface SubjectService extends IService<Subject> {
      * @param count
      * @return
      */
-    void isEnough(Long category, Long subjectType, int count);
+    void isEnough(Integer category, Integer subjectType, int count);
 }

@@ -28,5 +28,5 @@ public class MarkingAnswerVO implements Serializable {
      */
     @NotNull(message = "试卷id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperSubjectId;
+    private Integer paperSubjectId;
 }

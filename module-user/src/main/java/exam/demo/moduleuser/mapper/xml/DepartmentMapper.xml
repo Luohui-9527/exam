@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.demo.moduleuser.mapper.DepartmentMapper">
+
+    <update id="update">
+        UPDATE department
+        SET id = #{id},company_id = #{companyId},name = #{name},mnemonic_code = #{mnemonicCode},code = #{code},
+        level = #{level}, parent_id = #{parentId},master = #{master},descript = #{descript},status =
+        #{status},created_by = #{createdBy},
+        created_time = #{createdTime},updated_by = #{updatedBy},updated_time = #{updatedTime},version = #{version}
+        WHERE id = #{id} AND version = #{oldVersion}
+        <if test="judgeId!=null and judgeId!=''">
+            AND company_id = #{judgeId}
+        </if>
+    </update>
+
+    <select id="listByCompanyId" resultType="exam.demo.moduleuser.pojo.model.Department">
+            SELECT * FROM department WHERE company_id = #{id}
+    </select>
+    <select id="query" resultType="exam.demo.moduleuser.pojo.model.Department">
+        SELECT a.*,b.name AS parentDepartment FROM department a
+        LEFT JOIN department b ON b.id = a.parent_id
+        <where>
+            <if test="name!=null and name!=''">
+                AND a.name LIKE CONCAT(#{name},'%')
+            </if>
+            <if test="level!=null and level!=''">
+                AND a.level = #{level}
+            </if>
+            <if test="judgeId!=null and judgeId!=''">
+                AND a.company_id = #{judgeId}
+            </if>
+        </where>
+        ORDER BY updated_time DESC
+    </select>
+    <select id="queryLevel" resultType="exam.demo.moduleuser.pojo.model.Department">
+        SELECT DISTINCT level FROM department ORDER BY level
+    </select>
+    <select id="queryParent" resultType="exam.demo.moduleuser.pojo.model.Department">
+        SELECT id,name FROM department ORDER BY level
+    </select>
+    <select id="getQueryListData" resultType="exam.demo.moduleuser.pojo.model.TreeList">
+        SELECT id,name,company_id AS parent_id,company_id AS root_id,version from department
+        WHERE level = '1'
+        <if test="_parameter!=null and _parameter!=''">
+            AND company_id = #{_parameter}
+        </if>
+        UNION
+        SELECT id,name,parent_id,company_id AS root_id,version from department
+        WHERE level != '1'
+        <if test="_parameter!=null and _parameter!=''">
+            AND company_id = #{_parameter}
+        </if>
+        UNION
+        SELECT id,name,null AS parent_id,id AS root_id,version FROM company
+        <where>
+            <if test="_parameter!=null and _parameter!=''">
+                id = #{_parameter}
+            </if>
+        </where>
+        ORDER BY parent_id
+    </select>
+</mapper>

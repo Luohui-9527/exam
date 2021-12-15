@@ -22,23 +22,23 @@ public interface BaseInfoApi {
     CommonResponse<BaseDataDto> getBaseDataS(CommonRequest<BaseDataDto> request);
 
     @PostMapping({"/get/base/data"})
-    CommonResponse<String> getBaseData(CommonRequest<Long> request);
+    CommonResponse<String> getBaseData(CommonRequest<Integer> request);
 
     @PostMapping({"/get/subject/and/answer"})
-    CommonResponse<SubjectPackage> getSubjectAndAnswer(CommonRequest<Long> request);
+    CommonResponse<SubjectPackage> getSubjectAndAnswer(CommonRequest<Integer> request);
 
     @PostMapping({"/get/subject/customized"})
     CommonResponse<SubjectPackage> getSubjectAndAnswerCustomized(CommonRequest<List<CombExamConfigItemDto>> request);
 
     @PostMapping({"/get/subject/by/id"})
-    CommonResponse<SubjectPackage> getSubjectById(CommonRequest<List<Long>> request);
+    CommonResponse<SubjectPackage> getSubjectById(CommonRequest<List<Integer>> request);
 
     @PostMapping({"/list/subject/type"})
     CommonResponse<BaseDataDto> getSubjectType(CommonRequest<BaseDataDto> request);
 
     @PostMapping({"/get/category/val"})
-    CommonResponse<String> getCategory(Long id);
+    CommonResponse<String> getCategory(Integer id);
 
     @PostMapping({"/get/subject/type"})
-    CommonResponse<String> getSubjectType(Long id);
+    CommonResponse<String> getSubjectType(Integer id);
 }

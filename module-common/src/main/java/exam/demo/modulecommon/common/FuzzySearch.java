@@ -18,5 +18,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FuzzySearch {
     String paperName;
-    Long companyId;
+    Integer companyId;
 }

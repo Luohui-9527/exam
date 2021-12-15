@@ -43,7 +43,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
             List<ExamPublishRecordTableDataDTO> examPublishRecordTableDataDTOS = CommonUtils.convertList(examPublishRecords, ExamPublishRecordTableDataDTO.class);
             examPublishRecordTableDataDTOS.forEach(dto -> {
                 List<UserRecord> selected = userRecordService.listExaminers(dto.getId());
-                List<Long> examiners = selected.stream().map(UserRecord::getId).collect(Collectors.toList());
+                List<Integer> examiners = selected.stream().map(UserRecord::getId).collect(Collectors.toList());
                 dto.setExaminers(examiners);
             });
             return examPublishRecordTableDataDTOS;
@@ -62,7 +62,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
         BeanUtils.copyProperties(examPublishRecordPublishFormDTO, examPublishRecord);
         examPublishRecord.setStatus((byte) 0);
         userRecord.setExamPublishRecordId(examPublishRecordPublishFormDTO.getId());
-        List<Long> idList = examPublishRecordPublishFormDTO.getExaminersId();
+        List<Integer> idList = examPublishRecordPublishFormDTO.getExaminersId();
         if (idList != null) {
             idList.forEach(id -> {
                 userRecord.setId(id);
@@ -99,7 +99,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
     }
 
     @Override
-    public List<ExamPublishRecord> getListByIdVersion(Long id, Long version) {
+    public List<ExamPublishRecord> getListByIdVersion(Integer id, Long version) {
         QueryWrapper<ExamPublishRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.ID, id);
         wrapper.eq(MagicPointConstant.VERSION, version);

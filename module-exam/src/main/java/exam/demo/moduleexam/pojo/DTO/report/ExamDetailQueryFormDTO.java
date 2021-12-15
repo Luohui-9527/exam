@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class ExamDetailQueryFormDTO {
-    private Long id;
+    private Integer id;
 }

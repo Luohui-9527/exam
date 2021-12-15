@@ -24,7 +24,7 @@ public class CategoryVo extends BaseItemVo implements Serializable {
      * 父类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private Integer parentId;
 
     public CategoryVo() {
     }
@@ -37,11 +37,11 @@ public class CategoryVo extends BaseItemVo implements Serializable {
         this.name = name;
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 

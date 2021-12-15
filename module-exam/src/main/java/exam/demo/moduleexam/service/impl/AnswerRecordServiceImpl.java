@@ -31,7 +31,7 @@ public class AnswerRecordServiceImpl extends ServiceImpl<AnswerRecordMapper, Ans
     }
 
     @Override
-    public AnswerRecord getOneByPaperSubjectIdAndExamRecordId(Long paperSubjectId, Long examRecordId) {
+    public AnswerRecord getOneByPaperSubjectIdAndExamRecordId(Integer paperSubjectId, Integer examRecordId) {
         QueryWrapper<AnswerRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.PAPER_SUBJECT_ID, paperSubjectId);
         wrapper.eq(MagicPointConstant.EXAM_RECORD_ID, examRecordId);
@@ -44,7 +44,7 @@ public class AnswerRecordServiceImpl extends ServiceImpl<AnswerRecordMapper, Ans
     }
 
     @Override
-    public List<AnswerRecord> getListByExamRecordId(Long examRecordId) {
+    public List<AnswerRecord> getListByExamRecordId(Integer examRecordId) {
         QueryWrapper<AnswerRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.EXAM_RECORD_ID, examRecordId);
         return this.list(wrapper);

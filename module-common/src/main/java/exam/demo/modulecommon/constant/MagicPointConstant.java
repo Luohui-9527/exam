@@ -59,4 +59,36 @@ public class MagicPointConstant {
      * The constant SCORE.
      */
     public static final String SCORE = "score";
+    /**
+     * The constant ROLE_ID.
+     */
+    public static final String ROLE_ID = "role_id";
+    /**
+     * The constant USER_ID.
+     */
+    public static final String USER_ID = "user_id";
+    /**
+     * The constant COMPANY_ID.
+     */
+    public static final String COMPANY_ID = "company_id";
+    /**
+     * The constant NAME.
+     */
+    public static final String NAME = "name";
+    /**
+     * The constant CODE.
+     */
+    public static final String CODE = "code";
+    /**
+     * The constant PARAM.
+     */
+    public static final String PARAM = "param";
+    /**
+     * The constant PARAM_TYPE.
+     */
+    public static final String PARAM_TYPE = "param_type";
+    /**
+     * The constant PARENT_ID.
+     */
+    public static final String PARENT_ID = "parent_id";
 }

@@ -18,25 +18,25 @@ public class UserListVo extends BaseVo implements Serializable {
      * 用户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 职位ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long positionId;
+    private Integer positionId;
 
     /**
      * 部门ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long departmentId;
+    private Integer departmentId;
 
     /**
      * 公司Id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
     /**
      * 工号
@@ -77,7 +77,7 @@ public class UserListVo extends BaseVo implements Serializable {
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long roleId;
+    private Integer roleId;
 
     /**
      * 性别
@@ -120,27 +120,27 @@ public class UserListVo extends BaseVo implements Serializable {
      */
     private Byte status;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getPositionId() {
+    public Integer getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(Long positionId) {
+    public void setPositionId(Integer positionId) {
         this.positionId = positionId;
     }
 
-    public Long getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Long departmentId) {
+    public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -277,11 +277,11 @@ public class UserListVo extends BaseVo implements Serializable {
                 '}';
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -293,11 +293,11 @@ public class UserListVo extends BaseVo implements Serializable {
         this.departmentName = departmentName;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 

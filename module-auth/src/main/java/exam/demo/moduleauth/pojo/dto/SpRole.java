@@ -12,7 +12,7 @@ public class SpRole {
     /**
      * 角色ID
      */
-    private Long id;
+    private Integer id;
     /**
      * 角色名
      */
@@ -20,11 +20,11 @@ public class SpRole {
 
     Set<SpResource> resources;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

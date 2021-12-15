@@ -37,7 +37,7 @@ public class PaperSubjectServiceImpl extends ServiceImpl<PaperSubjectDao, PaperS
      * @return
      */
     @Override
-    public List<PaperSubject> listSubjectByPaperIdList(List<Long> list) {
+    public List<PaperSubject> listSubjectByPaperIdList(List<Integer> list) {
         return baseMapper.listSubjectByPaperIdList(list);
     }
 }

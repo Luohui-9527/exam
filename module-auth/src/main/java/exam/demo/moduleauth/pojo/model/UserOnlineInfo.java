@@ -1,154 +1,69 @@
 package exam.demo.moduleauth.pojo.model;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * t_user_online_info
- * @author
+ * 用户在线记录表 - 数据对象定义
+ *
+ * @author gpmscloud
  */
 @Data
-@Accessors(chain = true)
-public class UserOnlineInfo extends Model<UserOnlineInfo> implements Serializable {
-    private static final long serialVersionUID = -1214689941310859787L;
+@TableName("user_online_info")
+public class UserOnlineInfo implements Serializable {
+
     /**
      * 在线ID
      */
-    private Long id;
-
+    @ApiModelProperty(value = "在线ID")
+    private Integer id;
     /**
      * 用户ID
      */
-    private Long userId;
-
+    @ApiModelProperty(value = "用户ID")
+    private Integer userId;
     /**
      * 工号
      */
+    @ApiModelProperty(value = "工号")
     private String code;
-
     /**
      * 用户名
      */
+    @ApiModelProperty(value = "用户名")
     private String name;
-
     /**
      * IP
      */
+    @ApiModelProperty(value = "IP")
     private String ip;
-
     /**
      * 上线时间
      */
-    private Date onlineTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "上线时间")
+    private java.util.Date onlineTime;
     /**
      * 下线时间
      */
-    private Date offlineTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "下线时间")
+    private java.util.Date offlineTime;
     /**
      * 在线时长
      */
+    @ApiModelProperty(value = "在线时长")
     private Integer stopTime;
-
     /**
      * 状态位
      */
-    private Byte status;
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public Date getOnlineTime() {
-        return onlineTime;
-    }
-
-    public void setOnlineTime(Date onlineTime) {
-        this.onlineTime = onlineTime;
-    }
-
-    public Date getOfflineTime() {
-        return offlineTime;
-    }
-
-    public void setOfflineTime(Date offlineTime) {
-        this.offlineTime = offlineTime;
-    }
-
-    public Integer getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(Integer stopTime) {
-        this.stopTime = stopTime;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "UserOnlineInfo{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", ip='" + ip + '\'' +
-                ", onlineTime=" + onlineTime +
-                ", offlineTime=" + offlineTime +
-                ", stopTime=" + stopTime +
-                ", status=" + status +
-                '}';
-    }
+    @ApiModelProperty(value = "状态位")
+    private Integer status;
 }

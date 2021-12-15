@@ -2,6 +2,7 @@ package exam.demo.server.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 /**
  * @author luohui
  */
+@Data
 public class BaseItemVo implements Serializable {
 
 
@@ -20,7 +22,7 @@ public class BaseItemVo implements Serializable {
      */
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    protected Long id;
+    protected Integer id;
 
     /**
      * 状态位
@@ -39,49 +41,4 @@ public class BaseItemVo implements Serializable {
      * 备注
      */
     protected String remark;
-
-    public BaseItemVo() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseItemVo{" +
-                "id=" + id +
-                ", status=" + status +
-                ", version=" + version +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
 }

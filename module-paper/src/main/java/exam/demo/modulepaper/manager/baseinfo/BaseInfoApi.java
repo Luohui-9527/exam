@@ -24,23 +24,23 @@ public interface BaseInfoApi {
     CommonResponse getBaseDataS(BaseDataDto baseDataDto);
 
     @PostMapping({"/baseinfo/get/base/data"})
-    CommonResponse getBaseData(Long dictionaryId);
+    CommonResponse getBaseData(Integer dictionaryId);
 
     @PostMapping({"/baseinfo/get/subject/and/answer"})
-    CommonResponse getSubjectAndAnswer(Long combExamConfigId);
+    CommonResponse getSubjectAndAnswer(Integer combExamConfigId);
 
     @PostMapping({"/baseinfo/get/subject/customized"})
     CommonResponse getSubjectAndAnswerCustomized(List<CombExamConfigItemDto> combExamConfigItemDtoList);
 
     @PostMapping({"/baseinfo/get/subject/by/id"})
-    CommonResponse getSubjectById(List<Long> subjectIdList);
+    CommonResponse getSubjectById(List<Integer> subjectIdList);
 
     @PostMapping({"/baseinfo/list/subject/type"})
     CommonResponse getSubjectType(BaseDataDto baseDataDto);
 
     @PostMapping({"/baseinfo/get/category/val"})
-    CommonResponse getCategory(Long id);
+    CommonResponse getCategory(Integer id);
 
     @PostMapping({"/baseinfo/get/subject/type"})
-    CommonResponse getSubjectType(Long id);
+    CommonResponse getSubjectType(Integer id);
 }

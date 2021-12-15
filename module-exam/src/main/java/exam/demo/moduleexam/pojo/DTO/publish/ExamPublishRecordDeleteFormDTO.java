@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ExamPublishRecordDeleteFormDTO {
-    private Long id;
+    private Integer id;
     private Long version;
 }

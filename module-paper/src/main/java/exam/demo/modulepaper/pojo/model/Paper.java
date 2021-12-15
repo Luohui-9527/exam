@@ -3,6 +3,7 @@ package exam.demo.modulepaper.pojo.model;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class Paper extends Model<Paper> {
     /**
      * 试卷id
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 试卷名
@@ -28,12 +29,12 @@ public class Paper extends Model<Paper> {
     /**
      * 试卷类型
      */
-    private Long paperType;
+    private Integer paperType;
 
     /**
      * 难度
      */
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 组卷日期
@@ -78,17 +79,17 @@ public class Paper extends Model<Paper> {
     /**
      * 机构id
      */
-    private Long orgId;
+    private Integer orgId;
 
     /**
      * 公司id
      */
-    private Long companyId;
+    private Integer companyId;
 
     /**
      * 创建者
      */
-    private Long createdBy;
+    private Integer createdBy;
 
     /**
      * 创建时间
@@ -98,7 +99,7 @@ public class Paper extends Model<Paper> {
     /**
      * 更新者
      */
-    private Long updatedBy;
+    private Integer updatedBy;
 
     /**
      * 更新时间
@@ -127,7 +128,7 @@ public class Paper extends Model<Paper> {
     public static final String DOWNLOAD_TIMES = "download_times";
     public static final String PUBLISH_TIMES = "publish_times";
     public static final String STATUS = "status";
-    public static final String ORG_ID ="org_id";
+    public static final String ORG_ID = "org_id";
     public static final String COMPANY_ID = "company_id";
     public static final String CREATED_BY = "created_by";
     public static final String CREATED_TIME = "created_time";

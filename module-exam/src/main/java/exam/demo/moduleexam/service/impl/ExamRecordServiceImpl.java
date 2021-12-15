@@ -28,7 +28,7 @@ public class ExamRecordServiceImpl extends ServiceImpl<ExamRecordMapper, ExamRec
     }
 
     @Override
-    public List<ExamRecord> getListByExamPublishRecordId(Long examPublishRecordId) {
+    public List<ExamRecord> getListByExamPublishRecordId(Integer examPublishRecordId) {
         QueryWrapper<ExamRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.EXAM_PUBLISH_RECORD_ID, examPublishRecordId);
         wrapper.orderByDesc(MagicPointConstant.SCORE);

@@ -8,13 +8,13 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.OrganizationService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.OrganizationDto;
 import exam.demo.moduleuser.pojo.model.Organization;
 import exam.demo.moduleuser.pojo.vo.OrganizationItemVo;
 import exam.demo.moduleuser.pojo.vo.OrganizationListVo;
 import exam.demo.moduleuser.pojo.vo.OrganizationQueryVo;
+import exam.demo.moduleuser.service.IOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ import java.util.List;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class OrganizationController {
     @Autowired
-    OrganizationService organizationService;
+    IOrganizationService organizationService;
 
     @Autowired
     CommonState state;
@@ -76,7 +76,7 @@ public class OrganizationController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF)
-    public CommonResponse<OrganizationListVo> getUpdateFormOrganization(@RequestBody CommonRequest<Long> request) {
+    public CommonResponse<OrganizationListVo> getUpdateFormOrganization(@RequestBody CommonRequest<Integer> request) {
         Organization organization = organizationService.getById(request.getData());
         OrganizationListVo organizationListVo = CommonUtils.copyProperties(organization, OrganizationListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, organizationListVo);

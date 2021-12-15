@@ -8,7 +8,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.ResourceService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.ResourceDto;
 import exam.demo.moduleuser.dto.TreeListDto;
@@ -16,6 +15,7 @@ import exam.demo.moduleuser.pojo.model.Resource;
 import exam.demo.moduleuser.pojo.vo.ResourceItemVo;
 import exam.demo.moduleuser.pojo.vo.ResourceListVo;
 import exam.demo.moduleuser.pojo.vo.ResourceQueryVo;
+import exam.demo.moduleuser.service.IResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,7 @@ import java.util.List;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class ResourceController {
     @Autowired
-    ResourceService resourceService;
+    IResourceService resourceService;
 
     @Autowired
     CommonState state;
@@ -47,7 +47,7 @@ public class ResourceController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_R)
-    public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody CommonRequest<Long> request) {
+    public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody CommonRequest<Integer> request) {
         Resource resource = resourceService.getById(request.getData());
         ResourceListVo resourceListVo = CommonUtils.copyProperties(resource, ResourceListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, resourceListVo);

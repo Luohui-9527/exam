@@ -19,7 +19,7 @@ public class PaperVo extends BaseQueryVo {
      * 试卷id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 试卷名称
      */
@@ -28,7 +28,7 @@ public class PaperVo extends BaseQueryVo {
      * 试卷类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperType;
+    private Integer paperType;
     /**
      * 试卷类型，通过id从数据字典中查询
      */
@@ -37,7 +37,7 @@ public class PaperVo extends BaseQueryVo {
      * 难度id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
     /**
      * 难度，通过id从数据字典中查询
      */
@@ -85,11 +85,11 @@ public class PaperVo extends BaseQueryVo {
      * 公司id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
     private String companyValue;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long updatedBy;
+    private Integer updatedBy;
 
     private String updatedByValue;
     /**
@@ -122,11 +122,11 @@ public class PaperVo extends BaseQueryVo {
                 '}';
     }
 
-    public Long getUpdatedBy() {
+    public Integer getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(Long updatedBy) {
+    public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -138,11 +138,11 @@ public class PaperVo extends BaseQueryVo {
         this.updatedByValue = updatedByValue;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 
@@ -162,11 +162,11 @@ public class PaperVo extends BaseQueryVo {
         this.updatedTime = updatedTime;
     }
 
-    public Long getPaperType() {
+    public Integer getPaperType() {
         return paperType;
     }
 
-    public void setPaperType(Long paperType) {
+    public void setPaperType(Integer paperType) {
         this.paperType = paperType;
     }
 
@@ -178,11 +178,11 @@ public class PaperVo extends BaseQueryVo {
         this.paperTypeValue = paperTypeValue;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -194,11 +194,11 @@ public class PaperVo extends BaseQueryVo {
         this.difficultyValue = difficultyValue;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

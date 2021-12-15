@@ -2,6 +2,7 @@ package exam.demo.moduleuser.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,54 +12,14 @@ import java.util.List;
  * @version V1.0.0
  * @date 2019/9/10
  */
+@Data
 public class UserRoleDto implements Serializable {
     private static final long serialVersionUID = 7771310453968830965L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private List<Long> roleId;
-    private Long userId;
+    private List<Integer> roleIds;
+    private Integer userId;
     private String roleName;
 
-    public List<Long> getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(List<Long> roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    @Override
-    public String toString() {
-        return "UserRoleDto{" +
-                "id=" + id +
-                ", roleId=" + roleId +
-                ", userId=" + userId +
-                ", roleName='" + roleName + '\'' +
-                '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }

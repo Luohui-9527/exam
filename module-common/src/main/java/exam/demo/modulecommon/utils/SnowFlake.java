@@ -58,7 +58,6 @@ public class SnowFlake {
     private final long timestampLeftShift = sequenceBits + workerIdBits + dataCenterIdBits;
 
     /**
-     *
      * 生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095)
      */
     private final long sequenceMask = ~(-1L << sequenceBits);
@@ -74,10 +73,10 @@ public class SnowFlake {
     private volatile long lastTimestamp = -1L;
 
 
-    public SnowFlake(){
+    public SnowFlake() {
     }
 
-    public SnowFlake(int dataCenterId, int machineId){
+    public SnowFlake(int dataCenterId, int machineId) {
         this.dataCenterId = dataCenterId;
         this.machineId = machineId;
     }
@@ -85,10 +84,11 @@ public class SnowFlake {
 
     /**
      * 获得下一个ID (该方法是线程安全的)
-     *  如果一个线程反复获取Synchronized锁，那么synchronized锁将变成偏向锁。
+     * 如果一个线程反复获取Synchronized锁，那么synchronized锁将变成偏向锁。
+     *
      * @return SnowflakeId
      */
-    public synchronized long nextId() throws RuntimeException {
+    public synchronized Integer nextId() throws RuntimeException {
         long timestamp = timeGen();
 
         //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
@@ -115,10 +115,12 @@ public class SnowFlake {
         lastTimestamp = timestamp;
 
         //移位并通过或运算拼到一起组成64位的ID
-        return ((timestamp - twepoch) << timestampLeftShift)
+        long result = ((timestamp - twepoch) << timestampLeftShift)
                 | (dataCenterId << dataCenterIdShift)
                 | (machineId << workerIdShift)
                 | sequence;
+
+        return Long.valueOf(result).intValue();
     }
 
     /**

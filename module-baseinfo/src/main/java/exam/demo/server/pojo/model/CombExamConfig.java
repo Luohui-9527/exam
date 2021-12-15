@@ -20,19 +20,19 @@ public class CombExamConfig extends Model<CombExamConfig> {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private Integer id;
     /**
      * 机构id
      */
-    public Long orgId;
+    public Integer orgId;
     /**
      * 机构下公司id
      */
-    public Long companyId;
+    public Integer companyId;
     /**
      * 通过id到数据字典中查询创建者
      */
-    public Long createdBy;
+    public Integer createdBy;
     /**
      * 创建日期
      */
@@ -40,7 +40,7 @@ public class CombExamConfig extends Model<CombExamConfig> {
     /**
      * 通过id到数据字典中查询修改者
      */
-    public Long updatedBy;
+    public Integer updatedBy;
     /**
      * 修改日期
      */
@@ -63,7 +63,7 @@ public class CombExamConfig extends Model<CombExamConfig> {
     /**
      * 题目难度id
      */
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 题目难度名
@@ -72,7 +72,7 @@ public class CombExamConfig extends Model<CombExamConfig> {
     private String difficultyName;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private Integer judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

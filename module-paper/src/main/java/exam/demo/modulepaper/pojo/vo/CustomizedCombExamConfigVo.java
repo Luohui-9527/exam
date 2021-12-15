@@ -19,8 +19,8 @@ import java.util.List;
 public class CustomizedCombExamConfigVo {
     private String name;
     private String status;
-    private Long difficulty;
+    private Integer difficulty;
     private String remark;
-    private Long paperType;
+    private Integer paperType;
     private List<CustomizedCombExamConfigItemVo> combExamConfigItemVOs;
 }

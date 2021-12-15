@@ -19,6 +19,6 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BaseDataDto {
-    private Map<Long, String> baseInfoMap;
+    private Map<Integer, String> baseInfoMap;
 }
 

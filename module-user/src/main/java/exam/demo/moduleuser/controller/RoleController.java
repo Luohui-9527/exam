@@ -8,9 +8,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.CompanyService;
-import exam.demo.moduleuser.biz.service.ResourceService;
-import exam.demo.moduleuser.biz.service.RoleService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.RoleDto;
 import exam.demo.moduleuser.dto.RoleResourceDto;
@@ -19,6 +16,9 @@ import exam.demo.moduleuser.pojo.model.Resource;
 import exam.demo.moduleuser.pojo.model.Role;
 import exam.demo.moduleuser.pojo.model.UserForRole;
 import exam.demo.moduleuser.pojo.vo.*;
+import exam.demo.moduleuser.service.ICompanyService;
+import exam.demo.moduleuser.service.IResourceService;
+import exam.demo.moduleuser.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,13 +38,13 @@ import java.util.stream.Collectors;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class RoleController {
     @Autowired
-    RoleService roleService;
+    IRoleService roleService;
 
     @Autowired
-    CompanyService companyService;
+    ICompanyService companyService;
 
     @Autowired
-    ResourceService resourceService;
+    IResourceService resourceService;
 
     @Autowired
     CommonState state;
@@ -67,7 +67,7 @@ public class RoleController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_ROLE)
-    public CommonResponse<RoleListVo> getUpdateFormRole(@RequestBody CommonRequest<Long> request) {
+    public CommonResponse<RoleListVo> getUpdateFormRole(@RequestBody CommonRequest<Integer> request) {
         Role role = roleService.getById(request.getData());
         RoleListVo listVo = CommonUtils.copyProperties(role, RoleListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, listVo);
@@ -113,7 +113,7 @@ public class RoleController {
     @MethodEnhancer
     @PostMapping(ControllerConstants.UPDATE_RESOURCE_FOR_ROLE)
     public CommonResponse<Boolean> updateResourceForRole(@RequestBody CommonRequest<List<RoleResourceVo>> request) {
-        List<Long> resourceIdList = request.getData().stream().map(RoleResourceVo::getId).collect(Collectors.toList());
+        List<Integer> resourceIdList = request.getData().stream().map(RoleResourceVo::getId).collect(Collectors.toList());
         List<RoleResourceVo> voList = request.getData();
         // 前端的代码有bug,存储的数据是不断的增加的，因此需要去重
         Set<RoleResourceVo> set = new HashSet<>(voList);

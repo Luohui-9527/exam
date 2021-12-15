@@ -44,7 +44,7 @@ public interface SubjectDao extends BaseMapper<Subject> {
             "Left JOIN subject_type t ON a.subject_type_id = t.id " +
             "LEFT JOIN category c ON a.category_id = c.id " +
             "LEFT JOIN dictionary d ON a.difficulty = d.id WHERE a.subject_type_id = #{subjectTypeId} AND a.category_id = #{categoryId} AND a.difficulty = #{difficulty}")
-    List<Long> querySubjectIdList(Subject subject);
+    List<Integer> querySubjectIdList(Subject subject);
 
     /**
      * 通过id来查询Subject
@@ -57,5 +57,5 @@ public interface SubjectDao extends BaseMapper<Subject> {
             "difficulty,status FROM subject WHERE id IN " +
             "<foreach item = 'id' index = 'index' collection = 'idList' open='(' separator=',' close=')'>" +
             "#{id} </foreach> </script>"})
-    List<Subject> querySubjectByPrimaryKeyList(@Param("idList") List<Long> idList);
+    List<Subject> querySubjectByPrimaryKeyList(@Param("idList") List<Integer> idList);
 }

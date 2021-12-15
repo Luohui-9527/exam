@@ -21,5 +21,5 @@ public interface PaperSubjectDao extends BaseMapper<PaperSubject> {
      * @param list
      * @return
      */
-    List<PaperSubject> listSubjectByPaperIdList(@Param("ids") List<Long> list);
+    List<PaperSubject> listSubjectByPaperIdList(@Param("ids") List<Integer> list);
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.demo.moduleuser.mapper.PositionMapper">
+
+    <update id="update">
+        UPDATE position
+        SET id = #{id},company_id = #{companyId},name = #{name},code = #{code},remark = #{remark},
+        status = #{status},created_by = #{createdBy},created_time = #{createdTime},
+        updated_by = #{updatedBy},updated_time = #{updatedTime},version = #{version}
+        WHERE id = #{id} AND version = #{oldVersion}
+        <if test="judgeId!=null and judgeId!=''">
+            AND company_id = #{judgeId}
+        </if>
+    </update>
+    <delete id="deleteById">
+        DELETE FROM position WHERE id = #{id} AND version = #{version}
+        <if test="judgeId!=null and judgeId!=''">
+            AND company_id = #{judgeId}
+        </if>
+    </delete>
+
+    <select id="queryPosition" resultType="exam.demo.moduleuser.dto.UserOptionsDto">
+        SELECT id AS positionId,name AS positionName,company_id FROM position WHERE company_id = #{id} ORDER BY LENGTH(name)
+    </select>
+    <select id="listByCompanyId" resultType="exam.demo.moduleuser.pojo.model.Position">
+        SELECT * FROM position WHERE company_id IN
+        <foreach collection="ids" item="id" separator="," close=")" open="(">
+            #{id}
+        </foreach>
+    </select>
+    <select id="queryOptions" resultType="exam.demo.moduleuser.pojo.model.Position">
+        SELECT id AS companyId,name AS companyName FROM company
+    </select>
+    <select id="query" resultType="exam.demo.moduleuser.pojo.model.Position">
+        SELECT a.*,b.name AS companyName FROM position a
+        LEFT JOIN company b ON a.company_id = b.id
+        <where>
+            <if test="name!=null and name!=''">
+                AND a.name LIKE CONCAT(#{name},'%')
+            </if>
+            <if test="judgeId!=null and judgeId!=''">
+                AND a.company_id = #{judgeId}
+            </if>
+        </where>
+        ORDER BY a.updated_time DESC
+    </select>
+</mapper>

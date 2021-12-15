@@ -2,16 +2,16 @@ package exam.demo.server.biz.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import exam.demo.modulecommon.annotation.FullCommonField;
+import exam.demo.modulecommon.common.CacheConstants;
+import exam.demo.modulecommon.enums.EnumOperation;
+import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.server.biz.dao.DictionaryDao;
 import exam.demo.server.biz.service.DictionaryService;
 import exam.demo.server.dto.DictionaryDto;
 import exam.demo.server.exception.BaseInfoError;
 import exam.demo.server.exception.BaseInfoException;
 import exam.demo.server.pojo.model.Dictionary;
-import exam.demo.modulecommon.annotation.FullCommonField;
-import exam.demo.modulecommon.common.CacheConstants;
-import exam.demo.modulecommon.enums.EnumOperation;
-import exam.demo.modulecommon.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -37,10 +37,10 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryDao, Dictionary
      * @return
      */
     @Override
-    public List<String> getDictionary(List<Long> idList) {
+    public List<String> getDictionary(List<Integer> idList) {
         Cache cache = cacheManager.getCache(CacheConstants.DICTIONARY);
         List<String> stringList = new ArrayList<>();
-        for (Long id : idList) {
+        for (Integer id : idList) {
             Dictionary dictionary;
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper == null) {
@@ -64,7 +64,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryDao, Dictionary
      * @return
      */
     @Override
-    public String getDictionaryValue(long id) {
+    public String getDictionaryValue(Integer id) {
         Dictionary dictionary;
         Cache cache = cacheManager.getCache(CacheConstants.DICTIONARY);
         Cache.ValueWrapper valueWrapper = cache.get(id);

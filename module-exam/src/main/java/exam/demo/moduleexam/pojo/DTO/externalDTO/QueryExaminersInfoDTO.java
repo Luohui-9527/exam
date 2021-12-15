@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class QueryExaminersInfoDTO {
     private String name;
-    private Long companyId;
+    private Integer companyId;
 }

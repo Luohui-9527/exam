@@ -47,7 +47,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @PostMapping(ApiConstant.PAPER_INFO_PUBLISH_PAPER)
-    public CommonResponse<Boolean> publishPaper(@RequestBody Long paperId) {
+    public CommonResponse<Boolean> publishPaper(@RequestBody Integer paperId) {
         if (paperService.publish(paperId)) {
             return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, true);
         }
@@ -88,7 +88,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_DETAIL)
-    public CommonResponse<PaperDetail> queryDetailByPaperId(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<PaperDetail> queryDetailByPaperId(@RequestParam("paperId") Integer paperId) {
         PaperDetail detail = baseService.queryDetailByPaperId(paperId);
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, detail);
     }
@@ -102,7 +102,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_PUBLISHED_TIME)
-    public CommonResponse<Integer> queryPublishedTimesByPaperId(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<Integer> queryPublishedTimesByPaperId(@RequestParam("paperId") Integer paperId) {
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperService.getPaper(paperId).getPublishTimes());
     }
 
@@ -114,7 +114,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_PAPER_NAME)
-    public CommonResponse<String> queryPaperNameByPaperId(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<String> queryPaperNameByPaperId(@RequestParam("paperId") Integer paperId) {
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperService.getPaper(paperId).getName());
     }
 
@@ -126,7 +126,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_PAPER_SCORE)
-    public CommonResponse<Double> queryPaperScore(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<Double> queryPaperScore(@RequestParam("paperId") Integer paperId) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, paperService.getScore(paperId));
     }
 }

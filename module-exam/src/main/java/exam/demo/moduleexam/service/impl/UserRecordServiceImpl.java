@@ -13,7 +13,7 @@ public class UserRecordServiceImpl extends ServiceImpl<UserRecordMapper, UserRec
 
 
     @Override
-    public List<UserRecord> listExaminers(Long examPublishRecordId) {
+    public List<UserRecord> listExaminers(Integer examPublishRecordId) {
         return baseMapper.listExaminers(examPublishRecordId);
     }
 }

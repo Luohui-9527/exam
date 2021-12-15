@@ -17,28 +17,28 @@ public class PaperSubject extends Model<PaperSubject> {
     /**
      * 试题id
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 试卷id
      */
-    private Long paperId;
+    private Integer paperId;
 
     /**
      * 题目
      */
     private String subject;
 
-    private Long categoryId;
+    private Integer categoryId;
     /**
      * 题目类型从基础数据中取
      */
-    private Long subjectTypeId;
+    private Integer subjectTypeId;
 
     /**
      * 难度
      */
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 分数

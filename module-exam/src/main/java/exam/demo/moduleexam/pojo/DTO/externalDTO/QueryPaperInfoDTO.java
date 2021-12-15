@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class QueryPaperInfoDTO {
     private String paperName;
-    private Long companyId;
+    private Integer companyId;
 }

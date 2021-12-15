@@ -14,9 +14,9 @@ public class SubjectAnswer extends Model<SubjectAnswer> {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private Integer id;
 
-    private Long subjectId;
+    private Integer subjectId;
 
     private String answer;
 

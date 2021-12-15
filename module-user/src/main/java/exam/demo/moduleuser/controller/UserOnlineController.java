@@ -8,13 +8,13 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.LoginService;
-import exam.demo.moduleuser.biz.service.UserOnlineInfoService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.UserOnlineInfoDto;
 import exam.demo.moduleuser.pojo.model.UserOnlineInfo;
 import exam.demo.moduleuser.pojo.vo.UserOnlineInfoListVo;
 import exam.demo.moduleuser.pojo.vo.UserOnlineInfoQueryVo;
+import exam.demo.moduleuser.service.IUserOnlineInfoService;
+import exam.demo.moduleuser.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ import java.util.List;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class UserOnlineController {
     @Autowired
-    UserOnlineInfoService userOnlineInfoService;
+    IUserOnlineInfoService userOnlineInfoService;
 
     @Autowired
     LoginService loginService;
@@ -62,7 +62,7 @@ public class UserOnlineController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.OFFLINE)
-    public CommonResponse<Boolean> kick(@RequestBody CommonRequest<List<Long>> request) {
+    public CommonResponse<Boolean> kick(@RequestBody CommonRequest<List<Integer>> request) {
         loginService.logout(request.getData());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }

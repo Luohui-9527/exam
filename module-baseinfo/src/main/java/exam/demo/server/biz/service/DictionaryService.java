@@ -17,7 +17,7 @@ public interface DictionaryService extends IService<Dictionary> {
      * @param idList
      * @return
      */
-    List<String> getDictionary(List<Long> idList);
+    List<String> getDictionary(List<Integer> idList);
 
     /**
      * 获取值
@@ -25,7 +25,7 @@ public interface DictionaryService extends IService<Dictionary> {
      * @param id
      * @return
      */
-    String getDictionaryValue(long id);
+    String getDictionaryValue(Integer id);
 
     /**
      * 保存

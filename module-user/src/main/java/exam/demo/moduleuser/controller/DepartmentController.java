@@ -8,7 +8,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.biz.service.DepartmentService;
 import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.DepartmentDto;
 import exam.demo.moduleuser.exception.UserError;
@@ -19,6 +18,7 @@ import exam.demo.moduleuser.pojo.vo.DepartmentItemVo;
 import exam.demo.moduleuser.pojo.vo.DepartmentListVo;
 import exam.demo.moduleuser.pojo.vo.DepartmentQueryVo;
 import exam.demo.moduleuser.pojo.vo.TreeListVo;
+import exam.demo.moduleuser.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ import java.util.List;
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
 public class DepartmentController {
     @Autowired
-    DepartmentService departmentService;
+    IDepartmentService departmentService;
 
     @Autowired
     CommonState state;
@@ -69,7 +69,7 @@ public class DepartmentController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_D)
-    public CommonResponse<DepartmentListVo> getUpdateFormDepartment(@RequestBody CommonRequest<Long> request) {
+    public CommonResponse<DepartmentListVo> getUpdateFormDepartment(@RequestBody CommonRequest<Integer> request) {
         Department department = departmentService.getById(request.getData());
         if (department == null) {
             throw new UserException(UserError.DATA_NOT_EXIST);

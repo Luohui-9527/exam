@@ -72,7 +72,7 @@ public class CreatePaperController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstant.CREATE_TEMPLATE_GEN)
-    public CommonResponse templateGen(@RequestParam("templateId") Long templateId) {
+    public CommonResponse templateGen(@RequestParam("templateId") Integer templateId) {
         checkAccessAuthority();
         PaperDto paperDto = new PaperDto();
         paperDto.setId(templateId);

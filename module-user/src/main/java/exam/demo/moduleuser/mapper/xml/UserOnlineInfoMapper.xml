@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.demo.moduleuser.mapper.UserOnlineInfoMapper">
+
+    <select id="query" resultType="exam.demo.moduleuser.pojo.model.UserOnlineInfo">
+        SELECT a.id,a.user_id,a.code,a.name,ip,online_time,offline_time,stop_time,a.status
+        FROM user_online_info a
+        LEFT JOIN user b ON a.user_id = b.id
+        <where>
+            <if test="onlineTime!=null and onlineTime!=''">
+                AND DATE(online_time) &lt; #{offlineTime} AND DATE(offline_time) &gt; #{onlineTime}
+            </if>
+            <if test="code!=null and code!=''">
+                AND a.code LIKE CONCAT(#{code},'%')
+            </if>
+            <if test="name!=null and name!=''">
+                AND a.name LIKE CONCAT(#{name},'%')
+            </if>
+            <if test="judgeId!=null and judgeId!=''">
+                AND b.company_id = #{judgeId}
+            </if>
+        </where>
+        ORDER BY status DESC,online_time ASC
+    </select>
+</mapper>

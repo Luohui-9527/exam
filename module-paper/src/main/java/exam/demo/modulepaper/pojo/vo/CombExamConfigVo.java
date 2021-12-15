@@ -18,7 +18,7 @@ import java.util.Date;
 public class CombExamConfigVo {
     @NotBlank(message = "组卷配置id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
     /**
      * 组卷配置名
      */
@@ -26,12 +26,12 @@ public class CombExamConfigVo {
     /**
      * 试卷类型
      */
-    private Long paperType;
+    private Integer paperType;
     /**
      * 试卷难度
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private Integer difficulty;
 
     /**
      * 状态位
@@ -45,13 +45,13 @@ public class CombExamConfigVo {
     private String remark;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    public Long companyId;
+    public Integer companyId;
 
     /**
      * 通过id到数据字典中查询创建者
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    public Long createdBy;
+    public Integer createdBy;
     /**
      * 修改日期
      */
@@ -66,11 +66,11 @@ public class CombExamConfigVo {
     public CombExamConfigVo() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,19 +82,19 @@ public class CombExamConfigVo {
         this.name = name;
     }
 
-    public Long getPaperType() {
+    public Integer getPaperType() {
         return paperType;
     }
 
-    public void setPaperType(Long paperType) {
+    public void setPaperType(Integer paperType) {
         this.paperType = paperType;
     }
 
-    public Long getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Long difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -114,19 +114,19 @@ public class CombExamConfigVo {
         this.remark = remark;
     }
 
-    public Long getCompanyId() {
+    public Integer getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
     }
 
-    public Long getCreatedBy() {
+    public Integer getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
+    public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -138,7 +138,7 @@ public class CombExamConfigVo {
         this.updatedTime = updatedTime;
     }
 
-    public Long getVersion() {
+    public Integer getVersion() {
         return version;
     }
 

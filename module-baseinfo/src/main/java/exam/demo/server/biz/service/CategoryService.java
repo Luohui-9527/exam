@@ -52,7 +52,7 @@ public interface CategoryService extends IService<Category> {
      * @param categoryIdList
      * @return
      */
-    List<String> getCategoryName(List<Long> categoryIdList);
+    List<String> getCategoryName(List<Integer> categoryIdList);
 
     /**
      * 根据节点id查询子节点比如c++ -> c++基础 + c++进阶
@@ -60,7 +60,7 @@ public interface CategoryService extends IService<Category> {
      * @param parentId
      * @return
      */
-    List<Category> queryChildNode(Long parentId);
+    List<Category> queryChildNode(Integer parentId);
 
-    String getCategoryNameById(Long id);
+    String getCategoryNameById(Integer id);
 }

@@ -75,9 +75,9 @@ public class AnswerSheetRecordController {
      * @param id
      * @return
      */
-    private String getPublisherName(Long id) {
+    private String getPublisherName(Integer id) {
         if (id != null) {
-            CommonRequest<Long> request = new CommonRequest<>();
+            CommonRequest<Integer> request = new CommonRequest<>();
             request.setVersion(state.getVersion());
             request.setData(id);
             request.setToken(TokenUtils.getToken());
@@ -92,17 +92,17 @@ public class AnswerSheetRecordController {
      * @param name
      * @return
      */
-    private Long getPublisherId(String name) {
+    private Integer getPublisherId(String name) {
         if (name != null) {
             CommonRequest<String> request = new CommonRequest<>();
             request.setVersion(state.getVersion());
             request.setToken(TokenUtils.getToken());
             request.setData(name);
-            Long id = RPCUtils.parseResponse(userFeignClient.getUserIdByName(request), Long.class, RPCUtils.USER);
+            Integer id = RPCUtils.parseResponse(userFeignClient.getUserIdByName(request), Integer.class, RPCUtils.USER);
             if (id != null) {
                 return id;
             } else {
-                return 0L;
+                return 0;
             }
         }
         return null;

@@ -1,6 +1,8 @@
 package exam.demo.modulecommon.common;
 
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,23 +11,24 @@ import java.util.Date;
  *
  * @author
  */
+@Data
 public class UserDto extends BaseDto implements Serializable {
     private static final long serialVersionUID = 3151530781112654208L;
 
     /**
      * 职位ID
      */
-    private Long positionId;
+    private Integer positionId;
 
     /**
      * 部门ID
      */
-    private Long departmentId;
+    private Integer departmentId;
 
     /**
      * 公司Id
      */
-    private Long companyId;
+    private Integer companyId;
 
     /**
      * 工号
@@ -90,7 +93,7 @@ public class UserDto extends BaseDto implements Serializable {
     /**
      * 角色ID
      */
-    private Long roleId;
+    private Integer roleId;
     /**
      * 职位
      */
@@ -117,218 +120,5 @@ public class UserDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Long getJudgeId() {
-        return judgeId;
-    }
-
-    public void setJudgeId(Long judgeId) {
-        this.judgeId = judgeId;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    public Long getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(Long positionId) {
-        this.positionId = positionId;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "positionId=" + positionId +
-                ", departmentId=" + departmentId +
-                ", companyId=" + companyId +
-                ", code='" + code + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", profilePicture='" + profilePicture + '\'' +
-                ", sex=" + sex +
-                ", birthday=" + birthday +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", other='" + other + '\'' +
-                ", remark='" + remark + '\'' +
-                ", status=" + status +
-                ", departmentName='" + departmentName + '\'' +
-                ", roleId=" + roleId +
-                ", positionName='" + positionName + '\'' +
-                ", roleName='" + roleName + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", ip='" + ip + '\'' +
-                '}';
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getOther() {
-        return other;
-    }
-
-    public void setOther(String other) {
-        this.other = other;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-
-    public String getPositionName() {
-        return positionName;
-    }
-
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    @Override
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    @Override
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+    private Integer judgeId;
 }

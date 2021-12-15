@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 public class ExamPublishRecordTableDataDTO {
-    private Long id;
-    private Long publisher;
+    private Integer id;
+    private Integer publisher;
     private Date createdTime;
     private Date endTime;
     private Integer planPepoleNum;
@@ -19,6 +19,6 @@ public class ExamPublishRecordTableDataDTO {
     private Long version;
     private Integer examSession;
     private Integer publishTimes;
-    private List<Long> examiners;
-    private Long paperId;
+    private List<Integer> examiners;
+    private Integer paperId;
 }

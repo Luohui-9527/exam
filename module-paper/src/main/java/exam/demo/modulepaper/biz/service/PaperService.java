@@ -75,7 +75,7 @@ public interface PaperService extends IService<Paper> {
      * @param paperIds 试卷id数组
      * @return 删除成功的条数
      */
-    boolean paperDelete(List<Long> paperIds);
+    boolean paperDelete(List<Integer> paperIds);
 
     /**
      * 准备修改的资源
@@ -117,7 +117,7 @@ public interface PaperService extends IService<Paper> {
      * @param paperTemplateIds the paper id of a template
      * @return the count of removed paper
      */
-    boolean deleteTemplate(List<Long> paperTemplateIds);
+    boolean deleteTemplate(List<Integer> paperTemplateIds);
 
     /**
      * 查询模板

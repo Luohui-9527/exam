@@ -1,35 +1,38 @@
 package exam.demo.moduleuser.pojo.model;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
 /**
- * @author luohui
+ * 权限资源关联表 - 数据对象定义
+ *
+ * @author gpmscloud
  */
 @Data
-@Accessors(chain = true)
-public class RoleResource extends Model<RoleResource> implements Serializable {
-    private static final long serialVersionUID = -5559929207907784262L;
-    private Long id;
-    private Long roleId;
-    private Long resourceId;
-    private Byte type;
+@TableName("role_resource")
+public class RoleResource implements Serializable {
 
-    public RoleResource() {
-    }
-
-    public RoleResource(Long id, Long roleId, Long resourceId, Byte type) {
-        this.id = id;
-        this.roleId = roleId;
-        this.resourceId = resourceId;
-        this.type = type;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
+    /**
+     * 关联id
+     */
+    @ApiModelProperty(value = "关联id")
+    private Integer id;
+    /**
+     * 权限id
+     */
+    @ApiModelProperty(value = "权限id")
+    private Integer roleId;
+    /**
+     * 资源id
+     */
+    @ApiModelProperty(value = "资源id")
+    private Integer resourceId;
+    /**
+     * 是否半选
+     */
+    @ApiModelProperty(value = "是否半选")
+    private Integer type;
 }

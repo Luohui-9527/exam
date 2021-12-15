@@ -18,5 +18,5 @@ public interface LoginService {
     Map<String,Object> createToken(UserDto userDTO);
     UserInfo getUserInfo(String token);
     List<UserMenu> getUserMenu(String token);
-    boolean logout(List<Long> ids);
+    boolean logout(List<Integer> ids);
 }

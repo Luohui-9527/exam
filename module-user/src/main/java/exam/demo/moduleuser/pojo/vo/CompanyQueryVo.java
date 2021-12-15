@@ -17,7 +17,7 @@ public class CompanyQueryVo extends BaseQueryVo implements Serializable {
      * 所属机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long orgId;
+    private Integer orgId;
     /**
      * 公司名
      */
@@ -30,11 +30,11 @@ public class CompanyQueryVo extends BaseQueryVo implements Serializable {
     public CompanyQueryVo() {
     }
 
-    public Long getOrgId() {
+    public Integer getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Long orgId) {
+    public void setOrgId(Integer orgId) {
         this.orgId = orgId;
     }
 

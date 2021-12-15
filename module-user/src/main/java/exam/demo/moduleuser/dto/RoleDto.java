@@ -26,19 +26,19 @@ public class RoleDto extends BaseDto implements Serializable {
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Integer id;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private Integer companyId;
 
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long orgId;
+    private Integer orgId;
 
     /**
      * 角色名
@@ -73,12 +73,12 @@ public class RoleDto extends BaseDto implements Serializable {
     /**
      * 资源节点ID
      */
-    private List<Long> resourceId;
+    private List<Integer> resourceId;
 
     /**
      * 用户ID
      */
-    private List<Long> userId;
+    private List<Integer> userId;
 
     /**
      * 当前请求页
@@ -89,7 +89,7 @@ public class RoleDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private Integer judgeId;
 
     public String getName() {
         return name;
@@ -155,11 +155,11 @@ public class RoleDto extends BaseDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Long getJudgeId() {
+    public Integer getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Long judgeId) {
+    public void setJudgeId(Integer judgeId) {
         this.judgeId = judgeId;
     }
 
@@ -193,19 +193,19 @@ public class RoleDto extends BaseDto implements Serializable {
                 '}';
     }
 
-    public List<Long> getResourceId() {
+    public List<Integer> getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(List<Long> resourceId) {
+    public void setResourceId(List<Integer> resourceId) {
         this.resourceId = resourceId;
     }
 
-    public List<Long> getUserId() {
+    public List<Integer> getUserId() {
         return userId;
     }
 
-    public void setUserId(List<Long> userId) {
+    public void setUserId(List<Integer> userId) {
         this.userId = userId;
     }
 }

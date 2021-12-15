@@ -38,7 +38,7 @@ public class ExamApiController {
      * @return
      */
     @PostMapping(ApiConstant.CHECK_EDITABLE)
-    public CommonResponse<Boolean> checkEditable(@RequestBody Long paperId) {
+    public CommonResponse<Boolean> checkEditable(@RequestBody Integer paperId) {
         List<ExamPublishRecord> record = examPublishRecordMapper.listByPaperId(paperId);
         if (CommonUtils.isEmpty(record)) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);

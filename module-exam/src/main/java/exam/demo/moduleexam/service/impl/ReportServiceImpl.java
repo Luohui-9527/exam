@@ -1,11 +1,9 @@
 package exam.demo.moduleexam.service.impl;
 
 
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.moduleexam.exception.ExamError;
 import exam.demo.moduleexam.exception.ExamException;
 import exam.demo.moduleexam.manage.PaperApi;
@@ -88,7 +86,7 @@ public class ReportServiceImpl implements ReportService {
         examRecords.forEach(examRecord -> {
             // 获取该场考试的答题情况
             List<AnswerRecord> answerRecords = answerRecordService.getListByExamRecordId(examRecord.getId());
-            List<Long> subjectIds = answerRecords.stream().map(AnswerRecord::getPaperSubjectId).collect(Collectors.toList());
+            List<Integer> subjectIds = answerRecords.stream().map(AnswerRecord::getPaperSubjectId).collect(Collectors.toList());
         });
         return null;
     }
@@ -105,7 +103,7 @@ public class ReportServiceImpl implements ReportService {
         if (record == null) {
             throw new ExamException(ExamError.EXAM_RECORD_NOT_EXIST);
         }
-        long paperId = record.getPaperId();
-        return RPCUtils.parseResponse(paperApi.queryPaperScore(new CommonRequest<>(commonState.getVersion(), TokenUtils.getToken(), paperId)), Double.class, RPCUtils.PAPER);
+        Integer paperId = record.getPaperId();
+        return RPCUtils.parseResponse(paperApi.queryPaperScore(paperId), Double.class, RPCUtils.PAPER);
     }
 }

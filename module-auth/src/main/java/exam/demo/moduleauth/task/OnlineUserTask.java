@@ -1,7 +1,7 @@
 package exam.demo.moduleauth.task;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import exam.demo.moduleauth.dao.UserOnlineInfoDao;
+import exam.demo.moduleauth.mapper.UserOnlineInfoMapper;
 import exam.demo.moduleauth.pojo.model.UserOnlineInfo;
 import exam.demo.moduleauth.service.UserOnlineInfoService;
 import exam.demo.modulecommon.common.CacheConstants;
@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * 定时确认在线人员
+ *
  * @author luohui
  * @version 1.0
  * @since 2020-04-23
@@ -31,34 +32,34 @@ public class OnlineUserTask {
     UserOnlineInfoService userOnlineInfoService;
 
     @Resource
-    UserOnlineInfoDao userOnlineInfoDao;
+    UserOnlineInfoMapper userOnlineInfoMapper;
 
     @Autowired
     CacheManager cacheManager;
 
     @Scheduled(cron = "${check.user}")
-    public void check(){
+    public void check() {
         log.info("开始定时处理离线用户");
         // 查询在线的用户
-        List<UserOnlineInfo> userOnlineInfoList = userOnlineInfoDao.listOnlineUser();
+        List<UserOnlineInfo> userOnlineInfoList = userOnlineInfoMapper.listOnlineUser();
         Cache cache = cacheManager.getCache(CacheConstants.TOKEN);
         // 离线的Id
-        List<Long> updateToLogoutId = new ArrayList<>();
+        List<Integer> updateToLogoutId = new ArrayList<>();
         for (UserOnlineInfo userOnlineInfo : userOnlineInfoList) {
             Cache.ValueWrapper tokenWrapper = cache.get(userOnlineInfo.getUserId());
-            if (tokenWrapper == null){
+            if (tokenWrapper == null) {
                 updateToLogoutId.add(userOnlineInfo.getUserId());
             }
         }
-        if (CommonUtils.isEmpty(updateToLogoutId)){
+        if (CommonUtils.isEmpty(updateToLogoutId)) {
             log.info("离线用户处理完成");
             return;
         }
-        for (Long id : updateToLogoutId) {
+        for (Integer id : updateToLogoutId) {
             UpdateWrapper<UserOnlineInfo> updateWrapper = new UpdateWrapper<>();
-            updateWrapper.set("status",0);
-            updateWrapper.eq("user_id",id);
-            updateWrapper.set("offline_time",new Date());
+            updateWrapper.set("status", 0);
+            updateWrapper.eq("user_id", id);
+            updateWrapper.set("offline_time", new Date());
             userOnlineInfoService.update(updateWrapper);
         }
         log.info("离线用户处理完成");

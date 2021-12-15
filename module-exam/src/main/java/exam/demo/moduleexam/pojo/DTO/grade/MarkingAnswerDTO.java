@@ -23,5 +23,5 @@ public class MarkingAnswerDTO {
     /**
      * 试题id
      */
-    private Long paperSubjectId;
+    private Integer paperSubjectId;
 }
