@@ -2,14 +2,12 @@ package exam.demo.moduleexam.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.moduleexam.manage.UserApi;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordQueryFormDTO;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordTableDataDTO;
@@ -27,7 +25,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("answersheet")
+@RequestMapping("/answersheet")
 public class AnswerSheetRecordController {
     @Autowired
     CommonState state;
@@ -41,19 +39,18 @@ public class AnswerSheetRecordController {
     private final static Integer PAGE_SIZE = 8;
 
     @MethodEnhancer
-    @RequestMapping(value = "getanswersheet", method = RequestMethod.POST)
-    public CommonResponse<PageVo<ExamAnswerSheetRecordTableDataVO>> queryAll(@RequestBody CommonRequest<ExamAnswerSheetRecordQueryFormVO> commonRequest) {
-        ExamAnswerSheetRecordQueryFormVO examAnswerSheetRecordQueryFormVO = commonRequest.getData();
+    @PostMapping(value = "/getanswersheet")
+    public CommonResponse<PageVo<ExamAnswerSheetRecordTableDataVO>> queryAll(@RequestBody ExamAnswerSheetRecordQueryFormVO queryFormVO) {
         ExamAnswerSheetRecordQueryFormDTO examAnswerSheetRecordQueryFormDTO = new ExamAnswerSheetRecordQueryFormDTO();
-        BeanUtils.copyProperties(examAnswerSheetRecordQueryFormVO, examAnswerSheetRecordQueryFormDTO);
-        if (examAnswerSheetRecordQueryFormVO.getPublisher() != null) {
-            examAnswerSheetRecordQueryFormDTO.setPublisher(getPublisherId(examAnswerSheetRecordQueryFormVO.getPublisher()));
+        BeanUtils.copyProperties(queryFormVO, examAnswerSheetRecordQueryFormDTO);
+        if (queryFormVO.getPublisher() != null) {
+            examAnswerSheetRecordQueryFormDTO.setPublisher(getPublisherId(queryFormVO.getPublisher()));
         }
-        if (examAnswerSheetRecordQueryFormVO.getExamTimeRange() != null && examAnswerSheetRecordQueryFormVO.getExamTimeRange().size() != 0) {
-            List<String> examTimeRange = DateToString.convert(examAnswerSheetRecordQueryFormVO.getExamTimeRange());
+        if (queryFormVO.getExamTimeRange() != null && queryFormVO.getExamTimeRange().size() != 0) {
+            List<String> examTimeRange = DateToString.convert(queryFormVO.getExamTimeRange());
             examAnswerSheetRecordQueryFormDTO.setExamTimeRange(examTimeRange);
         }
-        Page<ExamAnswerSheetRecordQueryFormVO> page = new Page<>(examAnswerSheetRecordQueryFormVO.getCurrentPage(), PAGE_SIZE);
+        Page<ExamAnswerSheetRecordQueryFormVO> page = new Page<>(queryFormVO.getCurrentPage(), PAGE_SIZE);
         List<ExamAnswerSheetRecordTableDataDTO> tableDataDTOS = answerSheetRecordService.queryAnswerSheet(examAnswerSheetRecordQueryFormDTO);
         List<ExamAnswerSheetRecordTableDataVO> tableDataVOS = new ArrayList<ExamAnswerSheetRecordTableDataVO>();
         for (ExamAnswerSheetRecordTableDataDTO tableDataDTO : tableDataDTOS) {
@@ -75,13 +72,9 @@ public class AnswerSheetRecordController {
      * @param id
      * @return
      */
-    private String getPublisherName(Integer id) {
+    private String getPublisherName(Long id) {
         if (id != null) {
-            CommonRequest<Integer> request = new CommonRequest<>();
-            request.setVersion(state.getVersion());
-            request.setData(id);
-            request.setToken(TokenUtils.getToken());
-            return RPCUtils.parseResponse(userFeignClient.getUserNameById(request), String.class, RPCUtils.USER);
+            return RPCUtils.parseResponse(userFeignClient.getUserNameById(id), String.class, RPCUtils.USER);
         }
         return null;
     }
@@ -92,17 +85,13 @@ public class AnswerSheetRecordController {
      * @param name
      * @return
      */
-    private Integer getPublisherId(String name) {
+    private Long getPublisherId(String name) {
         if (name != null) {
-            CommonRequest<String> request = new CommonRequest<>();
-            request.setVersion(state.getVersion());
-            request.setToken(TokenUtils.getToken());
-            request.setData(name);
-            Integer id = RPCUtils.parseResponse(userFeignClient.getUserIdByName(request), Integer.class, RPCUtils.USER);
+            Long id = RPCUtils.parseResponse(userFeignClient.getUserIdByName(name), Long.class, RPCUtils.USER);
             if (id != null) {
                 return id;
             } else {
-                return 0;
+                return 0L;
             }
         }
         return null;

@@ -13,6 +13,6 @@ public class ExamDetailQueryFormVO implements Serializable {
      * 考试发布记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
-    private Integer currentPage;
+    private Long id;
+    private Long currentPage;
 }

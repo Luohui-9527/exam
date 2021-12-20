@@ -1,79 +1,71 @@
 package exam.demo.modulepaper.pojo.model;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
 /**
+ * 试卷试题表 - 数据对象定义
+ *
  * @author luohui
  * @version 1.0
  * @since 2020-03-04
  */
+
 @Data
-@Accessors(chain = true)
-public class PaperSubject extends Model<PaperSubject> {
-    private static final long serialVersionUID = -5509709494009584723L;
+@TableName("paper_subject")
+public class PaperSubject implements Serializable {
+
     /**
      * 试题id
      */
-    private Integer id;
-
+    @ApiModelProperty(value = "试题id")
+    private Long id;
     /**
      * 试卷id
      */
-    private Integer paperId;
-
+    @ApiModelProperty(value = "试卷id")
+    private Long paperId;
     /**
      * 题目
      */
+    @ApiModelProperty(value = "题目")
     private String subject;
-
-    private Integer categoryId;
+    /**
+     * sb
+     */
+    @ApiModelProperty(value = "sb")
+    private Long categoryId;
     /**
      * 题目类型从基础数据中取
      */
-    private Integer subjectTypeId;
-
+    @ApiModelProperty(value = "题目类型从基础数据中取")
+    private Long subjectTypeId;
     /**
      * 难度
      */
-    private Integer difficulty;
-
+    @ApiModelProperty(value = "难度")
+    private Long difficulty;
     /**
      * 分数
      */
+    @ApiModelProperty(value = "分数")
     private Double score;
-
     /**
      * 预留
      */
+    @ApiModelProperty(value = "预留")
     private String field1;
-
     /**
      * 预留
      */
+    @ApiModelProperty(value = "预留")
     private String field2;
-
     /**
      * 预留
      */
+    @ApiModelProperty(value = "预留")
     private String field3;
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
-
-    public static final String ID = "id";
-    public static final String PAPER_ID = "paper_id";
-    public static final String SUBJECT  = "subject";
-    public static final String CATEGORY_ID = "category_id";
-    public static final String SUBJECT_TYPE_ID = "subject_type_id";
-    public static final String DIFFICULTY = "difficulty";
-    public static final String SCORE = "score";
-    public static final String FIELD1 = "field1";
-    public static final String FIELD2 = "field2";
-    public static final String FIELD3 = "field3";
-
 }

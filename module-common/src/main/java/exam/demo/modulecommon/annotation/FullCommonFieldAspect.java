@@ -96,9 +96,9 @@ public class FullCommonFieldAspect {
      */
     public Object handleDtoObjectInsert(BaseDto dto){
         UserPermission userPermission = TokenUtils.getUser();
-        Integer orgId  = userPermission.getOrgId();
-        Integer companyId = userPermission.getCompanyId();
-        Integer operator = userPermission.getId();
+        Long orgId  = userPermission.getOrgId();
+        Long companyId = userPermission.getCompanyId();
+        Long operator = userPermission.getId();
         dto.setId(snowFlake.nextId());
         dto.setCompanyId(companyId);
         dto.setOrgId(orgId);

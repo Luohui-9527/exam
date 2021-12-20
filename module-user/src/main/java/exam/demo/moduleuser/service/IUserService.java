@@ -15,10 +15,13 @@ import java.util.List;
 /**
  * 用户表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IUserService extends IService<User> {
-    Integer getMostPossibleUserId(String name);
+    Long getMostPossibleUserId(String name);
 
     /**
      * 通过名字查询符合条件的阅卷官信息
@@ -28,9 +31,9 @@ public interface IUserService extends IService<User> {
      */
     List<UserDto> queryScoringOfficerList(UserDto userDto);
 
-    CompanyAndUserVo getUserData(List<Integer> longList);
+    CompanyAndUserVo getUserData(List<Long> longList);
 
-    String getUserName(Integer id);
+    String getUserName(Long id);
 
     boolean save(UserDto userDto);
 
@@ -67,7 +70,7 @@ public interface IUserService extends IService<User> {
      * @param judgeId 组织机构Id或公司Id
      * @return 以树（treelist）形式返回数据
      */
-    List<TreeList> getQueryListData(Integer judgeId);
+    List<TreeList> getQueryListData(Long judgeId);
 
     /**
      * 分配角色后需要更新用户公司
@@ -75,7 +78,7 @@ public interface IUserService extends IService<User> {
      * @param userId
      * @param companyId
      */
-    void updateUserAfterAllocRole(Integer userId, Integer companyId);
+    void updateUserAfterAllocRole(Long userId, Long companyId);
 
     /**
      * 查询用户所拥有的角色
@@ -83,7 +86,7 @@ public interface IUserService extends IService<User> {
      * @param userId 用户ID
      * @return 拥有的角色集合
      */
-    List<RoleDto> queryRoleOfUser(Integer userId);
+    List<RoleDto> queryRoleOfUser(Long userId);
 
     /**
      * 判断是否存在该用户工号

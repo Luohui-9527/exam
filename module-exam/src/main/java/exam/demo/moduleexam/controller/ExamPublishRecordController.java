@@ -47,15 +47,14 @@ public class ExamPublishRecordController {
     /**
      * 列出考试发布记录
      *
-     * @param commonRequest
+     * @param examPublishRecordQueryFormVO
      * @return
      */
     @MethodEnhancer
     @RequestMapping(value = "query")
-    public CommonResponse<PageVo<ExamPublishRecordTableDataVO>> query(@RequestBody CommonRequest<ExamPublishRecordQueryFormVO> commonRequest) {
-        ExamPublishRecordQueryFormVO examPublishRecordQueryFormVO = commonRequest.getData();
+    public CommonResponse<PageVo<ExamPublishRecordTableDataVO>> query(@RequestBody ExamPublishRecordQueryFormVO examPublishRecordQueryFormVO) {
         ExamPublishRecordQueryFormDTO examPublishRecordQueryFormDTO = CommonUtils.copyProperties(examPublishRecordQueryFormVO, ExamPublishRecordQueryFormDTO.class);
-        examPublishRecordQueryFormDTO.setPublisher(getPublisherId(examPublishRecordQueryFormVO.getPublisher(), commonRequest));
+        examPublishRecordQueryFormDTO.setPublisher(getPublisherId(examPublishRecordQueryFormVO.getPublisher()));
         if (examPublishRecordQueryFormVO.getExamTimeRange() != null && examPublishRecordQueryFormVO.getExamTimeRange().size() != 0) {
             List<String> examTimeRange = DateToString.convert(examPublishRecordQueryFormVO.getExamTimeRange());
             examPublishRecordQueryFormDTO.setExamTimeRange(examTimeRange);
@@ -71,21 +70,17 @@ public class ExamPublishRecordController {
             ExamPublishRecordTableDataVO tableDataVO = new ExamPublishRecordTableDataVO();
             BeanUtils.copyProperties(tableDataDTO, tableDataVO);
             // publisher读出姓名
-            tableDataVO.setPublisher(getPublisherName(tableDataDTO.getPublisher(), commonRequest));
+            tableDataVO.setPublisher(getPublisherName(tableDataDTO.getPublisher()));
             //TODO 状态转为文本
             if (tableDataDTO.getStatus() != null)
                 tableDataVO.setStatus(tableDataDTO.getStatus().toString());
             // get publishTimes
             if (tableDataDTO.getPaperId() != null) {
-                CommonRequest<Integer> request = new CommonRequest<>();
-                request.setVersion(state.getVersion());
-                request.setToken(TokenUtils.getToken());
-                request.setData(tableDataDTO.getPaperId());
                 // 从试卷服务获取试卷发布次数
-                tableDataVO.setPublishTimes(RPCUtils.parseResponse(paperApi.queryPublishedTimesByPaperId(request), Integer.class, RPCUtils.PAPER));
+                tableDataVO.setPublishTimes(RPCUtils.parseResponse(paperApi.queryPublishedTimesByPaperId(tableDataDTO.getPaperId()), Long.class, RPCUtils.PAPER));
             }
             // get examinersName
-            tableDataVO.setExaminers(getExaminersName(tableDataDTO.getExaminers(), commonRequest));
+            tableDataVO.setExaminers(getExaminersName(tableDataDTO.getExaminers()));
             tableDataVO.setCreatedTime(DateFormatUtil.format(tableDataDTO.getCreatedTime()));
             tableDataVO.setEndTime(DateFormatUtil.format(tableDataDTO.getEndTime()));
             tableDataVOS.add(tableDataVO);
@@ -105,11 +100,7 @@ public class ExamPublishRecordController {
     public CommonResponse<Boolean> save(@RequestBody @Valid CommonRequest<ExamPublishRecordPublishFormVO> commonRequest) {
         ExamPublishRecordPublishFormDTO examPublishRecordPublishFormDTO = CommonUtils.copyProperties(commonRequest.getData(), ExamPublishRecordPublishFormDTO.class);
         if (examPublishRecordService.addExamPublishRecord(examPublishRecordPublishFormDTO)) {
-            CommonRequest<Integer> paperRequest = new CommonRequest<>();
-            paperRequest.setVersion(state.getVersion());
-            paperRequest.setData(examPublishRecordPublishFormDTO.getPaperId());
-            paperRequest.setToken(TokenUtils.getToken());
-            if (paperApi.publishPaper(paperRequest).getCode().equals(state.SUCCESS)) {
+            if (paperApi.publishPaper(examPublishRecordPublishFormDTO.getPaperId()).getCode().equals(state.SUCCESS)) {
                 return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
             }
         }
@@ -154,14 +145,10 @@ public class ExamPublishRecordController {
     @PostMapping(value = "getpaperinfo")
     public CommonResponse<Collection> getPaperInfo(@RequestBody CommonRequest<String> commonRequest) {
         UserPermission userPermission = TokenUtils.getUser();
-        CommonRequest<FuzzySearch> request = new CommonRequest<>();
         FuzzySearch queryPaperInfoDTO = new FuzzySearch();
         queryPaperInfoDTO.setPaperName(commonRequest.getData());
         queryPaperInfoDTO.setCompanyId(userPermission.getCompanyId());
-        request.setToken(commonRequest.getToken());
-        request.setData(queryPaperInfoDTO);
-        request.setVersion(commonRequest.getVersion());
-        Collection<PaperIdWithName> list = RPCUtils.parseCollectionTypeResponse(paperApi.fuzzySearchByPaperName(request), PaperIdWithName.class, RPCUtils.PAPER);
+        Collection<PaperIdWithName> list = RPCUtils.parseCollectionTypeResponse(paperApi.fuzzySearchByPaperName(queryPaperInfoDTO), PaperIdWithName.class, RPCUtils.PAPER);
         Collection<IdAndName> idAndNames = new ArrayList<>();
         for (PaperIdWithName paperIdWithName : list) {
             idAndNames.add(IdAndName.builder().name(paperIdWithName.getPaperName()).id(paperIdWithName.getId()).build());
@@ -177,26 +164,22 @@ public class ExamPublishRecordController {
         UserDto queryExaminersInfoDTO = new UserDto();
         queryExaminersInfoDTO.setName(commonRequest.getData());
         queryExaminersInfoDTO.setCompanyId(userPermission.getCompanyId());
-        request.setVersion(commonRequest.getVersion());
-        request.setData(queryExaminersInfoDTO);
-        request.setToken(request.getToken());
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, RPCUtils.parseCollectionTypeResponse(userApi.queryScoringOfficer(request), UserDto.class, RPCUtils.USER));
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, RPCUtils.parseCollectionTypeResponse(userApi.queryScoringOfficer(queryExaminersInfoDTO), UserDto.class, RPCUtils.USER));
     }
 
     /**
      * 获取阅卷官名字
      *
      * @param ids
-     * @param commonRequest
      * @return
      */
-    private String getExaminersName(List<Integer> ids, CommonRequest commonRequest) {
+    private String getExaminersName(List<Long> ids) {
         if (ids != null) {
             List<String> names = new ArrayList<>();
             StringBuffer examiners = new StringBuffer();
             //去用户服务获取姓名
-            for (Integer id : ids) {
-                return getPublisherName(id, commonRequest);
+            for (Long id : ids) {
+                return getPublisherName(id);
             }
             for (String name : names) {
                 examiners.append(name + ";");
@@ -210,16 +193,11 @@ public class ExamPublishRecordController {
      * 通过id获取userName
      *
      * @param id
-     * @param commonRequest
      * @return
      */
-    private String getPublisherName(Integer id, CommonRequest commonRequest) {
+    private String getPublisherName(Long id) {
         if (id != null) {
-            CommonRequest<Integer> request = new CommonRequest<>();
-            request.setToken(commonRequest.getToken());
-            request.setData(id);
-            request.setVersion(state.getVersion());
-            return RPCUtils.parseResponse(userApi.getUserNameById(request), String.class, RPCUtils.USER);
+            return RPCUtils.parseResponse(userApi.getUserNameById(id), String.class, RPCUtils.USER);
         }
         return null;
     }
@@ -228,16 +206,11 @@ public class ExamPublishRecordController {
      * 通过名字获取人物id
      *
      * @param name
-     * @param commonRequest
      * @return
      */
-    private Integer getPublisherId(String name, CommonRequest commonRequest) {
+    private Long getPublisherId(String name) {
         if (name != null) {
-            CommonRequest<String> request = new CommonRequest<>();
-            request.setToken(commonRequest.getToken());
-            request.setData(name);
-            request.setVersion(state.getVersion());
-            return RPCUtils.parseResponse(userApi.getUserIdByName(request), Integer.class, RPCUtils.USER);
+            return RPCUtils.parseResponse(userApi.getUserIdByName(name), Long.class, RPCUtils.USER);
         }
         return null;
     }

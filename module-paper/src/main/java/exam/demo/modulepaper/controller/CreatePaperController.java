@@ -9,11 +9,11 @@ import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
-import exam.demo.modulepaper.biz.service.PaperService;
 import exam.demo.modulepaper.exception.PaperException;
 import exam.demo.modulepaper.pojo.dto.PaperDto;
 import exam.demo.modulepaper.pojo.vo.CombExamConfigVo;
 import exam.demo.modulepaper.pojo.vo.CustomizedCombExamConfigVo;
+import exam.demo.modulepaper.service.IPaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class CreatePaperController {
     CommonState state;
 
     @Autowired
-    PaperService paperService;
+    IPaperService paperService;
 
 
     /**
@@ -72,7 +72,7 @@ public class CreatePaperController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstant.CREATE_TEMPLATE_GEN)
-    public CommonResponse templateGen(@RequestParam("templateId") Integer templateId) {
+    public CommonResponse templateGen(@RequestParam("templateId") Long templateId) {
         checkAccessAuthority();
         PaperDto paperDto = new PaperDto();
         paperDto.setId(templateId);

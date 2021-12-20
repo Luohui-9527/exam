@@ -77,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
         // 根据userId查询是否已经有缓存
         Cache.ValueWrapper valueWrapper = userPermissionCache.get(userPermission.getId());
         if (valueWrapper != null) {
-            List<Integer> ids = new ArrayList<>();
+            List<Long> ids = new ArrayList<>();
             ids.add(userPermission.getId());
             logout(ids);
         }
@@ -119,10 +119,10 @@ public class LoginServiceImpl implements LoginService {
      * @throws Exception
      */
     @Override
-    public boolean logout(List<Integer> ids) {
+    public boolean logout(List<Long> ids) {
         Cache cache = cacheManager.getCache(CacheConstants.TOKEN);
         Cache resourceCache = cacheManager.getCache(CacheConstants.RESOURCE_MAP);
-        for (Integer id : ids) {
+        for (Long id : ids) {
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper != null) {
                 resourceCache.evict(id);

@@ -12,7 +12,7 @@ public class ExamReportRecordQueryFormVO implements Serializable {
     /**
      * 考试场次
      */
-    private Integer examSession;
+    private Long examSession;
     /**
      * 考试时间段
      */
@@ -25,5 +25,5 @@ public class ExamReportRecordQueryFormVO implements Serializable {
      * 考试标题
      */
     private String title;
-    private Integer currentPage;
+    private Long currentPage;
 }

@@ -14,7 +14,7 @@ public class ExamPublishRecord {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * 考试标题
@@ -25,12 +25,12 @@ public class ExamPublishRecord {
      * 考试场次
      */
     @Column(name = "exam_session")
-    private Integer examSession;
+    private Long examSession;
 
     /**
      * 发布人
      */
-    private Integer publisher;
+    private Long publisher;
 
     /**
      * 考试开始时间
@@ -88,13 +88,13 @@ public class ExamPublishRecord {
      * 公司ID
      */
     @Column(name = "company_id")
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 创建人
      */
     @Column(name = "created_by")
-    private Integer createdBy;
+    private Long createdBy;
 
     /**
      * 创建时间
@@ -106,7 +106,7 @@ public class ExamPublishRecord {
      * 修改人
      */
     @Column(name = "updated_by")
-    private Integer updatedBy;
+    private Long updatedBy;
 
     /**
      * 修改时间
@@ -133,7 +133,7 @@ public class ExamPublishRecord {
      * 试卷ID
      */
     @Column(name = "paper_id")
-    private Integer paperId;
+    private Long paperId;
 
     /**
      * examRecords 关联

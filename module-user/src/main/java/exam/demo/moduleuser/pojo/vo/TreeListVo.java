@@ -13,12 +13,12 @@ import java.io.Serializable;
 public class TreeListVo implements Serializable {
     private static final long serialVersionUID = -1830434213241855994L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     private String name;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer parentId;
+    private Long parentId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer rootId;
+    private Long rootId;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
 

@@ -14,12 +14,12 @@ public class TreeQueryVo implements Serializable {
     private static final long serialVersionUID = -4160739494491823702L;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     private String name;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer parentId;
+    private Long parentId;
 
     @JsonSerialize(using = ToStringSerializer.class)
     private Long version;

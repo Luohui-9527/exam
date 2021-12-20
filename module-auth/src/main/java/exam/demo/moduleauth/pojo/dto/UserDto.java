@@ -15,17 +15,17 @@ public class UserDto implements Serializable {
     /**
      * 用户ID
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 职位ID
      */
-    private Integer positionId;
+    private Long positionId;
 
     /**
      * 部门ID
      */
-    private Integer departmentId;
+    private Long departmentId;
 
     /**
      * 工号
@@ -85,7 +85,7 @@ public class UserDto implements Serializable {
     /**
      * 创建人
      */
-    private Integer createdBy;
+    private Long createdBy;
 
     /**
      * 创建时间
@@ -95,7 +95,7 @@ public class UserDto implements Serializable {
     /**
      * 修改人
      */
-    private Integer updatedBy;
+    private Long updatedBy;
 
     /**
      * 修改时间

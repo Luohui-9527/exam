@@ -18,13 +18,13 @@ public class DepartmentItemVo extends BaseVo implements Serializable {
      * 部门ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 部门名称
@@ -52,7 +52,7 @@ public class DepartmentItemVo extends BaseVo implements Serializable {
     /**
      * 上级部门
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 负责人
@@ -73,19 +73,19 @@ public class DepartmentItemVo extends BaseVo implements Serializable {
     public DepartmentItemVo() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
@@ -121,11 +121,11 @@ public class DepartmentItemVo extends BaseVo implements Serializable {
         this.level = level;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

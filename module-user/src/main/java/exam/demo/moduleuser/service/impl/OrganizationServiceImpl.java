@@ -20,8 +20,11 @@ import java.util.stream.Collectors;
 /**
  * 组织机构表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Organization> implements IOrganizationService {
     @FullCommonFieldU
@@ -48,7 +51,7 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean delete(List<OrganizationDto> list) {
-        List<Integer> ids = list.stream().map(OrganizationDto::getId).collect(Collectors.toList());
+        List<Long> ids = list.stream().map(OrganizationDto::getId).collect(Collectors.toList());
         try {
             if (removeByIds(ids)) {
                 return true;

@@ -10,8 +10,11 @@ import java.util.List;
 /**
  * 职位表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IPositionService extends IService<Position> {
     /**
      * 功能描述

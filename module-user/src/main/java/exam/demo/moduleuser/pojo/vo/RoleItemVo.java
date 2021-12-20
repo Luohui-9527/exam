@@ -18,19 +18,19 @@ public class RoleItemVo extends BaseVo implements Serializable {
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer orgId;
+    private Long orgId;
 
     /**
      * 角色名
@@ -57,34 +57,34 @@ public class RoleItemVo extends BaseVo implements Serializable {
     /**
      * 资源节点ID
      */
-    private List<Integer> resourceId;
+    private List<Long> resourceId;
 
     /**
      * 用户ID
      */
-    private List<Integer> userId;
+    private List<Long> userId;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
-    public Integer getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Integer orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 
@@ -138,19 +138,19 @@ public class RoleItemVo extends BaseVo implements Serializable {
                 '}';
     }
 
-    public List<Integer> getResourceId() {
+    public List<Long> getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(List<Integer> resourceId) {
+    public void setResourceId(List<Long> resourceId) {
         this.resourceId = resourceId;
     }
 
-    public List<Integer> getUserId() {
+    public List<Long> getUserId() {
         return userId;
     }
 
-    public void setUserId(List<Integer> userId) {
+    public void setUserId(List<Long> userId) {
         this.userId = userId;
     }
 }

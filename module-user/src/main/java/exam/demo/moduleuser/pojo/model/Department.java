@@ -12,8 +12,11 @@ import java.io.Serializable;
 /**
  * 部门表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("department")
 public class Department implements Serializable {
@@ -22,12 +25,12 @@ public class Department implements Serializable {
      * 部门ID
      */
     @ApiModelProperty(value = "部门ID")
-    private Integer id;
+    private Long id;
     /**
      * 公司ID
      */
     @ApiModelProperty(value = "公司ID")
-    private Integer companyId;
+    private Long companyId;
     /**
      * 部门名称
      */
@@ -52,7 +55,7 @@ public class Department implements Serializable {
      * 上级部门
      */
     @ApiModelProperty(value = "上级部门")
-    private Integer parentId;
+    private Long parentId;
     /**
      * 负责人
      */
@@ -67,12 +70,12 @@ public class Department implements Serializable {
      * 状态
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Long status;
     /**
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Integer createdBy;
+    private Long createdBy;
     /**
      * 创建时间
      */
@@ -84,7 +87,7 @@ public class Department implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Integer updatedBy;
+    private Long updatedBy;
     /**
      * 修改时间
      */
@@ -99,7 +102,7 @@ public class Department implements Serializable {
     private Long version;
 
     @TableField(exist = false)
-    private Integer judgeId;
+    private Long judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

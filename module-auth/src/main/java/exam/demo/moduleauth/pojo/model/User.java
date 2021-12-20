@@ -14,8 +14,11 @@ import java.util.Set;
 /**
  * 用户表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("user")
 public class User implements Serializable {
@@ -24,22 +27,22 @@ public class User implements Serializable {
      * 用户ID
      */
     @ApiModelProperty(value = "用户ID")
-    private Integer id;
+    private Long id;
     /**
      * 职位ID
      */
     @ApiModelProperty(value = "职位ID")
-    private Integer positionId;
+    private Long positionId;
     /**
      * 部门ID
      */
     @ApiModelProperty(value = "部门ID")
-    private Integer departmentId;
+    private Long departmentId;
     /**
      * 公司id
      */
     @ApiModelProperty(value = "公司id")
-    private Integer companyId;
+    private Long companyId;
     /**
      * 工号
      */
@@ -64,7 +67,7 @@ public class User implements Serializable {
      * 性别
      */
     @ApiModelProperty(value = "性别")
-    private Integer sex;
+    private Long sex;
     /**
      * 生日
      */
@@ -96,12 +99,12 @@ public class User implements Serializable {
      * 状态位
      */
     @ApiModelProperty(value = "状态位")
-    private Integer status;
+    private Long status;
     /**
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Integer createdBy;
+    private Long createdBy;
     /**
      * 创建时间
      */
@@ -113,7 +116,7 @@ public class User implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Integer updatedBy;
+    private Long updatedBy;
     /**
      * 修改时间
      */
@@ -155,10 +158,10 @@ public class User implements Serializable {
      * 角色ID
      */
     @TableField(exist = false)
-    private Integer roleId;
+    private Long roleId;
 
     @TableField(exist = false)
-    private Integer judgeId;
+    private Long judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

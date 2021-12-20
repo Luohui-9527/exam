@@ -20,7 +20,7 @@ import java.util.List;
 @FeignClient(ApiConstant.SERVICE_NAME_PAPER)
 public interface PaperApi {
     @PostMapping({"/info/publish/paper"})
-    CommonResponse<Boolean> publishPaper(Integer paperId);
+    CommonResponse<Boolean> publishPaper(Long paperId);
 
     @GetMapping({"/info/list/paper"})
     CommonResponse<List<PaperIdWithName>> listPaper();
@@ -29,14 +29,14 @@ public interface PaperApi {
     CommonResponse<List<PaperIdWithName>> fuzzySearchByPaperName(FuzzySearch request);
 
     @PostMapping({"/info/query/detail"})
-    CommonResponse<PaperDetail> queryDetailByPaperId(Integer request);
+    CommonResponse<PaperDetail> queryDetailByPaperId(Long request);
 
     @PostMapping({"/info/query/published/time"})
-    CommonResponse<Integer> queryPublishedTimesByPaperId(Integer request);
+    CommonResponse<Long> queryPublishedTimesByPaperId(Long request);
 
     @PostMapping({"/info/query/paper/name"})
-    CommonResponse<String> queryPaperNameByPaperId(Integer request);
+    CommonResponse<String> queryPaperNameByPaperId(Long request);
 
     @PostMapping("/info/query/paper/score")
-    CommonResponse queryPaperScore(Integer request);
+    CommonResponse queryPaperScore(Long request);
 }

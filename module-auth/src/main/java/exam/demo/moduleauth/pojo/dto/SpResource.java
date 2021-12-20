@@ -9,7 +9,7 @@ public class SpResource {
     /**
      * 资源Id
      */
-    private Integer id;
+    private Long id;
     /**
      * 资源名
      */
@@ -19,11 +19,11 @@ public class SpResource {
      */
     private String url;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -17,17 +17,17 @@ public class PositionQueryVo extends BaseQueryVo implements Serializable {
      * 职位ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     /**
      * 职位名
      */
     private String name;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,64 +1,56 @@
 package exam.demo.modulepaper.pojo.model;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
+ * 试卷答案表 - 数据对象定义
+ *
  * @author luohui
  * @version 1.0
  * @since 2020-03-04
  */
+
 @Data
-@Accessors(chain = true)
-public class PaperSubjectAnswer extends Model<PaperSubjectAnswer> {
+@TableName("paper_subject_answer")
+public class PaperSubjectAnswer implements Serializable {
+
     /**
      * 答案id
      */
-    private Integer id;
-
-
+    @ApiModelProperty(value = "答案id")
+    private Long id;
     /**
      * 试题id
      */
-    private Integer paperSubjectId;
-
+    @ApiModelProperty(value = "试题id")
+    private Long paperSubjectId;
     /**
      * 答案
      */
+    @ApiModelProperty(value = "答案")
     private String answer;
-
     /**
      * 是否为正确答案
      */
+    @ApiModelProperty(value = "是否为正确答案")
     private Byte rightAnswer;
-
     /**
      * 预留
      */
+    @ApiModelProperty(value = "预留")
     private String field1;
-
     /**
      * 预留
      */
+    @ApiModelProperty(value = "预留")
     private String field2;
-
     /**
      * 预留
      */
+    @ApiModelProperty(value = "预留")
     private String field3;
-
-    @Override
-    protected Serializable pkVal() {
-        return id;
-    }
-
-    public static final String ID = "id";
-    public static final String PAPER_SUBJECT_ID = "paper_subject_id";
-    public static final String ANSWER  = "answer";
-    public static final String RIGHT_ANSWER = "right_answer";
-    public static final String FIELD1 = "field1";
-    public static final String FIELD2 = "field2";
-    public static final String FIELD3 = "field3";
 }

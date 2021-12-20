@@ -1,7 +1,6 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -42,8 +41,8 @@ public class DepartmentController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_D)
-    public CommonResponse<Boolean> saveDepartment(@RequestBody @Valid CommonRequest<DepartmentItemVo> request) {
-        DepartmentDto departmentDto = CommonUtils.copyProperties(request.getData(), DepartmentDto.class);
+    public CommonResponse<Boolean> saveDepartment(@RequestBody @Valid DepartmentItemVo departmentItemVo) {
+        DepartmentDto departmentDto = CommonUtils.copyProperties(departmentItemVo, DepartmentDto.class);
         departmentService.save(departmentDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -51,8 +50,8 @@ public class DepartmentController {
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_D)
-    public CommonResponse<Boolean> updateDepartment(@RequestBody @Valid CommonRequest<DepartmentItemVo> request) {
-        DepartmentDto departmentDto = CommonUtils.copyProperties(request.getData(), DepartmentDto.class);
+    public CommonResponse<Boolean> updateDepartment(@RequestBody @Valid DepartmentItemVo departmentItemVo) {
+        DepartmentDto departmentDto = CommonUtils.copyProperties(departmentItemVo, DepartmentDto.class);
         departmentDto.setOldVersion(departmentDto.getVersion());
         departmentService.update(departmentDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -60,17 +59,16 @@ public class DepartmentController {
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_D)
-    public CommonResponse<Boolean> deleteDepartment(@RequestBody @Valid CommonRequest<List<DepartmentItemVo>> request) {
-        List<DepartmentItemVo> itemVos = request.getData();
-        List<DepartmentDto> departmentDtoList = CommonUtils.convertList(itemVos, DepartmentDto.class);
+    public CommonResponse<Boolean> deleteDepartment(@RequestBody @Valid List<DepartmentItemVo> departmentItemVoList) {
+        List<DepartmentDto> departmentDtoList = CommonUtils.convertList(departmentItemVoList, DepartmentDto.class);
         departmentService.delete(departmentDtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_D)
-    public CommonResponse<DepartmentListVo> getUpdateFormDepartment(@RequestBody CommonRequest<Integer> request) {
-        Department department = departmentService.getById(request.getData());
+    public CommonResponse<DepartmentListVo> getUpdateFormDepartment(@RequestBody Long departmentId) {
+        Department department = departmentService.getById(departmentId);
         if (department == null) {
             throw new UserException(UserError.DATA_NOT_EXIST);
         }
@@ -80,10 +78,10 @@ public class DepartmentController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_D)
-    public CommonResponse<PageVo<DepartmentListVo>> queryDepartment(@RequestBody @Valid CommonRequest<DepartmentQueryVo> request) {
-        Department department = CommonUtils.copyProperties(request.getData(), Department.class);
+    public CommonResponse<PageVo<DepartmentListVo>> queryDepartment(@RequestBody @Valid DepartmentQueryVo departmentQueryVo) {
+        Department department = CommonUtils.copyProperties(departmentQueryVo, Department.class);
         department.setJudgeId(CommonUtils.judgeCompanyAndOrg());
-        Page<DepartmentListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+        Page<DepartmentListVo> page = new Page<>(departmentQueryVo.getCurrentPage(), departmentQueryVo.getTotalPages());
         List<Department> list = departmentService.query(department);
         List<DepartmentListVo> voList = CommonUtils.convertList(list, DepartmentListVo.class);
         PageVo<DepartmentListVo> pageVo = PageMapUtil.getPageMap(voList, page);

@@ -16,7 +16,7 @@ public class ExamPublishRecordEditFormVO implements Serializable {
      */
     @NotNull(message = "考试发布记录id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     /**
      * 描述
      */
@@ -35,18 +35,18 @@ public class ExamPublishRecordEditFormVO implements Serializable {
      * 考试场次
      */
     @NotNull(message = "考试场次不能为空")
-    private Integer examSession;
+    private Long examSession;
     /**
      * 考试时间
      */
 
     @NotNull(message = "考试时间不能为空")
-    private Integer limitTime;
+    private Long limitTime;
     /**
      * 阅卷方式
      */
     @NotNull(message = "阅卷方式不能为空")
-    private Integer markingMode;
+    private Long markingMode;
     /**
      * 阅卷截止时间
      */
@@ -56,12 +56,12 @@ public class ExamPublishRecordEditFormVO implements Serializable {
      * 试卷id
      */
     @NotNull(message = "试卷id不能为空")
-    private Integer paperId;
+    private Long paperId;
     /**
      * 计划考试人数
      */
     @NotNull(message = "计划人数不能为空")
-    private Integer planPepoleNum;
+    private Long planPepoleNum;
     /**
      * 考试标题
      */

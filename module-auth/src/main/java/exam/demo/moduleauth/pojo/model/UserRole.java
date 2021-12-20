@@ -9,8 +9,11 @@ import java.io.Serializable;
 /**
  * 用户权限关联表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("user_role")
 public class UserRole implements Serializable {
@@ -19,15 +22,15 @@ public class UserRole implements Serializable {
      * 用户权限关联id
      */
     @ApiModelProperty(value = "用户权限关联id")
-    private Integer id;
+    private Long id;
     /**
      * 用户id
      */
     @ApiModelProperty(value = "用户id")
-    private Integer userId;
+    private Long userId;
     /**
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Integer roleId;
+    private Long roleId;
 }

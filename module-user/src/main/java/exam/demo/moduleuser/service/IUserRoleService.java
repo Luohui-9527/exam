@@ -8,8 +8,11 @@ import java.util.List;
 /**
  * 用户权限关联表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IUserRoleService extends IService<UserRole> {
 
     /**
@@ -20,7 +23,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> listByRoleIds(List<Integer> roleIds);
+    List<UserRole> listByRoleIds(List<Long> roleIds);
 
     /**
      * 功能描述: 根据用户id列表获取对应列表
@@ -30,7 +33,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> listByUserIds(List<Integer> userIds);
+    List<UserRole> listByUserIds(List<Long> userIds);
 
     /**
      * 功能描述: 根据用户id获取权限
@@ -40,7 +43,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> selectByUserId(Integer userId);
+    List<UserRole> listByUserId(Long userId);
 
     /**
      * 功能描述: 根据角色id获取用户
@@ -50,7 +53,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> selectByRoleId(Integer roleId);
+    List<UserRole> selectByRoleId(Long roleId);
 
     /**
      * 功能描述: 根据用户id删除关联
@@ -60,5 +63,5 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    void deleteByUserId(Integer userId);
+    void deleteByUserId(Long userId);
 }

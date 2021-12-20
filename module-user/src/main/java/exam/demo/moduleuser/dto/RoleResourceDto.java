@@ -7,32 +7,32 @@ import java.io.Serializable;
  */
 public class RoleResourceDto implements Serializable {
     private static final long serialVersionUID = -1857819275686602576L;
-    private Integer id;
-    private Integer roleId;
-    private Integer resourceId;
+    private Long id;
+    private Long roleId;
+    private Long resourceId;
     private Byte type;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public Integer getResourceId() {
+    public Long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Integer resourceId) {
+    public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
     }
 

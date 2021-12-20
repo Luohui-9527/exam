@@ -10,8 +10,11 @@ import java.util.List;
 /**
  * 权限表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IRoleService extends IService<Role> {
     /**
      * 功能描述

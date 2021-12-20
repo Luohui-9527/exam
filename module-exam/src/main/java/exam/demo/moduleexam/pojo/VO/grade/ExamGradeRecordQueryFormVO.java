@@ -22,8 +22,8 @@ public class ExamGradeRecordQueryFormVO implements Serializable {
     /**
      * 考试场次
      */
-    private Integer examSession;
+    private Long examSession;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer userId;
-    private Integer currentPage;
+    private Long userId;
+    private Long currentPage;
 }

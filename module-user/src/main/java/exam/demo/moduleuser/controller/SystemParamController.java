@@ -73,7 +73,7 @@ public class SystemParamController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_SP)
-    public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid CommonRequest<Integer> request) {
+    public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid CommonRequest<Long> request) {
         SystemParam systemParam = systemParamService.getById(request.getData());
         SystemParamListVo systemParamListVo = CommonUtils.copyProperties(systemParam, SystemParamListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, systemParamListVo);

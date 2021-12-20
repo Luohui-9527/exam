@@ -15,13 +15,16 @@ import java.util.stream.Collectors;
 /**
  * 权限资源关联表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, RoleResource> implements IRoleResourceService {
 
     @Override
-    public void removeByRoleId(Integer roleId) {
+    public void removeByRoleId(Long roleId) {
         QueryWrapper<RoleResource> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.ROLE_ID, roleId);
         this.remove(wrapper);
@@ -29,7 +32,7 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
 
     @Override
     public void removeByRoleList(List<Role> roleList) {
-        List<Integer> roleIdList = roleList.stream().map(Role::getId).collect(Collectors.toList());
+        List<Long> roleIdList = roleList.stream().map(Role::getId).collect(Collectors.toList());
         QueryWrapper<RoleResource> wrapper = new QueryWrapper<>();
         wrapper.in(MagicPointConstant.ROLE_ID, roleIdList);
         this.remove(wrapper);

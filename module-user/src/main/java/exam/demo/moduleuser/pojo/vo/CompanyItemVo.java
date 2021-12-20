@@ -2,6 +2,7 @@ package exam.demo.moduleuser.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,19 +12,20 @@ import java.io.Serializable;
  * @version V1.0.0
  * @date 2019/8/28
  */
+@Data
 public class CompanyItemVo extends BaseVo implements Serializable {
     private static final long serialVersionUID = -4102804158288838906L;
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer orgId;
+    private Long orgId;
 
     /**
      * 公司名
@@ -87,130 +89,4 @@ public class CompanyItemVo extends BaseVo implements Serializable {
      * 状态位
      */
     private Byte status;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Integer getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(Integer orgId) {
-        this.orgId = orgId;
-    }
-
-    public String getMnemonicCode() {
-        return mnemonicCode;
-    }
-
-    public void setMnemonicCode(String mnemonicCode) {
-        this.mnemonicCode = mnemonicCode;
-    }
-
-    public String getMaster() {
-        return master;
-    }
-
-    public void setMaster(String master) {
-        this.master = master;
-    }
-
-    public String getTax() {
-        return tax;
-    }
-
-    public void setTax(String tax) {
-        this.tax = tax;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public CompanyItemVo() {
-    }
-
-    @Override
-    public String toString() {
-        return "CompanyItemVO{" +
-                "id=" + id +
-                ", orgId=" + orgId +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", mnemonicCode='" + mnemonicCode + '\'' +
-                ", master='" + master + '\'' +
-                ", tax='" + tax + '\'' +
-                ", fax='" + fax + '\'' +
-                ", tel='" + tel + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", website='" + website + '\'' +
-                ", status=" + status +
-                '}';
-    }
 }

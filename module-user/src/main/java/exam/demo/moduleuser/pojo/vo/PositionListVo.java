@@ -16,13 +16,13 @@ public class PositionListVo extends BaseVo implements Serializable {
      * 职位ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 公司名
@@ -73,19 +73,19 @@ public class PositionListVo extends BaseVo implements Serializable {
     public PositionListVo() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 

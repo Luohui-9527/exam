@@ -29,8 +29,11 @@ import java.util.List;
 /**
  * 部门表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
 
@@ -140,7 +143,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
             }
             return res;
         }
-        Integer id = null;
+        Long id = null;
         if (!CommonUtils.judgeCompanyAndOrg().equals(TokenUtils.getUser().getOrgId())) {
             id = CommonUtils.judgeCompanyAndOrg();
         }

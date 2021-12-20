@@ -13,8 +13,11 @@ import java.util.Map;
 /**
  * 职位表 - 数据访问接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface PositionMapper extends BaseMapper<Position> {
     /**
      * 查询职位集合
@@ -24,7 +27,7 @@ public interface PositionMapper extends BaseMapper<Position> {
     List<UserOptionsDto> queryPosition(@Param("id") long id);
 
 
-    List<Position> listByCompanyId(@Param("ids") List<Integer> ids);
+    List<Position> listByCompanyId(@Param("ids") List<Long> ids);
 
 
     int update(Position position);

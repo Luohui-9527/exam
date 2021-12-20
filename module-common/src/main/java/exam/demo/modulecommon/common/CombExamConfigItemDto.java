@@ -18,13 +18,13 @@ public class CombExamConfigItemDto implements Serializable {
 
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer subjectTypeId;
+    private Long subjectTypeId;
 
     /**
      * 题目类型
@@ -35,13 +35,13 @@ public class CombExamConfigItemDto implements Serializable {
      * 组卷配置id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer combExamId;
+    private Long combExamId;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 题目类别

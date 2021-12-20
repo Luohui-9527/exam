@@ -20,13 +20,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ModifyPaperSubjectVo {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer subjectTypeId;
+    private Long subjectTypeId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer categoryId;
+    private Long categoryId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer difficulty;
+    private Long difficulty;
     private String subject;
     private String categoryValue;
     private String difficultyValue;
@@ -34,7 +34,7 @@ public class ModifyPaperSubjectVo {
     /**
      * 标记是否为组卷服务传过去的原始题目，如果从基础数据服务中添加题目，则在接收对象时此数据不为9999
      */
-    private Integer mark;
+    private Long mark;
     /**
      * 答案list
      */

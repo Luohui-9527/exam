@@ -10,8 +10,11 @@ import java.util.List;
 /**
  * 部门表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IDepartmentService extends IService<Department> {
     /**
      * 功能描述

@@ -1,15 +1,16 @@
 package exam.demo.moduleauth.mapper;
 
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import exam.demo.moduleauth.pojo.model.RoleResource;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
+ * 权限资源关联表 - 数据访问接口
+ *
  * @author luohui
  * @version 1.0
- * @since 2020-04-17
+ * @since 2020-03-04
  */
-@Mapper
+
 public interface RoleResourceMapper extends BaseMapper<RoleResource> {
+
 }

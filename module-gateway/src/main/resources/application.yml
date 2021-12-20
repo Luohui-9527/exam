@@ -240,7 +240,7 @@ org:
       #     单位：d:天、h:小时、m:分钟、s:秒
       ###########################################
       effective-time: 1m
-aaron:
+exam:
   data-center-id: 5
   machine-id: 1
   version: 1

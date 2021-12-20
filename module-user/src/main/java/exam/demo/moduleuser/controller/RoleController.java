@@ -67,7 +67,7 @@ public class RoleController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_ROLE)
-    public CommonResponse<RoleListVo> getUpdateFormRole(@RequestBody CommonRequest<Integer> request) {
+    public CommonResponse<RoleListVo> getUpdateFormRole(@RequestBody CommonRequest<Long> request) {
         Role role = roleService.getById(request.getData());
         RoleListVo listVo = CommonUtils.copyProperties(role, RoleListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, listVo);
@@ -113,7 +113,7 @@ public class RoleController {
     @MethodEnhancer
     @PostMapping(ControllerConstants.UPDATE_RESOURCE_FOR_ROLE)
     public CommonResponse<Boolean> updateResourceForRole(@RequestBody CommonRequest<List<RoleResourceVo>> request) {
-        List<Integer> resourceIdList = request.getData().stream().map(RoleResourceVo::getId).collect(Collectors.toList());
+        List<Long> resourceIdList = request.getData().stream().map(RoleResourceVo::getId).collect(Collectors.toList());
         List<RoleResourceVo> voList = request.getData();
         // 前端的代码有bug,存储的数据是不断的增加的，因此需要去重
         Set<RoleResourceVo> set = new HashSet<>(voList);

@@ -1,4 +1,4 @@
-aaron:
+exam:
   version: 1
   data-center-id: 8
   machine-id: 1
@@ -46,7 +46,7 @@ eureka:
 #    ip-address: 192.168.1.102
 #    non-secure-port: 10050
 mybatis:
-  type-aliases-package: aaron.exam.service.pojo.model
+  type-aliases-package: exam.exam.service.pojo.model
   mapper-locations: classpath:mapper/*.xml
 
 ribbon:

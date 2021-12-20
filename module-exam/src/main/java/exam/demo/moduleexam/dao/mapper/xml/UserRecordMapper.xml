@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="exam.demo.moduleexam.dao.mapper.UserRecordMapper">
-
-    <select id="listExaminers" resultType="exam.demo.moduleexam.pojo.model.UserRecord">
-    SELECT id,exam_publish_record_id FROM user_record WHERE #{examPublishRecordId}=exam_publish_record_id
-  </select>
-</mapper>

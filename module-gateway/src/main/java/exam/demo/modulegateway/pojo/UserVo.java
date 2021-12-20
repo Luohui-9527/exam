@@ -11,17 +11,17 @@ public class UserVo implements Serializable {
     /**
      * 用户ID
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 职位ID
      */
-    private Integer positionId;
+    private Long positionId;
 
     /**
      * 部门ID
      */
-    private Integer departmentId;
+    private Long departmentId;
 
     /**
      * 工号

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableEurekaClient
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 @SpringBootApplication
-@MapperScan("exam.demo.moduleexam.dao.mapper")
+@MapperScan("exam.demo.moduleexam.mapper")
 public class ModuleExamApplication {
 
     public static void main(String[] args) {

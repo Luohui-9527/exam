@@ -37,7 +37,7 @@ public class DoPaperServiceImpl implements DoPaperService {
     private Integer count = 0;
 
     @Override
-    public Integer saveExaminee(UserInfoFormDTO userInfoFormDTO) {
+    public Long saveExaminee(UserInfoFormDTO userInfoFormDTO) {
         ExamRecord record = examRecordService.getOneByTel(userInfoFormDTO.getTel());
         if (record == null) {
             try {

@@ -1,7 +1,6 @@
 package exam.demo.moduleexam.controller;
 
 
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PaperDetail;
@@ -47,7 +46,7 @@ public class DoPaperController {
     @RequestMapping(value = "saveexaminer")
     public CommonResponse<String> saveExaminer(@RequestBody @Valid UserInfoFormVO userInfoFormVO) {
         UserInfoFormDTO userInfoFormDTO = CommonUtils.copyProperties(userInfoFormVO, UserInfoFormDTO.class);
-        Integer examId = doPaperService.saveExaminee(userInfoFormDTO);
+        Long examId = doPaperService.saveExaminee(userInfoFormDTO);
         if (null != examId) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, examId.toString());
         }
@@ -76,14 +75,14 @@ public class DoPaperController {
      */
     @MethodEnhancer
     @RequestMapping(value = "getPaper")
-    public CommonResponse<PaperDetail> getPaper(@RequestBody CommonRequest<Integer> commonRequest) {
+    public CommonResponse<PaperDetail> getPaper(@RequestBody Long commonRequest) {
         PaperDetail detail = RPCUtils.parseResponse(paperApi.queryDetailByPaperId(commonRequest), PaperDetail.class, RPCUtils.PAPER);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, detail);
     }
 
     @MethodEnhancer
     @RequestMapping(value = "getExamTime")
-    public CommonResponse<TimeWrapper> getExamTime(@RequestBody CommonRequest<Integer> request) {
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, doPaperService.getExamTime(request.getData()));
+    public CommonResponse<TimeWrapper> getExamTime(@RequestBody Long request) {
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, doPaperService.getExamTime(request));
     }
 }

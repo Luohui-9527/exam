@@ -86,7 +86,7 @@ public class ReportServiceImpl implements ReportService {
         examRecords.forEach(examRecord -> {
             // 获取该场考试的答题情况
             List<AnswerRecord> answerRecords = answerRecordService.getListByExamRecordId(examRecord.getId());
-            List<Integer> subjectIds = answerRecords.stream().map(AnswerRecord::getPaperSubjectId).collect(Collectors.toList());
+            List<Long> subjectIds = answerRecords.stream().map(AnswerRecord::getPaperSubjectId).collect(Collectors.toList());
         });
         return null;
     }
@@ -103,7 +103,7 @@ public class ReportServiceImpl implements ReportService {
         if (record == null) {
             throw new ExamException(ExamError.EXAM_RECORD_NOT_EXIST);
         }
-        Integer paperId = record.getPaperId();
+        Long paperId = record.getPaperId();
         return RPCUtils.parseResponse(paperApi.queryPaperScore(paperId), Double.class, RPCUtils.PAPER);
     }
 }

@@ -12,8 +12,11 @@ import java.io.Serializable;
 /**
  * 权限表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("role")
 public class Role implements Serializable {
@@ -22,17 +25,17 @@ public class Role implements Serializable {
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Integer id;
+    private Long id;
     /**
      * 公司id
      */
     @ApiModelProperty(value = "公司id")
-    private Integer companyId;
+    private Long companyId;
     /**
      * 组织机构id
      */
     @ApiModelProperty(value = "组织机构id")
-    private Integer orgId;
+    private Long orgId;
     /**
      * 角色名
      */
@@ -52,12 +55,12 @@ public class Role implements Serializable {
      * 状态位
      */
     @ApiModelProperty(value = "状态位")
-    private Integer status;
+    private Long status;
     /**
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Integer createdBy;
+    private Long createdBy;
     /**
      * 创建时间
      */
@@ -69,7 +72,7 @@ public class Role implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Integer updatedBy;
+    private Long updatedBy;
     /**
      * 修改时间
      */
@@ -99,16 +102,16 @@ public class Role implements Serializable {
      * 资源节点ID
      */
     @TableField(exist = false)
-    private Integer resourceId;
+    private Long resourceId;
 
     /**
      * 用户ID
      */
     @TableField(exist = false)
-    private Integer userId;
+    private Long userId;
 
     @TableField(exist = false)
-    private Integer judgeId;
+    private Long judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

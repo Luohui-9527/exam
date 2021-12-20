@@ -1,6 +1,5 @@
 package exam.demo.moduleauth.pojo.dto;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,7 +11,7 @@ public class SpRole {
     /**
      * 角色ID
      */
-    private Integer id;
+    private Long id;
     /**
      * 角色名
      */
@@ -20,11 +19,11 @@ public class SpRole {
 
     Set<SpResource> resources;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

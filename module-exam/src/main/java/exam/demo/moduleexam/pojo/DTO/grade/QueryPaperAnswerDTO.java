@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class QueryPaperAnswerDTO {
-    private Integer paperId;
-    private Integer examRecordId;
+    private Long paperId;
+    private Long examRecordId;
 }

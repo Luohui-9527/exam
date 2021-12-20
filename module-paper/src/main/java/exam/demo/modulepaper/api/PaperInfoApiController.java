@@ -7,8 +7,8 @@ import exam.demo.modulecommon.constant.ControllerConstant;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
-import exam.demo.modulepaper.biz.service.PaperService;
-import exam.demo.modulepaper.biz.service.impl.BaseService;
+import exam.demo.modulepaper.service.IPaperService;
+import exam.demo.modulepaper.service.impl.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -28,7 +28,7 @@ public class PaperInfoApiController {
 
 
     @Autowired
-    PaperService paperService;
+    IPaperService paperService;
 
     @Autowired
     CommonState state;
@@ -47,7 +47,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @PostMapping(ApiConstant.PAPER_INFO_PUBLISH_PAPER)
-    public CommonResponse<Boolean> publishPaper(@RequestBody Integer paperId) {
+    public CommonResponse<Boolean> publishPaper(@RequestBody Long paperId) {
         if (paperService.publish(paperId)) {
             return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, true);
         }
@@ -88,7 +88,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_DETAIL)
-    public CommonResponse<PaperDetail> queryDetailByPaperId(@RequestParam("paperId") Integer paperId) {
+    public CommonResponse<PaperDetail> queryDetailByPaperId(@RequestParam("paperId") Long paperId) {
         PaperDetail detail = baseService.queryDetailByPaperId(paperId);
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, detail);
     }
@@ -102,7 +102,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_PUBLISHED_TIME)
-    public CommonResponse<Integer> queryPublishedTimesByPaperId(@RequestParam("paperId") Integer paperId) {
+    public CommonResponse<Integer> queryPublishedTimesByPaperId(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperService.getPaper(paperId).getPublishTimes());
     }
 
@@ -114,7 +114,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_PAPER_NAME)
-    public CommonResponse<String> queryPaperNameByPaperId(@RequestParam("paperId") Integer paperId) {
+    public CommonResponse<String> queryPaperNameByPaperId(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperService.getPaper(paperId).getName());
     }
 
@@ -126,7 +126,7 @@ public class PaperInfoApiController {
      */
     @MethodEnhancer
     @GetMapping(ApiConstant.PAPER_INFO_QUERY_PAPER_SCORE)
-    public CommonResponse<Double> queryPaperScore(@RequestParam("paperId") Integer paperId) {
+    public CommonResponse<Double> queryPaperScore(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, paperService.getScore(paperId));
     }
 }

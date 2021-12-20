@@ -17,7 +17,7 @@ public class SystemParamQueryVo extends BaseQueryVo implements Serializable {
      * 参数类型
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer paramType;
+    private Long paramType;
     /**
      * 输入参数项
      */
@@ -26,11 +26,11 @@ public class SystemParamQueryVo extends BaseQueryVo implements Serializable {
     public SystemParamQueryVo() {
     }
 
-    public Integer getParamType() {
+    public Long getParamType() {
         return paramType;
     }
 
-    public void setParamType(Integer paramType) {
+    public void setParamType(Long paramType) {
         this.paramType = paramType;
     }
 

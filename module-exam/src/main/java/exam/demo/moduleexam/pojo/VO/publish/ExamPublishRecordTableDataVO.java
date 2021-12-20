@@ -13,7 +13,7 @@ public class ExamPublishRecordTableDataVO implements Serializable {
      * 考试发布记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     /**
      * 发布人
      */
@@ -29,11 +29,11 @@ public class ExamPublishRecordTableDataVO implements Serializable {
     /**
      * 计划人数
      */
-    private Integer planPepoleNum;
+    private Long planPepoleNum;
     /**
      * 考试时间
      */
-    private Integer limitTime;
+    private Long limitTime;
     /**
      * 考试标题
      */
@@ -49,7 +49,7 @@ public class ExamPublishRecordTableDataVO implements Serializable {
     /**
      * 考试场次
      */
-    private Integer examSession;
+    private Long examSession;
     /**
      * 版本
      */
@@ -58,7 +58,7 @@ public class ExamPublishRecordTableDataVO implements Serializable {
     /**
      * 发布次数
      */
-    private Integer publishTimes;
+    private Long publishTimes;
     /**
      * 阅卷官姓名
      */
@@ -67,5 +67,5 @@ public class ExamPublishRecordTableDataVO implements Serializable {
      * 试卷id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer paperId;
+    private Long paperId;
 }

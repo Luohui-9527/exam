@@ -12,8 +12,11 @@ import java.io.Serializable;
 /**
  * 系统配置表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("system_param")
 public class SystemParam implements Serializable {
@@ -22,17 +25,17 @@ public class SystemParam implements Serializable {
      * 系统参数ID
      */
     @ApiModelProperty(value = "系统参数ID")
-    private Integer id;
+    private Long id;
     /**
      * 组织机构ID
      */
     @ApiModelProperty(value = "组织机构ID")
-    private Integer orgId;
+    private Long orgId;
     /**
      * 参数类型
      */
     @ApiModelProperty(value = "参数类型")
-    private Integer paramType;
+    private Long paramType;
     /**
      * 参数项
      */
@@ -47,12 +50,12 @@ public class SystemParam implements Serializable {
      * 状态位
      */
     @ApiModelProperty(value = "状态位")
-    private Integer status;
+    private Long status;
     /**
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Integer createdBy;
+    private Long createdBy;
     /**
      * 创建时间
      */
@@ -64,7 +67,7 @@ public class SystemParam implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Integer updatedBy;
+    private Long updatedBy;
     /**
      * 修改时间
      */

@@ -1,7 +1,6 @@
 package exam.demo.moduleexam.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -42,15 +41,14 @@ public class ReportController {
 
     @MethodEnhancer
     @RequestMapping(value = "query", method = RequestMethod.POST)
-    public CommonResponse<PageVo<ExamReportRecordExamTableDataVO>> query(@RequestBody CommonRequest<ExamReportRecordQueryFormVO> commonRequest) {
-        ExamReportRecordQueryFormVO queryFormVO = commonRequest.getData();
+    public CommonResponse<PageVo<ExamReportRecordExamTableDataVO>> query(@RequestBody ExamReportRecordQueryFormVO queryFormVO) {
         ExamReportRecordQueryFormDTO queryFormDTO = CommonUtils.copyProperties(queryFormVO, ExamReportRecordQueryFormDTO.class);
 
         if (queryFormVO.getExamTimeRange() != null && queryFormVO.getExamTimeRange().size() != 0) {
             queryFormDTO.setStartTime(queryFormVO.getExamTimeRange().get(0));
             queryFormDTO.setEndTime(queryFormVO.getExamTimeRange().get(1));
         }
-        Page<ExamReportRecordQueryFormVO> page = new Page<>(commonRequest.getData().getCurrentPage(), PAGE_SIZE);
+        Page<ExamReportRecordQueryFormVO> page = new Page<>(queryFormVO.getCurrentPage(), PAGE_SIZE);
         List<ExamReportRecordExamTableDataDTO> tableDataDTOS = reportService.query(queryFormDTO);
         List<ExamReportRecordExamTableDataVO> tableDataVOS = new ArrayList<>();
         for (ExamReportRecordExamTableDataDTO tableDataDTO : tableDataDTOS) {
@@ -64,11 +62,10 @@ public class ReportController {
 
     @MethodEnhancer
     @RequestMapping(value = "querydetail", method = RequestMethod.POST)
-    public CommonResponse<PageVo<ExamReportRecordDetailTableDataVO>> queryDetail(@RequestBody CommonRequest<ExamDetailQueryFormVO> commonRequest) {
+    public CommonResponse<PageVo<ExamReportRecordDetailTableDataVO>> queryDetail(@RequestBody ExamDetailQueryFormVO queryFormVO) {
         int rank = 0;
-        ExamDetailQueryFormVO queryFormVO = commonRequest.getData();
         ExamDetailQueryFormDTO queryFormDTO = CommonUtils.copyProperties(queryFormVO, ExamDetailQueryFormDTO.class);
-        Page<ExamDetailQueryFormVO> page = new Page<>(commonRequest.getData().getCurrentPage(), 10);
+        Page<ExamDetailQueryFormVO> page = new Page<>(queryFormVO.getCurrentPage(), 10);
         List<ExamReportRecordDetailTableDataDTO> tableDataDTOS = reportService.queryDetail(queryFormDTO);
         // 查询该考试的试卷满分是多少
         Double score = reportService.findMaxScore(queryFormVO.getId());

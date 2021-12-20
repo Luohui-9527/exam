@@ -54,7 +54,7 @@ public class GradeServiceImpl implements GradeService {
 
 
     @Override
-    public List<MyAnswerDTO> getMyAnswer(Integer examRecordId) {
+    public List<MyAnswerDTO> getMyAnswer(Long examRecordId) {
         // 获取答题明细
         List<AnswerRecord> answerRecords = answerRecordService.getListByExamRecordId(examRecordId);
         if (answerRecords.size() == 0) {

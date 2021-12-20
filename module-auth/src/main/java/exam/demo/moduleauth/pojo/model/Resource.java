@@ -11,8 +11,11 @@ import java.io.Serializable;
 /**
  * 资源表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("resource")
 public class Resource implements Serializable {
@@ -21,7 +24,7 @@ public class Resource implements Serializable {
      * 资源ID
      */
     @ApiModelProperty(value = "资源ID")
-    private Integer id;
+    private Long id;
     /**
      * 节点名称
      */
@@ -36,12 +39,12 @@ public class Resource implements Serializable {
      * 顺序号
      */
     @ApiModelProperty(value = "顺序号")
-    private Integer orderIndex;
+    private Long orderIndex;
     /**
      * 父亲节点
      */
     @ApiModelProperty(value = "父亲节点")
-    private Integer parentId;
+    private Long parentId;
     /**
      * URL
      */
@@ -61,12 +64,12 @@ public class Resource implements Serializable {
      * 资源类型
      */
     @ApiModelProperty(value = "资源类型")
-    private Integer resourceType;
+    private Long resourceType;
     /**
      * 叶子节点
      */
     @ApiModelProperty(value = "叶子节点")
-    private Integer leaf;
+    private Long leaf;
     /**
      * 备注
      */
@@ -76,12 +79,12 @@ public class Resource implements Serializable {
      * 状态位
      */
     @ApiModelProperty(value = "状态位")
-    private Integer status;
+    private Long status;
     /**
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Integer createdBy;
+    private Long createdBy;
     /**
      * 创建时间
      */
@@ -93,7 +96,7 @@ public class Resource implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Integer updatedBy;
+    private Long updatedBy;
     /**
      * 修改时间
      */

@@ -10,8 +10,11 @@ import java.util.List;
 /**
  * 公司表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface ICompanyService extends IService<Company> {
     /**
      * 功能描述
@@ -51,7 +54,7 @@ public interface ICompanyService extends IService<Company> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    List<TreeListDto> getCompanyTree(Integer id);
+    List<TreeListDto> getCompanyTree(Long id);
 
     /**
      * 功能描述
@@ -61,7 +64,7 @@ public interface ICompanyService extends IService<Company> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    String getNameById(Integer id);
+    String getNameById(Long id);
 
     /**
      * 功能描述
@@ -71,5 +74,5 @@ public interface ICompanyService extends IService<Company> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    List<Company> listByOrgId(Integer orgId);
+    List<Company> listByOrgId(Long orgId);
 }

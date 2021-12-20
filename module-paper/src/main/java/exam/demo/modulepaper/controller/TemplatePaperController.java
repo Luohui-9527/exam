@@ -9,13 +9,13 @@ import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
-import exam.demo.modulepaper.biz.service.PaperService;
-import exam.demo.modulepaper.biz.service.impl.BaseService;
 import exam.demo.modulepaper.exception.PaperException;
 import exam.demo.modulepaper.pojo.dto.PaperDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
 import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
 import exam.demo.modulepaper.pojo.vo.PaperVo;
+import exam.demo.modulepaper.service.IPaperService;
+import exam.demo.modulepaper.service.impl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +35,7 @@ import java.util.Map;
 public class TemplatePaperController {
 
     @Autowired
-    PaperService paperService;
+    IPaperService paperService;
 
     @Autowired
     CommonState state;
@@ -86,7 +86,7 @@ public class TemplatePaperController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstant.TEMPLATE_DELETE_PAPER)
-    public CommonResponse deleteTemplate(@RequestBody List<Integer> templateIdList) {
+    public CommonResponse deleteTemplate(@RequestBody List<Long> templateIdList) {
         if (paperService.deleteTemplate(templateIdList)) {
             baseService.evictPaper(templateIdList);
             return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, true);

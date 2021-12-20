@@ -22,14 +22,14 @@ import java.util.List;
 @NoArgsConstructor
 public class ModifyPaperVo {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     private String name;
     private String paperCreator;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer category;
+    private Long category;
     private String categoryValue;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer difficulty;
+    private Long difficulty;
     private String difficultyValue;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date combExamTime;
@@ -38,5 +38,5 @@ public class ModifyPaperVo {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
     private List<ModifyPaperSubjectVo> currentPaperSubjectVOList;
-    private List<Integer> deletedId;
+    private List<Long> deletedId;
 }

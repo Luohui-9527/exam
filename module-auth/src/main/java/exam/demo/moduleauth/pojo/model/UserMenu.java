@@ -8,30 +8,30 @@ import java.io.Serializable;
 public class UserMenu implements Serializable {
     private static final long serialVersionUID = -3364986961375400850L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     private String name;
     private String code;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer parentId;
+    private Long parentId;
     private String url;
     private String openImg;
     private String closeImg;
     private byte resourceType;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

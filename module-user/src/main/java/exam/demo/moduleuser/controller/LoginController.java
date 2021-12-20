@@ -1,7 +1,6 @@
 package exam.demo.moduleuser.controller;
 
 
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.UserDto;
@@ -54,10 +53,10 @@ public class LoginController {
     }
 
     @PostMapping(ControllerConstants.LOGOUT)
-    public CommonResponse<Boolean> logout(@RequestBody @Valid CommonRequest<Object> request) {
-        LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) request.getData();
+    public CommonResponse<Boolean> logout(@RequestBody @Valid Object request) {
+        LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) request;
         ArrayList<String> data = (ArrayList<String>) map.get("data");
-        List<Integer> list = data.stream().map(e -> Integer.valueOf(e)).collect(Collectors.toList());
+        List<Long> list = data.stream().map(e -> Long.valueOf(e)).collect(Collectors.toList());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.logout(list));
     }
 }

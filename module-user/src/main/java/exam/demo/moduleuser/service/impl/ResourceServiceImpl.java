@@ -22,8 +22,11 @@ import java.util.stream.Collectors;
 /**
  * 资源表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
 
@@ -75,12 +78,12 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public List<Resource> listByIdList(List<Integer> idList) {
+    public List<Resource> listByIdList(List<Long> idList) {
         return this.listByIds(idList);
     }
 
     private int getLeafCount(List<Resource> resources) {
-        List<Integer> parentIdList = resources.stream().map(Resource::getParentId).collect(Collectors.toList());
+        List<Long> parentIdList = resources.stream().map(Resource::getParentId).collect(Collectors.toList());
         QueryWrapper<Resource> wrapper = new QueryWrapper<>();
         wrapper.in(MagicPointConstant.PARENT_ID, parentIdList);
         return this.count(wrapper);

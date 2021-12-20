@@ -12,7 +12,7 @@ public class DoPaperFormVO implements Serializable {
     private String standardAnswer;
     private String myAnswer;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer examRecordId;
+    private Long examRecordId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer paperSubjectId;
+    private Long paperSubjectId;
 }

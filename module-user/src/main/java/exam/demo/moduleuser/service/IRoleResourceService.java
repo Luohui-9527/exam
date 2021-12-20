@@ -9,8 +9,11 @@ import java.util.List;
 /**
  * 权限资源关联表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IRoleResourceService extends IService<RoleResource> {
 
     /**
@@ -21,7 +24,7 @@ public interface IRoleResourceService extends IService<RoleResource> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    void removeByRoleId(Integer roleId);
+    void removeByRoleId(Long roleId);
 
     /**
      * 功能描述: 删除角色资源

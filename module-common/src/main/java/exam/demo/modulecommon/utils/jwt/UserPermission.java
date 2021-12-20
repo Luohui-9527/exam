@@ -7,10 +7,10 @@ import lombok.Data;
  */
 @Data
 public class UserPermission {
-    private Integer id;
+    private Long id;
     private String userName;
-    private Integer orgId;
-    private Integer companyId;
-    private Integer userOnlineId;
+    private Long orgId;
+    private Long companyId;
+    private Long userOnlineId;
 
 }

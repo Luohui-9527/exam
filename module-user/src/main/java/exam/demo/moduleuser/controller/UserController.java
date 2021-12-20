@@ -69,7 +69,7 @@ public class UserController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_U)
-    public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid CommonRequest<Integer> request) {
+    public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid CommonRequest<Long> request) {
         User user = userService.getById(request.getData());
         UserListVo userListVo = CommonUtils.copyProperties(user, UserListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userListVo);
@@ -130,7 +130,7 @@ public class UserController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_USER_ROLE)
-    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody CommonRequest<Integer> commonRequest) {
+    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody CommonRequest<Long> commonRequest) {
         List<RoleDto> roleDtoList = userService.queryRoleOfUser(commonRequest.getData());
         List<RoleListVo> roleListVoList = CommonUtils.convertList(roleDtoList, RoleListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, roleListVoList);

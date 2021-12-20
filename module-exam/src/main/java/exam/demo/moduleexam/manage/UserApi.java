@@ -1,7 +1,6 @@
 package exam.demo.moduleexam.manage;
 
 
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CompanyAndUserVo;
 import exam.demo.modulecommon.common.UserDto;
@@ -19,17 +18,17 @@ import java.util.List;
 @FeignClient(ApiConstant.SERVICE_NAME)
 public interface UserApi {
     @PostMapping({"/get/user/name"})
-    CommonResponse<CompanyAndUserVo> getUserInfo(CommonRequest<List<Integer>> request);
+    CommonResponse<CompanyAndUserVo> getUserInfo(List<Long> request);
 
     @PostMapping({"/get/company/name/by/id"})
-    CommonResponse<String> getUserNameById(CommonRequest<Integer> request);
+    CommonResponse<String> getUserNameById(Long request);
 
     @PostMapping({"/get/scoring/officer"})
-    CommonResponse<List<UserDto>> queryScoringOfficer(CommonRequest<UserDto> request);
+    CommonResponse<List<UserDto>> queryScoringOfficer(UserDto request);
 
     @PostMapping({"/get/id/by/name"})
-    CommonResponse<Integer> getUserIdByName(CommonRequest<String> request);
+    CommonResponse<Long> getUserIdByName(String request);
 
     @PostMapping({"/get/company/name"})
-    CommonResponse<String> getCompanyById(CommonRequest<Integer> request);
+    CommonResponse<String> getCompanyById(Long request);
 }

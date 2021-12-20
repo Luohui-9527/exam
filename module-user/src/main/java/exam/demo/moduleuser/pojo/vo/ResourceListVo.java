@@ -16,7 +16,7 @@ public class ResourceListVo extends BaseVo implements Serializable {
      * 资源ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 节点名称
@@ -31,13 +31,13 @@ public class ResourceListVo extends BaseVo implements Serializable {
     /**
      * 顺序号
      */
-    private Integer orderIndex;
+    private Long orderIndex;
 
     /**
      * 父亲节点
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * URL
@@ -77,11 +77,11 @@ public class ResourceListVo extends BaseVo implements Serializable {
     public ResourceListVo() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -101,11 +101,11 @@ public class ResourceListVo extends BaseVo implements Serializable {
         this.code = code;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -183,11 +183,11 @@ public class ResourceListVo extends BaseVo implements Serializable {
                 '}';
     }
 
-    public Integer getOrderIndex() {
+    public Long getOrderIndex() {
         return orderIndex;
     }
 
-    public void setOrderIndex(Integer orderIndex) {
+    public void setOrderIndex(Long orderIndex) {
         this.orderIndex = orderIndex;
     }
 }

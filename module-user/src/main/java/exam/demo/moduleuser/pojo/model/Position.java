@@ -12,8 +12,11 @@ import java.io.Serializable;
 /**
  * 职位表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("position")
 public class Position implements Serializable {
@@ -22,12 +25,12 @@ public class Position implements Serializable {
      * 职位ID
      */
     @ApiModelProperty(value = "职位ID")
-    private Integer id;
+    private Long id;
     /**
      * 公司ID
      */
     @ApiModelProperty(value = "公司ID")
-    private Integer companyId;
+    private Long companyId;
     /**
      * 职位名称
      */
@@ -47,12 +50,12 @@ public class Position implements Serializable {
      * 状态位
      */
     @ApiModelProperty(value = "状态位")
-    private Integer status;
+    private Long status;
     /**
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Integer createdBy;
+    private Long createdBy;
     /**
      * 创建时间
      */
@@ -64,7 +67,7 @@ public class Position implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Integer updatedBy;
+    private Long updatedBy;
     /**
      * 更新时间
      */
@@ -85,7 +88,7 @@ public class Position implements Serializable {
     private String companyName;
 
     @TableField(exist = false)
-    private Integer judgeId;
+    private Long judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

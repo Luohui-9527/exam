@@ -10,17 +10,17 @@ public class UserVo implements Serializable {
     /**
      * 用户ID
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 职位ID
      */
-    private Integer positionId;
+    private Long positionId;
 
     /**
      * 部门ID
      */
-    private Integer departmentId;
+    private Long departmentId;
 
     /**
      * 工号
@@ -91,15 +91,15 @@ public class UserVo implements Serializable {
     private String companyName;
     private String ip;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getPositionId() {
+    public Long getPositionId() {
         return positionId;
     }
 
@@ -127,15 +127,15 @@ public class UserVo implements Serializable {
                 '}';
     }
 
-    public void setPositionId(Integer positionId) {
+    public void setPositionId(Long positionId) {
         this.positionId = positionId;
     }
 
-    public Integer getDepartmentId() {
+    public Long getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
 

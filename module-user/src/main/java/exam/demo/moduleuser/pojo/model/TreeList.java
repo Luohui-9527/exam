@@ -20,12 +20,12 @@ import java.util.Objects;
 public class TreeList implements Serializable {
     private static final long serialVersionUID = -2740873114126068062L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     private String name;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer parentId;
+    private Long parentId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer rootId;
+    private Long rootId;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
 

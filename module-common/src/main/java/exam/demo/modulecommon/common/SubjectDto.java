@@ -32,7 +32,7 @@ public class SubjectDto extends BaseDataBaseDto implements Serializable {
     private String remark;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer difficulty;
+    private Long difficulty;
 
     /**
      * 状态位
@@ -43,7 +43,7 @@ public class SubjectDto extends BaseDataBaseDto implements Serializable {
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
      * 题目类别名字
@@ -59,7 +59,7 @@ public class SubjectDto extends BaseDataBaseDto implements Serializable {
      * 题型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer subjectTypeId;
+    private Long subjectTypeId;
     /**
      * 题目类型名字
      */
@@ -69,7 +69,7 @@ public class SubjectDto extends BaseDataBaseDto implements Serializable {
     /**
      * 题目数量
      */
-    private Integer num;
+    private Long num;
 
     /**
      * 题目分数

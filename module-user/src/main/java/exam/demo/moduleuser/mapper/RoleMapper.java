@@ -11,8 +11,11 @@ import java.util.List;
 /**
  * 权限表 - 数据访问接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface RoleMapper extends BaseMapper<Role> {
 
     /**
@@ -53,7 +56,7 @@ public interface RoleMapper extends BaseMapper<Role> {
      */
     List<UserOptionsDto> queryRole();
 
-    List<UserOptionsDto> queryRoleByCompany(Integer companyId);
+    List<UserOptionsDto> queryRoleByCompany(Long companyId);
 
-    List<UserOptionsDto> queryRoleByOrg(Integer orgId);
+    List<UserOptionsDto> queryRoleByOrg(Long orgId);
 }

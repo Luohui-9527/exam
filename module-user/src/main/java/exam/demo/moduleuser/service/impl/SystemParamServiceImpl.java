@@ -36,8 +36,11 @@ import java.util.Map;
 /**
  * 系统配置表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, SystemParam> implements ISystemParamService {
     @Autowired
@@ -98,7 +101,7 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
         }
         List<SystemParamListVo> listVoList = CommonUtils.convertList(systemParamList, SystemParamListVo.class);
         // 从基础数据服务获取值
-        Map<Integer, String> map = new HashMap<>(systemParamList.size());
+        Map<Long, String> map = new HashMap<>(systemParamList.size());
         for (SystemParam param : systemParamList) {
             map.put(param.getParamType(), null);
         }

@@ -47,7 +47,7 @@ public class ResourceController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_R)
-    public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody CommonRequest<Integer> request) {
+    public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody CommonRequest<Long> request) {
         Resource resource = resourceService.getById(request.getData());
         ResourceListVo resourceListVo = CommonUtils.copyProperties(resource, ResourceListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, resourceListVo);

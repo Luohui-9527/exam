@@ -13,8 +13,8 @@ import java.io.Serializable;
 @Data
 public class RoleUserDto implements Serializable {
     private static final long serialVersionUID = -4555168027630926134L;
-    private Integer id;
-    private Integer userId;
-    private Integer roleId;
-    private Integer companyId;
+    private Long id;
+    private Long userId;
+    private Long roleId;
+    private Long companyId;
 }

@@ -91,4 +91,52 @@ public class MagicPointConstant {
      * The constant PARENT_ID.
      */
     public static final String PARENT_ID = "parent_id";
+    /**
+     * The constant PAPER_TYPE.
+     */
+    public static final String PAPER_TYPE = "paper_type";
+    /**
+     * The constant DIFFICULTY.
+     */
+    public static final String DIFFICULTY = "difficulty";
+    /**
+     * The constant COMB_EXAM_TIME.
+     */
+    public static final String COMB_EXAM_TIME = "comb_exam_time";
+    /**
+     * The constant PAPER_CREATOR.
+     */
+    public static final String PAPER_CREATOR = "paper_creator";
+    /**
+     * The constant DESCRIPTION.
+     */
+    public static final String DESCRIPTION = "description";
+    /**
+     * The constant TEMPLATE.
+     */
+    public static final String TEMPLATE = "template";
+    /**
+     * The constant DOWNLOAD_TIMES.
+     */
+    public static final String DOWNLOAD_TIMES = "download_times";
+    /**
+     * The constant PUBLISH_TIMES.
+     */
+    public static final String PUBLISH_TIMES = "publish_times";
+    /**
+     * The constant STATUS.
+     */
+    public static final String STATUS = "status";
+    /**
+     * The constant ORG_ID.
+     */
+    public static final String ORG_ID = "org_id";
+    /**
+     * The constant PAPER_ID.
+     */
+    public static final String PAPER_ID = "paper_id";
+    /**
+     * The constant UPDATE_TIME.
+     */
+    public static final String UPDATE_TIME = "updated_time";
 }

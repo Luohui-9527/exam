@@ -38,8 +38,11 @@ import java.util.stream.Collectors;
 /**
  * 用户表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Autowired
@@ -202,11 +205,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         // 对角色的处理
         if (userDto.getRoleId() != null) {
-            List<Integer> idList = new ArrayList<>();
+            List<Long> idList = new ArrayList<>();
             idList.add(userDto.getRoleId());
             List<UserRole> userRoleList = userRoleService.listByRoleIds(idList);
             List<UserRole> userRoles = userRoleList.stream().filter(u -> userDto.getRoleId().equals(u.getRoleId())).collect(Collectors.toList());
-            List<Integer> userIdList = userRoles.stream().map(UserRole::getUserId).collect(Collectors.toList());
+            List<Long> userIdList = userRoles.stream().map(UserRole::getUserId).collect(Collectors.toList());
             userList = userList.stream().filter(u -> userIdList.contains(u.getId())).peek(u -> u.setRoleId(userDto.getRoleId())).collect(Collectors.toList());
         }
         if (CommonUtils.isEmpty(userList)) {
@@ -231,7 +234,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 user.setRoleId(role.getId());
             }
         }
-        Map<Integer, String> cache = new HashMap<>(userList.size() << 1);
+        Map<Long, String> cache = new HashMap<>(userList.size() << 1);
         for (User user : userList) {
             String val;
             if (user.getDepartmentId() != null) {
@@ -297,7 +300,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             userRoleService.deleteByUserId(userRoleDTO.getUserId());
             List<UserRole> userRoleList = new ArrayList<>();
             // 重新绑定角色关系
-            for (Integer roleId : userRoleDTO.getRoleIds()) {
+            for (Long roleId : userRoleDTO.getRoleIds()) {
                 UserRole userRole = CommonUtils.copyProperties(userRoleDTO, UserRole.class);
                 userRole.setId(snowFlake.nextId());
                 userRole.setRoleId(roleId);
@@ -322,10 +325,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return
      */
     @Override
-    public CompanyAndUserVo getUserData(List<Integer> longList) {
+    public CompanyAndUserVo getUserData(List<Long> longList) {
         CompanyAndUserVo res = new CompanyAndUserVo();
-        Integer company = longList.get(0);
-        Integer userId = longList.get(1);
+        Long company = longList.get(0);
+        Long userId = longList.get(1);
         Cache companyCache = cacheManager.getCache(CacheConstants.COMPANY_VAL);
         Cache userCache = cacheManager.getCache(CacheConstants.USER_VAL);
         Cache.ValueWrapper companyWrapper = companyCache.get(company);
@@ -354,7 +357,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public String getUserName(Integer id) {
+    public String getUserName(Long id) {
         Cache userCache = cacheManager.getCache(CacheConstants.USER_VAL);
         Cache.ValueWrapper userWrapper = userCache.get(id);
         if (userWrapper == null) {
@@ -384,7 +387,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     // TODO 此接口需优化
-    public Integer getMostPossibleUserId(String name) {
+    public Long getMostPossibleUserId(String name) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.NAME, name);
         return this.list(wrapper).get(0).getId();
@@ -397,7 +400,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return 以树（treelist）形式返回数据
      */
     @Override
-    public List<TreeList> getQueryListData(Integer judgeId) {
+    public List<TreeList> getQueryListData(Long judgeId) {
         if (AdminUtil.isSuperAdmin()) {
             List<TreeList> res = new ArrayList<>();
             List<Organization> organizationList = organizationService.list();
@@ -430,7 +433,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @param companyId
      */
     @Override
-    public void updateUserAfterAllocRole(Integer userId, Integer companyId) {
+    public void updateUserAfterAllocRole(Long userId, Long companyId) {
         UpdateWrapper<User> wrapper = new UpdateWrapper<>();
         wrapper.eq(MagicPointConstant.ID, userId);
         wrapper.set(MagicPointConstant.COMPANY_ID, companyId);
@@ -444,9 +447,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return
      */
     @Override
-    public List<RoleDto> queryRoleOfUser(Integer userId) {
-        List<UserRole> userRoleList = userRoleService.selectByUserId(userId);
-        List<Integer> roleIds = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());
+    public List<RoleDto> queryRoleOfUser(Long userId) {
+        List<UserRole> userRoleList = userRoleService.listByUserId(userId);
+        List<Long> roleIds = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());
         List<Role> roleList = roleService.listByIds(roleIds);
         List<RoleDto> roleDtoList = CommonUtils.convertList(roleList, RoleDto.class);
         return roleDtoList;

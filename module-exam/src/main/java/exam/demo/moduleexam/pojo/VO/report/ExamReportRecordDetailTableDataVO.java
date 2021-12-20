@@ -34,7 +34,7 @@ public class ExamReportRecordDetailTableDataVO implements Serializable {
     /**
      * 排名 TODO 待生成
      */
-    private Integer ranking;
+    private Long ranking;
     /**
      * 考试耗时
      */

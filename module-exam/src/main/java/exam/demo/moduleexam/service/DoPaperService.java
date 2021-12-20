@@ -14,7 +14,7 @@ public interface DoPaperService {
      * @param userInfoFormDTO
      * @return 考试发布记录id
      */
-    Integer saveExaminee(UserInfoFormDTO userInfoFormDTO);
+    Long saveExaminee(UserInfoFormDTO userInfoFormDTO);
 
     /**
      * 填写答案 存入答案

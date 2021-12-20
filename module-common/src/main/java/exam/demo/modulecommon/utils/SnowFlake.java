@@ -88,7 +88,7 @@ public class SnowFlake {
      *
      * @return SnowflakeId
      */
-    public synchronized Integer nextId() throws RuntimeException {
+    public synchronized Long nextId() throws RuntimeException {
         long timestamp = timeGen();
 
         //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
@@ -120,7 +120,7 @@ public class SnowFlake {
                 | (machineId << workerIdShift)
                 | sequence;
 
-        return Long.valueOf(result).intValue();
+        return result;
     }
 
     /**

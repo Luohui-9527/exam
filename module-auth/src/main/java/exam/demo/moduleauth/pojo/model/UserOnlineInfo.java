@@ -11,8 +11,11 @@ import java.io.Serializable;
 /**
  * 用户在线记录表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("user_online_info")
 public class UserOnlineInfo implements Serializable {
@@ -21,12 +24,12 @@ public class UserOnlineInfo implements Serializable {
      * 在线ID
      */
     @ApiModelProperty(value = "在线ID")
-    private Integer id;
+    private Long id;
     /**
      * 用户ID
      */
     @ApiModelProperty(value = "用户ID")
-    private Integer userId;
+    private Long userId;
     /**
      * 工号
      */
@@ -60,7 +63,7 @@ public class UserOnlineInfo implements Serializable {
      * 在线时长
      */
     @ApiModelProperty(value = "在线时长")
-    private Integer stopTime;
+    private Long stopTime;
     /**
      * 状态位
      */

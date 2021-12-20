@@ -11,8 +11,11 @@ import java.util.List;
 /**
  * 资源表 - 服务接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface IResourceService extends IService<Resource> {
     /**
      * 功能描述
@@ -72,5 +75,5 @@ public interface IResourceService extends IService<Resource> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    List<Resource> listByIdList(List<Integer> idList);
+    List<Resource> listByIdList(List<Long> idList);
 }

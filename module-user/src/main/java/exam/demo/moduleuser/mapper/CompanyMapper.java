@@ -10,12 +10,15 @@ import java.util.Map;
 /**
  * 公司表 - 数据访问接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
-public interface CompanyMapper extends BaseMapper<Company> {
-    List<Company> listByOrgId(@Param("id") Integer id);
 
-    String selectNameById(Integer id);
+public interface CompanyMapper extends BaseMapper<Company> {
+    List<Company> listByOrgId(@Param("id") Long id);
+
+    String selectNameById(Long id);
 
     /**
      * 模糊查询
@@ -32,5 +35,5 @@ public interface CompanyMapper extends BaseMapper<Company> {
      * @return 树的相关数据
      */
 
-    List<Map> getQueryListData(Integer judgeId);
+    List<Map> getQueryListData(Long judgeId);
 }

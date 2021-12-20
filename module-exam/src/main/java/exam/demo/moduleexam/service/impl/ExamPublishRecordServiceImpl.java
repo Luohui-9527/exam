@@ -7,9 +7,9 @@ import exam.demo.modulecommon.constant.MagicPointConstant;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
-import exam.demo.moduleexam.dao.mapper.ExamPublishRecordMapper;
 import exam.demo.moduleexam.exception.ExamError;
 import exam.demo.moduleexam.exception.ExamException;
+import exam.demo.moduleexam.mapper.ExamPublishRecordMapper;
 import exam.demo.moduleexam.pojo.DTO.grade.ExamGradeRecordQueryFormDTO;
 import exam.demo.moduleexam.pojo.DTO.publish.*;
 import exam.demo.moduleexam.pojo.model.ExamPublishRecord;
@@ -43,7 +43,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
             List<ExamPublishRecordTableDataDTO> examPublishRecordTableDataDTOS = CommonUtils.convertList(examPublishRecords, ExamPublishRecordTableDataDTO.class);
             examPublishRecordTableDataDTOS.forEach(dto -> {
                 List<UserRecord> selected = userRecordService.listExaminers(dto.getId());
-                List<Integer> examiners = selected.stream().map(UserRecord::getId).collect(Collectors.toList());
+                List<Long> examiners = selected.stream().map(UserRecord::getId).collect(Collectors.toList());
                 dto.setExaminers(examiners);
             });
             return examPublishRecordTableDataDTOS;
@@ -62,7 +62,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
         BeanUtils.copyProperties(examPublishRecordPublishFormDTO, examPublishRecord);
         examPublishRecord.setStatus((byte) 0);
         userRecord.setExamPublishRecordId(examPublishRecordPublishFormDTO.getId());
-        List<Integer> idList = examPublishRecordPublishFormDTO.getExaminersId();
+        List<Long> idList = examPublishRecordPublishFormDTO.getExaminersId();
         if (idList != null) {
             idList.forEach(id -> {
                 userRecord.setId(id);
@@ -99,7 +99,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
     }
 
     @Override
-    public List<ExamPublishRecord> getListByIdVersion(Integer id, Long version) {
+    public List<ExamPublishRecord> getListByIdVersion(Long id, Long version) {
         QueryWrapper<ExamPublishRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.ID, id);
         wrapper.eq(MagicPointConstant.VERSION, version);
@@ -117,7 +117,7 @@ public class ExamPublishRecordServiceImpl extends ServiceImpl<ExamPublishRecordM
     }
 
     @Override
-    public List<ExamPublishRecord> getExamPublishRecordList(String title, Integer examSession, Date startTime, Date endTime) {
+    public List<ExamPublishRecord> getExamPublishRecordList(String title, Long examSession, Date startTime, Date endTime) {
         QueryWrapper<ExamPublishRecord> wrapper = new QueryWrapper<>();
         wrapper.like(MagicPointConstant.TITLE, title);
         wrapper.eq(MagicPointConstant.EXAM_SESSION, examSession);

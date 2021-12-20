@@ -9,8 +9,11 @@ import java.util.List;
 /**
  * 组织机构表 - 数据访问接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface OrganizationMapper extends BaseMapper<Organization> {
 
 

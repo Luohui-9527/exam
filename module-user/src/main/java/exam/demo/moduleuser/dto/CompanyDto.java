@@ -23,12 +23,12 @@ public class CompanyDto extends BaseDto implements Serializable {
     /**
      * 公司ID
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 组织机构ID
      */
-    private Integer orgId;
+    private Long orgId;
 
     /**
      * 公司名
@@ -99,6 +99,6 @@ public class CompanyDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Integer judgeId;
+    private Long judgeId;
 
 }

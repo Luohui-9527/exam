@@ -9,7 +9,7 @@ public class ExamGradeRecordQueryFormDTO {
 
     private List<String> endTimeRange;
     private Byte status;
-    private Integer examSession;
-    private Integer userId;
+    private Long examSession;
+    private Long userId;
 
 }

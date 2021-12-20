@@ -3,7 +3,7 @@ package exam.demo.moduleexam.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import exam.demo.modulecommon.constant.MagicPointConstant;
-import exam.demo.moduleexam.dao.mapper.AnswerRecordMapper;
+import exam.demo.moduleexam.mapper.AnswerRecordMapper;
 import exam.demo.moduleexam.pojo.DTO.dopaper.DoPaperFormDTO;
 import exam.demo.moduleexam.pojo.model.AnswerRecord;
 import exam.demo.moduleexam.service.AnswerRecordService;
@@ -31,7 +31,7 @@ public class AnswerRecordServiceImpl extends ServiceImpl<AnswerRecordMapper, Ans
     }
 
     @Override
-    public AnswerRecord getOneByPaperSubjectIdAndExamRecordId(Integer paperSubjectId, Integer examRecordId) {
+    public AnswerRecord getOneByPaperSubjectIdAndExamRecordId(Long paperSubjectId, Long examRecordId) {
         QueryWrapper<AnswerRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.PAPER_SUBJECT_ID, paperSubjectId);
         wrapper.eq(MagicPointConstant.EXAM_RECORD_ID, examRecordId);
@@ -44,7 +44,7 @@ public class AnswerRecordServiceImpl extends ServiceImpl<AnswerRecordMapper, Ans
     }
 
     @Override
-    public List<AnswerRecord> getListByExamRecordId(Integer examRecordId) {
+    public List<AnswerRecord> getListByExamRecordId(Long examRecordId) {
         QueryWrapper<AnswerRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.EXAM_RECORD_ID, examRecordId);
         return this.list(wrapper);

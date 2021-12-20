@@ -31,5 +31,5 @@ public interface GradeService {
      * @param examRecordId
      * @return 我的答案和标准答案
      */
-    List<MyAnswerDTO> getMyAnswer(Integer examRecordId);
+    List<MyAnswerDTO> getMyAnswer(Long examRecordId);
 }

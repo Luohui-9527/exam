@@ -33,7 +33,7 @@ import java.util.Map;
  * @since 2020-03-04
  */
 @Configuration
-@ConfigurationProperties(prefix = "aaron")
+@ConfigurationProperties(prefix = "exam")
 public class CommonAutoConfiguration {
     private String version;
     private Integer dataCenterId;
@@ -64,8 +64,8 @@ public class CommonAutoConfiguration {
     }
 
     @Bean
-    public SnowFlake getSnowFlake(){
-        return new SnowFlake(dataCenterId,machineId);
+    public SnowFlake getSnowFlake() {
+        return new SnowFlake(dataCenterId, machineId);
     }
 
     @Bean
@@ -97,23 +97,25 @@ public class CommonAutoConfiguration {
 
     /**
      * 在此配置指定键的过期时间
+     *
      * @return
      */
-    private Map<String,RedisCacheConfiguration> getRedisCacheConfiguration(){
-        Map<String,RedisCacheConfiguration> map = new HashMap<>();
+    private Map<String, RedisCacheConfiguration> getRedisCacheConfiguration() {
+        Map<String, RedisCacheConfiguration> map = new HashMap<>();
         // 设置半小时
-        map.put(CacheConstants.USER_PERMISSION,this.getRedisCacheConfigurationWithTTL(30 * 60));
-        map.put(CacheConstants.TOKEN,this.getRedisCacheConfigurationWithTTL(30 * 60));
-        map.put(CacheConstants.RESOURCE_MAP,this.getRedisCacheConfigurationWithTTL(30 * 60));
+        map.put(CacheConstants.USER_PERMISSION, this.getRedisCacheConfigurationWithTTL(30 * 60));
+        map.put(CacheConstants.TOKEN, this.getRedisCacheConfigurationWithTTL(30 * 60));
+        map.put(CacheConstants.RESOURCE_MAP, this.getRedisCacheConfigurationWithTTL(30 * 60));
         return map;
     }
 
     /**
      * 设置指定时间过期
+     *
      * @param seconds
      * @return
      */
-    private RedisCacheConfiguration getRedisCacheConfigurationWithTTL(int seconds){
+    private RedisCacheConfiguration getRedisCacheConfigurationWithTTL(int seconds) {
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
@@ -141,31 +143,31 @@ public class CommonAutoConfiguration {
     }
 
     @Bean
-    public FullCommonFieldAspect fullCommonFieldAspect(){
+    public FullCommonFieldAspect fullCommonFieldAspect() {
         return new FullCommonFieldAspect();
     }
 
     @Bean
-    public LoggingAspect loggingAspect(){
+    public LoggingAspect loggingAspect() {
         LoggingAspect a = new LoggingAspect();
         a.setVersion(version);
         return a;
     }
 
     @Bean
-    public CommonState commonState(){
+    public CommonState commonState() {
         CommonState state = new CommonState();
         state.setVersion(version);
         return state;
     }
 
     @Bean
-    public RedisUtil redisUtil(RedisTemplate<String,Object> redisTemplate){
+    public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate) {
         return new RedisUtil(redisTemplate);
     }
 
     @Bean
-    public CommonExceptionHandler commonExceptionHandler(){
+    public CommonExceptionHandler commonExceptionHandler() {
         return new CommonExceptionHandler();
     }
 

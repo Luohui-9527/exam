@@ -18,13 +18,13 @@ public class UserOnlineInfoItemVo extends BaseVo implements Serializable {
      * 在线ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 用户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer userId;
+    private Long userId;
 
     /**
      * 工号
@@ -54,26 +54,26 @@ public class UserOnlineInfoItemVo extends BaseVo implements Serializable {
     /**
      * 在线时长
      */
-    private Integer stopTime;
+    private Long stopTime;
 
     /**
      * 状态位
      */
     private Byte status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -117,11 +117,11 @@ public class UserOnlineInfoItemVo extends BaseVo implements Serializable {
         this.offlineTime = offlineTime;
     }
 
-    public Integer getStopTime() {
+    public Long getStopTime() {
         return stopTime;
     }
 
-    public void setStopTime(Integer stopTime) {
+    public void setStopTime(Long stopTime) {
         this.stopTime = stopTime;
     }
 

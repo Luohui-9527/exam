@@ -64,7 +64,7 @@ public class PositionController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_P)
-    public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid CommonRequest<Integer> request) {
+    public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid CommonRequest<Long> request) {
         Position position = positionService.getById(request.getData());
         PositionListVo positionListVo = CommonUtils.copyProperties(position, PositionListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, positionListVo);

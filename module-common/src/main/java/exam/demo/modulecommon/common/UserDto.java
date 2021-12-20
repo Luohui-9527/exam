@@ -18,17 +18,17 @@ public class UserDto extends BaseDto implements Serializable {
     /**
      * 职位ID
      */
-    private Integer positionId;
+    private Long positionId;
 
     /**
      * 部门ID
      */
-    private Integer departmentId;
+    private Long departmentId;
 
     /**
      * 公司Id
      */
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 工号
@@ -93,7 +93,7 @@ public class UserDto extends BaseDto implements Serializable {
     /**
      * 角色ID
      */
-    private Integer roleId;
+    private Long roleId;
     /**
      * 职位
      */
@@ -120,5 +120,5 @@ public class UserDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Integer judgeId;
+    private Long judgeId;
 }

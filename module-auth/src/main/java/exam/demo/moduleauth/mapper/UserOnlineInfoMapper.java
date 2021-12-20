@@ -1,31 +1,25 @@
 package exam.demo.moduleauth.mapper;
 
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import exam.demo.moduleauth.pojo.model.UserOnlineInfo;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 /**
+ * 用户在线记录表 - 数据访问接口
+ *
  * @author luohui
  * @version 1.0
- * @since 2020-03-05
+ * @since 2020-03-04
  */
-@Mapper
+
 public interface UserOnlineInfoMapper extends BaseMapper<UserOnlineInfo> {
 
-    @Select("SELECT * FROM user_online_info WHERE status = 1")
+
     List<UserOnlineInfo> listOnlineUser();
 
-    @Select("<script>" +
-            "UPDATE user_online_info SET status = '0' WHERE user_id IN" +
-            "<foreach collection=\"ids\" item=\"id\" separator=\",\" close=\")\" open=\"(\">\n" +
-            "            #{id}\n" +
-            "        </foreach>" +
-            "</script>")
+
     boolean updateOnlineState(@Param("ids") List<Integer> ids);
 
 }

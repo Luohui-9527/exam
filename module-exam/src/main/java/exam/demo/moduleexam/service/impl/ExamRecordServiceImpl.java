@@ -3,7 +3,7 @@ package exam.demo.moduleexam.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import exam.demo.modulecommon.constant.MagicPointConstant;
-import exam.demo.moduleexam.dao.mapper.ExamRecordMapper;
+import exam.demo.moduleexam.mapper.ExamRecordMapper;
 import exam.demo.moduleexam.pojo.model.ExamRecord;
 import exam.demo.moduleexam.service.ExamRecordService;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ExamRecordServiceImpl extends ServiceImpl<ExamRecordMapper, ExamRec
     }
 
     @Override
-    public List<ExamRecord> getListByExamPublishRecordId(Integer examPublishRecordId) {
+    public List<ExamRecord> getListByExamPublishRecordId(Long examPublishRecordId) {
         QueryWrapper<ExamRecord> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.EXAM_PUBLISH_RECORD_ID, examPublishRecordId);
         wrapper.orderByDesc(MagicPointConstant.SCORE);

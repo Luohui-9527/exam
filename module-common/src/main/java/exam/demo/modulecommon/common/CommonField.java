@@ -23,22 +23,22 @@ public class CommonField {
      */
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    public Integer id;
+    public Long id;
     /**
      * 机构id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    public Integer orgId;
+    public Long orgId;
     /**
      * 机构下公司id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    public Integer companyId;
+    public Long companyId;
     /**
      * 通过id到数据字典中查询创建者
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    public Integer createdBy;
+    public Long createdBy;
     /**
      * 创建日期
      */
@@ -48,7 +48,7 @@ public class CommonField {
      * 通过id到数据字典中查询修改者
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    public Integer updatedBy;
+    public Long updatedBy;
     /**
      * 修改日期
      */

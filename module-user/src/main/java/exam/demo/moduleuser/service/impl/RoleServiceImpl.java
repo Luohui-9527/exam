@@ -32,8 +32,11 @@ import java.util.stream.Collectors;
 /**
  * 权限表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
     @Autowired
@@ -195,8 +198,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
     public boolean addResourceForRole(List<RoleResourceDto> resourceDtos) {
         List<RoleResource> roles = CommonUtils.convertList(resourceDtos, RoleResource.class);
-        List<Integer> roleIdList = roles.stream().map(RoleResource::getRoleId).collect(Collectors.toList());
-        for (Integer roleId : roleIdList) {
+        List<Long> roleIdList = roles.stream().map(RoleResource::getRoleId).collect(Collectors.toList());
+        for (Long roleId : roleIdList) {
             roleResourceService.removeByRoleId(roleId);
         }
         if (roles.size() != 0) {

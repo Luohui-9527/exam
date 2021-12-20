@@ -20,6 +20,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaperIdWithName {
     @JsonSerialize(using = ToStringSerializer.class)
-    Integer id;
+    Long id;
     String paperName;
 }

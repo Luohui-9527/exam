@@ -17,18 +17,9 @@
         WHERE a.role_id = b.role_id AND b.user_id = c.id AND d.id = a.resource_id AND c.id = #{id}
         ORDER BY id
     </select>
-
     <select id="findByCode" resultType="exam.demo.moduleauth.pojo.model.User">
         SELECT id, code, name, password
         FROM user
         WHERE code = #{code}
-    </select>
-
-    <select id="selectId" resultType="exam.demo.moduleauth.pojo.model.User">
-        SELECT id, code, name, password,profile_picture FROM user WHERE id = #{id}
-    </select>
-
-    <select id="exist" resultType="java.lang.Boolean">
-        SELECT 1 FROM user WHERE id = #{id}
     </select>
 </mapper>

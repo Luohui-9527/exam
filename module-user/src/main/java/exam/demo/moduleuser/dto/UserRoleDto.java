@@ -16,10 +16,10 @@ import java.util.List;
 public class UserRoleDto implements Serializable {
     private static final long serialVersionUID = 7771310453968830965L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private List<Integer> roleIds;
-    private Integer userId;
+    private List<Long> roleIds;
+    private Long userId;
     private String roleName;
 
 }

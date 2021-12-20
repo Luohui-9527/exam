@@ -1,4 +1,4 @@
-aaron:
+exam:
   version: 1
   data-center-id: 2
   machine-id: 1
@@ -14,7 +14,7 @@ spring:
   #  datasource:
   #    url: jdbc:mysql://rm-bp1vt89u1y7x0x9t61o.mysql.rds.aliyuncs.com:3306/user?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useAffectedRows=true
   #    driver-class-name: com.mysql.cj.jdbc.Driver
-  #    username: aaron
+  #    username: exam
   #    password: xymXYM@123
   #    hikari:
   #      max-lifetime: 30000

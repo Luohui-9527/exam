@@ -13,7 +13,7 @@ public class UserAlloctionQueryVo extends BaseQueryVo implements Serializable {
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     /**
      * 用户工号
      */
@@ -26,18 +26,18 @@ public class UserAlloctionQueryVo extends BaseQueryVo implements Serializable {
      * 公司Id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer companyId;
+    private Long companyId;
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer orgId;
+    private Long orgId;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,19 +57,19 @@ public class UserAlloctionQueryVo extends BaseQueryVo implements Serializable {
         this.name = name;
     }
 
-    public Integer getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
-    public Integer getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Integer orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 

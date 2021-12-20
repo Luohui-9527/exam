@@ -25,5 +25,5 @@ public class ExamPublishRecordQueryFormVO implements Serializable {
      * 考试标题
      */
     private String title;
-    private Integer currentPage;
+    private Long currentPage;
 }

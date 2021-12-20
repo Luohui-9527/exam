@@ -52,7 +52,7 @@ public interface ExamPublishRecordService extends IService<ExamPublishRecord> {
      * @Author: luohui
      * @date: 2021-12-10
      */
-    List<ExamPublishRecord> getListByIdVersion(Integer id, Long version);
+    List<ExamPublishRecord> getListByIdVersion(Long id, Long version);
 
     /**
      * 功能描述
@@ -75,5 +75,5 @@ public interface ExamPublishRecordService extends IService<ExamPublishRecord> {
      * @Author: luohui
      * @date: 2021-12-13
      */
-    List<ExamPublishRecord> getExamPublishRecordList(String title, Integer examSession, Date startTime, Date endTime);
+    List<ExamPublishRecord> getExamPublishRecordList(String title, Long examSession, Date startTime, Date endTime);
 }

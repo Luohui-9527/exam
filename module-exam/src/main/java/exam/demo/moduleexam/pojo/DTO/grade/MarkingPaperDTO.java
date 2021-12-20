@@ -10,6 +10,6 @@ import java.util.List;
 public class MarkingPaperDTO extends BaseDto {
     private Double score;
     private String systemEvaluate;
-    private Integer examRecordId;
+    private Long examRecordId;
     List<MarkingAnswerDTO> markingAnswerDTOList;
 }

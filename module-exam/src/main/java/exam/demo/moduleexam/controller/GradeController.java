@@ -2,7 +2,6 @@ package exam.demo.moduleexam.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -44,9 +43,8 @@ public class GradeController {
 
     @MethodEnhancer
     @RequestMapping(value = "query", method = RequestMethod.POST)
-    public CommonResponse<PageVo<ExamGradeRecordTableDataVO>> query(@RequestBody CommonRequest<ExamGradeRecordQueryFormVO> commonRequest) {
-        ExamGradeRecordQueryFormVO queryFormVO = commonRequest.getData();
-        ExamGradeRecordQueryFormDTO queryFormDTO = CommonUtils.copyProperties(commonRequest.getData(), ExamGradeRecordQueryFormDTO.class);
+    public CommonResponse<PageVo<ExamGradeRecordTableDataVO>> query(@RequestBody ExamGradeRecordQueryFormVO queryFormVO) {
+        ExamGradeRecordQueryFormDTO queryFormDTO = CommonUtils.copyProperties(queryFormVO, ExamGradeRecordQueryFormDTO.class);
         if (queryFormVO.getEndTimeRange() != null && queryFormVO.getEndTimeRange().size() != 0) {
             List<String> endTimeRange = DateToString.convert(queryFormVO.getEndTimeRange());
             queryFormDTO.setEndTimeRange(endTimeRange);
@@ -56,7 +54,7 @@ public class GradeController {
         List<ExamGradeRecordTableDataVO> tableDataVOS = new ArrayList<>();
         for (ExamGradeRecordTableDataDTO tableDataDTO : tableDataDTOS) {
             ExamGradeRecordTableDataVO tableDataVO = CommonUtils.copyProperties(tableDataDTO, ExamGradeRecordTableDataVO.class);
-            tableDataVO.setPaperName(getPaperName(tableDataDTO.getPaperId(), commonRequest));
+            tableDataVO.setPaperName(getPaperName(tableDataDTO.getPaperId()));
             tableDataVO.setCreatedTime(DateFormatUtil.format(tableDataDTO.getCreatedTime()));
             tableDataVO.setActualEndTime(DateFormatUtil.format(tableDataDTO.getActualEndTime()));
             tableDataVO.setMarkingStopTime(DateFormatUtil.format(tableDataDTO.getMarkingStopTime()));
@@ -71,8 +69,7 @@ public class GradeController {
 
     @MethodEnhancer
     @RequestMapping(value = "markingpaper", method = RequestMethod.POST)
-    public CommonResponse<Boolean> markingPaper(@RequestBody CommonRequest<MarkingPaperVO> commonRequest) {
-        MarkingPaperVO markingPaperVO = commonRequest.getData();
+    public CommonResponse<Boolean> markingPaper(@RequestBody MarkingPaperVO markingPaperVO) {
         MarkingPaperDTO markingPaperDTO = new MarkingPaperDTO();
         BeanUtils.copyProperties(markingPaperVO, markingPaperDTO);
         List<MarkingAnswerDTO> markingAnswerDTOS = CommonUtils.convertList(markingPaperVO.getMarkingAnswerVOList(), MarkingAnswerDTO.class);
@@ -86,13 +83,12 @@ public class GradeController {
     /**
      * 获取答题情况
      *
-     * @param commonRequest
+     * @param examRecordId
      * @return
      */
     @MethodEnhancer
     @RequestMapping(value = "getPaperAnswer")
-    public CommonResponse<List> getPaperAnswer(@RequestBody CommonRequest<Integer> commonRequest) {
-        Integer examRecordId = commonRequest.getData();
+    public CommonResponse<List> getPaperAnswer(@RequestBody Long examRecordId) {
         List<MyAnswerDTO> myAnswerDTOS = gradeService.getMyAnswer(examRecordId);
         List<MyAnswerVO> myAnswerVOS = CommonUtils.convertList(myAnswerDTOS, MyAnswerVO.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, myAnswerVOS);
@@ -110,13 +106,9 @@ public class GradeController {
         }
     }
 
-    private String getPaperName(Integer id, CommonRequest commonRequest) {
+    private String getPaperName(Long id) {
         if (id != null) {
-            CommonRequest<Integer> request = new CommonRequest<>();
-            request.setToken(commonRequest.getToken());
-            request.setData(id);
-            request.setVersion(commonRequest.getVersion());
-            return RPCUtils.parseResponse(paperApi.queryPaperNameByPaperId(request), String.class, RPCUtils.PAPER);
+            return RPCUtils.parseResponse(paperApi.queryPaperNameByPaperId(id), String.class, RPCUtils.PAPER);
         }
         return null;
     }

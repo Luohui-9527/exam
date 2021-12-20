@@ -34,7 +34,7 @@ public class UserQueryVo extends BaseQueryVo implements Serializable {
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer roleId;
+    private Long roleId;
 
     public UserQueryVo() {
     }
@@ -81,11 +81,11 @@ public class UserQueryVo extends BaseQueryVo implements Serializable {
                 '}';
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 }

@@ -16,11 +16,11 @@ import java.io.Serializable;
 public class TreeListDto implements Serializable {
     private static final long serialVersionUID = 3526803680587824396L;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     private String name;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer parentId;
+    private Long parentId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer rootId;
+    private Long rootId;
     private Long version;
 }

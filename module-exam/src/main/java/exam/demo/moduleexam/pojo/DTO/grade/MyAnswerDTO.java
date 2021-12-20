@@ -14,5 +14,5 @@ public class MyAnswerDTO {
     private String myAnswer;
     private String standardAnswer;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer paperSubjectId;
+    private Long paperSubjectId;
 }

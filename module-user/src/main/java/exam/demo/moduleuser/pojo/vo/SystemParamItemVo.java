@@ -17,19 +17,19 @@ public class SystemParamItemVo extends BaseVo implements Serializable {
      * 系统参数ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer orgId;
+    private Long orgId;
 
     /**
      * 参数类型
      */
     @NotNull(message = "参数类型不能为空")
-    private Integer paramType;
+    private Long paramType;
 
     /**
      * 参数项
@@ -48,27 +48,27 @@ public class SystemParamItemVo extends BaseVo implements Serializable {
      */
     private Byte status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Integer orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 
-    public Integer getParamType() {
+    public Long getParamType() {
         return paramType;
     }
 
-    public void setParamType(Integer paramType) {
+    public void setParamType(Long paramType) {
         this.paramType = paramType;
     }
 

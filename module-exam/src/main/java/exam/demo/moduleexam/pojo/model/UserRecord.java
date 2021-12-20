@@ -9,20 +9,20 @@ public class UserRecord {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * 考试发布记录
      */
     @Column(name = "exam_publish_record_id")
-    private Integer examPublishRecordId;
+    private Long examPublishRecordId;
 
     /**
      * 获取用户ID
      *
      * @return id - 用户ID
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -31,7 +31,7 @@ public class UserRecord {
      *
      * @param id 用户ID
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,7 +40,7 @@ public class UserRecord {
      *
      * @return exam_publish_record_id - 考试发布记录
      */
-    public Integer getExamPublishRecordId() {
+    public Long getExamPublishRecordId() {
         return examPublishRecordId;
     }
 
@@ -49,7 +49,7 @@ public class UserRecord {
      *
      * @param examPublishRecordId 考试发布记录
      */
-    public void setExamPublishRecordId(Integer examPublishRecordId) {
+    public void setExamPublishRecordId(Long examPublishRecordId) {
         this.examPublishRecordId = examPublishRecordId;
     }
 }

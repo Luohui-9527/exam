@@ -25,7 +25,7 @@ public class ResourceDto extends BaseDto implements Serializable {
     /**
      * 父亲节点
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * URL
@@ -45,7 +45,7 @@ public class ResourceDto extends BaseDto implements Serializable {
     /**
      * 顺序号
      */
-    private Integer orderIndex;
+    private Long orderIndex;
 
     /**
      * 资源类型
@@ -75,7 +75,7 @@ public class ResourceDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Integer judgeId;
+    private Long judgeId;
 
     public int getCurrentPage() {
         return currentPage;
@@ -93,11 +93,11 @@ public class ResourceDto extends BaseDto implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Integer getJudgeId() {
+    public Long getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Integer judgeId) {
+    public void setJudgeId(Long judgeId) {
         this.judgeId = judgeId;
     }
 
@@ -137,11 +137,11 @@ public class ResourceDto extends BaseDto implements Serializable {
         this.code = code;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -201,11 +201,11 @@ public class ResourceDto extends BaseDto implements Serializable {
         this.status = status;
     }
 
-    public Integer getOrderIndex() {
+    public Long getOrderIndex() {
         return orderIndex;
     }
 
-    public void setOrderIndex(Integer orderIndex) {
+    public void setOrderIndex(Long orderIndex) {
         this.orderIndex = orderIndex;
     }
 

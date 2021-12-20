@@ -12,8 +12,11 @@ import java.util.Map;
 /**
  * 部门表 - 数据访问接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface DepartmentMapper extends BaseMapper<Department> {
 
 
@@ -55,7 +58,7 @@ public interface DepartmentMapper extends BaseMapper<Department> {
      *
      * @return treelist记录
      */
-    List<TreeList> getQueryListData(Integer judgeId);
+    List<TreeList> getQueryListData(Long judgeId);
 
     /**
      * 删除列表

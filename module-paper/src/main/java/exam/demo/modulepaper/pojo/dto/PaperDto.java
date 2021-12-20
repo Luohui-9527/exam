@@ -25,15 +25,15 @@ public class PaperDto extends BaseDto {
     /*
      * 配置id，通过id生成试卷信息
      */
-    private Integer configId;
+    private Long configId;
     /**
      * 试卷类型，通过id从数据字典中查询
      */
-    private Integer paperType;
+    private Long paperType;
     /**
      * 难度，通过id从数据字典中查询
      */
-    private Integer difficulty;
+    private Long difficulty;
     /**
      * 组卷日期
      */
@@ -57,11 +57,11 @@ public class PaperDto extends BaseDto {
     /**
      * 下载次数
      */
-    private Integer downloadTimes;
+    private Long downloadTimes;
     /**
      * 发布次数
      */
-    private Integer publishTimes;
+    private Long publishTimes;
     /**
      * 试卷状态
      */
@@ -73,5 +73,5 @@ public class PaperDto extends BaseDto {
     /**
      * 原id在通过FullCommonField时会被替换成新的，因此需要保存起来。
      */
-    private Integer preId;
+    private Long preId;
 }

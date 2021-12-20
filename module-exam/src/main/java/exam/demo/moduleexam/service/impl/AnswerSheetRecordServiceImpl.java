@@ -1,7 +1,7 @@
 package exam.demo.moduleexam.service.impl;
 
 
-import exam.demo.moduleexam.dao.mapper.ExamPublishRecordMapper;
+import exam.demo.moduleexam.mapper.ExamPublishRecordMapper;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordQueryFormDTO;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordTableDataDTO;
 import exam.demo.moduleexam.pojo.model.ExamPublishRecord;

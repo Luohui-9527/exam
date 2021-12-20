@@ -11,8 +11,11 @@ import java.util.List;
 /**
  * 用户表 - 数据访问接口
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 public interface UserMapper extends BaseMapper<User> {
 
     /**
@@ -28,7 +31,7 @@ public interface UserMapper extends BaseMapper<User> {
      *
      * @return treelist记录
      */
-    List<TreeList> getQueryListData(Integer id);
+    List<TreeList> getQueryListData(Long id);
 
     /**
      * 查询用户

@@ -33,8 +33,11 @@ import java.util.stream.Collectors;
 /**
  * 职位表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> implements IPositionService {
 
@@ -114,7 +117,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
         } else if (userPermission.getOrgId() != null) {
             // 查该机构下的所有公司
             List<Company> companyList = companyService.queryCompany(CompanyDto.builder().orgId(userPermission.getOrgId()).build());
-            List<Integer> companyIdList = companyList.stream().map(Company::getId).collect(Collectors.toList());
+            List<Long> companyIdList = companyList.stream().map(Company::getId).collect(Collectors.toList());
             if (CommonUtils.isEmpty(companyIdList)) {
                 return null;
             }

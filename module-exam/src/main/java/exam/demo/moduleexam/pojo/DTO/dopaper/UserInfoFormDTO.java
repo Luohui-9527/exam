@@ -7,5 +7,5 @@ public class UserInfoFormDTO {
     private String tel;
     private String examiner;
     private Byte sex;
-    private Integer examPublishRecordId;
+    private Long examPublishRecordId;
 }

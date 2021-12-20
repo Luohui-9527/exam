@@ -76,7 +76,7 @@ public class OrganizationController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF)
-    public CommonResponse<OrganizationListVo> getUpdateFormOrganization(@RequestBody CommonRequest<Integer> request) {
+    public CommonResponse<OrganizationListVo> getUpdateFormOrganization(@RequestBody CommonRequest<Long> request) {
         Organization organization = organizationService.getById(request.getData());
         OrganizationListVo organizationListVo = CommonUtils.copyProperties(organization, OrganizationListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, organizationListVo);

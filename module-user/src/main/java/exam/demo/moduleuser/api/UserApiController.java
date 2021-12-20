@@ -35,7 +35,7 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_USER_NAME)
-    public CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody CommonRequest<List<Integer>> request) {
+    public CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody CommonRequest<List<Long>> request) {
         CompanyAndUserVo res = userService.getUserData(request.getData());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, res);
     }
@@ -47,7 +47,7 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_USER_NAME_BY_ID)
-    public CommonResponse<String> getUserNameById(@RequestBody CommonRequest<Integer> request) {
+    public CommonResponse<String> getUserNameById(@RequestBody CommonRequest<Long> request) {
         String name = userService.getUserName(request.getData());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, name);
     }
@@ -71,8 +71,8 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_ID_BY_NAME)
-    public CommonResponse<Integer> getUserIdByName(@RequestBody CommonRequest<String> request) {
-        Integer mostPossibleId = userService.getMostPossibleUserId(request.getData());
+    public CommonResponse<Long> getUserIdByName(@RequestBody CommonRequest<String> request) {
+        Long mostPossibleId = userService.getMostPossibleUserId(request.getData());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, mostPossibleId);
     }
 
@@ -83,7 +83,7 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_COMPANY_NAME)
-    public CommonResponse<String> getCompanyById(@RequestBody CommonRequest<Integer> request) {
+    public CommonResponse<String> getCompanyById(@RequestBody CommonRequest<Long> request) {
         String company = companyService.getNameById(request.getData());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, company);
     }

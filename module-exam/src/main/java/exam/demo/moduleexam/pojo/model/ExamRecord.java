@@ -13,7 +13,7 @@ public class ExamRecord {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * 考试人员工号
@@ -98,13 +98,13 @@ public class ExamRecord {
      * 公司ID
      */
     @Column(name = "company_id")
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 创建人
      */
     @Column(name = "created_by")
-    private Integer createdBy;
+    private Long createdBy;
 
     /**
      * 创建时间
@@ -116,7 +116,7 @@ public class ExamRecord {
      * 修改人
      */
     @Column(name = "updated_by")
-    private Integer updatedBy;
+    private Long updatedBy;
 
     /**
      * 修改时间
@@ -130,11 +130,11 @@ public class ExamRecord {
     private Long version;
 
     @Column(name = "exam_publish_record_id")
-    private Integer examPublishRecordId;
+    private Long examPublishRecordId;
 
     /**
      * 用户ID
      */
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 }

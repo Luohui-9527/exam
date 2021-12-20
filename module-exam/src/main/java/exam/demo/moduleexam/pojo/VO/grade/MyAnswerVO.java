@@ -26,5 +26,5 @@ public class MyAnswerVO implements Serializable {
      * 试题id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer paperSubjectId;
+    private Long paperSubjectId;
 }

@@ -6,7 +6,7 @@ import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.constant.ApiConstant;
 import exam.demo.modulecommon.constant.ControllerConstant;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.moduleexam.dao.mapper.ExamPublishRecordMapper;
+import exam.demo.moduleexam.mapper.ExamPublishRecordMapper;
 import exam.demo.moduleexam.pojo.model.ExamPublishRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +38,7 @@ public class ExamApiController {
      * @return
      */
     @PostMapping(ApiConstant.CHECK_EDITABLE)
-    public CommonResponse<Boolean> checkEditable(@RequestBody Integer paperId) {
+    public CommonResponse<Boolean> checkEditable(@RequestBody Long paperId) {
         List<ExamPublishRecord> record = examPublishRecordMapper.listByPaperId(paperId);
         if (CommonUtils.isEmpty(record)) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);

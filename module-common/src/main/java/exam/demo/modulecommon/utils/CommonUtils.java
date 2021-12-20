@@ -72,9 +72,9 @@ public class CommonUtils {
     }
 
 
-    public static Integer judgeCompanyAndOrg (){
-        Integer companyId = TokenUtils.getUser().getCompanyId();
-        Integer orgId = TokenUtils.getUser().getOrgId();
+    public static Long judgeCompanyAndOrg (){
+        Long companyId = TokenUtils.getUser().getCompanyId();
+        Long orgId = TokenUtils.getUser().getOrgId();
         if(companyId != null){
             return companyId;
         }else{

@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-import java.net.*;
-import java.io.*;
-import java.nio.channels.*;
 import java.util.Properties;
 
 public class MavenWrapperDownloader {
@@ -110,7 +107,7 @@ public class MavenWrapperDownloader {
         ReadableByteChannel rbc;
         rbc = Channels.newChannel(website.openStream());
         FileOutputStream fos = new FileOutputStream(destination);
-        fos.getChannel().transferFrom(rbc, 0, Integer.MAX_VALUE);
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         fos.close();
         rbc.close();
     }

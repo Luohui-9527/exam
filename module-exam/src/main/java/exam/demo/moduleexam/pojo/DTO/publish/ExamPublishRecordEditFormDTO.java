@@ -6,15 +6,15 @@ import java.util.Date;
 
 @Data
 public class ExamPublishRecordEditFormDTO {
-    private Integer id;
+    private Long id;
     private String descript;
     private Date startTime;
     private Date endTime;
-    private Integer examSession;
-    private Integer limitTime;
-    private Integer markingMode;
+    private Long examSession;
+    private Long limitTime;
+    private Long markingMode;
     private Date markingStopTime;
-    private Integer paperId;
-    private Integer planPepoleNum;
+    private Long paperId;
+    private Long planPepoleNum;
     private String title;
 }

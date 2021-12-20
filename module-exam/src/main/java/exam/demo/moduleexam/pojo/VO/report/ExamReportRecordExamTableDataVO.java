@@ -13,11 +13,11 @@ public class ExamReportRecordExamTableDataVO implements Serializable {
      * 考试记录id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
     /**
      * 实际考试人数
      */
-    private Integer actualPepoleNum;
+    private Long actualPepoleNum;
     /**
      * 考试结束时间
      */
@@ -25,11 +25,11 @@ public class ExamReportRecordExamTableDataVO implements Serializable {
     /**
      * 考试场次
      */
-    private Integer examSession;
+    private Long examSession;
     /**
      * 计划考试人数
      */
-    private Integer planPepoleNum;
+    private Long planPepoleNum;
     /**
      * 考试标题
      */

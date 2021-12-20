@@ -3,7 +3,7 @@ package exam.demo.moduleauth.task;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import exam.demo.moduleauth.mapper.UserOnlineInfoMapper;
 import exam.demo.moduleauth.pojo.model.UserOnlineInfo;
-import exam.demo.moduleauth.service.UserOnlineInfoService;
+import exam.demo.moduleauth.service.IUserOnlineInfoService;
 import exam.demo.modulecommon.common.CacheConstants;
 import exam.demo.modulecommon.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import java.util.List;
 @Service
 public class OnlineUserTask {
     @Autowired
-    UserOnlineInfoService userOnlineInfoService;
+    IUserOnlineInfoService userOnlineInfoService;
 
     @Resource
     UserOnlineInfoMapper userOnlineInfoMapper;
@@ -41,10 +41,10 @@ public class OnlineUserTask {
     public void check() {
         log.info("开始定时处理离线用户");
         // 查询在线的用户
-        List<UserOnlineInfo> userOnlineInfoList = userOnlineInfoMapper.listOnlineUser();
+        List<UserOnlineInfo> userOnlineInfoList = userOnlineInfoService.listOnlineUser();
         Cache cache = cacheManager.getCache(CacheConstants.TOKEN);
         // 离线的Id
-        List<Integer> updateToLogoutId = new ArrayList<>();
+        List<Long> updateToLogoutId = new ArrayList<>();
         for (UserOnlineInfo userOnlineInfo : userOnlineInfoList) {
             Cache.ValueWrapper tokenWrapper = cache.get(userOnlineInfo.getUserId());
             if (tokenWrapper == null) {
@@ -55,7 +55,7 @@ public class OnlineUserTask {
             log.info("离线用户处理完成");
             return;
         }
-        for (Integer id : updateToLogoutId) {
+        for (Long id : updateToLogoutId) {
             UpdateWrapper<UserOnlineInfo> updateWrapper = new UpdateWrapper<>();
             updateWrapper.set("status", 0);
             updateWrapper.eq("user_id", id);

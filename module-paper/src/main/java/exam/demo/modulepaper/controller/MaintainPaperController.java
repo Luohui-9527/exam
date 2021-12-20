@@ -7,14 +7,14 @@ import exam.demo.modulecommon.common.PaperDetail;
 import exam.demo.modulecommon.constant.ControllerConstant;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.modulepaper.biz.service.PaperService;
-import exam.demo.modulepaper.biz.service.impl.BaseService;
 import exam.demo.modulepaper.manager.baseinfo.BaseInfoApi;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
 import exam.demo.modulepaper.pojo.vo.ModifyPaperVo;
 import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
+import exam.demo.modulepaper.service.IPaperService;
+import exam.demo.modulepaper.service.impl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class MaintainPaperController {
 
     @Autowired
-    PaperService paperService;
+    IPaperService paperService;
 
     @Autowired
     CommonState commonState;
@@ -84,7 +84,7 @@ public class MaintainPaperController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstant.MAINTAIN_DELETE_PAPER)
-    public CommonResponse deletePaper(@RequestBody List<Integer> paperIds) {
+    public CommonResponse deletePaper(@RequestBody List<Long> paperIds) {
         if (paperService.paperDelete(paperIds)) {
             baseService.evictPaper(paperIds);
             return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, true);
@@ -100,7 +100,7 @@ public class MaintainPaperController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstant.MAINTAIN_PAPER_DETAIL)
-    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Integer paperId) {
+    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperId));
     }
 

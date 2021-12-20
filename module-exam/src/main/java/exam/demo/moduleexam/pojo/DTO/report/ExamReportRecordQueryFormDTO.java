@@ -9,7 +9,7 @@ import java.util.Date;
 @SuppressWarnings("unused")
 public class ExamReportRecordQueryFormDTO {
 
-    private Integer examSession;
+    private Long examSession;
     private Date startTime;
     private Date endTime;
     private String publisher;

@@ -9,8 +9,11 @@ import java.io.Serializable;
 /**
  * 权限资源关联表 - 数据对象定义
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Data
 @TableName("role_resource")
 public class RoleResource implements Serializable {
@@ -19,20 +22,20 @@ public class RoleResource implements Serializable {
      * 关联id
      */
     @ApiModelProperty(value = "关联id")
-    private Integer id;
+    private Long id;
     /**
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Integer roleId;
+    private Long roleId;
     /**
      * 资源id
      */
     @ApiModelProperty(value = "资源id")
-    private Integer resourceId;
+    private Long resourceId;
     /**
      * 是否半选
      */
     @ApiModelProperty(value = "是否半选")
-    private Integer type;
+    private Long type;
 }

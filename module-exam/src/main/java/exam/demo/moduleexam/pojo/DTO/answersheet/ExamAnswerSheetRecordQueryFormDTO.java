@@ -9,9 +9,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class ExamAnswerSheetRecordQueryFormDTO {
 
-    private Integer examSession;
+    private Long examSession;
     private List<String> examTimeRange;
-    private Integer publisher;
+    private Long publisher;
     private String title;
 
 }

@@ -32,8 +32,11 @@ import java.util.stream.Collectors;
 /**
  * 公司表 - 服务实现
  *
- * @author gpmscloud
+ * @author luohui
+ * @version 1.0
+ * @since 2020-03-04
  */
+
 @Service
 public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> implements ICompanyService {
     @Autowired
@@ -101,7 +104,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     }
 
     @Override
-    public List<TreeListDto> getCompanyTree(Integer id) {
+    public List<TreeListDto> getCompanyTree(Long id) {
         // 超级管理员直接返回所有结果
         if (AdminUtil.isSuperAdmin()) {
             List<Company> companyList = list();
@@ -145,12 +148,12 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     }
 
     @Override
-    public String getNameById(Integer id) {
+    public String getNameById(Long id) {
         return baseMapper.selectNameById(id);
     }
 
     @Override
-    public List<Company> listByOrgId(Integer orgId) {
+    public List<Company> listByOrgId(Long orgId) {
         return baseMapper.listByOrgId(orgId);
     }
 }

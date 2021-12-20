@@ -18,25 +18,25 @@ public class UserItemVo extends BaseVo implements Serializable {
      * 用户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer id;
+    private Long id;
 
     /**
      * 职位ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer positionId;
+    private Long positionId;
 
     /**
      * 部门ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer departmentId;
+    private Long departmentId;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Integer companyId;
+    private Long companyId;
 
     /**
      * 工号
@@ -103,37 +103,37 @@ public class UserItemVo extends BaseVo implements Serializable {
     /**
      * 角色ID
      */
-    private Integer roleId;
+    private Long roleId;
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getPositionId() {
+    public Long getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(Integer positionId) {
+    public void setPositionId(Long positionId) {
         this.positionId = positionId;
     }
 
-    public Integer getDepartmentId() {
+    public Long getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -250,11 +250,11 @@ public class UserItemVo extends BaseVo implements Serializable {
                 '}';
     }
 
-    public Integer getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 }

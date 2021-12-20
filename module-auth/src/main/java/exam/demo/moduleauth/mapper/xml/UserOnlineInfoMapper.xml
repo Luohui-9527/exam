@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="exam.demo.moduleauth.mapper.UserOnlineInfoMapper">
+    <update id="updateOnlineState">
+        UPDATE user_online_info SET status = '0' WHERE user_id IN
+        <foreach collection="ids" item="id" separator="," close=")" open="(">
+            #{id}
+        </foreach>
+    </update>
 
+    <select id="listOnlineUser" resultType="exam.demo.moduleauth.pojo.model.UserOnlineInfo">
+        SELECT * FROM user_online_info WHERE status = 1
+    </select>
 </mapper>
