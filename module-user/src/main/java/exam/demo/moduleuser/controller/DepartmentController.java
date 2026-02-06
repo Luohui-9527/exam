@@ -31,7 +31,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ControllerConstants.DEPARTMENT)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class DepartmentController {
     @Autowired
     IDepartmentService departmentService;

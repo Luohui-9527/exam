@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping(ControllerConstants.ROLE)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class RoleController {
     @Autowired
     IRoleService roleService;

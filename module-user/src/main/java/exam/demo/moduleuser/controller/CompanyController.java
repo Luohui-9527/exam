@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping(ControllerConstants.COMPANY)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class CompanyController {
     @Autowired
     ICompanyService companyService;

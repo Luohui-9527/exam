@@ -27,7 +27,7 @@ import java.util.Map;
  * @date 2019/8/26
  */
 @RestController
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class AuthController {
     @Autowired
     private LoginService loginService;

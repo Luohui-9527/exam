@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ControllerConstants.POSITION)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class PositionController {
     @Autowired
     IPositionService positionService;

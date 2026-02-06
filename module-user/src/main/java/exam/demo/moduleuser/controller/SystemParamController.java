@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ControllerConstants.SYSTEM_PARAM)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class SystemParamController {
     @Autowired
     ISystemParamService systemParamService;

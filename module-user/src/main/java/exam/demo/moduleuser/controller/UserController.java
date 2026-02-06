@@ -33,7 +33,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping(ControllerConstants.USER)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class UserController {
     @Autowired
     CacheManager cacheManager;

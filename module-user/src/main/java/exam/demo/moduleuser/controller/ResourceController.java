@@ -29,7 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ControllerConstants.RESOURCE)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class ResourceController {
     @Autowired
     IResourceService resourceService;

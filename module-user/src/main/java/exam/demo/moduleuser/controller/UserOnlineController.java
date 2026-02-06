@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ControllerConstants.USER_ONLINE)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class UserOnlineController {
     @Autowired
     IUserOnlineInfoService userOnlineInfoService;

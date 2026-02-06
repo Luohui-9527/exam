@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(ControllerConstants.ORG)
-@CrossOrigin(allowedHeaders = "*", allowCredentials = "true", methods = {})
+@CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class OrganizationController {
     @Autowired
     IOrganizationService organizationService;
