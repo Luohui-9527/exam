@@ -4,6 +4,18 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# npm cache
+.npm
+.npm-cache
+
+# yarn cache
+yarn
+.yarn-cache
+
+# pnpm cache
+pnpm
+.pnpm-store
+
 ### STS ###
 .apt_generated
 .classpath

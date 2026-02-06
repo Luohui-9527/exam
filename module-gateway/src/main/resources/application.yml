@@ -77,7 +77,7 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
 
         - id: baseinfo
-          uri: lb://baseinfo
+          uri: http://localhost:8083
           predicates:
             - Path=/baseinfo/**
           filters:
@@ -108,7 +108,7 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
 
         - id: paper
-          uri: lb://paper
+          uri: http://localhost:10050
           predicates:
             - Path=/paper/**
           filters:

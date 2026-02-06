@@ -27,7 +27,7 @@ spring:
     port: 6379
     password: xym123
 server:
-  port: 8082
+  port: 8083
 
   servlet:
     context-path: /baseinfo
