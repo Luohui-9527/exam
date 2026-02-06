@@ -29,7 +29,7 @@ public class TreeList extends Model<TreeList> {
     private Long version;
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return id;
     }
 

@@ -113,7 +113,7 @@ public class Subject extends Model<Subject> {
     private Long oldVersion;
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return id;
     }
 

@@ -23,6 +23,9 @@ spring:
     host: localhost
     port: 6379
     password: xym123
+  sql:
+    init:
+      enabled: false
 
 server:
   port: 8770
@@ -42,7 +45,6 @@ exam:
   version: 1
 
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
 
 # 每半小时确认一次在线用户
 check:

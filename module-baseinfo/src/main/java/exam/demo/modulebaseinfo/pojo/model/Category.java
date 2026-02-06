@@ -81,7 +81,7 @@ public class Category extends Model<Category> {
     private Long oldVersion;
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return id;
     }
 

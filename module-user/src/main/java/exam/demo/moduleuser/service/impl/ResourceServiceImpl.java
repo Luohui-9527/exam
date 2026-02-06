@@ -82,7 +82,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         return this.listByIds(idList);
     }
 
-    private int getLeafCount(List<Resource> resources) {
+    private long getLeafCount(List<Resource> resources) {
         List<Long> parentIdList = resources.stream().map(Resource::getParentId).collect(Collectors.toList());
         QueryWrapper<Resource> wrapper = new QueryWrapper<>();
         wrapper.in(MagicPointConstant.PARENT_ID, parentIdList);

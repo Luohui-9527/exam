@@ -66,7 +66,7 @@ public class CombExamConfigDetail extends Model<CombExamConfigDetail> {
     private Double score;
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return id;
     }
 

@@ -29,7 +29,7 @@ public class SubjectAnswer extends Model<SubjectAnswer> {
     private Object field3;
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return id;
     }
 
