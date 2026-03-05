@@ -1,10 +1,10 @@
 package exam.demo.modulebaseinfo.pojo.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,9 +14,8 @@ import java.util.Date;
  *
  * @author luohui
  */
-@Builder
-@AllArgsConstructor
 @Data
+@ToString(callSuper = true)
 public class SubjectQueryVo extends BaseQueryVo implements Serializable {
 
     private static final long serialVersionUID = 1902508370783136321L;
@@ -84,76 +83,5 @@ public class SubjectQueryVo extends BaseQueryVo implements Serializable {
     private Byte status;
 
     private String remark;
-
-    public SubjectQueryVo() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Long difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getSubjectTypeId() {
-        return subjectTypeId;
-    }
-
-    public void setSubjectTypeId(Long subjectTypeId) {
-        this.subjectTypeId = subjectTypeId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getSubjectTypeName() {
-        return subjectTypeName;
-    }
-
-    public void setSubjectTypeName(String subjectTypeName) {
-        this.subjectTypeName = subjectTypeName;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getDifficultyName() {
-        return difficultyName;
-    }
-
-    public void setDifficultyName(String difficultyName) {
-        this.difficultyName = difficultyName;
-    }
 
 }

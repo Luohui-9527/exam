@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @since 2020-03-03
  */
-@Component
 public class CommonState {
     public final String SUCCESS = "200";
     public final String FAIL = "100";

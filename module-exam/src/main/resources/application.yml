@@ -26,6 +26,13 @@ spring:
     host: localhost
     port: 6379
     password: xym123
+  # 日志配置
+  logging:
+    level:
+      # 打印MyBatis SQL日志
+      exam.demo.moduleexam.dao: debug
+      # 打印JDBC日志
+      java.sql: debug
 
 server:
   port: 10051

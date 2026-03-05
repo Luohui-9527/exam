@@ -54,7 +54,7 @@ echo 等待10秒后启动前端应用...
 timeout /t 10 /nobreak >nul
 
 echo 8. 启动前端Vue应用...
-start "前端应用" cmd /k "cd /d %~dp0..\exam-vue && npm install && npm run dev"
+start "前端应用" cmd /k "cd /d %~dp0..\vue-login-demo && npm install && npm run dev"
 
 echo 所有服务启动完成！
 echo 请检查各个终端窗口，确保所有服务正常运行。

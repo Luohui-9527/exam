@@ -78,16 +78,29 @@ public class SubjectController {
     @MethodEnhancer
     @PostMapping(ControllerConstant.QUERY_SUBJECT)
     public CommonResponse<PageVo<SubjectQueryVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
-        Page<SubjectQueryVo> page = new Page<>(queryVo.getPageNum(), queryVo.getPageSize());
+        Long pageNum = queryVo.getPageNum() != null ? queryVo.getPageNum() : 1L;
+        Long pageSize = queryVo.getPageSize() != null ? queryVo.getPageSize() : 10L;
+        Page<SubjectQueryVo> page = new Page<>(pageNum, pageSize);
         Subject subject = CommonUtils.copyProperties(queryVo, Subject.class);
-        subject.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        try {
+            subject.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        } catch (Exception e) {
+            // 没有登录时，不设置 judgeId
+        }
         List<SubjectInfo> subjectList = subjectService.listSubject(subject);
         List<SubjectQueryVo> voList = new ArrayList<>();
         for (SubjectInfo subjectInfo : subjectList) {
-            voList.add(SubjectQueryVo.builder().id(subjectInfo.getId()).name(subjectInfo.getName()).difficulty(subjectInfo.getDifficulty())
-                    .subjectTypeId(subjectInfo.getSubjectTypeId()).categoryId(subjectInfo.getCategoryId()).categoryName(subjectInfo.getCategoryName())
-                    .subjectTypeName(subjectInfo.getSubjectTypeName()).difficultyName(subjectInfo.getDifficultyName()).updatedTime(subjectInfo.getUpdatedTime()).build()
-            );
+            SubjectQueryVo subjectQueryVo = new SubjectQueryVo();
+            subjectQueryVo.setId(subjectInfo.getId());
+            subjectQueryVo.setName(subjectInfo.getName());
+            subjectQueryVo.setDifficulty(subjectInfo.getDifficulty());
+            subjectQueryVo.setSubjectTypeId(subjectInfo.getSubjectTypeId());
+            subjectQueryVo.setCategoryId(subjectInfo.getCategoryId());
+            subjectQueryVo.setCategoryName(subjectInfo.getCategoryName());
+            subjectQueryVo.setSubjectTypeName(subjectInfo.getSubjectTypeName());
+            subjectQueryVo.setDifficultyName(subjectInfo.getDifficultyName());
+            subjectQueryVo.updatedTime = subjectInfo.getUpdatedTime();
+            voList.add(subjectQueryVo);
         }
         PageVo<SubjectQueryVo> pageVo = PageMapUtil.getPageMap(voList, page);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);

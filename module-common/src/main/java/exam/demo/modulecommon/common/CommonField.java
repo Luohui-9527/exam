@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
-import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -21,7 +20,6 @@ public class CommonField {
     /**
      * 雪花算法生成Id
      */
-    @Id
     @JsonSerialize(using = ToStringSerializer.class)
     public Long id;
     /**

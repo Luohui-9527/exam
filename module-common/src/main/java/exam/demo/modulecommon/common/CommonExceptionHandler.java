@@ -1,12 +1,10 @@
 package exam.demo.modulecommon.common;
 
 
-import com.netflix.hystrix.exception.HystrixBadRequestException;
 import exam.demo.modulecommon.exception.NestedExamException;
 import exam.demo.modulecommon.exception.StarterError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -69,37 +67,12 @@ public class CommonExceptionHandler {
         return commonError;
     }
 
-    @ExceptionHandler(HystrixBadRequestException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public CommonResponse handleHystrixBadRequestException(HystrixBadRequestException ex) {
-        log.error("微服务调用异常:", ex);
-        CommonResponse commonError = new CommonResponse();
-        String[] errors = ex.getMessage().split(":");
-        commonError.setCode(generateTraceCode(errors[0]));
-        commonError.setMsg(ex.getMessage().substring(errors[0].length() + 1));
-        return commonError;
-    }
 
-    @ExceptionHandler(RedisConnectionFailureException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public CommonResponse redisException(RedisConnectionFailureException e) {
-        log.error("Redis异常：", e);
-        CommonResponse error = new CommonResponse();
-        error.setCode(generateTraceCode(StarterError.SYSTEM_REDIS_CONNECT_FAILURE.getCode()));
-        error.setMsg(StarterError.SYSTEM_REDIS_CONNECT_FAILURE.getMsg());
-        return error;
-    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public CommonResponse otherException(Exception t) {
-        if (t instanceof RedisConnectionFailureException) {
-            return redisException((RedisConnectionFailureException) t);
-        } else if (t instanceof HystrixBadRequestException) {
-            return handleHystrixBadRequestException((HystrixBadRequestException) t);
-        } else if (t instanceof MissingServletRequestParameterException) {
+        if (t instanceof MissingServletRequestParameterException) {
             return handleBindException((MissingServletRequestParameterException) t);
         } else if (t instanceof MethodArgumentNotValidException) {
             return handleBindException((MethodArgumentNotValidException) t);

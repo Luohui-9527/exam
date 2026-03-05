@@ -108,14 +108,19 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
         List<SubjectInfo> subjectInfoList = new ArrayList<>();
         if (subject.getCategoryId() != null) {
             Category category = categoryService.getById(subject.getCategoryId());
-            // 递归查找子节点
-            DFS dfs = new DFS(category.getId());
-            dfs.dfs();
-            List<Long> res = dfs.getRes();
-            for (Long id : res) {
-                subjectInfoList.addAll(baseMapper.queryByCategory(id));
+            if (category != null) {
+                // 递归查找子节点
+                DFS dfs = new DFS(category.getId());
+                dfs.dfs();
+                List<Long> res = dfs.getRes();
+                for (Long id : res) {
+                    subjectInfoList.addAll(baseMapper.queryByCategory(id));
+                }
             }
         } else {
+            // 检查 judgeId 是否为 null
+            // 无论 judgeId 是否为 null，都调用 querySubject 方法
+            // 因为 querySubject 方法已经在 SQL 中处理了 judgeId 为 null 的情况
             subjectInfoList = baseMapper.querySubject(subject);
         }
         // 对题目进行筛选

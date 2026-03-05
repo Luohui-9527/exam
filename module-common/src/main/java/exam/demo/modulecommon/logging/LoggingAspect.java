@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Aspect
-@Configuration
 public class LoggingAspect {
     public String GET = "GET";
 
@@ -35,23 +34,26 @@ public class LoggingAspect {
     @Before(value = "exam.demo.modulecommon.logging.LoggingAspect.joinPoint()")
     public void logRequest(JoinPoint joinPoint){
         Object[] arg = joinPoint.getArgs();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        log.info("\n\n\n请求的方法为:{}\n",joinPoint.getSignature().getName());
-        if (request != null && GET.equals(request.getMethod())){
-            return;
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (requestAttributes != null) {
+            HttpServletRequest request = requestAttributes.getRequest();
+            log.info("\n\n\n请求的方法为:{}\n",joinPoint.getSignature().getName());
+            if (request != null && GET.equals(request.getMethod())){
+                return;
+            }
         }
         if (arg.length != 0){
             for (Object o : arg) {
-                log.info("\n请求参数为: {}\n\n",o.toString());
-                if (o instanceof CommonRequest){
-                    // 版本不匹配
-                    if (version != null && !version.equals(((CommonRequest) o).getVersion())){
-                        throw new StarterException(StarterError.SYSTEM_VERSION_NOT_MATCH);
+                if (o != null) {
+                    log.info("\n请求参数为: {}\n\n",o.toString());
+                    if (o instanceof CommonRequest){
+                        // 版本不匹配
+                        if (version != null && !version.equals(((CommonRequest) o).getVersion())){
+                            throw new StarterException(StarterError.SYSTEM_VERSION_NOT_MATCH);
+                        }
                     }
                 }
             }
-        }else {
-            throw new StarterException(StarterError.SYSTEM_PARAMETER_IS_NULL);
         }
     }
 

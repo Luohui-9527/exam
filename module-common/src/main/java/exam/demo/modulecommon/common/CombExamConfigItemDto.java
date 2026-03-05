@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -16,7 +15,6 @@ import java.io.Serializable;
 public class CombExamConfigItemDto implements Serializable {
     private static final long serialVersionUID = 6193674149029494679L;
 
-    @Id
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 

@@ -1,0 +1,121 @@
+-- 初始化题目数据（符合实际表结构）
+USE exam;
+
+-- 清空现有数据（重新初始化）
+DELETE FROM subject_answer WHERE subject_id >= 1001;
+DELETE FROM subject WHERE id >= 1001;
+DELETE FROM dictionary WHERE category = '难度' AND id >= 1;
+DELETE FROM category WHERE id >= 1 AND id <= 6;
+DELETE FROM subject_type WHERE id >= 1 AND id <= 4;
+
+-- 插入题目类型数据
+INSERT INTO subject_type (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, name, attribute, status) VALUES
+(1, 1, 1, 1, NOW(), 1, NOW(), 1, '单选题', 'SINGLE', 1),
+(2, 1, 1, 1, NOW(), 1, NOW(), 1, '多选题', 'MULTIPLE', 1),
+(3, 1, 1, 1, NOW(), 1, NOW(), 1, '判断题', 'JUDGE', 1),
+(4, 1, 1, 1, NOW(), 1, NOW(), 1, '简答题', 'ESSAY', 1);
+
+-- 插入题目分类数据
+INSERT INTO category (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, name, parent_id, status) VALUES
+(1, 1, 1, 1, NOW(), 1, NOW(), 1, '政治', 0, 1),
+(2, 1, 1, 1, NOW(), 1, NOW(), 1, '商务', 0, 1),
+(3, 1, 1, 1, NOW(), 1, NOW(), 1, '项目管理', 0, 1),
+(4, 1, 1, 1, NOW(), 1, NOW(), 1, '地理', 0, 1),
+(5, 1, 1, 1, NOW(), 1, NOW(), 1, '生物', 0, 1),
+(6, 1, 1, 1, NOW(), 1, NOW(), 1, '采购', 0, 1);
+
+-- 插入难度字典数据
+INSERT INTO dictionary (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, category, name, value, status) VALUES
+(1, 1, 1, 1, NOW(), 1, NOW(), 1, '难度', '简单', '1', 1),
+(2, 1, 1, 1, NOW(), 1, NOW(), 1, '难度', '中等', '2', 1),
+(3, 1, 1, 1, NOW(), 1, NOW(), 1, '难度', '困难', '3', 1);
+
+-- 插入单选题
+INSERT INTO subject (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, subject_type_id, category_id, name, difficulty, status) VALUES
+(1001, 1, 1, 1, NOW(), 1, NOW(), 1, 1, 1, '中国特色社会主义进入（ ），这是党的十九大作出的一个重大政治判断', 1, 1),
+(1002, 1, 1, 1, NOW(), 1, NOW(), 1, 1, 2, '谈判的当事人包括( )两类人员', 1, 1),
+(1003, 1, 1, 1, NOW(), 1, NOW(), 1, 1, 6, '采购项目评审中，下列哪项不属于评审专家应具备的基本条件？', 2, 1),
+(1004, 1, 1, 1, NOW(), 1, NOW(), 1, 1, 3, '项目管理的五大过程组不包括以下哪项？', 1, 1),
+(1005, 1, 1, 1, NOW(), 1, NOW(), 1, 1, 4, '世界上最大的洲是？', 1, 1);
+
+-- 插入单选题答案
+INSERT INTO subject_answer (id, subject_id, answer, correct) VALUES
+(2001, 1001, 'A.新进展', 0),
+(2002, 1001, 'B.新时代', 1),
+(2003, 1001, 'C.新征程', 0),
+(2004, 1001, 'D.新变革', 0),
+(2005, 1002, 'A.台上（一线）和台下', 1),
+(2006, 1002, 'B.业务员和老板', 0),
+(2007, 1002, 'C.委托人和受托人', 0),
+(2008, 1003, 'A. 具有相关专业知识和经验', 0),
+(2009, 1003, 'B. 具有良好的职业道德和公正性', 0),
+(2010, 1003, 'C. 具有较强的沟通协调能力', 0),
+(2011, 1003, 'D. 具有采购从业资格证书', 1),
+(2012, 1004, 'A. 启动过程组', 0),
+(2013, 1004, 'B. 规划过程组', 0),
+(2014, 1004, 'C. 执行过程组', 0),
+(2015, 1004, 'D. 监控过程组', 0),
+(2016, 1004, 'E. 收尾过程组', 0),
+(2017, 1005, 'A. 亚洲', 1),
+(2018, 1005, 'B. 非洲', 0),
+(2019, 1005, 'C. 欧洲', 0),
+(2020, 1005, 'D. 美洲', 0);
+
+-- 插入多选题
+INSERT INTO subject (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, subject_type_id, category_id, name, difficulty, status) VALUES
+(1006, 1, 1, 1, NOW(), 1, NOW(), 1, 2, 3, '下列哪些属于项目管理的基本过程组？', 2, 1),
+(1007, 1, 1, 1, NOW(), 1, NOW(), 1, 2, 2, '商务谈判的基本原则包括哪些？', 2, 1),
+(1008, 1, 1, 1, NOW(), 1, NOW(), 1, 2, 6, '政府采购的主要方式包括哪些？', 2, 1);
+
+-- 插入多选题答案
+INSERT INTO subject_answer (id, subject_id, answer, correct) VALUES
+(2021, 1006, 'A. 启动过程组', 1),
+(2022, 1006, 'B. 规划过程组', 1),
+(2023, 1006, 'C. 执行过程组', 1),
+(2024, 1006, 'D. 监控过程组', 1),
+(2025, 1006, 'E. 收尾过程组', 1),
+(2026, 1007, 'A. 平等互利原则', 1),
+(2027, 1007, 'B. 求同存异原则', 1),
+(2028, 1007, 'C. 诚实守信原则', 1),
+(2029, 1007, 'D. 公平竞争原则', 1),
+(2030, 1007, 'E. 妥协让步原则', 0),
+(2031, 1008, 'A. 公开招标', 1),
+(2032, 1008, 'B. 邀请招标', 1),
+(2033, 1008, 'C. 竞争性谈判', 1),
+(2034, 1008, 'D. 单一来源采购', 1),
+(2035, 1008, 'E. 询价采购', 1);
+
+-- 插入判断题
+INSERT INTO subject (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, subject_type_id, category_id, name, difficulty, status) VALUES
+(1009, 1, 1, 1, NOW(), 1, NOW(), 1, 3, 4, '判断对错：地球是圆的', 1, 1),
+(1010, 1, 1, 1, NOW(), 1, NOW(), 1, 3, 6, '判断对错：采购评审专家可以参与与自己有利害关系的项目评审', 1, 1),
+(1011, 1, 1, 1, NOW(), 1, NOW(), 1, 3, 3, '判断对错：项目范围管理包括确保项目做且只做所需的全部工作', 2, 1),
+(1012, 1, 1, 1, NOW(), 1, NOW(), 1, 3, 5, '判断对错：植物进行光合作用需要光能', 1, 1);
+
+-- 插入判断题答案
+INSERT INTO subject_answer (id, subject_id, answer, correct) VALUES
+(2036, 1009, '正确', 1),
+(2037, 1010, '错误', 1),
+(2038, 1011, '正确', 1),
+(2039, 1012, '正确', 1);
+
+-- 插入简答题
+INSERT INTO subject (id, org_id, company_id, created_by, created_time, updated_by, updated_time, version, subject_type_id, category_id, name, difficulty, status) VALUES
+(1013, 1, 1, 1, NOW(), 1, NOW(), 1, 4, 5, '请简述光合作用的过程', 2, 1),
+(1014, 1, 1, 1, NOW(), 1, NOW(), 1, 4, 2, '请简述商务谈判的基本流程', 2, 1),
+(1015, 1, 1, 1, NOW(), 1, NOW(), 1, 4, 3, '请简述项目管理的核心要素', 3, 1),
+(1016, 1, 1, 1, NOW(), 1, NOW(), 1, 4, 1, '请简述中国特色社会主义进入新时代的重大意义', 3, 1);
+
+-- 插入简答题答案
+INSERT INTO subject_answer (id, subject_id, answer, correct) VALUES
+(2040, 1013, '光合作用是绿色植物利用光能，将二氧化碳和水转化为有机物（如葡萄糖）并释放氧气的过程。主要包括光反应和暗反应两个阶段：1. 光反应：在叶绿体的类囊体膜上进行，利用光能将水分解为氧气和氢离子，同时产生ATP；2. 暗反应：在叶绿体的基质中进行，利用光反应产生的ATP和氢离子，将二氧化碳固定并还原为有机物。', 1),
+(2041, 1014, '商务谈判的基本流程包括：1. 准备阶段：收集信息、确定目标、制定策略、组建团队；2. 开局阶段：建立关系、营造氛围、设定议程；3. 磋商阶段：报价、讨价还价、解决分歧；4. 成交阶段：确认共识、起草协议、签字确认；5. 后续阶段：履行协议、维护关系、总结经验。', 1),
+(2042, 1015, '项目管理的核心要素包括：1. 范围管理：明确项目的边界和交付物；2. 时间管理：制定合理的进度计划并控制执行；3. 成本管理：估算和控制项目费用；4. 质量管理：确保项目交付物符合要求；5. 风险管理：识别、分析和应对项目风险；6. 人力资源管理：合理配置和管理项目团队；7. 沟通管理：确保信息及时有效地传递；8. 采购管理：获取项目所需的外部资源；9. 干系人管理：识别和满足干系人的需求和期望。', 1),
+(2043, 1016, '中国特色社会主义进入新时代的重大意义：1. 意味着近代以来久经磨难的中华民族迎来了从站起来、富起来到强起来的伟大飞跃，迎来了实现中华民族伟大复兴的光明前景；2. 意味着科学社会主义在二十一世纪的中国焕发出强大生机活力，在世界上高高举起了中国特色社会主义伟大旗帜；3. 意味着中国特色社会主义道路、理论、制度、文化不断发展，拓展了发展中国家走向现代化的途径，给世界上那些既希望加快发展又希望保持自身独立性的国家和民族提供了全新选择，为解决人类问题贡献了中国智慧和中国方案。', 1);
+
+SELECT '题目数据初始化完成' AS result;
+SELECT COUNT(*) AS '题目类型数量' FROM subject_type WHERE id >= 1 AND id <= 4;
+SELECT COUNT(*) AS '题目分类数量' FROM category WHERE id >= 1 AND id <= 6;
+SELECT COUNT(*) AS '难度字典数量' FROM dictionary WHERE category = '难度';
+SELECT COUNT(*) AS '题目总数' FROM subject WHERE id >= 1001;
+SELECT COUNT(*) AS '答案总数' FROM subject_answer WHERE id >= 2001;

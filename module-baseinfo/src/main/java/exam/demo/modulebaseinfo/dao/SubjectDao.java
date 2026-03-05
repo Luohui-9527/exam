@@ -27,7 +27,10 @@ public interface SubjectDao extends BaseMapper<Subject> {
             "<if test=\"difficulty!=null and difficulty!=''\">" +
             "AND a.difficulty = #{difficulty} " +
             "</if>" +
-            "AND (a.company_id = #{judgeId} or a.org_id = #{judgeId}) order by updated_time DESC" +
+            "<if test=\"judgeId!=null\">" +
+            "AND (a.company_id = #{judgeId} or a.org_id = #{judgeId}) " +
+            "</if>" +
+            "order by updated_time DESC" +
             "</script>")
     List<SubjectInfo> querySubject(Subject subject);
 
