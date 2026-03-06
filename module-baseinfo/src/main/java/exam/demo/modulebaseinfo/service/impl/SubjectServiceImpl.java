@@ -10,6 +10,7 @@ import exam.demo.modulebaseinfo.pojo.model.*;
 import exam.demo.modulebaseinfo.service.CategoryService;
 import exam.demo.modulebaseinfo.service.SubjectAnswerService;
 import exam.demo.modulebaseinfo.service.SubjectService;
+import exam.demo.modulebaseinfo.utils.DFSUtil;
 import exam.demo.modulebaseinfo.utils.RandomTask;
 import exam.demo.modulecommon.annotation.FullCommonField;
 import exam.demo.modulecommon.common.SubjectAnswerDto;
@@ -109,12 +110,18 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
         if (subject.getCategoryId() != null) {
             Category category = categoryService.getById(subject.getCategoryId());
             if (category != null) {
-                // 递归查找子节点
-                DFS dfs = new DFS(category.getId());
-                dfs.dfs();
+                // 使用DFSUtil递归查找子节点
+                DFSUtil<Category> dfs = new DFSUtil<>(category.getId(), categoryService::queryChildNode);
                 List<Long> res = dfs.getRes();
                 for (Long id : res) {
-                    subjectInfoList.addAll(baseMapper.queryByCategory(id));
+                    // 创建临时Subject对象，设置categoryId和其他查询条件
+                    Subject tempSubject = new Subject();
+                    tempSubject.setCategoryId(id);
+                    tempSubject.setName(subject.getName());
+                    tempSubject.setSubjectTypeId(subject.getSubjectTypeId());
+                    tempSubject.setDifficulty(subject.getDifficulty());
+                    tempSubject.setJudgeId(subject.getJudgeId());
+                    subjectInfoList.addAll(baseMapper.queryByCategory(tempSubject));
                 }
             }
         } else {
@@ -123,48 +130,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
             // 因为 querySubject 方法已经在 SQL 中处理了 judgeId 为 null 的情况
             subjectInfoList = baseMapper.querySubject(subject);
         }
-        // 对题目进行筛选
-        if (subject.getName() != null) {
-            subjectInfoList = subjectInfoList.stream().filter(s -> SqlUtil.like(subject.getName(), s.getName())).collect(Collectors.toList());
-        }
-        // 对题型筛选
-        if (subject.getSubjectTypeId() != null) {
-            subjectInfoList = subjectInfoList.stream().filter(s -> subject.getSubjectTypeId().equals(s.getSubjectTypeId())).collect(Collectors.toList());
-        }
-        if (subject.getDifficulty() != null) {
-            subjectInfoList = subjectInfoList.stream().filter(s -> subject.getDifficulty().equals(s.getDifficulty())).collect(Collectors.toList());
-        }
         return subjectInfoList;
-    }
-
-
-    class DFS {
-        List<Long> res = new ArrayList<>();
-
-        Long cur;
-
-        DFS(Long cur) {
-            this.cur = cur;
-            res.add(cur);
-        }
-
-        private void dfs() {
-            dfs0(cur);
-        }
-
-        private void dfs0(Long cur1) {
-            List<Category> list = categoryService.queryChildNode(cur1);
-            if (CommonUtils.isEmpty(list)) {
-                return;
-            }
-            List<Long> idList = list.stream().map(Category::getId).collect(Collectors.toList());
-            res.addAll(idList);
-            idList.forEach(this::dfs0);
-        }
-
-        public List<Long> getRes() {
-            return res;
-        }
     }
 
 

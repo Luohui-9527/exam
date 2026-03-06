@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 试卷表 - 服务接口
+ * 试卷服务接口
+ * 提供试卷的创建、查询、修改、删除、发布等功能
  *
  * @author luohui
  * @version 1.0
@@ -24,12 +25,10 @@ import java.util.Map;
  */
 public interface IPaperService extends IService<Paper> {
 
-
     /**
      * 快速组卷
      *
-     * @param paperDTO
-     * @param paperDTO
+     * @param paperDTO 试卷信息
      * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean generateFastMode(PaperDto paperDTO);
@@ -37,28 +36,27 @@ public interface IPaperService extends IService<Paper> {
     /**
      * 标准组卷
      *
-     * @param paperDTO
-     * @param combExamConfigDTO
-     * @return
+     * @param paperDTO 试卷信息
+     * @param combExamConfigDTO 组卷配置信息
+     * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean generateNormalMode(PaperDto paperDTO, CustomizedCombExamConfigVo combExamConfigDTO);
 
     /**
      * 模版组卷
      *
-     * @param paperDTO
-     * @return
+     * @param paperDTO 试卷信息
+     * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean generateTemplateMode(PaperDto paperDTO);
-
 
     /**
      * 插入试卷
      *
-     * @param paper
-     * @param subjectList
-     * @param subjectAnswerList
-     * @return
+     * @param paper 试卷信息
+     * @param subjectList 试卷题目列表
+     * @param subjectAnswerList 试卷答案列表
+     * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean insertPaper(Paper paper, List<PaperSubject> subjectList, List<PaperSubjectAnswer> subjectAnswerList);
 
@@ -66,12 +64,13 @@ public interface IPaperService extends IService<Paper> {
      * 通过查询参数查询试卷
      *
      * @param paperQueryDTO 查询试卷参数
+     * @param isTemplate 是否为模板
      * @return 返回满足此参数的试卷列表
      */
     Map<String, Object> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate);
 
     /**
-     * 准备要删除的试卷数据
+     * 删除试卷
      *
      * @param paperIds 试卷id数组
      * @return 删除成功的条数
@@ -79,89 +78,92 @@ public interface IPaperService extends IService<Paper> {
     boolean paperDelete(List<Long> paperIds);
 
     /**
-     * 准备修改的资源
+     * 修改试卷
      *
-     * @param paperDetail
-     * @return
+     * @param paperDetail 试卷详情
+     * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean paperModify(ModifyPaperDto paperDetail);
 
     /**
      * 获取试卷详情
      *
-     * @param id
-     * @return
+     * @param id 试卷ID
+     * @return 试卷详情
      */
     PaperDetail getPaperInfo(long id);
 
     /**
-     * download
+     * 下载模板
      *
-     * @param paper the ids of which are downloaded
-     * @return the count of downloaded
-     * @throws Exception when parse a userPermission if token is invalid of expired and decode unsuccessfully
+     * @param paper 试卷信息
+     * @return 下载成功返回 <code>true</code> 否则 <code>false</code>
+     * @throws Exception 当解析用户权限失败时
      */
     boolean downloadTemplate(PaperDto paper);
 
     /**
-     * upload
+     * 上传模板
      *
-     * @param paper the id of uploaded
-     * @return the count of uploaded
-     * @throws Exception when parse a userPermission if token is invalid of expired and decode unsuccessfully
+     * @param paper 试卷信息
+     * @return 上传成功返回 <code>true</code> 否则 <code>false</code>
+     * @throws Exception 当解析用户权限失败时
      */
     boolean uploadTemplate(PaperDto paper);
 
     /**
-     * remove batch of templates
+     * 批量删除模板
      *
-     * @param paperTemplateIds the paper id of a template
-     * @return the count of removed paper
+     * @param paperTemplateIds 模板试卷ID列表
+     * @return 删除成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean deleteTemplate(List<Long> paperTemplateIds);
 
     /**
      * 查询模板
      *
-     * @param paperQueryDTO
-     * @return
+     * @param paperQueryDTO 查询参数
+     * @return 模板列表
      */
     Map<String, Object> queryTemplate(PaperQueryDto paperQueryDTO);
 
     /**
      * 发布试卷，也就是将试卷中publishedTime加一
      *
-     * @param id
-     * @return
+     * @param id 试卷ID
+     * @return 发布成功返回 <code>true</code> 否则 <code>false</code>
      */
     boolean publish(long id);
 
     /**
      * 列出该公司的所有试卷
      *
-     * @param companyId
-     * @return
+     * @param companyId 公司ID
+     * @return 试卷ID和名称列表
      */
     List<PaperIdWithName> list(long companyId);
 
     /**
      * 通过试卷名模糊搜索
      *
-     * @param fuzzySearch
-     * @return
+     * @param fuzzySearch 模糊搜索条件
+     * @return 试卷ID和名称列表
      */
     List<PaperIdWithName> listByName(FuzzySearch fuzzySearch);
 
     /**
      * 获取试卷
+     *
+     * @param id 试卷ID
+     * @return 试卷信息
      */
     Paper getPaper(long id);
 
     /**
      * 获取试卷分数
      *
-     * @param id
-     * @return
+     * @param id 试卷ID
+     * @return 试卷分数
      */
     Double getScore(long id);
 }

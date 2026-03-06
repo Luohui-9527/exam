@@ -9,6 +9,7 @@ import exam.demo.modulebaseinfo.pojo.model.SubjectAnswer;
 import exam.demo.modulebaseinfo.pojo.model.SubjectInfo;
 import exam.demo.modulebaseinfo.pojo.vo.SubjectAnswerQueryVo;
 import exam.demo.modulebaseinfo.pojo.vo.SubjectQueryVo;
+import exam.demo.modulebaseinfo.pojo.vo.SubjectQueryResultVo;
 import exam.demo.modulebaseinfo.pojo.vo.SubjectVo;
 import exam.demo.modulebaseinfo.service.SubjectAnswerService;
 import exam.demo.modulebaseinfo.service.SubjectService;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 题目控制器
+ * 提供题目的增删改查等API接口
+ *
  * @author luohui
  */
 @RequestMapping(ControllerConstant.SUBJECT)
@@ -40,7 +44,12 @@ public class SubjectController {
     @Autowired
     SubjectAnswerService subjectAnswerService;
 
-
+    /**
+     * 保存试题及答案
+     *
+     * @param subjectVo 题目信息
+     * @return 保存结果
+     */
     @MethodEnhancer
     @PostMapping(ControllerConstant.SAVE_SUBJECT)
     public CommonResponse<Boolean> saveSubject(@RequestBody SubjectVo subjectVo) {
@@ -50,6 +59,12 @@ public class SubjectController {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
+    /**
+     * 批量删除试题及答案
+     *
+     * @param subjectVoList 待删除的题目列表
+     * @return 删除结果
+     */
     @MethodEnhancer
     @PostMapping(ControllerConstant.DELETE_SUBJECT_LIST)
     public CommonResponse<Boolean> deleteSubjectList(@RequestBody List<SubjectVo> subjectVoList) {
@@ -61,7 +76,13 @@ public class SubjectController {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
-
+    /**
+     * 更新试题及答案
+     *
+     * @param subjectVo 题目信息
+     * @return 更新结果
+     * @throws BaseInfoException 如果更新失败
+     */
     @MethodEnhancer
     @PostMapping(ControllerConstant.UPDATE_SUBJECT)
     public CommonResponse<Boolean> updateSubject(@RequestBody SubjectVo subjectVo) {
@@ -75,12 +96,18 @@ public class SubjectController {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
+    /**
+     * 查询题目列表
+     *
+     * @param queryVo 查询条件
+     * @return 分页查询结果
+     */
     @MethodEnhancer
     @PostMapping(ControllerConstant.QUERY_SUBJECT)
-    public CommonResponse<PageVo<SubjectQueryVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
-        Long pageNum = queryVo.getPageNum() != null ? queryVo.getPageNum() : 1L;
-        Long pageSize = queryVo.getPageSize() != null ? queryVo.getPageSize() : 10L;
-        Page<SubjectQueryVo> page = new Page<>(pageNum, pageSize);
+    public CommonResponse<PageVo<SubjectQueryResultVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
+        Long pageNum = queryVo.getPageNumOrDefault();
+        Long pageSize = queryVo.getPageSizeOrDefault();
+        Page<SubjectQueryResultVo> page = new Page<>(pageNum, pageSize);
         Subject subject = CommonUtils.copyProperties(queryVo, Subject.class);
         try {
             subject.setJudgeId(CommonUtils.judgeCompanyAndOrg());
@@ -88,24 +115,30 @@ public class SubjectController {
             // 没有登录时，不设置 judgeId
         }
         List<SubjectInfo> subjectList = subjectService.listSubject(subject);
-        List<SubjectQueryVo> voList = new ArrayList<>();
+        List<SubjectQueryResultVo> resultList = new ArrayList<>();
         for (SubjectInfo subjectInfo : subjectList) {
-            SubjectQueryVo subjectQueryVo = new SubjectQueryVo();
-            subjectQueryVo.setId(subjectInfo.getId());
-            subjectQueryVo.setName(subjectInfo.getName());
-            subjectQueryVo.setDifficulty(subjectInfo.getDifficulty());
-            subjectQueryVo.setSubjectTypeId(subjectInfo.getSubjectTypeId());
-            subjectQueryVo.setCategoryId(subjectInfo.getCategoryId());
-            subjectQueryVo.setCategoryName(subjectInfo.getCategoryName());
-            subjectQueryVo.setSubjectTypeName(subjectInfo.getSubjectTypeName());
-            subjectQueryVo.setDifficultyName(subjectInfo.getDifficultyName());
-            subjectQueryVo.updatedTime = subjectInfo.getUpdatedTime();
-            voList.add(subjectQueryVo);
+            SubjectQueryResultVo resultVo = new SubjectQueryResultVo();
+            resultVo.setId(subjectInfo.getId());
+            resultVo.setName(subjectInfo.getName());
+            resultVo.setDifficulty(subjectInfo.getDifficulty());
+            resultVo.setSubjectTypeId(subjectInfo.getSubjectTypeId());
+            resultVo.setCategoryId(subjectInfo.getCategoryId());
+            resultVo.setCategoryName(subjectInfo.getCategoryName());
+            resultVo.setSubjectTypeName(subjectInfo.getSubjectTypeName());
+            resultVo.setDifficultyName(subjectInfo.getDifficultyName());
+            resultVo.setUpdatedTime(subjectInfo.getUpdatedTime());
+            resultList.add(resultVo);
         }
-        PageVo<SubjectQueryVo> pageVo = PageMapUtil.getPageMap(voList, page);
+        PageVo<SubjectQueryResultVo> pageVo = PageMapUtil.getPageMap(resultList, page);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
 
+    /**
+     * 查询题目答案
+     *
+     * @param subjectAnswerQueryVo 查询条件
+     * @return 答案列表
+     */
     @MethodEnhancer
     @PostMapping(ControllerConstant.QUERY_ANSWER)
     public CommonResponse<List> queryAnswer(@RequestBody SubjectAnswerQueryVo subjectAnswerQueryVo) {

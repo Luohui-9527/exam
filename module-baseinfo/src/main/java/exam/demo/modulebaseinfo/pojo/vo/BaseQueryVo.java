@@ -27,11 +27,21 @@ public class BaseQueryVo implements Serializable {
     protected Long pageSize;
 
     /**
-     * 每页大小（小写，用于接收请求参数）
+     * 获取当前分页，若为null则返回默认值1
+     *
+     * @return 当前分页
      */
-    @JsonProperty("pagesize")
-    public void setPagesize(Long pagesize) {
-        this.pageSize = pagesize;
+    public Long getPageNumOrDefault() {
+        return pageNum != null ? pageNum : 1L;
+    }
+
+    /**
+     * 获取每页大小，若为null则返回默认值10
+     *
+     * @return 每页大小
+     */
+    public Long getPageSizeOrDefault() {
+        return pageSize != null ? pageSize : 10L;
     }
 
 }

@@ -1,0 +1,1 @@
+Invoke-RestMethod -Uri "http://localhost:8083/baseinfo/subject/querySubject" -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"pageNum": 1, "pageSize": 1}'

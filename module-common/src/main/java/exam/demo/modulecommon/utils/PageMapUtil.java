@@ -11,12 +11,36 @@ import java.util.List;
 public class PageMapUtil {
     public static <T, K> PageVo<T> getPageMap(List<T> list, Page<K> page) {
         PageVo<T> pageVo = new PageVo<>();
-        pageVo.setPageInfo(list);
-        pageVo.setSize(page.getSize());
-        pageVo.setCurrent(page.getCurrent());
+        
+        // 计算总记录数
         long total = list.size();
         pageVo.setTotal(total);
-        pageVo.setPages(total / page.getSize() + 1);
+        
+        // 计算总页数
+        long pages = total / page.getSize();
+        if (total % page.getSize() > 0) {
+            pages++;
+        }
+        pageVo.setPages(pages);
+        
+        // 设置当前页和每页大小
+        pageVo.setCurrent(page.getCurrent());
+        pageVo.setSize(page.getSize());
+        
+        // 进行分页处理
+        List<T> pageList = new java.util.ArrayList<>();
+        if (!list.isEmpty()) {
+            // 计算起始索引和结束索引
+            int startIndex = (int) ((page.getCurrent() - 1) * page.getSize());
+            int endIndex = (int) Math.min(startIndex + page.getSize(), total);
+            
+            // 截取数据
+            if (startIndex < endIndex) {
+                pageList = list.subList(startIndex, endIndex);
+            }
+        }
+        
+        pageVo.setPageInfo(pageList);
         return pageVo;
     }
 

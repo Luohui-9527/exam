@@ -8,101 +8,82 @@ import exam.demo.moduleuser.pojo.model.UserForRole;
 import java.util.List;
 
 /**
- * 权限表 - 服务接口
+ * 角色服务接口
+ * 提供角色的增删改查、用户分配、资源分配等功能
  *
  * @author luohui
  * @version 1.0
  * @since 2020-03-04
  */
-
 public interface IRoleService extends IService<Role> {
     /**
-     * 功能描述
+     * 保存角色信息
      *
-     * @param roleDto
-     * @return: boolean
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @param roleDto 角色信息
+     * @return 是否保存成功
      */
     boolean save(RoleDto roleDto);
 
     /**
-     * 功能描述
+     * 更新角色信息
      *
-     * @param roleDto
-     * @return: boolean
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @param roleDto 角色信息
+     * @return 是否更新成功
      */
     boolean update(RoleDto roleDto);
 
     /**
-     * 功能描述 删除角色记录
+     * 删除角色记录
      *
      * @param roleDtoList 角色List集合
-     * @return: boolean 删除成功条数
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @return 删除成功条数
      */
     boolean delete(List<RoleDto> roleDtoList);
 
     /**
-     * 功能描述 根据请求条件查询符合条件的角色记录集合
+     * 根据请求条件查询符合条件的角色记录集合
      *
      * @param role 请求条件查询信息
-     * @return: java.util.List<exam.demo.moduleuser.pojo.model.Role>
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @return 符合条件的角色集合
      */
     List<Role> queryByCondition(Role role);
 
     /**
-     * 功能描述
+     * 为角色分配用户
      *
-     * @param roleUserDtoList
-     * @return: boolean
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @param roleUserDtoList 角色用户关联信息列表
+     * @return 是否分配成功
      */
     boolean addUserForRole(List<RoleUserDto> roleUserDtoList);
 
     /**
-     * 功能描述
+     * 为角色分配资源
      *
-     * @param resourceDtos
-     * @return: boolean
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @param resourceDtos 角色资源关联信息列表
+     * @return 是否分配成功
      */
     boolean addResourceForRole(List<RoleResourceDto> resourceDtos);
 
     /**
-     * 功能描述
+     * 查询角色下的用户
      *
-     * @param role
-     * @return: java.util.List<exam.demo.moduleuser.pojo.model.UserForRole>
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @param role 角色信息
+     * @return 角色下的用户列表
      */
     List<UserForRole> queryUserRole(Role role);
 
     /**
-     * 功能描述 查询角色分配资源的树集合
+     * 查询角色分配资源的树集合
      *
      * @param roleDTO 角色信息
-     * @return: java.util.List<exam.demo.moduleuser.dto.TreeListDto> 以树（treelist）形式返回资源数据
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @return 以树（treelist）形式返回资源数据
      */
     List<TreeListDto> queryResourceForRole(RoleDto roleDTO);
 
     /**
-     * 功能描述 查询角色
+     * 查询角色列表
      *
-     * @param
-     * @return: java.util.List<exam.demo.moduleuser.dto.UserOptionsDto> 角色集合
-     * @Author: luohui
-     * @date: 2021-12-9
+     * @return 角色集合
      */
     List<UserOptionsDto> queryRole();
 

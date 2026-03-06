@@ -37,6 +37,10 @@ spring:
       org.apache.ibatis: debug
       # 打印事务日志
       org.springframework.jdbc: debug
+# MyBatis 配置
+mybatis-plus:
+  mapper-locations: classpath:exam/demo/modulebaseinfo/dao/xml/*.xml
+  type-aliases-package: exam.demo.modulebaseinfo.pojo.model
 server:
   port: 8083
 
