@@ -46,4 +46,12 @@ public interface UserMapper extends BaseMapper<User> {
      * @return UserMenu
      */
     List<UserMenu> getUserMenu(UserPermission userPermission);
+
+    /**
+     * 根据条件查询用户
+     *
+     * @param user 查询条件
+     * @return 符合条件的用户集合
+     */
+    List<User> queryByCondition(User user);
 }

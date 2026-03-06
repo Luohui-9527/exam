@@ -105,8 +105,8 @@ public class SubjectController {
     @MethodEnhancer
     @PostMapping(ControllerConstant.QUERY_SUBJECT)
     public CommonResponse<PageVo<SubjectQueryResultVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
-        Long pageNum = queryVo.getPageNumOrDefault();
-        Long pageSize = queryVo.getPageSizeOrDefault();
+        Long pageNum = queryVo.getPageNum() != null ? queryVo.getPageNum() : 1L;
+        Long pageSize = queryVo.getPageSize() != null ? queryVo.getPageSize() : 10L;
         Page<SubjectQueryResultVo> page = new Page<>(pageNum, pageSize);
         Subject subject = CommonUtils.copyProperties(queryVo, Subject.class);
         try {

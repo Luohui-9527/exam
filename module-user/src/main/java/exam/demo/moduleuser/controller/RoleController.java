@@ -155,8 +155,20 @@ public class RoleController {
 
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_LIST_ROLE)
-    public CommonResponse<List> getQueryListDataRole() {
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, companyService.getCompanyTree(CommonUtils.judgeCompanyAndOrg()));
+    @PostMapping(ControllerConstants.GET_LIST_ROLE)
+    public CommonResponse<PageVo<RoleListVo>> getRoleList(@RequestBody RoleQueryVo queryVo) {
+        Long pageNum = (long) (queryVo.getCurrentPage() > 0 ? queryVo.getCurrentPage() : 1);
+        Long pageSize = (long) (queryVo.getPageSize() > 0 ? queryVo.getPageSize() : 10);
+        Page<RoleListVo> page = new Page<>(pageNum, pageSize);
+        Role role = CommonUtils.copyProperties(queryVo, Role.class);
+        try {
+            role.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        } catch (Exception e) {
+            // 没有登录时，不设置 judgeId
+        }
+        List<Role> roleList = roleService.queryByCondition(role);
+        List<RoleListVo> roleListVos = CommonUtils.convertList(roleList, RoleListVo.class);
+        PageVo<RoleListVo> pageVo = PageMapUtil.getPageMap(roleListVos, page);
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
 }

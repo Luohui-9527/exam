@@ -83,8 +83,20 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.QUERY_LIST_R)
-    public CommonResponse<List<TreeListDto>> getResourceListResource() {
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, resourceService.getQueryList());
+    @PostMapping(ControllerConstants.QUERY_LIST_R)
+    public CommonResponse<PageVo<ResourceListVo>> getResourceList(@RequestBody ResourceQueryVo queryVo) {
+        Long pageNum = (long) (queryVo.getCurrentPage() > 0 ? queryVo.getCurrentPage() : 1);
+        Long pageSize = (long) (queryVo.getPageSize() > 0 ? queryVo.getPageSize() : 10);
+        Page<ResourceListVo> page = new Page<>(pageNum, pageSize);
+        ResourceDto resourceDto = CommonUtils.copyProperties(queryVo, ResourceDto.class);
+        try {
+            resourceDto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        } catch (Exception e) {
+            // 没有登录时，不设置 judgeId
+        }
+        List<Resource> resourceList = resourceService.list(resourceDto);
+        List<ResourceListVo> listVos = CommonUtils.convertList(resourceList, ResourceListVo.class);
+        PageVo<ResourceListVo> pageVo = PageMapUtil.getPageMap(listVos, page);
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
 }

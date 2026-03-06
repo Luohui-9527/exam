@@ -13,7 +13,10 @@ public class PageMapUtil {
         PageVo<T> pageVo = new PageVo<>();
         
         // 计算总记录数
-        long total = list.size();
+        long total = 0;
+        if (list != null) {
+            total = list.size();
+        }
         pageVo.setTotal(total);
         
         // 计算总页数
@@ -29,7 +32,7 @@ public class PageMapUtil {
         
         // 进行分页处理
         List<T> pageList = new java.util.ArrayList<>();
-        if (!list.isEmpty()) {
+        if (list != null && !list.isEmpty()) {
             // 计算起始索引和结束索引
             int startIndex = (int) ((page.getCurrent() - 1) * page.getSize());
             int endIndex = (int) Math.min(startIndex + page.getSize(), total);

@@ -107,11 +107,21 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_LIST_U)
-    public CommonResponse<List<TreeListVo>> queryUserTree() {
-        List<TreeList> treeListDtoList = userService.getQueryListData(CommonUtils.judgeCompanyAndOrg());
-        List<TreeListVo> treeListVos = CommonUtils.convertList(treeListDtoList, TreeListVo.class);
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, treeListVos);
+    @PostMapping(ControllerConstants.GET_LIST_U)
+    public CommonResponse<PageVo<UserListVo>> getUserManagementList(@RequestBody UserQueryVo queryVo) {
+        Long pageNum = (long) (queryVo.getCurrentPage() > 0 ? queryVo.getCurrentPage() : 1);
+        Long pageSize = (long) (queryVo.getPageSize() > 0 ? queryVo.getPageSize() : 10);
+        Page<UserListVo> page = new Page<>(pageNum, pageSize);
+        UserDto userDto = CommonUtils.copyProperties(queryVo, UserDto.class);
+        try {
+            userDto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        } catch (Exception e) {
+            // 没有登录时，不设置 judgeId
+        }
+        List<User> userList = userService.queryByCondition(userDto);
+        List<UserListVo> userListVoList = CommonUtils.convertList(userList, UserListVo.class);
+        PageVo<UserListVo> pageVo = PageMapUtil.getPageMap(userListVoList, page);
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
 
 

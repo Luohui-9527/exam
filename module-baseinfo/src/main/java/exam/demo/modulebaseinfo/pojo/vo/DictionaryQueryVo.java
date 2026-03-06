@@ -1,5 +1,6 @@
 package exam.demo.modulebaseinfo.pojo.vo;
 
+import exam.demo.modulecommon.common.BaseQueryVo;
 import java.io.Serializable;
 
 /**

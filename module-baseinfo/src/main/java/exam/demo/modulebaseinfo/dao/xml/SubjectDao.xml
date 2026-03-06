@@ -10,13 +10,13 @@
         <if test="name != null and name != ''">
             AND a.name LIKE CONCAT('%',#{name},'%')
         </if>
-        <if test="subjectTypeId != null and subjectTypeId != ''">
+        <if test="subjectTypeId != null">
             AND a.subject_type_id = #{subjectTypeId}
         </if>
-        <if test="categoryId != null and categoryId != ''">
+        <if test="categoryId != null">
             AND a.category_id = #{categoryId}
         </if>
-        <if test="difficulty != null and difficulty != ''">
+        <if test="difficulty != null">
             AND a.difficulty = #{difficulty}
         </if>
         <if test="judgeId != null">
@@ -34,10 +34,10 @@
         <if test="name != null and name != ''">
             AND a.name LIKE CONCAT('%',#{name},'%')
         </if>
-        <if test="subjectTypeId != null and subjectTypeId != ''">
+        <if test="subjectTypeId != null">
             AND a.subject_type_id = #{subjectTypeId}
         </if>
-        <if test="difficulty != null and difficulty != ''">
+        <if test="difficulty != null">
             AND a.difficulty = #{difficulty}
         </if>
         <if test="judgeId != null">

@@ -45,4 +45,23 @@
         WHERE a.role_id = b.role_id AND b.user_id = c.id AND d.id = a.resource_id AND c.id = #{id}
         ORDER BY id
     </select>
+
+    <select id="queryByCondition" resultType="exam.demo.moduleuser.pojo.model.User">
+        SELECT * FROM user
+        <where>
+            <if test="code != null and code != ''">
+                AND code LIKE CONCAT('%', #{code}, '%')
+            </if>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="judgeId != null">
+                AND company_id = #{judgeId}
+            </if>
+        </where>
+        ORDER BY updated_time DESC
+    </select>
 </mapper>
