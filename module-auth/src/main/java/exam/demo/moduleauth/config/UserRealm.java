@@ -12,10 +12,10 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.lang.util.ByteSource;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.lang.util.ByteSource;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -85,8 +85,9 @@ public class UserRealm extends AuthorizingRealm {
         //加密次数
         int hashIterations = 32;
 
-        ByteSource credentialsSalt = ByteSource.Util.bytes("肖又铭");
+        // 测试数据中ALB001用户的name是"张三"
+        ByteSource credentialsSalt = ByteSource.Util.bytes("张三");
         Object obj = new SimpleHash(hashAlgorithName, password, credentialsSalt, hashIterations);
-        System.out.println(obj);
+        System.out.println("ALB001用户的加密密码: " + obj);
     }
 }

@@ -198,6 +198,7 @@ org:
         - /user/department/queryDepartmentParent
         - /user/usermanagement/queryUserManagementRole
         - /paper/template/query
+        - /paper/maintain/queryPaper
         - /paper/create/standard/gen
         - /exam/exampublishrecord/getpaperinfo
         - /exam/exampublishrecord/getuserinfo

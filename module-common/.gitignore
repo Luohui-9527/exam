@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Log files
+*.log
+
+# SQL files
+*.sql
+
+# Zip files
+*.zip

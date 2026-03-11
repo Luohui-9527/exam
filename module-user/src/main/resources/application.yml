@@ -37,9 +37,13 @@ spring:
   logging:
     level:
       # 打印MyBatis SQL日志
-      exam.demo.moduleuser.dao: debug
+      exam.demo.moduleuser.mapper: debug
       # 打印JDBC日志
       java.sql: debug
+      # 打印MyBatis框架日志
+      org.apache.ibatis: debug
+      # 打印事务日志
+      org.springframework.jdbc: debug
 server:
   #port: ${random.int[10000,65535]}
   servlet:
