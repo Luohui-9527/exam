@@ -1,6 +1,6 @@
 package exam.demo.modulecommon.logging;
 
-import exam.demo.modulecommon.common.CommonRequest;
+
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.exception.StarterException;
@@ -38,6 +38,17 @@ public class LoggingAspect {
         if (requestAttributes != null) {
             HttpServletRequest request = requestAttributes.getRequest();
             log.info("\n\n\n请求的方法为:{}\n",joinPoint.getSignature().getName());
+            
+            // 从请求头中获取版本号进行校验
+            String requestVersion = request.getHeader("version");
+            if (version != null && !version.equals(requestVersion)){
+                throw new StarterException(StarterError.SYSTEM_VERSION_NOT_MATCH);
+            }
+            
+            // 从请求头中获取token
+            String token = request.getHeader("X-Token");
+            log.info("\n请求token为: {}\n", token);
+            
             if (request != null && GET.equals(request.getMethod())){
                 return;
             }
@@ -46,12 +57,6 @@ public class LoggingAspect {
             for (Object o : arg) {
                 if (o != null) {
                     log.info("\n请求参数为: {}\n\n",o.toString());
-                    if (o instanceof CommonRequest){
-                        // 版本不匹配
-                        if (version != null && !version.equals(((CommonRequest) o).getVersion())){
-                            throw new StarterException(StarterError.SYSTEM_VERSION_NOT_MATCH);
-                        }
-                    }
                 }
             }
         }

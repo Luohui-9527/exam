@@ -1,15 +1,22 @@
 package exam.demo.moduleuser.pojo.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author luohui
  * @version V1.0.0
  * @date 2019/8/28
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class ResourceListVo extends BaseVo implements Serializable {
     private static final long serialVersionUID = 4163387454235973715L;
     /**
@@ -57,12 +64,12 @@ public class ResourceListVo extends BaseVo implements Serializable {
     /**
      * 资源类型
      */
-    private Byte resourceType;
+    private Long resourceType;
 
     /**
      * 叶子节点
      */
-    private Byte leaf;
+    private Long leaf;
 
     /**
      * 备注
@@ -72,122 +79,22 @@ public class ResourceListVo extends BaseVo implements Serializable {
     /**
      * 状态位
      */
-    private Byte status;
+    private Long status;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createdTime;
+
+    /**
+     * 修改时间
+     */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updatedTime;
 
     public ResourceListVo() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getOpenImg() {
-        return openImg;
-    }
-
-    public void setOpenImg(String openImg) {
-        this.openImg = openImg;
-    }
-
-    public String getCloseImg() {
-        return closeImg;
-    }
-
-    public void setCloseImg(String closeImg) {
-        this.closeImg = closeImg;
-    }
-
-    public Byte getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(Byte resourceType) {
-        this.resourceType = resourceType;
-    }
-
-    public Byte getLeaf() {
-        return leaf;
-    }
-
-    public void setLeaf(Byte leaf) {
-        this.leaf = leaf;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "ResourceListVo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", orderIndex=" + orderIndex +
-                ", parentId=" + parentId +
-                ", url='" + url + '\'' +
-                ", openImg='" + openImg + '\'' +
-                ", closeImg='" + closeImg + '\'' +
-                ", resourceType=" + resourceType +
-                ", leaf=" + leaf +
-                ", remark='" + remark + '\'' +
-                ", status=" + status +
-                '}';
-    }
-
-    public Long getOrderIndex() {
-        return orderIndex;
-    }
-
-    public void setOrderIndex(Long orderIndex) {
-        this.orderIndex = orderIndex;
     }
 }

@@ -1,7 +1,10 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.*;
+import exam.demo.modulecommon.common.CommonResponse;
+import exam.demo.modulecommon.common.CommonState;
+import exam.demo.modulecommon.common.PageVo;
+import exam.demo.modulecommon.common.UserDto;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
@@ -9,9 +12,11 @@ import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.RoleDto;
 import exam.demo.moduleuser.dto.UserOptionsDto;
 import exam.demo.moduleuser.dto.UserRoleDto;
-import exam.demo.moduleuser.pojo.model.TreeList;
 import exam.demo.moduleuser.pojo.model.User;
-import exam.demo.moduleuser.pojo.vo.*;
+import exam.demo.moduleuser.pojo.vo.RoleListVo;
+import exam.demo.moduleuser.pojo.vo.UserItemVo;
+import exam.demo.moduleuser.pojo.vo.UserListVo;
+import exam.demo.moduleuser.pojo.vo.UserQueryVo;
 import exam.demo.moduleuser.service.IPositionService;
 import exam.demo.moduleuser.service.IRoleService;
 import exam.demo.moduleuser.service.IUserService;
@@ -52,16 +57,16 @@ public class UserController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_U)
-    public CommonResponse<Boolean> saveUser(@RequestBody @Valid CommonRequest<UserItemVo> request) {
-        UserDto userDto = CommonUtils.copyProperties(request.getData(), UserDto.class);
+    public CommonResponse<Boolean> saveUser(@RequestBody @Valid UserItemVo request) {
+        UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userService.save(userDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_U)
-    public CommonResponse<Boolean> updateUser(@RequestBody @Valid CommonRequest<UserItemVo> request) {
-        UserDto userDto = CommonUtils.copyProperties(request.getData(), UserDto.class);
+    public CommonResponse<Boolean> updateUser(@RequestBody @Valid UserItemVo request) {
+        UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userDto.setOldVersion(userDto.getVersion());
         userService.update(userDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -69,26 +74,26 @@ public class UserController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_U)
-    public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid CommonRequest<Long> request) {
-        User user = userService.getById(request.getData());
+    public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid Long request) {
+        User user = userService.getById(request);
         UserListVo userListVo = CommonUtils.copyProperties(user, UserListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userListVo);
     }
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_U)
-    public CommonResponse<Boolean> deleteUser(@RequestBody @Valid CommonRequest<List<UserItemVo>> request) {
-        List<UserDto> userDtoList = CommonUtils.convertList(request.getData(), UserDto.class);
+    public CommonResponse<Boolean> deleteUser(@RequestBody @Valid List<UserItemVo> request) {
+        List<UserDto> userDtoList = CommonUtils.convertList(request, UserDto.class);
         userService.delete(userDtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_U)
-    public CommonResponse<PageVo<UserListVo>> queryUser(@RequestBody @Valid CommonRequest<UserQueryVo> request) {
-        UserDto userDto = CommonUtils.copyProperties(request.getData(), UserDto.class);
+    public CommonResponse<PageVo<UserListVo>> queryUser(@RequestBody @Valid UserQueryVo request) {
+        UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userDto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
-        Page<UserListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+        Page<UserListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         List<User> userList = userService.queryByCondition(userDto);
         List<UserListVo> userListVoList = CommonUtils.convertList(userList, UserListVo.class);
         PageVo<UserListVo> pageVo = PageMapUtil.getPageMap(userListVoList, page);
@@ -127,8 +132,8 @@ public class UserController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.ALLOC_USER)
-    public CommonResponse<Boolean> allocRoleUser(@RequestBody @Valid CommonRequest<UserRoleDto> request) {
-        userService.addRoleForUser(request.getData());
+    public CommonResponse<Boolean> allocRoleUser(@RequestBody @Valid UserRoleDto request) {
+        userService.addRoleForUser(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
@@ -140,15 +145,15 @@ public class UserController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_USER_ROLE)
-    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody CommonRequest<Long> commonRequest) {
-        List<RoleDto> roleDtoList = userService.queryRoleOfUser(commonRequest.getData());
+    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody Long commonRequest) {
+        List<RoleDto> roleDtoList = userService.queryRoleOfUser(commonRequest);
         List<RoleListVo> roleListVoList = CommonUtils.convertList(roleDtoList, RoleListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, roleListVoList);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.EXIST_CODE)
-    public CommonResponse<Boolean> existCode(@RequestBody CommonRequest<String> code) {
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userService.notExistCode(code.getData()));
+    public CommonResponse<Boolean> existCode(@RequestBody String code) {
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userService.notExistCode(code));
     }
 }

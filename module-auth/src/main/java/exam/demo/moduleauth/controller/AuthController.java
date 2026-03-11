@@ -6,11 +6,11 @@ import exam.demo.moduleauth.pojo.dto.UserDto;
 import exam.demo.moduleauth.pojo.model.UserInfo;
 import exam.demo.moduleauth.pojo.vo.UserVo;
 import exam.demo.moduleauth.service.LoginService;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
+import exam.demo.modulecommon.utils.TokenUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -53,23 +53,22 @@ public class AuthController {
 
     @MethodEnhancer
     @PostMapping(value = "/getInfo")
-    public CommonResponse<UserInfo> getInfo(@RequestBody CommonRequest request) {
-        String token = request.getToken();
+    public CommonResponse<UserInfo> getInfo() {
+        String token = TokenUtils.getToken();
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.getUserInfo(token));
     }
 
     @MethodEnhancer
     @PostMapping(value = "/getMenu")
-    public CommonResponse<List> getMenu(@RequestBody CommonRequest request) {
-        String token = request.getToken();
+    public CommonResponse<List> getMenu() {
+        String token = TokenUtils.getToken();
         List list = loginService.getUserMenu(token);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, list);
     }
 
     @MethodEnhancer
     @RequestMapping(value = "/logout")
-    public CommonResponse<Boolean> logout(@RequestBody CommonRequest<List<Long>> commonRequest) throws Exception {
-        List<Long> ids = commonRequest.getData();
+    public CommonResponse<Boolean> logout(@RequestBody List<Long> ids) throws Exception {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.logout(ids));
     }
 

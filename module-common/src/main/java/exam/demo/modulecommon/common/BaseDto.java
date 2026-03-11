@@ -1,6 +1,7 @@
 package exam.demo.modulecommon.common;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * DTO基类，token属性便于切面提取公共字段
@@ -9,6 +10,7 @@ import lombok.Data;
  * @version 1.0
  * @since 2019-08-23
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class BaseDto extends CommonField {
     /**

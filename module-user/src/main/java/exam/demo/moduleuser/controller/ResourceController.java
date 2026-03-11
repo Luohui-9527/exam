@@ -1,7 +1,7 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
+
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -39,24 +39,24 @@ public class ResourceController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_R)
-    public CommonResponse<Boolean> saveResource(@RequestBody @Valid CommonRequest<ResourceItemVo> request) {
-        ResourceDto resourceDto = CommonUtils.copyProperties(request.getData(), ResourceDto.class);
+    public CommonResponse<Boolean> saveResource(@RequestBody @Valid ResourceItemVo request) {
+        ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
         resourceService.save(resourceDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_R)
-    public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody CommonRequest<Long> request) {
-        Resource resource = resourceService.getById(request.getData());
+    public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody Long request) {
+        Resource resource = resourceService.getById(request);
         ResourceListVo resourceListVo = CommonUtils.copyProperties(resource, ResourceListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, resourceListVo);
     }
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_R)
-    public CommonResponse<Boolean> deleteResource(@RequestBody CommonRequest<List<ResourceItemVo>> request) {
-        List<Resource> resourceList = CommonUtils.convertList(request.getData(), Resource.class);
+    public CommonResponse<Boolean> deleteResource(@RequestBody List<ResourceItemVo> request) {
+        List<Resource> resourceList = CommonUtils.convertList(request, Resource.class);
         resourceService.delete(resourceList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -64,8 +64,8 @@ public class ResourceController {
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_R)
-    public CommonResponse<Boolean> updateResource(@RequestBody CommonRequest<ResourceItemVo> request) {
-        ResourceDto resourceDto = CommonUtils.copyProperties(request.getData(), ResourceDto.class);
+    public CommonResponse<Boolean> updateResource(@RequestBody ResourceItemVo request) {
+        ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
         resourceDto.setOldVersion(resourceDto.getVersion());
         resourceService.update(resourceDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -73,9 +73,9 @@ public class ResourceController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_R)
-    public CommonResponse<PageVo<ResourceListVo>> queryResource(@RequestBody CommonRequest<ResourceQueryVo> request) {
-        ResourceDto resourceDto = CommonUtils.copyProperties(request.getData(), ResourceDto.class);
-        Page<ResourceListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+    public CommonResponse<PageVo<ResourceListVo>> queryResource(@RequestBody ResourceQueryVo request) {
+        ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
+        Page<ResourceListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         List<Resource> resourceList = resourceService.list(resourceDto);
         List<ResourceListVo> listVos = CommonUtils.convertList(resourceList, ResourceListVo.class);
         PageVo<ResourceListVo> pageVo = PageMapUtil.getPageMap(listVos, page);

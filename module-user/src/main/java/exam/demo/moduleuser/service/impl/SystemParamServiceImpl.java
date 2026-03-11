@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.common.BaseDataDto;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.constant.MagicPointConstant;
@@ -106,10 +105,9 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
             map.put(param.getParamType(), null);
         }
         BaseDataDto baseDataDto = new BaseDataDto(map);
-        CommonRequest<BaseDataDto> request = new CommonRequest<>(state.getVersion(), TokenUtils.getToken(), baseDataDto);
         CommonResponse<BaseDataDto> response;
         try {
-            response = baseInfoApi.getBaseDataS(request);
+            response = baseInfoApi.getBaseDataS(baseDataDto);
         } catch (Exception e) {
             throw new StarterException(StarterError.SYSTEM_RPC_ERROR);
         }

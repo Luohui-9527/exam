@@ -1,7 +1,6 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -38,16 +37,16 @@ public class SystemParamController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_SP)
-    public CommonResponse<Boolean> saveSystemParam(@RequestBody @Valid CommonRequest<SystemParamItemVo> request) {
-        SystemParamDto systemParamDto = CommonUtils.copyProperties(request.getData(), SystemParamDto.class);
+    public CommonResponse<Boolean> saveSystemParam(@RequestBody @Valid SystemParamItemVo request) {
+        SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
         systemParamService.save(systemParamDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_SP)
-    public CommonResponse<Boolean> updateSystemParam(@RequestBody @Valid CommonRequest<SystemParamItemVo> request) {
-        SystemParamDto systemParamDto = CommonUtils.copyProperties(request.getData(), SystemParamDto.class);
+    public CommonResponse<Boolean> updateSystemParam(@RequestBody @Valid SystemParamItemVo request) {
+        SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
         systemParamDto.setOldVersion(systemParamDto.getVersion());
         systemParamService.update(systemParamDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -55,17 +54,17 @@ public class SystemParamController {
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_SP)
-    public CommonResponse<Boolean> deleteSystemParam(@RequestBody @Valid CommonRequest<List<SystemParamItemVo>> request) {
-        List<SystemParamDto> systemParamDtoList = CommonUtils.convertList(request.getData(), SystemParamDto.class);
+    public CommonResponse<Boolean> deleteSystemParam(@RequestBody @Valid List<SystemParamItemVo> request) {
+        List<SystemParamDto> systemParamDtoList = CommonUtils.convertList(request, SystemParamDto.class);
         systemParamService.delete(systemParamDtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_SP)
-    public CommonResponse<PageVo<SystemParamListVo>> querySystemParam(@RequestBody @Valid CommonRequest<SystemParamQueryVo> request) {
-        SystemParamDto systemParamDto = CommonUtils.copyProperties(request.getData(), SystemParamDto.class);
-        Page<SystemParamListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+    public CommonResponse<PageVo<SystemParamListVo>> querySystemParam(@RequestBody @Valid SystemParamQueryVo request) {
+        SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
+        Page<SystemParamListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         List<SystemParamListVo> systemParamList = systemParamService.queryByCondition(systemParamDto);
         PageVo<SystemParamListVo> pageVo = PageMapUtil.getPageMap(systemParamList, page);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
@@ -73,8 +72,8 @@ public class SystemParamController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_SP)
-    public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid CommonRequest<Long> request) {
-        SystemParam systemParam = systemParamService.getById(request.getData());
+    public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid Long request) {
+        SystemParam systemParam = systemParamService.getById(request);
         SystemParamListVo systemParamListVo = CommonUtils.copyProperties(systemParam, SystemParamListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, systemParamListVo);
     }

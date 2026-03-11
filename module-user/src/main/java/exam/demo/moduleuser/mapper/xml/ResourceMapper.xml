@@ -9,6 +9,6 @@
                 AND id = #{id} UNION SELECT * FROM resource WHERE parent_id = #{id}
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY id ASC
     </select>
 </mapper>

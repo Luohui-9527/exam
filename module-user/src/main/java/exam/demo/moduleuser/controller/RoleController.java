@@ -1,7 +1,7 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
+
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -51,34 +51,33 @@ public class RoleController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_ROLE)
-    public CommonResponse<Boolean> saveRole(@RequestBody CommonRequest<RoleItemVo> request) {
-        RoleDto roleDto = CommonUtils.copyProperties(request.getData(), RoleDto.class);
+    public CommonResponse<Boolean> saveRole(@RequestBody RoleItemVo request) {
+        RoleDto roleDto = CommonUtils.copyProperties(request, RoleDto.class);
         roleService.save(roleDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_ROLE)
-    public CommonResponse<Boolean> updateRole(@RequestBody CommonRequest<RoleItemVo> request) {
-        RoleDto roleDto = CommonUtils.copyProperties(request.getData(), RoleDto.class);
+    public CommonResponse<Boolean> updateRole(@RequestBody RoleItemVo request) {
+        RoleDto roleDto = CommonUtils.copyProperties(request, RoleDto.class);
         roleService.update(roleDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_ROLE)
-    public CommonResponse<RoleListVo> getUpdateFormRole(@RequestBody CommonRequest<Long> request) {
-        Role role = roleService.getById(request.getData());
+    public CommonResponse<RoleListVo> getUpdateFormRole(@RequestBody Long request) {
+        Role role = roleService.getById(request);
         RoleListVo listVo = CommonUtils.copyProperties(role, RoleListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, listVo);
     }
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_ROLE)
-    public CommonResponse<Boolean> deleteRole(@RequestBody CommonRequest<List<RoleItemVo>> request) {
-        List<RoleItemVo> data = request.getData();
+    public CommonResponse<Boolean> deleteRole(@RequestBody List<RoleItemVo> request) {
         List<RoleDto> roleDtoList = new ArrayList<>();
-        for (RoleItemVo datum : data) {
+        for (RoleItemVo datum : request) {
             roleDtoList.add(RoleDto.builder().id(datum.getId()).build());
         }
         roleService.delete(roleDtoList);
@@ -87,9 +86,9 @@ public class RoleController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_ROLE)
-    public CommonResponse<PageVo<RoleListVo>> queryRole(@RequestBody CommonRequest<RoleQueryVo> request) {
-        Page<RoleListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
-        Role role = CommonUtils.copyProperties(request.getData(), Role.class);
+    public CommonResponse<PageVo<RoleListVo>> queryRole(@RequestBody RoleQueryVo request) {
+        Page<RoleListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
+        Role role = CommonUtils.copyProperties(request, Role.class);
         List<Role> roleList = roleService.queryByCondition(role);
         List<RoleListVo> roleListVos = CommonUtils.convertList(roleList, RoleListVo.class);
         PageVo<RoleListVo> pageVo = PageMapUtil.getPageMap(roleListVos, page);
@@ -104,17 +103,17 @@ public class RoleController {
      */
     @MethodEnhancer
     @PostMapping(ControllerConstants.ALLOC_USER_FOR_ROLE)
-    public CommonResponse<Boolean> allocUserRole(@RequestBody CommonRequest<List<RoleUserVo>> request) {
-        List<RoleUserDto> userDtoList = CommonUtils.convertList(request.getData(), RoleUserDto.class);
+    public CommonResponse<Boolean> allocUserRole(@RequestBody List<RoleUserVo> request) {
+        List<RoleUserDto> userDtoList = CommonUtils.convertList(request, RoleUserDto.class);
         roleService.addUserForRole(userDtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.UPDATE_RESOURCE_FOR_ROLE)
-    public CommonResponse<Boolean> updateResourceForRole(@RequestBody CommonRequest<List<RoleResourceVo>> request) {
-        List<Long> resourceIdList = request.getData().stream().map(RoleResourceVo::getId).collect(Collectors.toList());
-        List<RoleResourceVo> voList = request.getData();
+    public CommonResponse<Boolean> updateResourceForRole(@RequestBody List<RoleResourceVo> request) {
+        List<Long> resourceIdList = request.stream().map(RoleResourceVo::getId).collect(Collectors.toList());
+        List<RoleResourceVo> voList = request;
         // 前端的代码有bug,存储的数据是不断的增加的，因此需要去重
         Set<RoleResourceVo> set = new HashSet<>(voList);
         if (!CommonUtils.isEmpty(set)) {
@@ -136,10 +135,10 @@ public class RoleController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_USER_FOR_ROLE_FORM)
-    public CommonResponse<PageVo<UserForRoleListVo>> getUserRoleForm(@RequestBody CommonRequest<UserAlloctionQueryVo> request) {
-        Role role = CommonUtils.copyProperties(request.getData(), Role.class);
+    public CommonResponse<PageVo<UserForRoleListVo>> getUserRoleForm(@RequestBody UserAlloctionQueryVo request) {
+        Role role = CommonUtils.copyProperties(request, Role.class);
         role.setJudgeId(CommonUtils.judgeCompanyAndOrg());
-        Page<RoleListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+        Page<RoleListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         List<UserForRole> roleList = roleService.queryUserRole(role);
         List<UserForRoleListVo> userForRoleListVoList = CommonUtils.convertList(roleList, UserForRoleListVo.class);
         PageVo<UserForRoleListVo> pageVo = PageMapUtil.getPageMap(userForRoleListVoList, page);
@@ -148,8 +147,8 @@ public class RoleController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_RESOURCE_FOR_ROLE_FORM)
-    public CommonResponse<List> getResourceForRoleForm(@RequestBody CommonRequest<RoleItemVo> request) {
-        RoleDto roleDto = CommonUtils.copyProperties(request.getData(), RoleDto.class);
+    public CommonResponse<List> getResourceForRoleForm(@RequestBody RoleItemVo request) {
+        RoleDto roleDto = CommonUtils.copyProperties(request, RoleDto.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, roleService.queryResourceForRole(roleDto));
     }
 

@@ -1,7 +1,6 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -41,10 +40,10 @@ public class UserOnlineController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_UO)
-    public CommonResponse<PageVo<UserOnlineInfo>> queryUserOnline(@RequestBody @Valid CommonRequest<UserOnlineInfoQueryVo> request) {
-        UserOnlineInfo userOnlineInfo = CommonUtils.copyProperties(request.getData(), UserOnlineInfo.class);
+    public CommonResponse<PageVo<UserOnlineInfo>> queryUserOnline(@RequestBody @Valid UserOnlineInfoQueryVo request) {
+        UserOnlineInfo userOnlineInfo = CommonUtils.copyProperties(request, UserOnlineInfo.class);
         List<UserOnlineInfo> onlineInfoList = userOnlineInfoService.queryByCondition(userOnlineInfo);
-        Page<UserOnlineInfoListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+        Page<UserOnlineInfoListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         PageVo<UserOnlineInfo> pageVo = PageMapUtil.getPageMap(onlineInfoList, page);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
@@ -52,8 +51,8 @@ public class UserOnlineController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_ALL)
-    public CommonResponse<List> queryAllUserOnline(@RequestBody CommonRequest<UserOnlineInfoQueryVo> request) {
-        UserOnlineInfoDto userOnlineInfoDto = CommonUtils.copyProperties(request.getData(), UserOnlineInfoDto.class);
+    public CommonResponse<List> queryAllUserOnline(@RequestBody UserOnlineInfoQueryVo request) {
+        UserOnlineInfoDto userOnlineInfoDto = CommonUtils.copyProperties(request, UserOnlineInfoDto.class);
         userOnlineInfoDto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
         List<UserOnlineInfoDto> userOnlineInfoDtoList = userOnlineInfoService.queryAllByCondition(userOnlineInfoDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, CommonUtils.convertList(userOnlineInfoDtoList, UserOnlineInfoListVo.class));
@@ -62,8 +61,8 @@ public class UserOnlineController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.OFFLINE)
-    public CommonResponse<Boolean> kick(@RequestBody CommonRequest<List<Long>> request) {
-        loginService.logout(request.getData());
+    public CommonResponse<Boolean> kick(@RequestBody List<Long> request) {
+        loginService.logout(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 }

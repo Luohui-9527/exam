@@ -67,3 +67,7 @@ eureka:
 #    non-secure-port: 8775
 ribbon:
   ReadTimeout: 2000
+
+mybatis-plus:
+  mapper-locations: classpath:exam/demo/moduleuser/mapper/xml/*.xml
+  type-aliases-package: exam.demo.moduleuser.pojo.model

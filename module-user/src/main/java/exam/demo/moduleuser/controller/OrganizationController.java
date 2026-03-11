@@ -1,7 +1,6 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -38,8 +37,8 @@ public class OrganizationController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_O)
-    public CommonResponse<Boolean> saveOrganization(@RequestBody @Valid CommonRequest<OrganizationItemVo> request) {
-        OrganizationDto organizationDto = CommonUtils.copyProperties(request.getData(), OrganizationDto.class);
+    public CommonResponse<Boolean> saveOrganization(@RequestBody @Valid OrganizationItemVo request) {
+        OrganizationDto organizationDto = CommonUtils.copyProperties(request, OrganizationDto.class);
         organizationService.save(organizationDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -47,8 +46,8 @@ public class OrganizationController {
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_O)
-    public CommonResponse<Boolean> deleteOrganization(@RequestBody @Valid CommonRequest<List<OrganizationItemVo>> request) {
-        List<OrganizationDto> dtoList = CommonUtils.convertList(request.getData(), OrganizationDto.class);
+    public CommonResponse<Boolean> deleteOrganization(@RequestBody @Valid List<OrganizationItemVo> request) {
+        List<OrganizationDto> dtoList = CommonUtils.convertList(request, OrganizationDto.class);
         organizationService.delete(dtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -56,8 +55,8 @@ public class OrganizationController {
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_O)
-    public CommonResponse<Boolean> updateOrganization(@RequestBody @Valid CommonRequest<OrganizationItemVo> request) {
-        OrganizationDto organizationDto = CommonUtils.copyProperties(request.getData(), OrganizationDto.class);
+    public CommonResponse<Boolean> updateOrganization(@RequestBody @Valid OrganizationItemVo request) {
+        OrganizationDto organizationDto = CommonUtils.copyProperties(request, OrganizationDto.class);
         organizationDto.setOldVersion(organizationDto.getVersion());
         organizationService.update(organizationDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -65,9 +64,9 @@ public class OrganizationController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_O)
-    public CommonResponse<PageVo<OrganizationListVo>> queryOrganization(@RequestBody CommonRequest<OrganizationQueryVo> request) {
-        OrganizationDto dto = CommonUtils.copyProperties(request.getData(), OrganizationDto.class);
-        Page<OrganizationListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+    public CommonResponse<PageVo<OrganizationListVo>> queryOrganization(@RequestBody OrganizationQueryVo request) {
+        OrganizationDto dto = CommonUtils.copyProperties(request, OrganizationDto.class);
+        Page<OrganizationListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         List<Organization> organizationList = organizationService.list(dto);
         List<OrganizationListVo> listVos = CommonUtils.convertList(organizationList, OrganizationListVo.class);
         PageVo<OrganizationListVo> pageVo = PageMapUtil.getPageMap(listVos, page);
@@ -76,8 +75,8 @@ public class OrganizationController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF)
-    public CommonResponse<OrganizationListVo> getUpdateFormOrganization(@RequestBody CommonRequest<Long> request) {
-        Organization organization = organizationService.getById(request.getData());
+    public CommonResponse<OrganizationListVo> getUpdateFormOrganization(@RequestBody Long request) {
+        Organization organization = organizationService.getById(request);
         OrganizationListVo organizationListVo = CommonUtils.copyProperties(organization, OrganizationListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, organizationListVo);
     }

@@ -1,5 +1,6 @@
 package exam.demo.moduleauth.pojo.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -87,5 +88,6 @@ public class Role implements Serializable {
     @ApiModelProperty(value = "版本")
     private Long version;
 
+    @TableField(exist = false)
     private Set<Resource> resources = new HashSet<>();
 }

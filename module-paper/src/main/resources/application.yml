@@ -61,3 +61,7 @@ eureka:
 
 ribbon:
   ReadTimeout: 2000
+
+mybatis-plus:
+  mapper-locations: classpath:exam/demo/modulepaper/mapper/xml/*.xml
+  type-aliases-package: exam.demo.modulepaper.pojo.model

@@ -97,8 +97,8 @@ public class ExamPublishRecordController {
      */
     @MethodEnhancer
     @RequestMapping(value = "save")
-    public CommonResponse<Boolean> save(@RequestBody @Valid CommonRequest<ExamPublishRecordPublishFormVO> commonRequest) {
-        ExamPublishRecordPublishFormDTO examPublishRecordPublishFormDTO = CommonUtils.copyProperties(commonRequest.getData(), ExamPublishRecordPublishFormDTO.class);
+    public CommonResponse<Boolean> save(@RequestBody @Valid ExamPublishRecordPublishFormVO commonRequest) {
+        ExamPublishRecordPublishFormDTO examPublishRecordPublishFormDTO = CommonUtils.copyProperties(commonRequest, ExamPublishRecordPublishFormDTO.class);
         if (examPublishRecordService.addExamPublishRecord(examPublishRecordPublishFormDTO)) {
             if (paperApi.publishPaper(examPublishRecordPublishFormDTO.getPaperId()).getCode().equals(state.SUCCESS)) {
                 return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -115,9 +115,9 @@ public class ExamPublishRecordController {
      */
     @MethodEnhancer
     @RequestMapping(value = "del")
-    public CommonResponse<Boolean> del(@RequestBody @Valid CommonRequest<List<ExamPublishRecordDeleteFormVO>> commonRequest) {
+    public CommonResponse<Boolean> del(@RequestBody @Valid List<ExamPublishRecordDeleteFormVO> commonRequest) {
 
-        List<ExamPublishRecordDeleteFormDTO> dtoList = CommonUtils.convertList(commonRequest.getData(), ExamPublishRecordDeleteFormDTO.class);
+        List<ExamPublishRecordDeleteFormDTO> dtoList = CommonUtils.convertList(commonRequest, ExamPublishRecordDeleteFormDTO.class);
         if (examPublishRecordService.deleteExamPublishRecord(dtoList)) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
         }
@@ -133,8 +133,8 @@ public class ExamPublishRecordController {
      */
     @MethodEnhancer
     @RequestMapping(value = "update")
-    public CommonResponse<Boolean> update(@RequestBody @Valid CommonRequest<ExamPublishRecordEditFormVO> commonRequest) {
-        ExamPublishRecordEditFormDTO dto = CommonUtils.copyProperties(commonRequest.getData(), ExamPublishRecordEditFormDTO.class);
+    public CommonResponse<Boolean> update(@RequestBody @Valid ExamPublishRecordEditFormVO commonRequest) {
+        ExamPublishRecordEditFormDTO dto = CommonUtils.copyProperties(commonRequest, ExamPublishRecordEditFormDTO.class);
         if (examPublishRecordService.updateExamPublishRecord(dto)) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
         }
@@ -143,10 +143,10 @@ public class ExamPublishRecordController {
 
     @MethodEnhancer
     @PostMapping(value = "getpaperinfo")
-    public CommonResponse<Collection> getPaperInfo(@RequestBody CommonRequest<String> commonRequest) {
+    public CommonResponse<Collection> getPaperInfo(@RequestBody String commonRequest) {
         UserPermission userPermission = TokenUtils.getUser();
         FuzzySearch queryPaperInfoDTO = new FuzzySearch();
-        queryPaperInfoDTO.setPaperName(commonRequest.getData());
+        queryPaperInfoDTO.setPaperName(commonRequest);
         queryPaperInfoDTO.setCompanyId(userPermission.getCompanyId());
         Collection<PaperIdWithName> list = RPCUtils.parseCollectionTypeResponse(paperApi.fuzzySearchByPaperName(queryPaperInfoDTO), PaperIdWithName.class, RPCUtils.PAPER);
         Collection<IdAndName> idAndNames = new ArrayList<>();
@@ -158,11 +158,10 @@ public class ExamPublishRecordController {
 
     @MethodEnhancer
     @RequestMapping(value = "getuserinfo", method = RequestMethod.POST)
-    public CommonResponse<Collection> getUserInfo(@RequestBody CommonRequest<String> commonRequest) {
+    public CommonResponse<Collection> getUserInfo(@RequestBody String commonRequest) {
         UserPermission userPermission = TokenUtils.getUser();
-        CommonRequest<UserDto> request = new CommonRequest<>();
         UserDto queryExaminersInfoDTO = new UserDto();
-        queryExaminersInfoDTO.setName(commonRequest.getData());
+        queryExaminersInfoDTO.setName(commonRequest);
         queryExaminersInfoDTO.setCompanyId(userPermission.getCompanyId());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, RPCUtils.parseCollectionTypeResponse(userApi.queryScoringOfficer(queryExaminersInfoDTO), UserDto.class, RPCUtils.USER));
     }
@@ -179,7 +178,7 @@ public class ExamPublishRecordController {
             StringBuffer examiners = new StringBuffer();
             //去用户服务获取姓名
             for (Long id : ids) {
-                return getPublisherName(id);
+                names.add(getPublisherName(id));
             }
             for (String name : names) {
                 examiners.append(name + ";");

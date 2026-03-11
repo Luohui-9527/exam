@@ -1,7 +1,6 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulecommon.common.CommonRequest;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -39,16 +38,16 @@ public class PositionController {
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.SAVE_P)
-    public CommonResponse<Boolean> savePosition(@RequestBody @Valid CommonRequest<PositionItemVo> request) {
-        PositionDto positionDto = CommonUtils.copyProperties(request.getData(), PositionDto.class);
+    public CommonResponse<Boolean> savePosition(@RequestBody @Valid PositionItemVo request) {
+        PositionDto positionDto = CommonUtils.copyProperties(request, PositionDto.class);
         positionService.save(positionDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PutMapping(ControllerConstants.UPDATE_P)
-    public CommonResponse<Boolean> updatePosition(@RequestBody @Valid CommonRequest<PositionItemVo> request) {
-        PositionDto positionDto = CommonUtils.copyProperties(request.getData(), PositionDto.class);
+    public CommonResponse<Boolean> updatePosition(@RequestBody @Valid PositionItemVo request) {
+        PositionDto positionDto = CommonUtils.copyProperties(request, PositionDto.class);
         positionDto.setOldVersion(positionDto.getVersion());
         positionService.update(positionDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -56,26 +55,26 @@ public class PositionController {
 
     @MethodEnhancer
     @DeleteMapping(ControllerConstants.DEL_P)
-    public CommonResponse<Boolean> deletePosition(@RequestBody @Valid CommonRequest<List<PositionItemVo>> request) {
-        List<Position> positionList = CommonUtils.convertList(request.getData(), Position.class);
+    public CommonResponse<Boolean> deletePosition(@RequestBody @Valid List<PositionItemVo> request) {
+        List<Position> positionList = CommonUtils.convertList(request, Position.class);
         positionService.delete(positionList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.GET_UF_P)
-    public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid CommonRequest<Long> request) {
-        Position position = positionService.getById(request.getData());
+    public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid Long request) {
+        Position position = positionService.getById(request);
         PositionListVo positionListVo = CommonUtils.copyProperties(position, PositionListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, positionListVo);
     }
 
     @MethodEnhancer
     @PostMapping(ControllerConstants.QUERY_P)
-    public CommonResponse<PageVo<PositionListVo>> queryPosition(@RequestBody @Valid CommonRequest<PositionQueryVo> request) {
-        Position position = CommonUtils.copyProperties(request.getData(), Position.class);
+    public CommonResponse<PageVo<PositionListVo>> queryPosition(@RequestBody @Valid PositionQueryVo request) {
+        Position position = CommonUtils.copyProperties(request, Position.class);
         position.setJudgeId(CommonUtils.judgeCompanyAndOrg());
-        Page<PositionListVo> page = new Page<>(request.getData().getCurrentPage(), request.getData().getTotalPages());
+        Page<PositionListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
         List<Position> positionList = positionService.list(position);
         List<PositionListVo> listVos = CommonUtils.convertList(positionList, PositionListVo.class);
         PageVo<PositionListVo> pageVo = PageMapUtil.getPageMap(listVos, page);

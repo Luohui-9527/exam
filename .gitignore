@@ -52,3 +52,6 @@ build/
 
 # Zip files
 *.zip
+
+# Temporary files
+*.tmp

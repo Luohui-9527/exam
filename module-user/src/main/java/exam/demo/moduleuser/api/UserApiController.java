@@ -1,7 +1,10 @@
 package exam.demo.moduleuser.api;
 
 
-import exam.demo.modulecommon.common.*;
+import exam.demo.modulecommon.common.CommonResponse;
+import exam.demo.modulecommon.common.CommonState;
+import exam.demo.modulecommon.common.CompanyAndUserVo;
+import exam.demo.modulecommon.common.UserDto;
 import exam.demo.moduleuser.constant.ApiConstant;
 import exam.demo.moduleuser.service.ICompanyService;
 import exam.demo.moduleuser.service.IUserService;
@@ -35,8 +38,8 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_USER_NAME)
-    public CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody CommonRequest<List<Long>> request) {
-        CompanyAndUserVo res = userService.getUserData(request.getData());
+    public CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody List<Long> request) {
+        CompanyAndUserVo res = userService.getUserData(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, res);
     }
 
@@ -47,8 +50,8 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_USER_NAME_BY_ID)
-    public CommonResponse<String> getUserNameById(@RequestBody CommonRequest<Long> request) {
-        String name = userService.getUserName(request.getData());
+    public CommonResponse<String> getUserNameById(@RequestBody Long request) {
+        String name = userService.getUserName(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, name);
     }
 
@@ -59,8 +62,8 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_SCORING_OFFICER)
-    public CommonResponse<List<UserDto>> queryScoringOfficer(@RequestBody CommonRequest<UserDto> request) {
-        List<UserDto> userDtoList = userService.queryScoringOfficerList(request.getData());
+    public CommonResponse<List<UserDto>> queryScoringOfficer(@RequestBody UserDto request) {
+        List<UserDto> userDtoList = userService.queryScoringOfficerList(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userDtoList);
     }
 
@@ -71,8 +74,8 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_ID_BY_NAME)
-    public CommonResponse<Long> getUserIdByName(@RequestBody CommonRequest<String> request) {
-        Long mostPossibleId = userService.getMostPossibleUserId(request.getData());
+    public CommonResponse<Long> getUserIdByName(@RequestBody String request) {
+        Long mostPossibleId = userService.getMostPossibleUserId(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, mostPossibleId);
     }
 
@@ -83,8 +86,8 @@ public class UserApiController {
      * @return
      */
     @PostMapping(ApiConstant.GET_COMPANY_NAME)
-    public CommonResponse<String> getCompanyById(@RequestBody CommonRequest<Long> request) {
-        String company = companyService.getNameById(request.getData());
+    public CommonResponse<String> getCompanyById(@RequestBody Long request) {
+        String company = companyService.getNameById(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, company);
     }
 }

@@ -102,11 +102,11 @@ public class JwtUtil {
         map.forEach((k, v) -> resultMap.put(k, v.asString()));
         userPermission.setId(Long.valueOf(resultMap.get(ID)));
         userPermission.setUserName(resultMap.get(USERNAME));
-        // 通过size判断是否存在companyId
-        if (resultMap.size() > 6) {
+        // 直接检查字段是否存在
+        if (resultMap.containsKey(ORGANIZATION_ID) && resultMap.get(ORGANIZATION_ID) != null) {
             userPermission.setOrgId(Long.valueOf(resultMap.get(ORGANIZATION_ID)));
         }
-        if (resultMap.size() > 7) {
+        if (resultMap.containsKey(COMPANY_ID) && resultMap.get(COMPANY_ID) != null) {
             userPermission.setCompanyId(Long.valueOf(resultMap.get(COMPANY_ID)));
         }
         userPermission.setUserOnlineId(Long.valueOf(resultMap.get(USERONLINE_ID)));
