@@ -182,6 +182,7 @@ org:
         - /user/department/getDepartmentUpdateForm
         - /user/resource/getResourceList
         - /user/resource/getResourceUpdateForm
+        - /user/resource/getAllResource
         - /user/role/getRoleList
         - /user/usermanagement/existCode
         - /user/role/getRoleUpdateForm

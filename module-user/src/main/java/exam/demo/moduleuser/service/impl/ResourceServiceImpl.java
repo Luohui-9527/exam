@@ -82,6 +82,12 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         return this.listByIds(idList);
     }
 
+    @Override
+    public List<TreeListDto> getAllResource() {
+        List<Resource> resourceList = list();
+        return CommonUtils.convertList(resourceList, TreeListDto.class);
+    }
+
     private long getLeafCount(List<Resource> resources) {
         List<Long> parentIdList = resources.stream().map(Resource::getParentId).collect(Collectors.toList());
         QueryWrapper<Resource> wrapper = new QueryWrapper<>();

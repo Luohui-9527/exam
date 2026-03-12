@@ -79,6 +79,9 @@ public class GlobalRequestLogFilter implements GlobalFilter, Ordered {
     }
 
     private DataBuffer stringBuffer(String value) {
+        if (value == null) {
+            value = "";
+        }
         byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
         NettyDataBufferFactory nettyDataBufferFactory = new NettyDataBufferFactory(ByteBufAllocator.DEFAULT);
         DataBuffer buffer = nettyDataBufferFactory.allocateBuffer(bytes.length);

@@ -99,4 +99,11 @@ public class ResourceController {
         PageVo<ResourceListVo> pageVo = PageMapUtil.getPageMap(listVos, page);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
+
+    @MethodEnhancer
+    @PostMapping("/getAllResource")
+    public CommonResponse<List<TreeListDto>> getAllResource() {
+        List<TreeListDto> allResource = resourceService.getAllResource();
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, allResource);
+    }
 }

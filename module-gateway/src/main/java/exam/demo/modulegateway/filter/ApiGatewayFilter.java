@@ -96,7 +96,14 @@ public class ApiGatewayFilter implements GlobalFilter, Ordered {
                 for (Object value : resourceMap.values()) {
                     uriList.add(value.toString());
                 }
+                // 检查完整路径
                 if (uriList.contains(uri)) {
+                    resourceCache.put(userId, resourceMap);
+                    return chain.filter(exchange);
+                }
+                // 检查去除/user前缀的路径
+                String uriWithoutUser = uri.replace("/user", "");
+                if (uriList.contains(uriWithoutUser)) {
                     resourceCache.put(userId, resourceMap);
                     return chain.filter(exchange);
                 }

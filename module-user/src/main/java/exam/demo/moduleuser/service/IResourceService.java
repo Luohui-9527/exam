@@ -76,4 +76,13 @@ public interface IResourceService extends IService<Resource> {
      * @date: 2021-12-9
      */
     List<Resource> listByIdList(List<Long> idList);
+
+    /**
+     * 获取所有资源
+     *
+     * @return: java.util.List<exam.demo.moduleuser.dto.TreeListDto>
+     * @Author: luohui
+     * @date: 2026-03-12
+     */
+    List<TreeListDto> getAllResource();
 }
