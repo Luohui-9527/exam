@@ -2,6 +2,7 @@ package exam.demo.moduleuser.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.enums.EnumOperation;
 import exam.demo.modulecommon.exception.StarterError;
@@ -118,7 +119,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
             // 查该机构下的所有公司
             List<Company> companyList = companyService.queryCompany(CompanyDto.builder().orgId(userPermission.getOrgId()).build());
             List<Long> companyIdList = companyList.stream().map(Company::getId).collect(Collectors.toList());
-            if (CommonUtils.isEmpty(companyIdList)) {
+            if (CollUtil.isEmpty(companyIdList)) {
                 return null;
             }
             List<Position> positionList = baseMapper.listByCompanyId(companyIdList);

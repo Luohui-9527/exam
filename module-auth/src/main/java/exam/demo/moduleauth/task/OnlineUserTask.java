@@ -1,11 +1,11 @@
 package exam.demo.moduleauth.task;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import exam.demo.moduleauth.mapper.UserOnlineInfoMapper;
 import exam.demo.moduleauth.pojo.model.UserOnlineInfo;
 import exam.demo.moduleauth.service.IUserOnlineInfoService;
 import exam.demo.modulecommon.common.CacheConstants;
-import exam.demo.modulecommon.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -51,7 +51,7 @@ public class OnlineUserTask {
                 updateToLogoutId.add(userOnlineInfo.getUserId());
             }
         }
-        if (CommonUtils.isEmpty(updateToLogoutId)) {
+        if (CollUtil.isEmpty(updateToLogoutId)) {
             log.info("离线用户处理完成");
             return;
         }

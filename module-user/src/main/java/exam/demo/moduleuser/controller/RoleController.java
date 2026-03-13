@@ -1,7 +1,7 @@
 package exam.demo.moduleuser.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -58,9 +58,10 @@ public class RoleController {
     }
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_ROLE)
+    @PostMapping(ControllerConstants.UPDATE_ROLE)
     public CommonResponse<Boolean> updateRole(@RequestBody RoleItemVo request) {
         RoleDto roleDto = CommonUtils.copyProperties(request, RoleDto.class);
+        roleDto.setOldVersion(request.getVersion());
         roleService.update(roleDto);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -74,11 +75,11 @@ public class RoleController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_ROLE)
+    @PostMapping(ControllerConstants.DEL_ROLE)
     public CommonResponse<Boolean> deleteRole(@RequestBody List<RoleItemVo> request) {
         List<RoleDto> roleDtoList = new ArrayList<>();
         for (RoleItemVo datum : request) {
-            roleDtoList.add(RoleDto.builder().id(datum.getId()).build());
+            roleDtoList.add(new RoleDto(datum.getId()));
         }
         roleService.delete(roleDtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -113,10 +114,8 @@ public class RoleController {
     @PostMapping(ControllerConstants.UPDATE_RESOURCE_FOR_ROLE)
     public CommonResponse<Boolean> updateResourceForRole(@RequestBody List<RoleResourceVo> request) {
         List<Long> resourceIdList = request.stream().map(RoleResourceVo::getId).collect(Collectors.toList());
-        List<RoleResourceVo> voList = request;
-        // 前端的代码有bug,存储的数据是不断的增加的，因此需要去重
-        Set<RoleResourceVo> set = new HashSet<>(voList);
-        if (!CommonUtils.isEmpty(set)) {
+        Set<RoleResourceVo> set = new HashSet<>(request);
+        if (!CollUtil.isEmpty(set)) {
             List<Resource> resourceList = resourceService.listByIdList(resourceIdList);
             for (RoleResourceVo vo : set) {
                 for (Resource resource : resourceList) {

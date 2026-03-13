@@ -2,6 +2,7 @@ package exam.demo.moduleuser.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.common.BaseDataDto;
 import exam.demo.modulecommon.common.CommonResponse;
@@ -95,7 +96,7 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
         wrapper.likeRight(StringUtils.isNotEmpty(systemParam.getParam()), MagicPointConstant.PARAM, systemParam.getParam());
         wrapper.eq(systemParam.getParamType() != null, MagicPointConstant.PARAM_TYPE, systemParam.getParamType());
         List<SystemParam> systemParamList = this.list(wrapper);
-        if (CommonUtils.isEmpty(systemParamList)) {
+        if (CollUtil.isEmpty(systemParamList)) {
             throw new UserException(UserError.DATA_NOT_EXIST);
         }
         List<SystemParamListVo> listVoList = CommonUtils.convertList(systemParamList, SystemParamListVo.class);

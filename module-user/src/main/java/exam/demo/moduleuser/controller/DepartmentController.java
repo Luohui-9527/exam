@@ -49,7 +49,7 @@ public class DepartmentController {
 
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_D)
+    @PostMapping(ControllerConstants.UPDATE_D)
     public CommonResponse<Boolean> updateDepartment(@RequestBody @Valid DepartmentItemVo departmentItemVo) {
         DepartmentDto departmentDto = CommonUtils.copyProperties(departmentItemVo, DepartmentDto.class);
         departmentDto.setOldVersion(departmentDto.getVersion());
@@ -58,7 +58,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_D)
+    @PostMapping(ControllerConstants.DEL_D)
     public CommonResponse<Boolean> deleteDepartment(@RequestBody @Valid List<DepartmentItemVo> departmentItemVoList) {
         List<DepartmentDto> departmentDtoList = CommonUtils.convertList(departmentItemVoList, DepartmentDto.class);
         departmentService.delete(departmentDtoList);

@@ -16,19 +16,6 @@ eureka:
 
 
 spring:
-  #云上
-  #  datasource:
-  #    url: jdbc:mysql://118.31.7.229:3307/user?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-  #    username: root
-  #    password: xym123
-  #    driverClassName: com.mysql.cj.jdbc.Driver
-  #  application:
-  #    name: gateway
-  #  redis:
-  #    database: 8
-  #    host: 118.31.7.229
-  #    port: 6379
-  #    password: xym123
   datasource:
     url: jdbc:mysql://localhost:3306/exam?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
@@ -40,7 +27,7 @@ spring:
     database: 8
     host: localhost
     port: 6379
-    password: xym123
+    password:
   # 日志配置
   logging:
     level:
@@ -74,7 +61,7 @@ spring:
               args:
                 retries: 5
                 statuses: BAD_GATEWAY
-            
+
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 10

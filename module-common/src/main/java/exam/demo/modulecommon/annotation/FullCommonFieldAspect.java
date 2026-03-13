@@ -4,7 +4,8 @@ import exam.demo.modulecommon.common.BaseDto;
 import exam.demo.modulecommon.enums.EnumOperation;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.exception.StarterException;
-import exam.demo.modulecommon.utils.CommonUtils;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ArrayUtil;
 import exam.demo.modulecommon.utils.SnowFlake;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
@@ -44,7 +45,7 @@ public class FullCommonFieldAspect {
     public Object full(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("填充公共字段");
         Object[] params = joinPoint.getArgs();
-        if (CommonUtils.isEmpty(params)){
+        if (ArrayUtil.isEmpty(params)){
             throw new StarterException(StarterError.SYSTEM_PARAMETER_IS_NULL);
         }
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -180,7 +181,7 @@ public class FullCommonFieldAspect {
     public Object fullU(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("填充公共字段");
         Object[] params = joinPoint.getArgs();
-        if (CommonUtils.isEmpty(params)){
+        if (ArrayUtil.isEmpty(params)){
             throw new StarterException(StarterError.SYSTEM_PARAMETER_IS_NULL);
         }
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

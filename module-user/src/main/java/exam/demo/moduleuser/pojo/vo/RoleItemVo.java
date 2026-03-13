@@ -56,7 +56,7 @@ public class RoleItemVo extends BaseVo implements Serializable {
     /**
      * 状态位
      */
-    private Byte status;
+    private Long status;
 
     /**
      * 资源节点ID

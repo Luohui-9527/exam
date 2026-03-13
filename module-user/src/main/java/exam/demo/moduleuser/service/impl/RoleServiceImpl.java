@@ -188,30 +188,22 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         return true;
     }
 
-    /**
-     * 为角色分配资源
-     *
-     * @param resourceDtos
-     * @return
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean addResourceForRole(List<RoleResourceDto> resourceDtos) {
+    public void addResourceForRole(List<RoleResourceDto> resourceDtos) {
         List<RoleResource> roles = CommonUtils.convertList(resourceDtos, RoleResource.class);
-        List<Long> roleIdList = roles.stream().map(RoleResource::getRoleId).collect(Collectors.toList());
+        List<Long> roleIdList = roles.stream().map(RoleResource::getRoleId).distinct().toList();
         for (Long roleId : roleIdList) {
             roleResourceService.removeByRoleId(roleId);
         }
-        if (roles.size() != 0) {
+        if (!roles.isEmpty()) {
             for (RoleResource resource : roles) {
                 resource.setId(snowFlake.nextId());
             }
-            for (RoleResource role : roles) {
-                roleResourceService.save(role);
-            }
-            return true;
+            roleResourceService.saveBatch(roles);
+        } else {
+            throw new UserException(UserError.SAVE_FAIL);
         }
-        throw new UserException(UserError.SAVE_FAIL);
     }
 
 

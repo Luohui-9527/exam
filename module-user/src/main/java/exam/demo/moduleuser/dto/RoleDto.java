@@ -3,23 +3,14 @@ package exam.demo.moduleuser.dto;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * t_role
- *
- * @author
- */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class RoleDto extends BaseDto implements Serializable {
     private static final long serialVersionUID = 7246277876403033644L;
     /**
@@ -58,7 +49,7 @@ public class RoleDto extends BaseDto implements Serializable {
     /**
      * 状态位
      */
-    private Byte status;
+    private Long status;
 
     /**
      * 所属机构
@@ -91,121 +82,7 @@ public class RoleDto extends BaseDto implements Serializable {
 
     private Long judgeId;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getOrgName() {
-        return orgName;
-    }
-
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Long getJudgeId() {
-        return judgeId;
-    }
-
-    public void setJudgeId(Long judgeId) {
-        this.judgeId = judgeId;
-    }
-
-    @Override
-    public String toString() {
-        return "RoleDto{" +
-                "id=" + id +
-                ", companyId=" + companyId +
-                ", orgId=" + orgId +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", remark='" + remark + '\'' +
-                ", status=" + status +
-                ", createdBy=" + createdBy +
-                ", createdTime=" + createdTime +
-                ", updatedBy=" + updatedBy +
-                ", updatedTime=" + updatedTime +
-                ", version=" + version +
-                ", orgName='" + orgName + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", resourceId=" + resourceId +
-                ", userId=" + userId +
-                ", id=" + id +
-                ", orgId=" + orgId +
-                ", companyId=" + companyId +
-                ", createdBy=" + createdBy +
-                ", createdTime=" + createdTime +
-                ", updatedBy=" + updatedBy +
-                ", updatedTime=" + updatedTime +
-                ", version=" + version +
-                '}';
-    }
-
-    public List<Long> getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(List<Long> resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    public List<Long> getUserId() {
-        return userId;
-    }
-
-    public void setUserId(List<Long> userId) {
-        this.userId = userId;
+    public RoleDto(Long id) {
+        this.id = id;
     }
 }

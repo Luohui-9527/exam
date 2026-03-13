@@ -62,7 +62,7 @@ public interface IRoleService extends IService<Role> {
      * @param resourceDtos 角色资源关联信息列表
      * @return 是否分配成功
      */
-    boolean addResourceForRole(List<RoleResourceDto> resourceDtos);
+    void addResourceForRole(List<RoleResourceDto> resourceDtos);
 
     /**
      * 查询角色下的用户

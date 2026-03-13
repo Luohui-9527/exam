@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_U)
+    @PostMapping(ControllerConstants.UPDATE_U)
     public CommonResponse<Boolean> updateUser(@RequestBody @Valid UserItemVo request) {
         UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userDto.setOldVersion(userDto.getVersion());
@@ -81,7 +81,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_U)
+    @PostMapping(ControllerConstants.DEL_U)
     public CommonResponse<Boolean> deleteUser(@RequestBody @Valid List<UserItemVo> request) {
         List<UserDto> userDtoList = CommonUtils.convertList(request, UserDto.class);
         userService.delete(userDtoList);

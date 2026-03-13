@@ -44,7 +44,7 @@ public class SystemParamController {
     }
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_SP)
+    @PostMapping(ControllerConstants.UPDATE_SP)
     public CommonResponse<Boolean> updateSystemParam(@RequestBody @Valid SystemParamItemVo request) {
         SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
         systemParamDto.setOldVersion(systemParamDto.getVersion());
@@ -53,7 +53,7 @@ public class SystemParamController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_SP)
+    @PostMapping(ControllerConstants.DEL_SP)
     public CommonResponse<Boolean> deleteSystemParam(@RequestBody @Valid List<SystemParamItemVo> request) {
         List<SystemParamDto> systemParamDtoList = CommonUtils.convertList(request, SystemParamDto.class);
         systemParamService.delete(systemParamDtoList);

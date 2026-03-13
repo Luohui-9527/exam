@@ -54,7 +54,7 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_R)
+    @PostMapping(ControllerConstants.DEL_R)
     public CommonResponse<Boolean> deleteResource(@RequestBody List<ResourceItemVo> request) {
         List<Resource> resourceList = CommonUtils.convertList(request, Resource.class);
         resourceService.delete(resourceList);
@@ -63,7 +63,7 @@ public class ResourceController {
 
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_R)
+    @PostMapping(ControllerConstants.UPDATE_R)
     public CommonResponse<Boolean> updateResource(@RequestBody ResourceItemVo request) {
         ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
         resourceDto.setOldVersion(resourceDto.getVersion());

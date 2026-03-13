@@ -49,7 +49,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DELETE_C)
+    @PostMapping(ControllerConstants.DELETE_C)
     public CommonResponse<Boolean> deleteCompany(@RequestBody @Valid List<CompanyItemVo> itemVoList) {
         List<Long> idList = itemVoList.stream().map(CompanyItemVo::getId).collect(Collectors.toList());
         companyService.removeByIds(idList);
@@ -57,7 +57,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_C)
+    @PostMapping(ControllerConstants.UPDATE_C)
     public CommonResponse<Boolean> updateCompany(@RequestBody @Valid CompanyItemVo companyItemVo) {
         CompanyDto dto = CommonUtils.copyProperties(companyItemVo, CompanyDto.class);
         dto.setOldVersion(companyItemVo.getVersion());

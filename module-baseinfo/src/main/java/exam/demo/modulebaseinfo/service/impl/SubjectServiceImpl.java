@@ -3,6 +3,7 @@ package exam.demo.modulebaseinfo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulebaseinfo.dao.SubjectDao;
 import exam.demo.modulebaseinfo.exception.BaseInfoError;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
@@ -144,10 +145,10 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
             List<Subject> subjectList = baseMapper.querySubjectByPrimaryKeyList(subjectIdList);
             // 获取答案
             List<SubjectAnswer> subjectAnswerList = subjectAnswerService.listAnswer(subjectList.stream().map(Subject::getId).collect(Collectors.toList()));
-            if (CommonUtils.isEmpty(subjectList)) {
+            if (CollUtil.isEmpty(subjectList)) {
                 throw new BaseInfoException(BaseInfoError.GENERATE_FAIL);
             }
-            if (CommonUtils.isEmpty(subjectAnswerList)) {
+            if (CollUtil.isEmpty(subjectAnswerList)) {
                 throw new BaseInfoException(BaseInfoError.GENERATE_FAIL);
             }
             for (Subject subject : subjectList) {
@@ -174,10 +175,10 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
         List<Subject> subjectList = baseMapper.querySubjectByPrimaryKeyList(idList);
         // 获取答案
         List<SubjectAnswer> subjectAnswerList = subjectAnswerService.listAnswer(subjectList.stream().map(Subject::getId).collect(Collectors.toList()));
-        if (CommonUtils.isEmpty(subjectList)) {
+        if (CollUtil.isEmpty(subjectList)) {
             throw new BaseInfoException(BaseInfoError.GENERATE_FAIL);
         }
-        if (CommonUtils.isEmpty(subjectAnswerList)) {
+        if (CollUtil.isEmpty(subjectAnswerList)) {
             throw new BaseInfoException(BaseInfoError.GENERATE_FAIL);
         }
 

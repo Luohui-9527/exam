@@ -3,6 +3,7 @@ package exam.demo.modulepaper.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonField;
 import exam.demo.modulecommon.common.*;
 import exam.demo.modulecommon.constant.MagicPointConstant;
@@ -250,7 +251,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         if (deletedIdList != null && deletedIdList.size() != 0) {
             hasDelete = true;
             List<PaperSubject> deletedPaperSubject = paperSubjectService.listByIds(deletedIdList);
-            if (!CommonUtils.isEmpty(deletedPaperSubject)) {
+            if (!CollUtil.isEmpty(deletedPaperSubject)) {
                 for (PaperSubject paperSubject : deletedPaperSubject) {
                     deletedScore += paperSubject.getScore();
                 }
@@ -259,13 +260,13 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
         // 处理新添加的试题
         List<ModifyPaperSubjectDto> modifyPaperDtoList = paperDto.getCurrentPaperSubjectDtoList();
-        if (!CommonUtils.isEmpty(modifyPaperDtoList)) {
+        if (!CollUtil.isEmpty(modifyPaperDtoList)) {
             // 获取mark不为9999的试题Id,9999是存在的试题
             List<Long> addedSubjectIdList = modifyPaperDtoList.stream().filter(s ->
                     s.getMark() == null || 9999 != (s.getMark())
             ).map(ModifyPaperSubjectDto::getId).collect(Collectors.toList());
             double addedScore = 0;
-            if (!CommonUtils.isEmpty(addedSubjectIdList)) {
+            if (!CollUtil.isEmpty(addedSubjectIdList)) {
                 // 从基础数据服务中获取新添加的试题并进行拷贝
                 CommonResponse response = baseInfoApi.getSubjectById(addedSubjectIdList);
                 SubjectPackage subjectPackage = RPCUtils.parseResponse(response, SubjectPackage.class, RPCUtils.BASEINFO);
@@ -357,13 +358,13 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             throw new PaperException(PaperError.PAPER_NOT_EXIST);
         }
         List<PaperSubject> subjectList = paperSubjectService.listSubjectByPaperId(id);
-        if (CommonUtils.isEmpty(subjectList)) {
+        if (CollUtil.isEmpty(subjectList)) {
             throw new PaperException(PaperError.PAPER_SUBJECT_IS_NULL);
         }
         // 根据题目查询答案
         List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         List<PaperSubjectAnswer> answerList = paperSubjectAnswerService.listAnswerBySubjectIdList(subjectIdList);
-        if (CommonUtils.isEmpty(answerList)) {
+        if (CollUtil.isEmpty(answerList)) {
             throw new PaperException(PaperError.PAPER_ANSWER_IS_EMPTY);
         }
         List<PaperSubjectDto> subjectDtoList = new ArrayList<>(subjectIdList.size());
@@ -450,7 +451,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         });
         List<PaperSubject> subjectList = paperSubjectService.listSubjectByPaperIdList(paperTemplateIds);
         List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
-        if (CommonUtils.isEmpty(subjectList)) {
+        if (CollUtil.isEmpty(subjectList)) {
             return false;
         }
         PaperServiceImpl service = (PaperServiceImpl) AopContext.currentProxy();

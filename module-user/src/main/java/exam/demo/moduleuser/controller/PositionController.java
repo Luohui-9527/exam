@@ -45,7 +45,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_P)
+    @PostMapping(ControllerConstants.UPDATE_P)
     public CommonResponse<Boolean> updatePosition(@RequestBody @Valid PositionItemVo request) {
         PositionDto positionDto = CommonUtils.copyProperties(request, PositionDto.class);
         positionDto.setOldVersion(positionDto.getVersion());
@@ -54,7 +54,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_P)
+    @PostMapping(ControllerConstants.DEL_P)
     public CommonResponse<Boolean> deletePosition(@RequestBody @Valid List<PositionItemVo> request) {
         List<Position> positionList = CommonUtils.convertList(request, Position.class);
         positionService.delete(positionList);

@@ -3,6 +3,7 @@ package exam.demo.moduleuser.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.common.CacheConstants;
 import exam.demo.modulecommon.common.CompanyAndUserVo;
@@ -174,7 +175,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 userQueryWrapper.eq("tel", userDto.getTel());
             }
             userList = list(userQueryWrapper);
-            if (CommonUtils.isEmpty(userList)) {
+            if (CollUtil.isEmpty(userList)) {
                 return null;
             }
         }
@@ -200,7 +201,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (StringUtils.isNotBlank(userDto.getTel())) {
             userList = userList.stream().filter(u -> userDto.getTel().equals(u.getTel())).collect(Collectors.toList());
         }
-        if (CommonUtils.isEmpty(userList)) {
+        if (CollUtil.isEmpty(userList)) {
             return null;
         }
         // 对角色的处理
@@ -212,7 +213,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             List<Long> userIdList = userRoles.stream().map(UserRole::getUserId).collect(Collectors.toList());
             userList = userList.stream().filter(u -> userIdList.contains(u.getId())).peek(u -> u.setRoleId(userDto.getRoleId())).collect(Collectors.toList());
         }
-        if (CommonUtils.isEmpty(userList)) {
+        if (CollUtil.isEmpty(userList)) {
             return null;
         }
         // 为这个User设置roleId
@@ -306,7 +307,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 userRole.setRoleId(roleId);
                 userRoleList.add(userRole);
             }
-            if (!CommonUtils.isEmpty(userRoleList)) {
+            if (!CollUtil.isEmpty(userRoleList)) {
                 userRoleService.saveBatch(userRoleList);
             }
             // 同时要更新用户的companyId

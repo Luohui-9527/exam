@@ -45,7 +45,7 @@ public class OrganizationController {
 
 
     @MethodEnhancer
-    @DeleteMapping(ControllerConstants.DEL_O)
+    @PostMapping(ControllerConstants.DEL_O)
     public CommonResponse<Boolean> deleteOrganization(@RequestBody @Valid List<OrganizationItemVo> request) {
         List<OrganizationDto> dtoList = CommonUtils.convertList(request, OrganizationDto.class);
         organizationService.delete(dtoList);
@@ -54,7 +54,7 @@ public class OrganizationController {
 
 
     @MethodEnhancer
-    @PutMapping(ControllerConstants.UPDATE_O)
+    @PostMapping(ControllerConstants.UPDATE_O)
     public CommonResponse<Boolean> updateOrganization(@RequestBody @Valid OrganizationItemVo request) {
         OrganizationDto organizationDto = CommonUtils.copyProperties(request, OrganizationDto.class);
         organizationDto.setOldVersion(organizationDto.getVersion());

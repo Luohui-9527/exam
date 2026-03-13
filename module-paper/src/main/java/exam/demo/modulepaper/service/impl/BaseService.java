@@ -1,6 +1,7 @@
 package exam.demo.modulepaper.service.impl;
 
 
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.common.*;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
@@ -79,7 +80,7 @@ public class BaseService {
 
     public Map<SubjectDto, List<SubjectAnswerDto>> parseSubjectPackage(SubjectPackage subjectPackage) {
         List<SubjectPackageDto> dtoList = subjectPackage.getDtoList();
-        if (CommonUtils.isEmpty(dtoList)) {
+        if (CollUtil.isEmpty(dtoList)) {
             throw new PaperException(PaperError.PAPER_SUBJECT_CANT_BE_NULL);
         }
         // linkedHashMap可以保证进入顺序一致

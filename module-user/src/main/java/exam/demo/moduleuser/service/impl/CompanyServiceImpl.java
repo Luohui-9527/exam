@@ -3,6 +3,7 @@ package exam.demo.moduleuser.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.common.CacheConstants;
 import exam.demo.modulecommon.enums.EnumOperation;
@@ -80,7 +81,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
             companyList = list(wrapper);
         }
         Cache orgCache = cacheManager.getCache(CacheConstants.ORG_VAL);
-        if (!CommonUtils.isEmpty(companyList)) {
+        if (!CollUtil.isEmpty(companyList)) {
             // 处理公司名称
             if (StringUtils.isNotBlank(companyDto.getName())) {
                 companyList = companyList.stream().filter(c -> SqlUtil.like(companyDto.getName(), c.getName())).collect(Collectors.toList());
@@ -131,7 +132,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
             TreeList o = ((JSONObject) list).toJavaObject(TreeList.class);
             treeList.add(o);
         }
-        if (CommonUtils.isEmpty(treeList)) {
+        if (CollUtil.isEmpty(treeList)) {
             throw new UserException(UserError.DATA_NOT_EXIST);
         }
         Set<TreeList> res = new HashSet<>();

@@ -1,10 +1,13 @@
 package exam.demo.modulecommon.utils;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.exception.StarterException;
-import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,55 +19,44 @@ import java.util.List;
  * @since 2020-03-03
  */
 public class CommonUtils {
-    public static <T> T copyProperties(Object src, Class<T> targetClass){
-        try {
-            T res = targetClass.newInstance();
-            BeanUtils.copyProperties(src,res);
-            return res;
-        } catch (ReflectiveOperationException e) {
-            // do nothing
+    public static <T> T copyProperties(Object source, Class<T> targetClass, String... ignoreParam) {
+        if (source == null) {
+            return null;
         }
-        throw new StarterException(StarterError.SYSTEM_COPY_PROPERTIES_ERROR);
+        CopyOptions copyOptions = CopyOptions.create()
+                .setIgnoreError(true)
+                .setIgnoreNullValue(true);
+        if (ObjectUtil.isNotEmpty(ignoreParam) && ignoreParam.length > 0) {
+            copyOptions.setIgnoreProperties(ignoreParam);
+        }
+        return BeanUtil.toBean(source, targetClass, copyOptions);
     }
 
-    public static <T> List<T> convertList(Collection<?> src, Class<T> targetClass){
-        if (isEmpty(src) || isEmpty(targetClass)){
+    public static <T> List<T> convertList(Collection<?> sourceList, Class<T> targetClass, String... ignoreParam) {
+        if (CollUtil.isEmpty(sourceList) || targetClass == null) {
             return new ArrayList<>();
         }
-        List<T> res = new ArrayList<>();
-        for (Object o : src) {
-            try {
-                T t = targetClass.newInstance();
-                BeanUtils.copyProperties(o,t);
-                res.add(t);
-            } catch (Exception e) {
-                throw new StarterException(StarterError.SYSTEM_COPY_PROPERTIES_ERROR);
-            }
+        List<T> targetList = new ArrayList<>();
+        for (Object item : sourceList) {
+            targetList.add(copyProperties(item, targetClass, ignoreParam));
         }
-        return res;
+        return targetList;
     }
 
-    public static <T> T copyComplicateObject(Object src, Class<T> target){
-        return JSON.parseObject(JSON.toJSONString(src),target);
+    public static <T> T copyComplicateObject(Object src, Class<T> target) {
+        return JSON.parseObject(JSON.toJSONString(src), target);
     }
 
-    public static boolean isSuccess(CommonResponse response){
+    public static boolean isSuccess(CommonResponse response) {
         return "200".equals(response.getCode());
     }
 
-    public static boolean isEmpty(Collection collection){
-        return collection == null || collection.size() == 0;
-    }
-
-    public static boolean isEmpty(Object[] array){
-        return array == null || array.length == 0;
-    }
-
-    public static boolean isEmpty(Object o){ return  o == null;}
-    public static boolean notNull(Object ... o){
-        if (o == null){return false;}
+    public static boolean notNull(Object... o) {
+        if (o == null) {
+            return false;
+        }
         for (Object o1 : o) {
-            if (o1 == null){
+            if (o1 == null) {
                 return false;
             }
         }
@@ -72,12 +64,12 @@ public class CommonUtils {
     }
 
 
-    public static Long judgeCompanyAndOrg (){
+    public static Long judgeCompanyAndOrg() {
         Long companyId = TokenUtils.getUser().getCompanyId();
         Long orgId = TokenUtils.getUser().getOrgId();
-        if(companyId != null){
+        if (companyId != null) {
             return companyId;
-        }else{
+        } else {
             return orgId;
         }
     }
