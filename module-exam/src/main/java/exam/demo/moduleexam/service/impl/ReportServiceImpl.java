@@ -6,7 +6,7 @@ import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
 import exam.demo.moduleexam.exception.ExamError;
 import exam.demo.moduleexam.exception.ExamException;
-import exam.demo.moduleexam.manage.PaperApi;
+import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.moduleexam.pojo.DTO.report.ExamDetailQueryFormDTO;
 import exam.demo.moduleexam.pojo.DTO.report.ExamReportRecordDetailTableDataDTO;
 import exam.demo.moduleexam.pojo.DTO.report.ExamReportRecordExamTableDataDTO;
@@ -37,7 +37,7 @@ public class ReportServiceImpl implements ReportService {
     private AnswerRecordService answerRecordService;
 
     @Autowired
-    PaperApi paperApi;
+    PaperFeign paperFeign;
 
     @Autowired
     CommonState commonState;
@@ -104,6 +104,6 @@ public class ReportServiceImpl implements ReportService {
             throw new ExamException(ExamError.EXAM_RECORD_NOT_EXIST);
         }
         Long paperId = record.getPaperId();
-        return RPCUtils.parseResponse(paperApi.queryPaperScore(paperId), Double.class, RPCUtils.PAPER);
+        return RPCUtils.parseResponse(paperFeign.queryPaperScore(paperId), Double.class, RPCUtils.PAPER);
     }
 }

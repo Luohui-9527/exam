@@ -17,7 +17,7 @@ import exam.demo.moduleuser.dto.SystemParamDto;
 import exam.demo.moduleuser.dto.TreeListDto;
 import exam.demo.moduleuser.exception.UserError;
 import exam.demo.moduleuser.exception.UserException;
-import exam.demo.moduleuser.manage.BaseInfoApi;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.moduleuser.mapper.SystemParamMapper;
 import exam.demo.moduleuser.pojo.model.SystemParam;
 import exam.demo.moduleuser.pojo.model.TreeList;
@@ -47,7 +47,7 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
     CommonState state;
 
     @Resource
-    BaseInfoApi baseInfoApi;
+    BaseInfoFeign baseInfoFeign;
 
 
     @FullCommonFieldU
@@ -108,7 +108,7 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
         BaseDataDto baseDataDto = new BaseDataDto(map);
         CommonResponse<BaseDataDto> response;
         try {
-            response = baseInfoApi.getBaseDataS(baseDataDto);
+            response = baseInfoFeign.getBaseDataS(baseDataDto);
         } catch (Exception e) {
             throw new StarterException(StarterError.SYSTEM_RPC_ERROR);
         }

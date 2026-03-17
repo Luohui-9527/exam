@@ -8,21 +8,6 @@ spring:
     name: user
   main:
     allow-circular-references: true
-  #  redis:
-  #    database: 8
-  #    host: 118.31.7.229
-  #    port: 6379
-  #    password: xym123
-  #  datasource:
-  #    url: jdbc:mysql://rm-bp1vt89u1y7x0x9t61o.mysql.rds.aliyuncs.com:3306/user?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&useAffectedRows=true
-  #    driver-class-name: com.mysql.cj.jdbc.Driver
-  #    username: exam
-  #    password: xymXYM@123
-  #    hikari:
-  #      max-lifetime: 30000
-  #      minimum-idle: 3
-  #      maximum-pool-size: 10
-  #      connection-test-query: SELECT 1
   datasource:
     url: jdbc:mysql://localhost:3306/exam?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
@@ -32,7 +17,7 @@ spring:
     database: 8
     host: localhost
     port: 6379
-    password: xym123
+    password:
   # 日志配置
   logging:
     level:

@@ -7,7 +7,7 @@ import exam.demo.modulecommon.common.PaperDetail;
 import exam.demo.modulecommon.constant.ControllerConstant;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.modulepaper.manager.baseinfo.BaseInfoApi;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
@@ -42,7 +42,7 @@ public class MaintainPaperController {
     CacheManager cacheManager;
 
     @Autowired
-    BaseInfoApi baseInfoApi;
+    BaseInfoFeign baseInfoFeign;
 
     @Autowired
     BaseService baseService;
@@ -102,6 +102,13 @@ public class MaintainPaperController {
     @PostMapping(ControllerConstant.MAINTAIN_PAPER_DETAIL)
     public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperId));
+    }
+
+    @MethodEnhancer
+    @PostMapping(ControllerConstant.MAINTAIN_PUBLISH_PAPER)
+    public CommonResponse<Boolean> publishPaper(@RequestParam("paperId") Long paperId) {
+        boolean result = paperService.publish(paperId);
+        return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, result);
     }
 
 }

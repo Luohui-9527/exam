@@ -15,8 +15,8 @@ import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
 import exam.demo.modulepaper.exception.PaperError;
 import exam.demo.modulepaper.exception.PaperException;
-import exam.demo.modulepaper.manager.baseinfo.BaseInfoApi;
-import exam.demo.modulepaper.manager.user.UserInfoApi;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulepaper.mapper.PaperMapper;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
 @Service
 public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements IPaperService {
     @Autowired
-    BaseInfoApi baseInfoApi;
+    BaseInfoFeign baseInfoFeign;
 
     @Autowired
     CommonState state;
@@ -65,7 +65,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     IPaperSubjectAnswerService paperSubjectAnswerService;
 
     @Autowired
-    UserInfoApi userApi;
+    UserFeign userFeign;
 
     @Autowired
     SnowFlake snowFlake;
@@ -81,7 +81,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     public boolean generateFastMode(PaperDto paperDTO) {
         paperDTO.setCombExamTime(paperDTO.getUpdatedTime());
         // 从基础数据获取题目
-        CommonResponse response = baseInfoApi.getSubjectAndAnswer(paperDTO.getConfigId());
+        CommonResponse response = baseInfoFeign.getSubjectAndAnswer(paperDTO.getConfigId());
         SubjectPackage subjectPackage = RPCUtils.parseResponse(response, SubjectPackage.class, RPCUtils.BASEINFO);
         Map<SubjectDto, List<SubjectAnswerDto>> map = baseService.parseSubjectPackage(subjectPackage);
         return baseService.insertNewPaper(paperDTO, map);
@@ -105,7 +105,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         paperDTO.setDifficulty(configVo.getDifficulty());
         List<CombExamConfigItemDto> dtoList = CommonUtils.convertList(configVo.getCombExamConfigItemVOs(), CombExamConfigItemDto.class);
         // 从基础数据获取题目
-        CommonResponse response = baseInfoApi.getSubjectAndAnswerCustomized(dtoList);
+        CommonResponse response = baseInfoFeign.getSubjectAndAnswerCustomized(dtoList);
         SubjectPackage subjectPackage = RPCUtils.parseResponse(response, SubjectPackage.class, RPCUtils.BASEINFO);
         Map<SubjectDto, List<SubjectAnswerDto>> map = baseService.parseSubjectPackage(subjectPackage);
         return baseService.insertNewPaper(paperDTO, map);
@@ -268,7 +268,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             double addedScore = 0;
             if (!CollUtil.isEmpty(addedSubjectIdList)) {
                 // 从基础数据服务中获取新添加的试题并进行拷贝
-                CommonResponse response = baseInfoApi.getSubjectById(addedSubjectIdList);
+                CommonResponse response = baseInfoFeign.getSubjectById(addedSubjectIdList);
                 SubjectPackage subjectPackage = RPCUtils.parseResponse(response, SubjectPackage.class, RPCUtils.BASEINFO);
                 Map<SubjectDto, List<SubjectAnswerDto>> newSubjectMap = baseService.parseSubjectPackage(subjectPackage);
                 // 拷贝试题

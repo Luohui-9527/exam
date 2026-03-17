@@ -8,7 +8,7 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.moduleexam.manage.UserApi;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordQueryFormDTO;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordTableDataDTO;
 import exam.demo.moduleexam.pojo.VO.answersheet.ExamAnswerSheetRecordQueryFormVO;
@@ -34,7 +34,7 @@ public class AnswerSheetRecordController {
     private AnswerSheetRecordService answerSheetRecordService;
 
     @Autowired
-    private UserApi userFeignClient;
+    private UserFeign userFeignClient;
 
     private final static Integer PAGE_SIZE = 8;
 

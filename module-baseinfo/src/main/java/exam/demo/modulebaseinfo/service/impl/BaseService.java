@@ -2,7 +2,7 @@ package exam.demo.modulebaseinfo.service.impl;
 
 import exam.demo.modulebaseinfo.constant.EnumUserInfoType;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
-import exam.demo.modulebaseinfo.manage.UserApi;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.common.CacheConstants;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BaseService {
     @Autowired
-    UserApi userApi;
+    UserFeign userFeign;
 
     @Autowired
     CacheManager cacheManager;
@@ -67,14 +67,14 @@ public class BaseService {
         CommonResponse<String> response;
         switch (type) {
             case COMPANY:
-                response = userApi.getCompanyById(id);
+                response = userFeign.getCompanyById(id);
                 if (CommonUtils.isSuccess(response)) {
                     return response.getData();
                 } else {
                     throw new BaseInfoException(StarterError.SYSTEM_API_ERROR, response.getMsg());
                 }
             case USER:
-                response = userApi.getUserNameById(id);
+                response = userFeign.getUserNameById(id);
                 if (CommonUtils.isSuccess(response)) {
                     return response.getData();
                 } else {

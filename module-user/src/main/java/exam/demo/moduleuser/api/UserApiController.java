@@ -5,7 +5,7 @@ import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.CompanyAndUserVo;
 import exam.demo.modulecommon.common.UserDto;
-import exam.demo.moduleuser.constant.ApiConstant;
+import exam.demo.modulecommon.constant.ApiConstant;
 import exam.demo.moduleuser.service.ICompanyService;
 import exam.demo.moduleuser.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

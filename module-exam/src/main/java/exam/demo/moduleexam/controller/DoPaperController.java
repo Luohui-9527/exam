@@ -7,7 +7,7 @@ import exam.demo.modulecommon.common.PaperDetail;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.moduleexam.manage.PaperApi;
+import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.moduleexam.pojo.DTO.dopaper.DoPaperFormDTO;
 import exam.demo.moduleexam.pojo.DTO.dopaper.UserInfoFormDTO;
 import exam.demo.moduleexam.pojo.VO.dopaper.DoPaperFormVO;
@@ -34,7 +34,7 @@ public class DoPaperController {
     DoPaperService doPaperService;
 
     @Autowired
-    PaperApi paperApi;
+    PaperFeign paperFeign;
 
     /**
      * 保存考生信息
@@ -76,7 +76,7 @@ public class DoPaperController {
     @MethodEnhancer
     @RequestMapping(value = "getPaper")
     public CommonResponse<PaperDetail> getPaper(@RequestBody Long commonRequest) {
-        PaperDetail detail = RPCUtils.parseResponse(paperApi.queryDetailByPaperId(commonRequest), PaperDetail.class, RPCUtils.PAPER);
+        PaperDetail detail = RPCUtils.parseResponse(paperFeign.queryDetailByPaperId(commonRequest), PaperDetail.class, RPCUtils.PAPER);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, detail);
     }
 

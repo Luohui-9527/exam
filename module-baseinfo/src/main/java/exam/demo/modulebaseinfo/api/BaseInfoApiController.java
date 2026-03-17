@@ -1,7 +1,7 @@
 package exam.demo.modulebaseinfo.api;
 
 
-import exam.demo.modulebaseinfo.constant.ApiConstant;
+import exam.demo.modulecommon.constant.ApiConstant;
 import exam.demo.modulebaseinfo.constant.EnumInfoType;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
 import exam.demo.modulebaseinfo.pojo.model.CombExamConfigDetail;

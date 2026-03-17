@@ -97,4 +97,14 @@ public class CompanyController {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, voList);
     }
 
+    @MethodEnhancer
+    @PostMapping("/get/company/name")
+    public CommonResponse<String> getCompanyById(@RequestParam("request") Long companyId) {
+        Company company = companyService.getById(companyId);
+        if (company == null) {
+            return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, "");
+        }
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, company.getName());
+    }
+
 }

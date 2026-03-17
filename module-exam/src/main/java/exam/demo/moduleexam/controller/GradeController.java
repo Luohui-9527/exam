@@ -9,7 +9,7 @@ import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.moduleexam.manage.PaperApi;
+import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.moduleexam.pojo.DTO.grade.*;
 import exam.demo.moduleexam.pojo.VO.grade.ExamGradeRecordQueryFormVO;
 import exam.demo.moduleexam.pojo.VO.grade.ExamGradeRecordTableDataVO;
@@ -33,7 +33,7 @@ public class GradeController {
     private final static Integer PAGE_SIZE = 8;
 
     @Autowired
-    PaperApi paperApi;
+    PaperFeign paperFeign;
 
     @Autowired
     GradeService gradeService;
@@ -108,7 +108,7 @@ public class GradeController {
 
     private String getPaperName(Long id) {
         if (id != null) {
-            return RPCUtils.parseResponse(paperApi.queryPaperNameByPaperId(id), String.class, RPCUtils.PAPER);
+            return RPCUtils.parseResponse(paperFeign.queryPaperNameByPaperId(id), String.class, RPCUtils.PAPER);
         }
         return null;
     }

@@ -1,4 +1,4 @@
-package exam.demo.modulepaper.manager.exam;
+package exam.demo.modulecommon.feign;
 
 
 import exam.demo.modulecommon.common.CommonResponse;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
+ * 考试服务 Feign 客户端
+ * 用于内部调用 exam 服务
  * @author luohui
- * @version 1.0
- * @since 2020-04-24
  */
 @FeignClient(name = ApiConstant.SERVICE_NAME_EXAM, path = ApiConstant.SERVICE_VALUE_EXAM)
-public interface ExamInfoApi {
+public interface ExamFeign {
     @PostMapping({"/api/checkEditable"})
     CommonResponse<Boolean> checkEditable(@RequestBody Long paperId);
 }

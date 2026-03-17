@@ -10,9 +10,9 @@ import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
 import exam.demo.modulepaper.exception.PaperError;
 import exam.demo.modulepaper.exception.PaperException;
-import exam.demo.modulepaper.manager.baseinfo.BaseInfoApi;
-import exam.demo.modulepaper.manager.exam.ExamInfoApi;
-import exam.demo.modulepaper.manager.user.UserInfoApi;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
+import exam.demo.modulecommon.feign.ExamFeign;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulepaper.pojo.dto.PaperDto;
 import exam.demo.modulepaper.pojo.model.Paper;
 import exam.demo.modulepaper.pojo.model.PaperSubject;
@@ -66,16 +66,16 @@ public class BaseService {
     CacheManager cacheManager;
 
     @Autowired
-    BaseInfoApi baseInfoApi;
+    BaseInfoFeign baseInfoFeign;
 
     @Autowired
-    UserInfoApi userInfoApi;
+    UserFeign userFeign;
 
     @Autowired
     CommonState commonState;
 
     @Autowired
-    ExamInfoApi examInfoApi;
+    ExamFeign examFeign;
 
 
     public Map<SubjectDto, List<SubjectAnswerDto>> parseSubjectPackage(SubjectPackage subjectPackage) {
@@ -263,7 +263,7 @@ public class BaseService {
             Cache cache = cacheManager.getCache(CacheConstants.CATEGORY_VAL);
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper == null) {
-                CommonResponse response = baseInfoApi.getCategory(id);
+                CommonResponse response = baseInfoFeign.getCategory(id);
                 String value = RPCUtils.parseResponse(response, String.class, RPCUtils.BASEINFO);
                 cache.put(id, value);
                 return value;
@@ -274,7 +274,7 @@ public class BaseService {
             Cache cache = cacheManager.getCache(CacheConstants.DICTIONARY_VAL);
             Cache.ValueWrapper wrapper = cache.get(id);
             if (wrapper == null) {
-                CommonResponse response = baseInfoApi.getBaseData(id);
+                CommonResponse response = baseInfoFeign.getBaseData(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.BASEINFO);
                 cache.put(id, val);
                 return val;
@@ -285,7 +285,7 @@ public class BaseService {
             Cache cache = cacheManager.getCache(CacheConstants.SUBJECT_TYPE_VAL);
             Cache.ValueWrapper wrapper = cache.get(id);
             if (wrapper == null) {
-                CommonResponse response = baseInfoApi.getSubjectType(id);
+                CommonResponse response = baseInfoFeign.getSubjectType(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.BASEINFO);
                 cache.put(id, val);
                 return val;
@@ -303,7 +303,7 @@ public class BaseService {
             if (wrapper != null) {
                 return (String) wrapper.get();
             } else {
-                CommonResponse response = userInfoApi.getCompanyById(id);
+                CommonResponse response = userFeign.getCompanyById(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.USER);
                 companyCache.put(id, val);
                 return val;
@@ -315,7 +315,7 @@ public class BaseService {
             if (wrapper != null) {
                 return (String) wrapper.get();
             } else {
-                CommonResponse response = userInfoApi.getUserNameById(id);
+                CommonResponse response = userFeign.getUserNameById(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.USER);
                 userCache.put(id, val);
                 return val;
@@ -349,7 +349,7 @@ public class BaseService {
      * @param id
      */
     public void published(Long id) {
-        CommonResponse response = examInfoApi.checkEditable(id);
+        CommonResponse response = examFeign.checkEditable(id);
         if (!RPCUtils.parseResponse(response, Boolean.class, RPCUtils.EXAM)) {
             throw new PaperException(PaperError.PAPER_PUBLISHED_CANT_DELETE);
         }

@@ -9,8 +9,8 @@ import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
-import exam.demo.moduleexam.manage.PaperApi;
-import exam.demo.moduleexam.manage.UserApi;
+import exam.demo.modulecommon.feign.PaperFeign;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.moduleexam.pojo.DTO.publish.*;
 import exam.demo.moduleexam.pojo.VO.IdAndName;
 import exam.demo.moduleexam.pojo.VO.publish.*;
@@ -39,10 +39,10 @@ public class ExamPublishRecordController {
     private ExamPublishRecordService examPublishRecordService;
 
     @Autowired
-    private PaperApi paperApi;
+    private PaperFeign paperFeign;
 
     @Autowired
-    private UserApi userApi;
+    private UserFeign userFeign;
 
     /**
      * 列出考试发布记录
@@ -77,7 +77,7 @@ public class ExamPublishRecordController {
             // get publishTimes
             if (tableDataDTO.getPaperId() != null) {
                 // 从试卷服务获取试卷发布次数
-                tableDataVO.setPublishTimes(RPCUtils.parseResponse(paperApi.queryPublishedTimesByPaperId(tableDataDTO.getPaperId()), Long.class, RPCUtils.PAPER));
+                tableDataVO.setPublishTimes(RPCUtils.parseResponse(paperFeign.queryPublishedTimesByPaperId(tableDataDTO.getPaperId()), Long.class, RPCUtils.PAPER));
             }
             // get examinersName
             tableDataVO.setExaminers(getExaminersName(tableDataDTO.getExaminers()));
@@ -100,7 +100,7 @@ public class ExamPublishRecordController {
     public CommonResponse<Boolean> save(@RequestBody @Valid ExamPublishRecordPublishFormVO commonRequest) {
         ExamPublishRecordPublishFormDTO examPublishRecordPublishFormDTO = CommonUtils.copyProperties(commonRequest, ExamPublishRecordPublishFormDTO.class);
         if (examPublishRecordService.addExamPublishRecord(examPublishRecordPublishFormDTO)) {
-            if (paperApi.publishPaper(examPublishRecordPublishFormDTO.getPaperId()).getCode().equals(state.SUCCESS)) {
+            if (paperFeign.publishPaper(examPublishRecordPublishFormDTO.getPaperId()).getCode().equals(state.SUCCESS)) {
                 return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
             }
         }
@@ -148,7 +148,7 @@ public class ExamPublishRecordController {
         FuzzySearch queryPaperInfoDTO = new FuzzySearch();
         queryPaperInfoDTO.setPaperName(commonRequest);
         queryPaperInfoDTO.setCompanyId(userPermission.getCompanyId());
-        Collection<PaperIdWithName> list = RPCUtils.parseCollectionTypeResponse(paperApi.fuzzySearchByPaperName(queryPaperInfoDTO), PaperIdWithName.class, RPCUtils.PAPER);
+        Collection<PaperIdWithName> list = RPCUtils.parseCollectionTypeResponse(paperFeign.fuzzySearchByPaperName(queryPaperInfoDTO), PaperIdWithName.class, RPCUtils.PAPER);
         Collection<IdAndName> idAndNames = new ArrayList<>();
         for (PaperIdWithName paperIdWithName : list) {
             idAndNames.add(IdAndName.builder().name(paperIdWithName.getPaperName()).id(paperIdWithName.getId()).build());
@@ -163,7 +163,7 @@ public class ExamPublishRecordController {
         UserDto queryExaminersInfoDTO = new UserDto();
         queryExaminersInfoDTO.setName(commonRequest);
         queryExaminersInfoDTO.setCompanyId(userPermission.getCompanyId());
-        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, RPCUtils.parseCollectionTypeResponse(userApi.queryScoringOfficer(queryExaminersInfoDTO), UserDto.class, RPCUtils.USER));
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, RPCUtils.parseCollectionTypeResponse(userFeign.queryScoringOfficer(queryExaminersInfoDTO), UserDto.class, RPCUtils.USER));
     }
 
     /**
@@ -196,7 +196,7 @@ public class ExamPublishRecordController {
      */
     private String getPublisherName(Long id) {
         if (id != null) {
-            return RPCUtils.parseResponse(userApi.getUserNameById(id), String.class, RPCUtils.USER);
+            return RPCUtils.parseResponse(userFeign.getUserNameById(id), String.class, RPCUtils.USER);
         }
         return null;
     }
@@ -209,7 +209,7 @@ public class ExamPublishRecordController {
      */
     private Long getPublisherId(String name) {
         if (name != null) {
-            return RPCUtils.parseResponse(userApi.getUserIdByName(name), Long.class, RPCUtils.USER);
+            return RPCUtils.parseResponse(userFeign.getUserIdByName(name), Long.class, RPCUtils.USER);
         }
         return null;
     }

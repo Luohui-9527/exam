@@ -19,6 +19,7 @@ public class ControllerConstant {
     public static final String MAINTAIN_MODIFY_PAPER = "/modifyPaper";
     public static final String MAINTAIN_DELETE_PAPER = "/deletePaper";
     public static final String MAINTAIN_PAPER_DETAIL = "/paperDetail";
+    public static final String MAINTAIN_PUBLISH_PAPER = "/publishPaper";
 
     public static final String TEMPLATE_DOWNLOAD_PAPER = "/download";
     public static final String TEMPLATE_UPLOAD_PAPER = "/upload";

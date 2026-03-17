@@ -1,4 +1,4 @@
-package exam.demo.moduleexam.manage;
+package exam.demo.modulecommon.feign;
 
 
 import exam.demo.modulecommon.common.CommonResponse;
@@ -9,34 +9,35 @@ import exam.demo.modulecommon.constant.ApiConstant;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 /**
+ * 试卷服务 Feign 客户端
+ * 用于内部调用 paper 服务
  * @author luohui
- * @version 1.0
- * @since 2020-04-24
  */
-@FeignClient(ApiConstant.SERVICE_NAME_PAPER)
-public interface PaperApi {
+@FeignClient(name = ApiConstant.SERVICE_NAME_PAPER, path = ApiConstant.SERVICE_VALUE_PAPER)
+public interface PaperFeign {
     @PostMapping({"/info/publish/paper"})
-    CommonResponse<Boolean> publishPaper(Long paperId);
+    CommonResponse<Boolean> publishPaper(@RequestBody Long paperId);
 
     @GetMapping({"/info/list/paper"})
     CommonResponse<List<PaperIdWithName>> listPaper();
 
     @PostMapping({"/info/fuzzy/search"})
-    CommonResponse<List<PaperIdWithName>> fuzzySearchByPaperName(FuzzySearch request);
+    CommonResponse<List<PaperIdWithName>> fuzzySearchByPaperName(@RequestBody FuzzySearch request);
 
     @PostMapping({"/info/query/detail"})
-    CommonResponse<PaperDetail> queryDetailByPaperId(Long request);
+    CommonResponse<PaperDetail> queryDetailByPaperId(@RequestBody Long request);
 
     @PostMapping({"/info/query/published/time"})
-    CommonResponse<Long> queryPublishedTimesByPaperId(Long request);
+    CommonResponse<Long> queryPublishedTimesByPaperId(@RequestBody Long request);
 
     @PostMapping({"/info/query/paper/name"})
-    CommonResponse<String> queryPaperNameByPaperId(Long request);
+    CommonResponse<String> queryPaperNameByPaperId(@RequestBody Long request);
 
     @PostMapping("/info/query/paper/score")
-    CommonResponse queryPaperScore(Long request);
+    CommonResponse queryPaperScore(@RequestBody Long request);
 }
