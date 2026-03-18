@@ -3,7 +3,7 @@ package exam.demo.modulepaper.controller;
 
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
-import exam.demo.modulecommon.constant.ControllerConstant;
+
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping(ControllerConstant.CREATE)
+@RequestMapping("/create")
 public class CreatePaperController {
     @Autowired
     CommonState state;
@@ -41,7 +41,7 @@ public class CreatePaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.CREATE_FAST_GEN)
+    @PostMapping("/fastGen")
     public CommonResponse<String> fastGen(@RequestBody CombExamConfigVo vo) {
         UserPermission userPermission = checkAccessAuthority();
         PaperDto paperDto = CommonUtils.copyProperties(vo, PaperDto.class);
@@ -57,7 +57,7 @@ public class CreatePaperController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.CREATE_STANDARD_GEN)
+    @PostMapping("/normalGen")
     public CommonResponse standardGen(@RequestBody CustomizedCombExamConfigVo vo) {
         UserPermission userPermission = checkAccessAuthority();
         PaperDto paperDto = new PaperDto();
@@ -71,7 +71,7 @@ public class CreatePaperController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.CREATE_TEMPLATE_GEN)
+    @PostMapping("/templateGen")
     public CommonResponse templateGen(@RequestParam("templateId") Long templateId) {
         checkAccessAuthority();
         PaperDto paperDto = new PaperDto();

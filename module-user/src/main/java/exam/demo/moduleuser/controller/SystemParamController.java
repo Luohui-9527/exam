@@ -7,7 +7,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.SystemParamDto;
 import exam.demo.moduleuser.pojo.model.SystemParam;
 import exam.demo.moduleuser.pojo.vo.SystemParamItemVo;
@@ -26,7 +25,7 @@ import java.util.List;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.SYSTEM_PARAM)
+@RequestMapping("/systemparam")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class SystemParamController {
     @Autowired
@@ -36,7 +35,7 @@ public class SystemParamController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.SAVE_SP)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveSystemParam(@RequestBody @Valid SystemParamItemVo request) {
         SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
         systemParamService.save(systemParamDto);
@@ -44,7 +43,7 @@ public class SystemParamController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.UPDATE_SP)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateSystemParam(@RequestBody @Valid SystemParamItemVo request) {
         SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
         systemParamDto.setOldVersion(systemParamDto.getVersion());
@@ -53,7 +52,7 @@ public class SystemParamController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.DEL_SP)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteSystemParam(@RequestBody @Valid List<SystemParamItemVo> request) {
         List<SystemParamDto> systemParamDtoList = CommonUtils.convertList(request, SystemParamDto.class);
         systemParamService.delete(systemParamDtoList);
@@ -61,7 +60,7 @@ public class SystemParamController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_SP)
+    @PostMapping("/query")
     public CommonResponse<PageVo<SystemParamListVo>> querySystemParam(@RequestBody @Valid SystemParamQueryVo request) {
         SystemParamDto systemParamDto = CommonUtils.copyProperties(request, SystemParamDto.class);
         Page<SystemParamListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
@@ -71,7 +70,7 @@ public class SystemParamController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_UF_SP)
+    @PostMapping("/form")
     public CommonResponse<SystemParamListVo> getUpdateFormSystemParam(@RequestBody @Valid Long request) {
         SystemParam systemParam = systemParamService.getById(request);
         SystemParamListVo systemParamListVo = CommonUtils.copyProperties(systemParam, SystemParamListVo.class);
@@ -80,7 +79,7 @@ public class SystemParamController {
 
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_LIST_SP)
+    @GetMapping("/list")
     public CommonResponse<List> getTreeSystemParam() {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, systemParamService.getQueryListData());
     }

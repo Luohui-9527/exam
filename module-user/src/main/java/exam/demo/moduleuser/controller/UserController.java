@@ -8,7 +8,6 @@ import exam.demo.modulecommon.common.UserDto;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.RoleDto;
 import exam.demo.moduleuser.dto.UserOptionsDto;
 import exam.demo.moduleuser.dto.UserRoleDto;
@@ -37,7 +36,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping(ControllerConstants.USER)
+@RequestMapping("/usermanagement")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class UserController {
     @Autowired
@@ -56,7 +55,7 @@ public class UserController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.SAVE_U)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveUser(@RequestBody @Valid UserItemVo request) {
         UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userService.save(userDto);
@@ -64,7 +63,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.UPDATE_U)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateUser(@RequestBody @Valid UserItemVo request) {
         UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userDto.setOldVersion(userDto.getVersion());
@@ -73,7 +72,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_UF_U)
+    @PostMapping("/form")
     public CommonResponse<UserListVo> getUpdateFormUser(@RequestBody @Valid Long request) {
         User user = userService.getById(request);
         UserListVo userListVo = CommonUtils.copyProperties(user, UserListVo.class);
@@ -81,7 +80,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.DEL_U)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteUser(@RequestBody @Valid List<UserItemVo> request) {
         List<UserDto> userDtoList = CommonUtils.convertList(request, UserDto.class);
         userService.delete(userDtoList);
@@ -89,7 +88,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_U)
+    @PostMapping("/query")
     public CommonResponse<PageVo<UserListVo>> queryUser(@RequestBody @Valid UserQueryVo request) {
         UserDto userDto = CommonUtils.copyProperties(request, UserDto.class);
         userDto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
@@ -101,7 +100,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_OPTIONS_U)
+    @GetMapping("/options")
     public CommonResponse<Map> queryUserOptions() {
         List<UserOptionsDto> userRole = roleService.queryRole();
         List<UserOptionsDto> userPosition = positionService.queryPosition();
@@ -112,7 +111,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_LIST_U)
+    @GetMapping("/list")
     public CommonResponse<PageVo<UserListVo>> getUserManagementList(@RequestBody UserQueryVo queryVo) {
         Long pageNum = (long) (queryVo.getCurrentPage() > 0 ? queryVo.getCurrentPage() : 1);
         Long pageSize = (long) (queryVo.getPageSize() > 0 ? queryVo.getPageSize() : 10);
@@ -131,7 +130,7 @@ public class UserController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.ALLOC_USER)
+    @PostMapping("/alloc")
     public CommonResponse<Boolean> allocRoleUser(@RequestBody @Valid UserRoleDto request) {
         userService.addRoleForUser(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
@@ -144,7 +143,7 @@ public class UserController {
      * @return 是否查询成功，成功返回角色list，若失败返回失败信息
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_USER_ROLE)
+    @PostMapping("/role")
     public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody Long commonRequest) {
         List<RoleDto> roleDtoList = userService.queryRoleOfUser(commonRequest);
         List<RoleListVo> roleListVoList = CommonUtils.convertList(roleDtoList, RoleListVo.class);
@@ -152,7 +151,7 @@ public class UserController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.EXIST_CODE)
+    @PostMapping("/exist")
     public CommonResponse<Boolean> existCode(@RequestBody String code) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userService.notExistCode(code));
     }

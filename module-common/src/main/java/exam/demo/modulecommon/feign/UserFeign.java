@@ -14,9 +14,10 @@ import java.util.List;
 /**
  * 用户服务 Feign 客户端
  * 用于内部调用 user 服务
+ *
  * @author luohui
  */
-@FeignClient(name = ApiConstant.SERVICE_NAME_USER, path = ApiConstant.SERVICE_VALUE_USER)
+@FeignClient(name = ApiConstant.SERVICE_NAME_USER)
 public interface UserFeign {
     @PostMapping({"/get/user/name"})
     CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody List<Long> request);

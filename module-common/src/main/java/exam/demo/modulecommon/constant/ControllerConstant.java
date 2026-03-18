@@ -2,7 +2,6 @@ package exam.demo.modulecommon.constant;
 
 /**
  * @author luohui
- * @version 1.0
  * @since 2020-03-19
  */
 public class ControllerConstant {
@@ -15,14 +14,14 @@ public class ControllerConstant {
     public static final String CREATE_STANDARD_GEN = "/normalGen";
     public static final String CREATE_TEMPLATE_GEN = "/templateGen";
 
-    public static final String MAINTAIN_QUERY_PAPER = "/queryPaper";
-    public static final String MAINTAIN_MODIFY_PAPER = "/modifyPaper";
-    public static final String MAINTAIN_DELETE_PAPER = "/deletePaper";
-    public static final String MAINTAIN_PAPER_DETAIL = "/paperDetail";
-    public static final String MAINTAIN_PUBLISH_PAPER = "/publishPaper";
+    public static final String MAINTAIN_QUERY_PAPER = "/query";
+    public static final String MAINTAIN_MODIFY_PAPER = "/update";
+    public static final String MAINTAIN_DELETE_PAPER = "/delete";
+    public static final String MAINTAIN_PAPER_DETAIL = "/detail";
+    public static final String MAINTAIN_PUBLISH_PAPER = "/publish";
 
     public static final String TEMPLATE_DOWNLOAD_PAPER = "/download";
     public static final String TEMPLATE_UPLOAD_PAPER = "/upload";
     public static final String TEMPLATE_DELETE_PAPER = "/delete";
-    public static final String TEMPLATE_QUERY = "/queryTemplate";
+    public static final String TEMPLATE_QUERY = "/query";
 }

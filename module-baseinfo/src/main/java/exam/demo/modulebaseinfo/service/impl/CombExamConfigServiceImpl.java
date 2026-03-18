@@ -135,7 +135,11 @@ public class CombExamConfigServiceImpl extends ServiceImpl<CombExamConfigDao, Co
      */
     @Override
     public List<CombExamConfig> listById(CombExamConfig combExamConfig) {
-        combExamConfig.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        try {
+            combExamConfig.setJudgeId(CommonUtils.judgeCompanyAndOrg());
+        } catch (Exception e) {
+            // 没有登录时，不设置 judgeId
+        }
         return baseMapper.queryCombExamConfig(combExamConfig);
     }
 }

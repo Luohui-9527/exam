@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * @author luohui
  */
-@EnableFeignClients
+@EnableFeignClients(basePackages = "exam.demo.modulecommon.feign")
 @EnableEurekaClient
 @EnableTransactionManagement
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)

@@ -3,6 +3,9 @@ package exam.demo.modulepaper.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.common.*;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
+import exam.demo.modulecommon.feign.ExamFeign;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
 import exam.demo.modulecommon.utils.SnowFlake;
@@ -10,9 +13,6 @@ import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
 import exam.demo.modulepaper.exception.PaperError;
 import exam.demo.modulepaper.exception.PaperException;
-import exam.demo.modulecommon.feign.BaseInfoFeign;
-import exam.demo.modulecommon.feign.ExamFeign;
-import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulepaper.pojo.dto.PaperDto;
 import exam.demo.modulepaper.pojo.model.Paper;
 import exam.demo.modulepaper.pojo.model.PaperSubject;
@@ -285,7 +285,7 @@ public class BaseService {
             Cache cache = cacheManager.getCache(CacheConstants.SUBJECT_TYPE_VAL);
             Cache.ValueWrapper wrapper = cache.get(id);
             if (wrapper == null) {
-                CommonResponse response = baseInfoFeign.getSubjectType(id);
+                CommonResponse response = baseInfoFeign.getSubjectTypeValue(id);
                 String val = RPCUtils.parseResponse(response, String.class, RPCUtils.BASEINFO);
                 cache.put(id, val);
                 return val;

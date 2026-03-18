@@ -7,7 +7,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.DepartmentDto;
 import exam.demo.moduleuser.exception.UserError;
 import exam.demo.moduleuser.exception.UserException;
@@ -30,7 +29,7 @@ import java.util.List;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.DEPARTMENT)
+@RequestMapping("/department")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class DepartmentController {
     @Autowired
@@ -40,7 +39,7 @@ public class DepartmentController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.SAVE_D)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveDepartment(@RequestBody @Valid DepartmentItemVo departmentItemVo) {
         DepartmentDto departmentDto = CommonUtils.copyProperties(departmentItemVo, DepartmentDto.class);
         departmentService.save(departmentDto);
@@ -49,7 +48,7 @@ public class DepartmentController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.UPDATE_D)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateDepartment(@RequestBody @Valid DepartmentItemVo departmentItemVo) {
         DepartmentDto departmentDto = CommonUtils.copyProperties(departmentItemVo, DepartmentDto.class);
         departmentDto.setOldVersion(departmentDto.getVersion());
@@ -58,7 +57,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.DEL_D)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteDepartment(@RequestBody @Valid List<DepartmentItemVo> departmentItemVoList) {
         List<DepartmentDto> departmentDtoList = CommonUtils.convertList(departmentItemVoList, DepartmentDto.class);
         departmentService.delete(departmentDtoList);
@@ -66,7 +65,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_UF_D)
+    @PostMapping("/form")
     public CommonResponse<DepartmentListVo> getUpdateFormDepartment(@RequestBody Long departmentId) {
         Department department = departmentService.getById(departmentId);
         if (department == null) {
@@ -77,7 +76,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_D)
+    @PostMapping("/query")
     public CommonResponse<PageVo<DepartmentListVo>> queryDepartment(@RequestBody @Valid DepartmentQueryVo departmentQueryVo) {
         Department department = CommonUtils.copyProperties(departmentQueryVo, Department.class);
         department.setJudgeId(CommonUtils.judgeCompanyAndOrg());
@@ -89,7 +88,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_DEP_LEVEL)
+    @GetMapping("/level")
     public CommonResponse<List> queryLevelDepartment() {
         List<Department> departmentList = departmentService.queryLevel();
         List<DepartmentQueryVo> res = CommonUtils.convertList(departmentList, DepartmentQueryVo.class);
@@ -97,7 +96,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_DEP_PARENT)
+    @GetMapping("/parent")
     public CommonResponse<List> queryParentDepartment() {
         List<Department> departmentList = departmentService.queryParent();
         List<DepartmentQueryVo> res = CommonUtils.convertList(departmentList, DepartmentQueryVo.class);
@@ -105,7 +104,7 @@ public class DepartmentController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_DEP_TREE_DATA)
+    @GetMapping("/tree")
     public CommonResponse<List> queryTreeDataDepartment() {
         List<TreeList> departmentList = departmentService.queryTreeData();
         List<TreeListVo> res = CommonUtils.convertList(departmentList, TreeListVo.class);

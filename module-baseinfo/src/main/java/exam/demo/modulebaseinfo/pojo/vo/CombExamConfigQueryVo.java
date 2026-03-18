@@ -2,7 +2,6 @@ package exam.demo.modulebaseinfo.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import exam.demo.modulecommon.common.BaseQueryVo;
 
 import java.io.Serializable;
 
@@ -11,7 +10,7 @@ import java.io.Serializable;
  *
  * @author
  */
-public class CombExamConfigQueryVo extends BaseQueryVo implements Serializable {
+public class CombExamConfigQueryVo implements Serializable {
 
     private static final long serialVersionUID = 697915909468078349L;
 
@@ -50,8 +49,6 @@ public class CombExamConfigQueryVo extends BaseQueryVo implements Serializable {
         return "CombExamConfigQueryVO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", currentPage=" + pageNum +
-                ", pageSize=" + pageSize +
                 '}';
     }
 }

@@ -4,7 +4,7 @@ package exam.demo.modulepaper.controller;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PaperDetail;
-import exam.demo.modulecommon.constant.ControllerConstant;
+
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.feign.BaseInfoFeign;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 2020-03-04
  */
-@RequestMapping(ControllerConstant.MAINTAIN)
+@RequestMapping("/maintain")
 @RestController
 public class MaintainPaperController {
 
@@ -54,7 +54,7 @@ public class MaintainPaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.MAINTAIN_QUERY_PAPER)
+    @PostMapping("/query")
     public CommonResponse<Map> queryPaper(@RequestBody PaperQueryVo paperQueryVo) {
         Map res = paperService.queryPaper(CommonUtils.copyProperties(paperQueryVo, PaperQueryDto.class), false);
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, res);
@@ -67,7 +67,7 @@ public class MaintainPaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.MAINTAIN_MODIFY_PAPER)
+    @PostMapping("/update")
     public CommonResponse modifyPaper(@RequestBody ModifyPaperVo modifyPaperVo) {
         baseService.published(modifyPaperVo.getId());
         ModifyPaperDto detail = CommonUtils.copyProperties(modifyPaperVo, ModifyPaperDto.class);
@@ -83,7 +83,7 @@ public class MaintainPaperController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.MAINTAIN_DELETE_PAPER)
+    @PostMapping("/delete")
     public CommonResponse deletePaper(@RequestBody List<Long> paperIds) {
         if (paperService.paperDelete(paperIds)) {
             baseService.evictPaper(paperIds);
@@ -99,13 +99,13 @@ public class MaintainPaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.MAINTAIN_PAPER_DETAIL)
+    @PostMapping("/detail")
     public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperId));
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.MAINTAIN_PUBLISH_PAPER)
+    @PostMapping("/publish")
     public CommonResponse<Boolean> publishPaper(@RequestParam("paperId") Long paperId) {
         boolean result = paperService.publish(paperId);
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, result);

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +20,15 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseDataDto {
-    private Map<Long, String> baseInfoMap;
-}
+public class BaseDataDto implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    private Map<Long, String> baseInfoMap;
+    private Long id;
+    private String name;
+    private String code;
+
+    private Long pageNum;
+    private Long pageSize;
+    private List<?> list;
+}

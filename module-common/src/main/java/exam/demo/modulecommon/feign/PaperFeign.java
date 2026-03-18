@@ -16,9 +16,10 @@ import java.util.List;
 /**
  * 试卷服务 Feign 客户端
  * 用于内部调用 paper 服务
+ *
  * @author luohui
  */
-@FeignClient(name = ApiConstant.SERVICE_NAME_PAPER, path = ApiConstant.SERVICE_VALUE_PAPER)
+@FeignClient(name = ApiConstant.SERVICE_NAME_PAPER)
 public interface PaperFeign {
     @PostMapping({"/info/publish/paper"})
     CommonResponse<Boolean> publishPaper(@RequestBody Long paperId);

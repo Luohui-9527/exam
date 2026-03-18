@@ -5,7 +5,6 @@ import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.UserDto;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.pojo.vo.UserInfo;
 import exam.demo.moduleuser.pojo.vo.UserMenu;
 import exam.demo.moduleuser.pojo.vo.UserVo;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.LOGIN)
+@RequestMapping("/login")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class LoginController {
     @Autowired
@@ -32,7 +31,7 @@ public class LoginController {
     @Autowired
     CommonState state;
 
-    @PostMapping(ControllerConstants.LOGIN)
+    @PostMapping
     public CommonResponse<Map> login(@RequestBody UserVo userVo) {
         UserDto user = CommonUtils.copyProperties(userVo, UserDto.class);
         String token = loginService.login(user);
@@ -42,17 +41,17 @@ public class LoginController {
     }
 
 
-    @GetMapping(ControllerConstants.USER_INFO)
+    @GetMapping("/info")
     public CommonResponse<UserInfo> getUserInfo() {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.getUserInfo());
     }
 
-    @GetMapping(ControllerConstants.USER_MENU)
+    @GetMapping("/menu")
     public CommonResponse<List<UserMenu>> getUserMenu() {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.getUserMenu());
     }
 
-    @PostMapping(ControllerConstants.LOGOUT)
+    @PostMapping("/logout")
     public CommonResponse<Boolean> logout(@RequestBody @Valid Object request) {
         LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) request;
         ArrayList<String> data = (ArrayList<String>) map.get("data");

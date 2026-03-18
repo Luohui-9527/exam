@@ -7,7 +7,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.CompanyDto;
 import exam.demo.moduleuser.dto.TreeListDto;
 import exam.demo.moduleuser.exception.UserError;
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.COMPANY)
+@RequestMapping("/company")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class CompanyController {
     @Autowired
@@ -41,7 +40,7 @@ public class CompanyController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.SAVE_C)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveCompany(@RequestBody @Valid CompanyItemVo companyItemVo) {
         CompanyDto dto = CommonUtils.copyProperties(companyItemVo, CompanyDto.class);
         companyService.save(dto);
@@ -49,7 +48,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.DELETE_C)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteCompany(@RequestBody @Valid List<CompanyItemVo> itemVoList) {
         List<Long> idList = itemVoList.stream().map(CompanyItemVo::getId).collect(Collectors.toList());
         companyService.removeByIds(idList);
@@ -57,7 +56,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.UPDATE_C)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateCompany(@RequestBody @Valid CompanyItemVo companyItemVo) {
         CompanyDto dto = CommonUtils.copyProperties(companyItemVo, CompanyDto.class);
         dto.setOldVersion(companyItemVo.getVersion());
@@ -66,7 +65,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_UPDATE_FORM_C)
+    @PostMapping("/form")
     public CommonResponse<CompanyListVo> getUpdateFormCompany(@RequestBody @Valid Long companyId) {
         Company company = companyService.getById(companyId);
         if (company == null) {
@@ -77,7 +76,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_C)
+    @PostMapping("/query")
     public CommonResponse<PageVo<CompanyListVo>> queryCompany(@RequestBody @Valid CompanyQueryVo companyQueryVo) {
         CompanyDto dto = CommonUtils.copyProperties(companyQueryVo, CompanyDto.class);
         dto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
@@ -89,7 +88,7 @@ public class CompanyController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.GET_COMPANY_LIST)
+    @GetMapping("/list")
     public CommonResponse<List> getCompanyList() {
         Long judgeId = CommonUtils.judgeCompanyAndOrg();
         List<TreeListDto> dtoList = companyService.getCompanyTree(judgeId);
@@ -99,7 +98,7 @@ public class CompanyController {
 
     @MethodEnhancer
     @PostMapping("/get/company/name")
-    public CommonResponse<String> getCompanyById(@RequestParam("request") Long companyId) {
+    public CommonResponse<String> getCompanyById(@RequestBody Long companyId) {
         Company company = companyService.getById(companyId);
         if (company == null) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, "");

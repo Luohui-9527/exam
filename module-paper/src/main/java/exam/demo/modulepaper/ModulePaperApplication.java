@@ -9,7 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
-@EnableFeignClients
+@EnableFeignClients(basePackages = "exam.demo.modulecommon.feign")
 @EnableEurekaClient
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 @SpringBootApplication

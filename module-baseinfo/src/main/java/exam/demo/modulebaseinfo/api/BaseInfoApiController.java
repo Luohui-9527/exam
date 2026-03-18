@@ -1,7 +1,6 @@
 package exam.demo.modulebaseinfo.api;
 
 
-import exam.demo.modulecommon.constant.ApiConstant;
 import exam.demo.modulebaseinfo.constant.EnumInfoType;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
 import exam.demo.modulebaseinfo.pojo.model.CombExamConfigDetail;
@@ -53,7 +52,7 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.LIST_CATEGORY)
+    @PostMapping("/category/list")
     public CommonResponse<BaseDataDto> listCategory(@RequestBody @Valid BaseDataDto baseDataDto) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, getBaseInfo(baseDataDto, EnumInfoType.CATEGORY));
     }
@@ -72,7 +71,7 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.GET_BASE_DATAS)
+    @PostMapping("/dictionary/list")
     public CommonResponse<BaseDataDto> getBaseDataS(@RequestBody @Valid BaseDataDto baseDataDto) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, getBaseInfo(baseDataDto, EnumInfoType.DICTIONARY));
     }
@@ -84,7 +83,7 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.GET_BASE_DATA)
+    @PostMapping("/dictionary/val")
     public CommonResponse<String> getBaseData(@RequestBody @Valid Long dictionaryId) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, dictionaryService.getDictionaryValue(dictionaryId));
     }
@@ -96,8 +95,8 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ApiConstant.GET_SUBJECT_AND_ANSWER)
-    public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestParam("combExamConfigId") Long combExamConfigId) {
+    @PostMapping("/subject/package")
+    public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestBody Long combExamConfigId) {
         CombExamConfigDetail config = new CombExamConfigDetail();
         config.setCombExamConfigId(combExamConfigId);
         List<CombExamConfigDetail> itemList = combExamConfigItemService.listByCombExamId(config);
@@ -112,7 +111,7 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.GET_SUBJECT_CUSTOMIZED)
+    @PostMapping("/subject/customized")
     public CommonResponse<SubjectPackage> getSubjectAndAnswerCustomized(@RequestBody @Valid List<CombExamConfigItemDto> combExamConfigItemDtoList) {
         List<CombExamConfigDetail> combExamConfigDetailList = CommonUtils.convertList(combExamConfigItemDtoList, CombExamConfigDetail.class);
         SubjectPackage subjectPackage = subjectService.getSubject(combExamConfigDetailList);
@@ -126,7 +125,7 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.GET_SUBJECT_BY_ID)
+    @PostMapping("/subject/byId")
     public CommonResponse<SubjectPackage> getSubjectById(@RequestBody @Valid List<Long> subjectIdList) {
         SubjectPackage subjectPackage = subjectService.getSubjectById(subjectIdList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectPackage);
@@ -139,7 +138,7 @@ public class BaseInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.LIST_SUBJECT_TYPE)
+    @PostMapping("/subjectType/list")
     public CommonResponse<BaseDataDto> getSubjectType(@RequestBody @Valid BaseDataDto baseDataDto) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, getBaseInfo(baseDataDto, EnumInfoType.SUBJECT_TYPE));
     }
@@ -165,12 +164,12 @@ public class BaseInfoApiController {
         return baseDataDto;
     }
 
-    @PostMapping(ApiConstant.GET_CATEGORY_VAL)
+    @PostMapping("/category/value")
     public CommonResponse<String> getCategory(@RequestBody Long id) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, categoryService.getCategoryNameById(id));
     }
 
-    @PostMapping(ApiConstant.GET_SUBJECT_TYPE)
+    @PostMapping("/subjectType/value")
     public CommonResponse<String> getSubjectType(@RequestBody Long id) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectTypeService.getTypeName(id));
     }

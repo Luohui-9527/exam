@@ -1,15 +1,14 @@
 package exam.demo.modulebaseinfo.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulebaseinfo.constant.ControllerConstant;
 import exam.demo.modulebaseinfo.exception.BaseInfoError;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
 import exam.demo.modulebaseinfo.pojo.model.Subject;
 import exam.demo.modulebaseinfo.pojo.model.SubjectAnswer;
 import exam.demo.modulebaseinfo.pojo.model.SubjectInfo;
 import exam.demo.modulebaseinfo.pojo.vo.SubjectAnswerQueryVo;
-import exam.demo.modulebaseinfo.pojo.vo.SubjectQueryVo;
 import exam.demo.modulebaseinfo.pojo.vo.SubjectQueryResultVo;
+import exam.demo.modulebaseinfo.pojo.vo.SubjectQueryVo;
 import exam.demo.modulebaseinfo.pojo.vo.SubjectVo;
 import exam.demo.modulebaseinfo.service.SubjectAnswerService;
 import exam.demo.modulebaseinfo.service.SubjectService;
@@ -26,14 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 题目控制器
- * 提供题目的增删改查等API接口
- *
- * @author luohui
- */
-@RequestMapping(ControllerConstant.SUBJECT)
 @RestController
+@RequestMapping("/subject")
 public class SubjectController {
     @Autowired
     CommonState state;
@@ -51,7 +44,7 @@ public class SubjectController {
      * @return 保存结果
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.SAVE_SUBJECT)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveSubject(@RequestBody SubjectVo subjectVo) {
         SubjectDto subjectDto = CommonUtils.copyProperties(subjectVo, SubjectDto.class);
         List<SubjectAnswerDto> answerDtoList = CommonUtils.convertList(subjectVo.getSubjectAnswerVOList(), SubjectAnswerDto.class);
@@ -66,7 +59,7 @@ public class SubjectController {
      * @return 删除结果
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.DELETE_SUBJECT_LIST)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteSubjectList(@RequestBody List<SubjectVo> subjectVoList) {
         List<Subject> subjects = CommonUtils.convertList(subjectVoList, Subject.class);
         for (Subject subject : subjects) {
@@ -84,7 +77,7 @@ public class SubjectController {
      * @throws BaseInfoException 如果更新失败
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.UPDATE_SUBJECT)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateSubject(@RequestBody SubjectVo subjectVo) {
         SubjectDto subjectDto = CommonUtils.copyProperties(subjectVo, SubjectDto.class);
         List<SubjectAnswerDto> subjectAnswerDtoList = CommonUtils.convertList(subjectVo.getSubjectAnswerVOList(), SubjectAnswerDto.class);
@@ -103,7 +96,7 @@ public class SubjectController {
      * @return 分页查询结果
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_SUBJECT)
+    @PostMapping("/query")
     public CommonResponse<PageVo<SubjectQueryResultVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
         Long pageNum = queryVo.getPageNum() != null ? queryVo.getPageNum() : 1L;
         Long pageSize = queryVo.getPageSize() != null ? queryVo.getPageSize() : 10L;
@@ -140,7 +133,7 @@ public class SubjectController {
      * @return 答案列表
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_ANSWER)
+    @PostMapping("/answer")
     public CommonResponse<List> queryAnswer(@RequestBody SubjectAnswerQueryVo subjectAnswerQueryVo) {
         long subjectId = subjectAnswerQueryVo.getSubjectId();
         List<SubjectAnswer> answerList = subjectAnswerService.listAnswerBySubjectId(subjectId);

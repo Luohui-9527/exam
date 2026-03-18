@@ -7,7 +7,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.PositionDto;
 import exam.demo.moduleuser.pojo.model.Position;
 import exam.demo.moduleuser.pojo.vo.PositionItemVo;
@@ -26,7 +25,7 @@ import java.util.List;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.POSITION)
+@RequestMapping("/position")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class PositionController {
     @Autowired
@@ -37,7 +36,7 @@ public class PositionController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.SAVE_P)
+    @PostMapping("/save")
     public CommonResponse<Boolean> savePosition(@RequestBody @Valid PositionItemVo request) {
         PositionDto positionDto = CommonUtils.copyProperties(request, PositionDto.class);
         positionService.save(positionDto);
@@ -45,7 +44,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.UPDATE_P)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updatePosition(@RequestBody @Valid PositionItemVo request) {
         PositionDto positionDto = CommonUtils.copyProperties(request, PositionDto.class);
         positionDto.setOldVersion(positionDto.getVersion());
@@ -54,7 +53,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.DEL_P)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deletePosition(@RequestBody @Valid List<PositionItemVo> request) {
         List<Position> positionList = CommonUtils.convertList(request, Position.class);
         positionService.delete(positionList);
@@ -62,7 +61,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_UF_P)
+    @PostMapping("/form")
     public CommonResponse<PositionListVo> getUpdateFormPosition(@RequestBody @Valid Long request) {
         Position position = positionService.getById(request);
         PositionListVo positionListVo = CommonUtils.copyProperties(position, PositionListVo.class);
@@ -70,7 +69,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_P)
+    @PostMapping("/query")
     public CommonResponse<PageVo<PositionListVo>> queryPosition(@RequestBody @Valid PositionQueryVo request) {
         Position position = CommonUtils.copyProperties(request, Position.class);
         position.setJudgeId(CommonUtils.judgeCompanyAndOrg());
@@ -82,7 +81,7 @@ public class PositionController {
     }
 
     @MethodEnhancer
-    @GetMapping(ControllerConstants.QUERY_OPTIONS_P)
+    @GetMapping("/options")
     public CommonResponse<List> queryCompOptionsPosition() {
         List<Position> positionList = positionService.listCompany();
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, CommonUtils.convertList(positionList, PositionListVo.class));

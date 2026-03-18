@@ -2,7 +2,6 @@ package exam.demo.modulebaseinfo.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import exam.demo.modulebaseinfo.constant.ControllerConstant;
 import exam.demo.modulebaseinfo.dto.CategoryDto;
 import exam.demo.modulebaseinfo.exception.BaseInfoError;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
@@ -30,7 +29,7 @@ import java.util.List;
  * @version 1.0
  * @since 2020-03-04
  */
-@RequestMapping(ControllerConstant.CATEGORY)
+@RequestMapping("/category")
 @RestController
 public class CategoryController {
     @Autowired
@@ -46,7 +45,7 @@ public class CategoryController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.SAVE_CATEGORY)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveCategory(@RequestBody CategoryVo categoryVo) {
         CategoryDto category = CommonUtils.copyProperties(categoryVo, CategoryDto.class);
         if (categoryService.save(category)) {
@@ -60,8 +59,7 @@ public class CategoryController {
      *
      * @return
      */
-    @MethodEnhancer
-    @PostMapping(ControllerConstant.DELETE_CATEGORY)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteCategory(@RequestBody List<CategoryVo> categoryVoList) {
         List<Category> categoryList = CommonUtils.convertList(categoryVoList, Category.class);
         for (Category category : categoryList) {
@@ -82,7 +80,7 @@ public class CategoryController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.UPDATE_CATEGORY)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateCategory(@RequestBody CategoryVo categoryVo) {
         CategoryDto dto = CommonUtils.copyProperties(categoryVo, CategoryDto.class);
         dto.setOrgId(TokenUtils.getUser().getOrgId());
@@ -98,7 +96,7 @@ public class CategoryController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_CATEGORY)
+    @PostMapping("/query")
     public CommonResponse<PageVo<CategoryListVo>> queryCategory(@RequestBody CategoryQueryVo queryVo) {
         Page<CategoryQueryVo> page = new Page<>(queryVo.getPageNum(), queryVo.getPageSize());
         Category category = new Category();
@@ -118,7 +116,7 @@ public class CategoryController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_CATEGORY_INFO)
+    @PostMapping("/info")
     public CommonResponse<List> queryCategoryInfo(@RequestBody CategoryQueryVo categoryQueryVo) {
         Category category = CommonUtils.copyProperties(categoryQueryVo, Category.class);
         category.setOrgId(TokenUtils.getUser().getOrgId());
@@ -133,7 +131,7 @@ public class CategoryController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ControllerConstant.QUERY_CATEGORY_TREE)
+    @GetMapping("/tree")
     public CommonResponse<List> queryCategoryTree() {
         Category category = new Category();
         category.setOrgId(TokenUtils.getUser().getOrgId());

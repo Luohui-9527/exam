@@ -2,8 +2,6 @@ package exam.demo.modulepaper.api;
 
 
 import exam.demo.modulecommon.common.*;
-import exam.demo.modulecommon.constant.ApiConstant;
-import exam.demo.modulecommon.constant.ControllerConstant;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
@@ -23,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@RequestMapping(ControllerConstant.API)
+@RequestMapping("/paper")
 public class PaperInfoApiController {
 
 
@@ -46,7 +44,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.PAPER_INFO_PUBLISH_PAPER)
+    @PostMapping("/publish")
     public CommonResponse<Boolean> publishPaper(@RequestBody Long paperId) {
         if (paperService.publish(paperId)) {
             return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, true);
@@ -60,7 +58,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ApiConstant.PAPER_INFO_LIST_PAPER)
+    @GetMapping("/list")
     public CommonResponse<List<PaperIdWithName>> listPaper() {
         UserPermission userPermission = TokenUtils.getUser();
         List<PaperIdWithName> res = paperService.list(userPermission.getCompanyId());
@@ -74,7 +72,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ApiConstant.PAPER_INFO_FUZZY_SEARCH)
+    @PostMapping("/search")
     public CommonResponse<List<PaperIdWithName>> fuzzySearchByPaperName(@RequestBody FuzzySearch fuzzySearch) {
         List<PaperIdWithName> res = paperService.listByName(fuzzySearch);
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, res);
@@ -87,7 +85,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ApiConstant.PAPER_INFO_QUERY_DETAIL)
+    @GetMapping("/detail")
     public CommonResponse<PaperDetail> queryDetailByPaperId(@RequestParam("paperId") Long paperId) {
         PaperDetail detail = baseService.queryDetailByPaperId(paperId);
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, detail);
@@ -101,7 +99,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ApiConstant.PAPER_INFO_QUERY_PUBLISHED_TIME)
+    @GetMapping("/publishedTimes")
     public CommonResponse<Integer> queryPublishedTimesByPaperId(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperService.getPaper(paperId).getPublishTimes());
     }
@@ -113,7 +111,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ApiConstant.PAPER_INFO_QUERY_PAPER_NAME)
+    @GetMapping("/name")
     public CommonResponse<String> queryPaperNameByPaperId(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperService.getPaper(paperId).getName());
     }
@@ -125,7 +123,7 @@ public class PaperInfoApiController {
      * @return
      */
     @MethodEnhancer
-    @GetMapping(ApiConstant.PAPER_INFO_QUERY_PAPER_SCORE)
+    @GetMapping("/score")
     public CommonResponse<Double> queryPaperScore(@RequestParam("paperId") Long paperId) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, paperService.getScore(paperId));
     }

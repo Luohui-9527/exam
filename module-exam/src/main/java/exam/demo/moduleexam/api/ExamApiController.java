@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2020-04-24
  */
 @RestController
-@RequestMapping(ControllerConstant.API)
+@RequestMapping("/api")
 public class ExamApiController {
     @Resource
     ExamPublishRecordMapper examPublishRecordMapper;

@@ -7,7 +7,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.UserOnlineInfoDto;
 import exam.demo.moduleuser.pojo.model.UserOnlineInfo;
 import exam.demo.moduleuser.pojo.vo.UserOnlineInfoListVo;
@@ -26,7 +25,7 @@ import java.util.List;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.USER_ONLINE)
+@RequestMapping("/useronline")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class UserOnlineController {
     @Autowired
@@ -39,7 +38,7 @@ public class UserOnlineController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_UO)
+    @PostMapping("/query")
     public CommonResponse<PageVo<UserOnlineInfo>> queryUserOnline(@RequestBody @Valid UserOnlineInfoQueryVo request) {
         UserOnlineInfo userOnlineInfo = CommonUtils.copyProperties(request, UserOnlineInfo.class);
         List<UserOnlineInfo> onlineInfoList = userOnlineInfoService.queryByCondition(userOnlineInfo);
@@ -50,7 +49,7 @@ public class UserOnlineController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_ALL)
+    @PostMapping("/all")
     public CommonResponse<List> queryAllUserOnline(@RequestBody UserOnlineInfoQueryVo request) {
         UserOnlineInfoDto userOnlineInfoDto = CommonUtils.copyProperties(request, UserOnlineInfoDto.class);
         userOnlineInfoDto.setJudgeId(CommonUtils.judgeCompanyAndOrg());
@@ -60,7 +59,7 @@ public class UserOnlineController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.OFFLINE)
+    @PostMapping("/offline")
     public CommonResponse<Boolean> kick(@RequestBody List<Long> request) {
         loginService.logout(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);

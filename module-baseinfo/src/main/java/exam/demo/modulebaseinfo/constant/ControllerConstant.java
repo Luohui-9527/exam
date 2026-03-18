@@ -2,7 +2,6 @@ package exam.demo.modulebaseinfo.constant;
 
 /**
  * @author luohui
- * @version 1.0
  * @since 2020-03-04
  */
 public class ControllerConstant {
@@ -12,36 +11,36 @@ public class ControllerConstant {
     public static final String SUBJECT = "/subject";
     public static final String SUBJECT_TYPE = "/subjectType";
 
-    public static final String SAVE_CATEGORY = "/saveCategory";
-    public static final String DELETE_CATEGORY = "/deleteCategory";
-    public static final String UPDATE_CATEGORY = "/updateCategory";
-    public static final String QUERY_CATEGORY = "/queryCategory";
-    public static final String QUERY_CATEGORY_INFO = "/queryCategoryInfo";
-    public static final String QUERY_CATEGORY_TREE = "/getCategoryTree";
+    public static final String SAVE_CATEGORY = "/save";
+    public static final String DELETE_CATEGORY = "/delete";
+    public static final String UPDATE_CATEGORY = "/update";
+    public static final String QUERY_CATEGORY = "/query";
+    public static final String QUERY_CATEGORY_INFO = "/info";
+    public static final String QUERY_CATEGORY_TREE = "/tree";
 
-    public static final String SAVE_DICTIONARY = "/saveDictionary";
-    public static final String DELETE_DICTIONARY = "/deleteDictionary";
-    public static final String UPDATE_DICTIONARY = "/updateDictionary";
-    public static final String QUERY_DICTIONARY = "/queryDictionary";
-    public static final String QUERY_DICTIONARY_VALUE = "/queryDictionaryValue";
+    public static final String SAVE_DICTIONARY = "/save";
+    public static final String DELETE_DICTIONARY = "/delete";
+    public static final String UPDATE_DICTIONARY = "/update";
+    public static final String QUERY_DICTIONARY = "/query";
+    public static final String QUERY_DICTIONARY_VALUE = "/value";
 
-    public static final String SAVE_COMB_EXAM_CONFIG = "/saveCombExamConfig";
-    public static final String UPDATE_CEC = "/updateCombExamConfig";
-    public static final String DELETE_CEC = "/deleteCombExamConfig";
-    public static final String QUERY_CONFIG = "/queryCombExamConfig";
-    public static final String QUERY_CONFIG_ITEM = "/queryCombExamConfigItem";
+    public static final String SAVE_COMB_EXAM_CONFIG = "/save";
+    public static final String UPDATE_CEC = "/update";
+    public static final String DELETE_CEC = "/delete";
+    public static final String QUERY_CONFIG = "/query";
+    public static final String QUERY_CONFIG_ITEM = "/queryItem";
 
-    public static final String SAVE_SUBJECT = "/saveSubject";
-    public static final String DELETE_SUBJECT_LIST = "/deleteSubjectList";
-    public static final String UPDATE_SUBJECT = "/updateSubject";
-    public static final String QUERY_SUBJECT = "/querySubject";
-    public static final String QUERY_ANSWER = "/queryAnswer";
+    public static final String SAVE_SUBJECT = "/save";
+    public static final String DELETE_SUBJECT_LIST = "/delete";
+    public static final String UPDATE_SUBJECT = "/update";
+    public static final String QUERY_SUBJECT = "/query";
+    public static final String QUERY_ANSWER = "/answer";
 
-    public static final String SAVE_SUBJECT_TYPE = "/saveSubjectType";
-    public static final String DELETE_SUBJECT_TYPE = "/deleteSubjectType";
-    public static final String UPDATE_SUBJECT_TYPE = "/updateSubjectType";
-    public static final String QUERY_SUBJECT_TYPE = "/querySubjectType";
-    public static final String QUERY_SUBJECT_TYPE_UPDATE_FORM = "/querySubjectTypeUpdateForm";
+    public static final String SAVE_SUBJECT_TYPE = "/save";
+    public static final String DELETE_SUBJECT_TYPE = "/delete";
+    public static final String UPDATE_SUBJECT_TYPE = "/update";
+    public static final String QUERY_SUBJECT_TYPE = "/query";
+    public static final String QUERY_SUBJECT_TYPE_UPDATE_FORM = "/form";
 
 
 }

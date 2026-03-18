@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 /**
  * @author luohui
  */
-@RequestMapping(ControllerConstant.DICTIONARY)
+@RequestMapping("/dictionary")
 @RestController
 public class DictionaryController {
     @Autowired
@@ -44,7 +44,7 @@ public class DictionaryController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.SAVE_DICTIONARY)
+    @PostMapping("/save")
     public CommonResponse<Boolean> save(@RequestBody DictionaryVo dictionaryVo) {
         DictionaryDto dictionaryDto = CommonUtils.copyProperties(dictionaryVo, DictionaryDto.class);
         dictionaryService.save(dictionaryDto);
@@ -52,7 +52,7 @@ public class DictionaryController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.DELETE_DICTIONARY)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> delete(@RequestBody List<DictionaryVo> dictionaryVoList) {
         List<Dictionary> dictionaryList = CommonUtils.convertList(dictionaryVoList, Dictionary.class);
         for (Dictionary dictionary : dictionaryList) {
@@ -65,7 +65,7 @@ public class DictionaryController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.UPDATE_DICTIONARY)
+    @PostMapping("/update")
     public CommonResponse<Boolean> update(@RequestBody DictionaryVo dictionaryVo) {
         DictionaryDto dictionaryDto = CommonUtils.copyProperties(dictionaryVo, DictionaryDto.class);
         dictionaryDto.setOldVersion(dictionaryDto.getVersion());
@@ -77,7 +77,7 @@ public class DictionaryController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_DICTIONARY)
+    @PostMapping("/query")
     public CommonResponse<PageVo<DictionaryListVo>> queryDictionary(@RequestBody DictionaryQueryVo vo) {
         Page<DictionaryQueryVo> page = new Page<>(vo.getPageNum(), vo.getPageSize());
         Dictionary dictionary = new Dictionary();
@@ -92,7 +92,7 @@ public class DictionaryController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_DICTIONARY_VALUE)
+    @PostMapping("/value")
     public CommonResponse<List> queryDictionaryValue(@RequestBody DictionaryQueryVo queryVo) {
         Dictionary dictionary = new Dictionary();
         dictionary.setOrgId(TokenUtils.getUser().getOrgId());

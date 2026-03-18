@@ -3,7 +3,6 @@ package exam.demo.modulepaper.controller;
 
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
-import exam.demo.modulecommon.constant.ControllerConstant;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
@@ -30,7 +29,7 @@ import java.util.Map;
  * @version 1.0
  * @since 2020-03-04
  */
-@RequestMapping(ControllerConstant.TEMPLATE)
+@RequestMapping("/template")
 @RestController
 public class TemplatePaperController {
 
@@ -50,7 +49,7 @@ public class TemplatePaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.TEMPLATE_DOWNLOAD_PAPER)
+    @PostMapping("/download")
     public CommonResponse<Boolean> downloadPaper(@RequestBody PaperVo paperVo) {
         checkCompany();
         PaperDto paper = CommonUtils.copyProperties(paperVo, PaperDto.class);
@@ -68,7 +67,7 @@ public class TemplatePaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.TEMPLATE_UPLOAD_PAPER)
+    @PostMapping("/upload")
     public CommonResponse<Boolean> uploadPaper(@RequestBody PaperVo paperVo) {
         checkCompany();
         PaperDto paper = CommonUtils.copyProperties(paperVo, PaperDto.class);
@@ -85,7 +84,7 @@ public class TemplatePaperController {
      * @return
      */
     @MethodEnhancer
-    @PostMapping(ControllerConstant.TEMPLATE_DELETE_PAPER)
+    @PostMapping("/delete")
     public CommonResponse deleteTemplate(@RequestBody List<Long> templateIdList) {
         if (paperService.deleteTemplate(templateIdList)) {
             baseService.evictPaper(templateIdList);
@@ -95,10 +94,10 @@ public class TemplatePaperController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.TEMPLATE_QUERY)
-    public CommonResponse<Map> queryTemplate(@RequestBody PaperQueryVo paperQueryVo) {
+    @PostMapping("/query")
+    public CommonResponse<List<PaperVo>> queryTemplate(@RequestBody PaperQueryVo paperQueryVo) {
         Map map = paperService.queryTemplate(CommonUtils.copyProperties(paperQueryVo, PaperQueryDto.class));
-        return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, map);
+        return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, (List<PaperVo>) map.get("paperVO"));
     }
 
     private void checkCompany() {

@@ -8,7 +8,6 @@ import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
-import exam.demo.moduleuser.constant.ControllerConstants;
 import exam.demo.moduleuser.dto.ResourceDto;
 import exam.demo.moduleuser.dto.TreeListDto;
 import exam.demo.moduleuser.pojo.model.Resource;
@@ -28,7 +27,7 @@ import java.util.List;
  * @since 2020-04-07
  */
 @RestController
-@RequestMapping(ControllerConstants.RESOURCE)
+@RequestMapping("/resource")
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "false", methods = {})
 public class ResourceController {
     @Autowired
@@ -38,7 +37,7 @@ public class ResourceController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.SAVE_R)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveResource(@RequestBody @Valid ResourceItemVo request) {
         ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
         resourceService.save(resourceDto);
@@ -46,7 +45,7 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.GET_UF_R)
+    @PostMapping("/form")
     public CommonResponse<ResourceListVo> queryUpdateFormResource(@RequestBody Long request) {
         Resource resource = resourceService.getById(request);
         ResourceListVo resourceListVo = CommonUtils.copyProperties(resource, ResourceListVo.class);
@@ -54,7 +53,7 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.DEL_R)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteResource(@RequestBody List<ResourceItemVo> request) {
         List<Resource> resourceList = CommonUtils.convertList(request, Resource.class);
         resourceService.delete(resourceList);
@@ -63,7 +62,7 @@ public class ResourceController {
 
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.UPDATE_R)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateResource(@RequestBody ResourceItemVo request) {
         ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
         resourceDto.setOldVersion(resourceDto.getVersion());
@@ -72,7 +71,7 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_R)
+    @PostMapping("/query")
     public CommonResponse<PageVo<ResourceListVo>> queryResource(@RequestBody ResourceQueryVo request) {
         ResourceDto resourceDto = CommonUtils.copyProperties(request, ResourceDto.class);
         Page<ResourceListVo> page = new Page<>(request.getCurrentPage(), request.getTotalPages());
@@ -83,7 +82,7 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstants.QUERY_LIST_R)
+    @GetMapping("/list")
     public CommonResponse<PageVo<ResourceListVo>> getResourceList(@RequestBody ResourceQueryVo queryVo) {
         Long pageNum = (long) (queryVo.getCurrentPage() > 0 ? queryVo.getCurrentPage() : 1);
         Long pageSize = (long) (queryVo.getPageSize() > 0 ? queryVo.getPageSize() : 10);

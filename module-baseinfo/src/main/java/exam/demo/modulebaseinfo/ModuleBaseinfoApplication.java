@@ -9,7 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "exam.demo.modulecommon.feign")
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @MapperScan(basePackages = "exam.demo.modulebaseinfo.dao")
 public class ModuleBaseinfoApplication {

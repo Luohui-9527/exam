@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * @author luohui
  */
-@RequestMapping(ControllerConstant.SUBJECT_TYPE)
+@RequestMapping("/subjectType")
 @RestController
 public class SubjectTypeController {
     @Autowired
@@ -37,7 +37,7 @@ public class SubjectTypeController {
     CommonState state;
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.SAVE_SUBJECT_TYPE)
+    @PostMapping("/save")
     public CommonResponse<Boolean> saveSubjectType(@RequestBody SubjectTypeVo subjectTypeVo) {
         SubjectTypeDto subjectTypeDto = CommonUtils.copyProperties(subjectTypeVo, SubjectTypeDto.class);
         subjectTypeService.save(subjectTypeDto);
@@ -45,7 +45,7 @@ public class SubjectTypeController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.DELETE_SUBJECT_TYPE)
+    @PostMapping("/delete")
     public CommonResponse<Boolean> deleteSubjectType(@RequestBody List list) {
         List<SubjectType> subjectTypeList = CommonUtils.convertList(list, SubjectType.class);
         UserPermission userPermission = TokenUtils.getUser();
@@ -57,7 +57,7 @@ public class SubjectTypeController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.UPDATE_SUBJECT_TYPE)
+    @PostMapping("/update")
     public CommonResponse<Boolean> updateSubjectType(@RequestBody SubjectTypeVo subjectTypeVo) {
         SubjectTypeDto subjectTypeDto = CommonUtils.copyProperties(subjectTypeVo, SubjectTypeDto.class);
         subjectTypeDto.setJudgeId(TokenUtils.getUser().getOrgId());
@@ -67,7 +67,7 @@ public class SubjectTypeController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_SUBJECT_TYPE)
+    @PostMapping("/query")
     public CommonResponse<PageVo<SubjectQueryVo>> querySubjectType(@RequestBody SubjectTypeQueryVo queryVo) {
         Page<SubjectTypeQueryVo> page = new Page<>(queryVo.getPageNum(), queryVo.getPageSize());
         SubjectType subjectType = CommonUtils.copyProperties(queryVo, SubjectType.class);
@@ -79,7 +79,7 @@ public class SubjectTypeController {
     }
 
     @MethodEnhancer
-    @PostMapping(ControllerConstant.QUERY_SUBJECT_TYPE_UPDATE_FORM)
+    @PostMapping("/form")
     public CommonResponse<List> querySubjectTypeUpdateForm(@RequestBody SubjectTypeQueryVo queryVo) {
         SubjectType subjectType = CommonUtils.copyProperties(queryVo, SubjectType.class);
         subjectType.setOrgId(TokenUtils.getUser().getOrgId());
