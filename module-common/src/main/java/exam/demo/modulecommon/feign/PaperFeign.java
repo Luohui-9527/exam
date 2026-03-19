@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author luohui
  */
-@FeignClient(name = ApiConstant.SERVICE_NAME_PAPER)
+@FeignClient(name = ApiConstant.SERVICE_NAME_PAPER, path = "/paper")
 public interface PaperFeign {
     @PostMapping({"/info/publish/paper"})
     CommonResponse<Boolean> publishPaper(@RequestBody Long paperId);

@@ -48,3 +48,10 @@ mybatis-plus:
 
 ribbon:
   ReadTimeout: 2000
+
+feign:
+  client:
+    config:
+      default:
+        requestInterceptors:
+          - exam.demo.modulecommon.config.FeignRequestInterceptor

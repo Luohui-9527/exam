@@ -105,7 +105,7 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
         for (SystemParam param : systemParamList) {
             map.put(param.getParamType(), null);
         }
-        BaseDataDto baseDataDto = new BaseDataDto(map);
+        BaseDataDto baseDataDto = BaseDataDto.builder().baseInfoMap(map).build();
         CommonResponse<BaseDataDto> response;
         try {
             response = baseInfoFeign.getBaseDataS(baseDataDto);

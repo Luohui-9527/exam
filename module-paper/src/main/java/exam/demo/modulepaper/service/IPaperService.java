@@ -1,9 +1,7 @@
 package exam.demo.modulepaper.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import exam.demo.modulecommon.common.FuzzySearch;
-import exam.demo.modulecommon.common.PaperDetail;
-import exam.demo.modulecommon.common.PaperIdWithName;
+import exam.demo.modulecommon.common.*;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.PaperDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
@@ -11,6 +9,7 @@ import exam.demo.modulepaper.pojo.model.Paper;
 import exam.demo.modulepaper.pojo.model.PaperSubject;
 import exam.demo.modulepaper.pojo.model.PaperSubjectAnswer;
 import exam.demo.modulepaper.pojo.vo.CustomizedCombExamConfigVo;
+import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,7 @@ public interface IPaperService extends IService<Paper> {
     /**
      * 标准组卷
      *
-     * @param paperDTO 试卷信息
+     * @param paperDTO          试卷信息
      * @param combExamConfigDTO 组卷配置信息
      * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
@@ -53,8 +52,8 @@ public interface IPaperService extends IService<Paper> {
     /**
      * 插入试卷
      *
-     * @param paper 试卷信息
-     * @param subjectList 试卷题目列表
+     * @param paper             试卷信息
+     * @param subjectList       试卷题目列表
      * @param subjectAnswerList 试卷答案列表
      * @return 成功返回 <code>true</code> 否则 <code>false</code>
      */
@@ -64,7 +63,7 @@ public interface IPaperService extends IService<Paper> {
      * 通过查询参数查询试卷
      *
      * @param paperQueryDTO 查询试卷参数
-     * @param isTemplate 是否为模板
+     * @param isTemplate    是否为模板
      * @return 返回满足此参数的试卷列表
      */
     Map<String, Object> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate);
@@ -142,6 +141,15 @@ public interface IPaperService extends IService<Paper> {
      * @return 试卷ID和名称列表
      */
     List<PaperIdWithName> list(long companyId);
+
+    /**
+     * 列出该公司的所有试卷（详细信息）
+     *
+     * @param companyId 公司ID
+     * @param queryVo   分页查询参数
+     * @return 试卷列表
+     */
+    PageVo<PaperListVo> listVo(long companyId, PaperQueryVo queryVo);
 
     /**
      * 通过试卷名模糊搜索

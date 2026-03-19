@@ -82,7 +82,7 @@ public class ResourceController {
     }
 
     @MethodEnhancer
-    @GetMapping("/list")
+    @PostMapping("/list")
     public CommonResponse<PageVo<ResourceListVo>> getResourceList(@RequestBody ResourceQueryVo queryVo) {
         Long pageNum = (long) (queryVo.getCurrentPage() > 0 ? queryVo.getCurrentPage() : 1);
         Long pageSize = (long) (queryVo.getPageSize() > 0 ? queryVo.getPageSize() : 10);

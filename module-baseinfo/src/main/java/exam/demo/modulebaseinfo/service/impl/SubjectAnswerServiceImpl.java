@@ -1,7 +1,7 @@
 package exam.demo.modulebaseinfo.service.impl;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import exam.demo.modulebaseinfo.dao.SubjectAnswerDao;
 import exam.demo.modulebaseinfo.pojo.model.SubjectAnswer;
@@ -37,8 +37,8 @@ public class SubjectAnswerServiceImpl extends ServiceImpl<SubjectAnswerDao, Subj
 
     @Override
     public List<SubjectAnswer> listAnswerBySubjectId(long subjectId) {
-        QueryWrapper<SubjectAnswer> wrapper = new QueryWrapper<>();
-        wrapper.eq(SubjectAnswer.SUBJECT_ID, subjectId);
+        LambdaQueryWrapper<SubjectAnswer> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(SubjectAnswer::getSubjectId, subjectId);
         return list(wrapper);
     }
 

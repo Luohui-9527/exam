@@ -139,4 +139,8 @@ public class MagicPointConstant {
      * The constant UPDATE_TIME.
      */
     public static final String UPDATE_TIME = "updated_time";
+    /**
+     * The constant CREATED_TIME.
+     */
+    public static final String CREATED_TIME = "created_time";
 }

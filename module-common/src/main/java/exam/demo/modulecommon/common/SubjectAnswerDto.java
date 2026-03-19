@@ -15,8 +15,6 @@ public class SubjectAnswerDto implements Serializable {
 
     private String answer;
 
-    private byte rightAnswer;
-
     private Object field1;
 
     private Object field2;

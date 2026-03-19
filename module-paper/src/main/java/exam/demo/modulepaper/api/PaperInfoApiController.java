@@ -5,6 +5,7 @@ import exam.demo.modulecommon.common.*;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
+import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
 import exam.demo.modulepaper.service.IPaperService;
 import exam.demo.modulepaper.service.impl.BaseService;
 import lombok.extern.slf4j.Slf4j;
@@ -53,15 +54,16 @@ public class PaperInfoApiController {
     }
 
     /**
-     * 列出试卷Id和名称
+     * 列出试卷列表
      *
+     * @param queryVo 分页查询参数
      * @return
      */
     @MethodEnhancer
-    @GetMapping("/list")
-    public CommonResponse<List<PaperIdWithName>> listPaper() {
+    @PostMapping("/list")
+    public CommonResponse<PageVo<PaperListVo>> listPaper(@RequestBody PaperQueryVo queryVo) {
         UserPermission userPermission = TokenUtils.getUser();
-        List<PaperIdWithName> res = paperService.list(userPermission.getCompanyId());
+        PageVo<PaperListVo> res = paperService.listVo(userPermission.getCompanyId(), queryVo);
         return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, res);
     }
 

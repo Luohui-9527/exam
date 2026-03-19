@@ -5,7 +5,6 @@ import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.CompanyAndUserVo;
 import exam.demo.modulecommon.common.UserDto;
-import exam.demo.modulecommon.constant.ApiConstant;
 import exam.demo.moduleuser.service.ICompanyService;
 import exam.demo.moduleuser.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class UserApiController {
      * @param request
      * @return
      */
-    @PostMapping(ApiConstant.GET_USER_NAME)
+    @PostMapping("/get/user/name")
     public CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody List<Long> request) {
         CompanyAndUserVo res = userService.getUserData(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, res);
@@ -49,7 +48,7 @@ public class UserApiController {
      * @param request
      * @return
      */
-    @PostMapping(ApiConstant.GET_USER_NAME_BY_ID)
+    @PostMapping("/get/company/name/by/id")
     public CommonResponse<String> getUserNameById(@RequestBody Long request) {
         String name = userService.getUserName(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, name);
@@ -61,7 +60,7 @@ public class UserApiController {
      * @param request
      * @return
      */
-    @PostMapping(ApiConstant.GET_SCORING_OFFICER)
+    @PostMapping("/get/scoring/officer")
     public CommonResponse<List<UserDto>> queryScoringOfficer(@RequestBody UserDto request) {
         List<UserDto> userDtoList = userService.queryScoringOfficerList(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, userDtoList);
@@ -73,7 +72,7 @@ public class UserApiController {
      * @param request
      * @return
      */
-    @PostMapping(ApiConstant.GET_ID_BY_NAME)
+    @PostMapping("/get/id/by/name")
     public CommonResponse<Long> getUserIdByName(@RequestBody String request) {
         Long mostPossibleId = userService.getMostPossibleUserId(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, mostPossibleId);
@@ -85,7 +84,7 @@ public class UserApiController {
      * @param request
      * @return
      */
-    @PostMapping(ApiConstant.GET_COMPANY_NAME)
+    @PostMapping("/get/company/name")
     public CommonResponse<String> getCompanyById(@RequestBody Long request) {
         String company = companyService.getNameById(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, company);

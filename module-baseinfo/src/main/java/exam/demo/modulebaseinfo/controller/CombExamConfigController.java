@@ -95,9 +95,7 @@ public class CombExamConfigController {
     @MethodEnhancer
     @PostMapping("/queryItem")
     public CommonResponse<List<CombExamConfigItemListVo>> queryCombExamConfigItem(@RequestBody CombExamConfigQueryVo queryVo) {
-        CombExamConfigDetail item = new CombExamConfigDetail();
-        item.setCombExamConfigId(queryVo.getId());
-        List<CombExamConfigDetail> combExamConfigDetailList = combExamConfigItemService.listByCombExamId(item);
+        List<CombExamConfigDetail> combExamConfigDetailList = combExamConfigItemService.listByConfigId(queryVo.getId());
         List<CombExamConfigItemListVo> voList = CommonUtils.convertList(combExamConfigDetailList, CombExamConfigItemListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, voList);
     }

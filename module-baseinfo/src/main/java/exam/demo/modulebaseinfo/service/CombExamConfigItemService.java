@@ -24,9 +24,9 @@ public interface CombExamConfigItemService extends IService<CombExamConfigDetail
     /**
      * 根据组卷配置ID查询对应的配置明细
      *
-     * @param item 查询条件
+     * @param configId 组卷配置ID
      * @return 配置明细列表
      */
-    List<CombExamConfigDetail> listByCombExamId(CombExamConfigDetail item);
+    List<CombExamConfigDetail> listByConfigId(Long configId);
 
 }

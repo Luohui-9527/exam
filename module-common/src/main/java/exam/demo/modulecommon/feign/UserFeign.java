@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author luohui
  */
-@FeignClient(name = ApiConstant.SERVICE_NAME_USER)
+@FeignClient(name = ApiConstant.SERVICE_NAME_USER, path = "/user")
 public interface UserFeign {
     @PostMapping({"/get/user/name"})
     CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody List<Long> request);

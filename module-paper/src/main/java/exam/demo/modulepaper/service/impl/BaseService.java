@@ -115,7 +115,8 @@ public class BaseService {
             // 设置试卷Id
             paperSubject.setPaperId(paper.getId());
             // 设置下题目
-            paperSubject.setSubject(subject.getName());
+            paperSubject.setSubjectName(subject.getName());
+            paperSubject.setSubjectId(subject.getId());
             paperSubjectList.add(paperSubject);
             // 处理试题答案
             subjectAnswer.forEach((answer -> {

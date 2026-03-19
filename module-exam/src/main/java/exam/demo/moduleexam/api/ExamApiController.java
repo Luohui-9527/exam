@@ -3,7 +3,6 @@ package exam.demo.moduleexam.api;
 
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
-import exam.demo.modulecommon.constant.ApiConstant;
 import exam.demo.modulecommon.constant.ControllerConstant;
 import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.utils.CommonUtils;
@@ -38,7 +37,7 @@ public class ExamApiController {
      * @param paperId
      * @return
      */
-    @PostMapping(ApiConstant.CHECK_EDITABLE)
+    @PostMapping("/checkEditable")
     public CommonResponse<Boolean> checkEditable(@RequestBody Long paperId) {
         List<ExamPublishRecord> record = examPublishRecordMapper.listByPaperId(paperId);
         if (CollUtil.isEmpty(record)) {

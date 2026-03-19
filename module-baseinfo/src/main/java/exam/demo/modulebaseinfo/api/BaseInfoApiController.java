@@ -91,15 +91,13 @@ public class BaseInfoApiController {
     /**
      * 根据组卷配置获取试卷
      *
-     * @param combExamConfigId
-     * @return
+     * @param combExamConfigId 组卷配置ID
+     * @return 试卷包装对象
      */
     @MethodEnhancer
     @PostMapping("/subject/package")
     public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestBody Long combExamConfigId) {
-        CombExamConfigDetail config = new CombExamConfigDetail();
-        config.setCombExamConfigId(combExamConfigId);
-        List<CombExamConfigDetail> itemList = combExamConfigItemService.listByCombExamId(config);
+        List<CombExamConfigDetail> itemList = combExamConfigItemService.listByConfigId(combExamConfigId);
         SubjectPackage subjectPackage = subjectService.getSubject(itemList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectPackage);
     }

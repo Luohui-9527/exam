@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * 组卷配置项服务实现类
+ *
  * @author luohui
  */
 @Service
@@ -18,8 +20,8 @@ public class CombExamConfigItemServiceImpl extends ServiceImpl<CombExamConfigIte
     /**
      * 根据组卷配置删除配置项
      *
-     * @param configId
-     * @return
+     * @param configId 组卷配置ID
+     * @return 是否删除成功
      */
     @Override
     public boolean removeByConfig(long configId) {
@@ -29,13 +31,13 @@ public class CombExamConfigItemServiceImpl extends ServiceImpl<CombExamConfigIte
     }
 
     /**
-     * 根据组卷配置id查询对应的配置明细
+     * 根据组卷配置ID查询对应的配置明细
      *
-     * @param item
-     * @return
+     * @param configId 组卷配置ID
+     * @return 配置明细列表
      */
     @Override
-    public List<CombExamConfigDetail> listByCombExamId(CombExamConfigDetail item) {
-        return baseMapper.listByConfigId(item);
+    public List<CombExamConfigDetail> listByConfigId(Long configId) {
+        return baseMapper.listByConfigId(configId);
     }
 }

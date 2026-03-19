@@ -1,13 +1,16 @@
 package exam.demo.modulepaper.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonField;
 import exam.demo.modulecommon.common.*;
 import exam.demo.modulecommon.constant.MagicPointConstant;
 import exam.demo.modulecommon.exception.StarterError;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
 import exam.demo.modulecommon.utils.SnowFlake;
@@ -15,8 +18,6 @@ import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
 import exam.demo.modulepaper.exception.PaperError;
 import exam.demo.modulepaper.exception.PaperException;
-import exam.demo.modulecommon.feign.BaseInfoFeign;
-import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulepaper.mapper.PaperMapper;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
@@ -26,6 +27,7 @@ import exam.demo.modulepaper.pojo.model.Paper;
 import exam.demo.modulepaper.pojo.model.PaperSubject;
 import exam.demo.modulepaper.pojo.model.PaperSubjectAnswer;
 import exam.demo.modulepaper.pojo.vo.CustomizedCombExamConfigVo;
+import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
 import exam.demo.modulepaper.pojo.vo.PaperVo;
 import exam.demo.modulepaper.service.IPaperService;
 import exam.demo.modulepaper.service.IPaperSubjectAnswerService;
@@ -283,7 +285,8 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                         subject.setCategoryId(subjectDto.getCategoryId());
                         subject.setDifficulty(subjectDto.getDifficulty());
                         subject.setSubjectTypeId(subjectDto.getSubjectTypeId());
-                        subject.setSubject(subjectDto.getName());
+                        subject.setSubjectName(subjectDto.getName());
+                        subject.setSubjectId(subjectDto.getId());
                         // 题库里不保存试题分值 todo 增加设置题目分数的位置
                         subject.setScore((double) 5);
                         for (SubjectAnswerDto answerDto : entry.getValue()) {
@@ -291,7 +294,6 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                             answer.setId(snowFlake.nextId());
                             answer.setPaperSubjectId(subject.getId());
                             answer.setAnswer(answerDto.getAnswer());
-                            answer.setRightAnswer(answerDto.getRightAnswer());
                             addedSubjectAnswer.add(answer);
                         }
                         addedSubject.add(subject);
@@ -505,6 +507,35 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         return paperList.stream().map(p ->
                 new PaperIdWithName(p.getId(), p.getName())
         ).collect(Collectors.toList());
+    }
+
+    @Override
+    public PageVo<PaperListVo> listVo(long companyId, PaperQueryVo queryVo) {
+        QueryWrapper<Paper> wrapper = new QueryWrapper<>();
+        wrapper.eq(MagicPointConstant.COMPANY_ID, companyId);
+        wrapper.orderByDesc(MagicPointConstant.CREATED_TIME);
+
+        Page<Paper> page = new Page<>(queryVo.getPageNumOrDefault(), queryVo.getPageSizeOrDefault());
+        IPage<Paper> paperPage = page(page, wrapper);
+
+        List<PaperListVo> voList = paperPage.getRecords().stream().map(p -> {
+            PaperListVo vo = PaperListVo.builder()
+                    .id(p.getId())
+                    .name(p.getName())
+                    .paperType(p.getPaperType())
+                    .score(p.getScore())
+                    .status(p.getStatus())
+                    .createdTime(p.getCreatedTime())
+                    .build();
+            return vo;
+        }).collect(Collectors.toList());
+
+        PageVo<PaperListVo> pageVo = new PageVo<>();
+        pageVo.setTotal(paperPage.getTotal());
+        pageVo.setSize(paperPage.getSize());
+        pageVo.setCurrent(paperPage.getCurrent());
+        pageVo.setPageInfo(voList);
+        return pageVo;
     }
 
     /**

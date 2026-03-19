@@ -32,7 +32,12 @@ public class PaperSubject implements Serializable {
      * 题目
      */
     @ApiModelProperty(value = "题目")
-    private String subject;
+    private String subjectName;
+    /**
+     * 题目
+     */
+    @ApiModelProperty(value = "题目")
+    private Long subjectId;
     /**
      * sb
      */

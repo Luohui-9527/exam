@@ -62,11 +62,6 @@ public class Dictionary extends Model<Dictionary> {
     private String value;
 
     /**
-     * 备注
-     */
-    private String remark;
-
-    /**
      * 状态位
      */
     private Byte status;

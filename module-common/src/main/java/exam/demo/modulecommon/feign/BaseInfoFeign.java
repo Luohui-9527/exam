@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author luohui
  */
-@FeignClient(name = "module-baseinfo")
+@FeignClient(name = "baseinfo", path = "/baseinfo")
 public interface BaseInfoFeign {
     @PostMapping("/category/list")
     CommonResponse<BaseDataDto> listCategory(@RequestBody BaseDataDto request);

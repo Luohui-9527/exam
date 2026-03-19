@@ -34,11 +34,6 @@ public class PaperSubjectAnswer implements Serializable {
     @ApiModelProperty(value = "答案")
     private String answer;
     /**
-     * 是否为正确答案
-     */
-    @ApiModelProperty(value = "是否为正确答案")
-    private Byte rightAnswer;
-    /**
      * 预留
      */
     @ApiModelProperty(value = "预留")

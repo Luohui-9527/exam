@@ -52,6 +52,13 @@ eureka:
 ribbon:
   ReadTimeout: 2000
 
+feign:
+  client:
+    config:
+      default:
+        requestInterceptors:
+          - exam.demo.modulecommon.config.FeignRequestInterceptor
+
 mybatis-plus:
   mapper-locations: classpath:exam/demo/modulepaper/mapper/xml/*.xml
   type-aliases-package: exam.demo.modulepaper.pojo.model

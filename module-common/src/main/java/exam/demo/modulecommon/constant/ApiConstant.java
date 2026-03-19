@@ -4,10 +4,10 @@ package exam.demo.modulecommon.constant;
  * @author luohui
  */
 public class ApiConstant {
-    public static final String SERVICE_NAME_USER = "module-user";
-    public static final String SERVICE_NAME_BASE_INFO = "module-baseinfo";
-    public static final String SERVICE_NAME_PAPER = "module-paper";
-    public static final String SERVICE_NAME_EXAM = "module-exam";
+    public static final String SERVICE_NAME_USER = "user";
+    public static final String SERVICE_NAME_BASE_INFO = "baseinfo";
+    public static final String SERVICE_NAME_PAPER = "paper";
+    public static final String SERVICE_NAME_EXAM = "exam";
 
     public static final String SERVICE_VALUE_USER = "/user";
     public static final String SERVICE_VALUE_BASE_INFO = "/baseinfo";
@@ -32,4 +32,10 @@ public class ApiConstant {
     public static final String QUERY_PAPER_PUBLISHED_TIME = "/maintain/query";
     public static final String QUERY_PAPER_NAME = "/maintain/name";
     public static final String QUERY_PAPER_SCORE = "/maintain/score";
+
+    public static final String GET_USER_NAME = "/get/user/name";
+    public static final String GET_USER_NAME_BY_ID = "/get/company/name/by/id";
+    public static final String GET_SCORING_OFFICER = "/get/scoring/officer";
+    public static final String GET_ID_BY_NAME = "/get/id/by/name";
+    public static final String GET_COMPANY_NAME = "/get/company/name";
 }
