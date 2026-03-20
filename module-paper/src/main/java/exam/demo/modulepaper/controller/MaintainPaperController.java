@@ -4,10 +4,9 @@ package exam.demo.modulepaper.controller;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PaperDetail;
-
+import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
@@ -84,7 +83,7 @@ public class MaintainPaperController {
 
     @MethodEnhancer
     @PostMapping("/delete")
-    public CommonResponse deletePaper(@RequestBody List<Long> paperIds) {
+    public CommonResponse deletePaper(@RequestBody List<String> paperIds) {
         if (paperService.paperDelete(paperIds)) {
             baseService.evictPaper(paperIds);
             return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, true);
@@ -100,13 +99,13 @@ public class MaintainPaperController {
      */
     @MethodEnhancer
     @PostMapping("/detail")
-    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") String paperId) {
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperId));
     }
 
     @MethodEnhancer
     @PostMapping("/publish")
-    public CommonResponse<Boolean> publishPaper(@RequestParam("paperId") Long paperId) {
+    public CommonResponse<Boolean> publishPaper(@RequestParam("paperId") String paperId) {
         boolean result = paperService.publish(paperId);
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, result);
     }

@@ -2,6 +2,8 @@ package exam.demo.modulebaseinfo.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +18,8 @@ import java.util.List;
  * @Version: 1.0
  * @Maintenance Records:
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class SubjectVo extends BaseItemVo implements Serializable {
 
     private static final long serialVersionUID = 8413924345677180367L;
@@ -31,7 +35,7 @@ public class SubjectVo extends BaseItemVo implements Serializable {
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "题型不能为空！")
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题目类型名
@@ -43,14 +47,14 @@ public class SubjectVo extends BaseItemVo implements Serializable {
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "题目难度不能为空！")
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "题目类别不能为空！")
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 题目类别名
@@ -63,76 +67,4 @@ public class SubjectVo extends BaseItemVo implements Serializable {
     public SubjectVo() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getSubjectTypeId() {
-        return subjectTypeId;
-    }
-
-    public void setSubjectTypeId(Long subjectTypeId) {
-        this.subjectTypeId = subjectTypeId;
-    }
-
-    public String getSubjectTypeName() {
-        return subjectTypeName;
-    }
-
-    public void setSubjectTypeName(String subjectTypeName) {
-        this.subjectTypeName = subjectTypeName;
-    }
-
-    public Long getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Long difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public List<SubjectAnswerVo> getSubjectAnswerVOList() {
-        return subjectAnswerVoList;
-    }
-
-    public void setSubjectAnswerVOList(List<SubjectAnswerVo> subjectAnswerVOList) {
-        this.subjectAnswerVoList = subjectAnswerVOList;
-    }
-
-    @Override
-    public String toString() {
-        return "SubjectVO{" +
-                "name='" + name + '\'' +
-                ", subjectTypeId=" + subjectTypeId +
-                ", subjectTypeName='" + subjectTypeName + '\'' +
-                ", difficulty=" + difficulty +
-                ", categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                ", subjectAnswerVOList=" + subjectAnswerVoList +
-                ", id=" + id +
-                ", status=" + status +
-                ", version=" + version +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
 }

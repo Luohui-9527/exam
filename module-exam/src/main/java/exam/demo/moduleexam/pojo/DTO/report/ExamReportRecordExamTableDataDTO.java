@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class ExamReportRecordExamTableDataDTO {
-    private Long id;
+    private String id;
     private Integer actualPepoleNum;
     private Date endTime;
     private Integer examSession;

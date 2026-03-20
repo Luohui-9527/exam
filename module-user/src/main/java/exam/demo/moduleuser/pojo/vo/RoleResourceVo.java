@@ -18,13 +18,13 @@ public class RoleResourceVo implements Serializable {
     private static final long serialVersionUID = -5392841873474130071L;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long roleId;
+    private String roleId;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long resourceId;
+    private String resourceId;
 
     private Long type;
 

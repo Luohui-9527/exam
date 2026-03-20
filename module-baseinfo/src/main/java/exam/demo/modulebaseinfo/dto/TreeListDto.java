@@ -11,7 +11,7 @@ public class TreeListDto {
     /**
      * id
      */
-    private Long id;
+    private String id;
 
     /**
      * 名字
@@ -21,7 +21,7 @@ public class TreeListDto {
     /**
      * 父亲id
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 版本

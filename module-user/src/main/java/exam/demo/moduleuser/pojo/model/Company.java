@@ -25,12 +25,12 @@ public class Company implements Serializable {
      * 公司ID
      */
     @ApiModelProperty(value = "公司ID")
-    private Long id;
+    private String id;
     /**
      * 组织机构ID
      */
     @ApiModelProperty(value = "组织机构ID")
-    private Long orgId;
+    private String orgId;
     /**
      * 公司名
      */
@@ -90,7 +90,7 @@ public class Company implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -102,7 +102,7 @@ public class Company implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */
@@ -117,7 +117,7 @@ public class Company implements Serializable {
     private Long version;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

@@ -20,7 +20,7 @@ public interface DictionaryService extends IService<Dictionary> {
      * @param idList 字典ID列表
      * @return 字典值列表
      */
-    List<String> getDictionary(List<Long> idList);
+    List<String> getDictionary(List<String> idList);
 
     /**
      * 根据字典ID获取字典值
@@ -28,7 +28,7 @@ public interface DictionaryService extends IService<Dictionary> {
      * @param id 字典ID
      * @return 字典值
      */
-    String getDictionaryValue(Long id);
+    String getDictionaryValue(String id);
 
     /**
      * 保存字典

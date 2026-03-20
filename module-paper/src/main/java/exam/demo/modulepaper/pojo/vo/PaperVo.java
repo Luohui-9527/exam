@@ -1,9 +1,8 @@
 package exam.demo.modulepaper.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseQueryVo;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -14,12 +13,12 @@ import java.util.Date;
  * @version 1.0
  * @since 2019-08-19
  */
+@Data
 public class PaperVo extends BaseQueryVo {
     /**
      * 试卷id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     /**
      * 试卷名称
      */
@@ -27,8 +26,7 @@ public class PaperVo extends BaseQueryVo {
     /**
      * 试卷类型id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperType;
+    private String paperType;
     /**
      * 试卷类型，通过id从数据字典中查询
      */
@@ -36,8 +34,7 @@ public class PaperVo extends BaseQueryVo {
     /**
      * 难度id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
     /**
      * 难度，通过id从数据字典中查询
      */
@@ -84,12 +81,10 @@ public class PaperVo extends BaseQueryVo {
     /**
      * 公司id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private String companyId;
 
     private String companyValue;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long updatedBy;
+    private String updatedBy;
 
     private String updatedByValue;
     /**
@@ -99,188 +94,6 @@ public class PaperVo extends BaseQueryVo {
     private Date updatedTime;
 
     public PaperVo() {
-    }
-
-    @Override
-    public String toString() {
-        return "PaperVo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", paperType=" + paperType +
-                ", paperTypeValue='" + paperTypeValue + '\'' +
-                ", difficulty=" + difficulty +
-                ", difficultyValue='" + difficultyValue + '\'' +
-                ", combExamTime=" + combExamTime +
-                ", score=" + score +
-                ", description='" + description + '\'' +
-                ", template=" + template +
-                ", downloadTimes=" + downloadTimes +
-                ", publishTimes=" + publishTimes +
-                ", status=" + status +
-                ", paperCreator='" + paperCreator + '\'' +
-                ", createdTime=" + createdTime +
-                '}';
-    }
-
-    public Long getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Long updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public String getUpdatedByValue() {
-        return updatedByValue;
-    }
-
-    public void setUpdatedByValue(String updatedByValue) {
-        this.updatedByValue = updatedByValue;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getCompanyValue() {
-        return companyValue;
-    }
-
-    public void setCompanyValue(String companyValue) {
-        this.companyValue = companyValue;
-    }
-
-    public Date getUpdatedTime() {
-        return updatedTime;
-    }
-
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
-    }
-
-    public Long getPaperType() {
-        return paperType;
-    }
-
-    public void setPaperType(Long paperType) {
-        this.paperType = paperType;
-    }
-
-    public String getPaperTypeValue() {
-        return paperTypeValue;
-    }
-
-    public void setPaperTypeValue(String paperTypeValue) {
-        this.paperTypeValue = paperTypeValue;
-    }
-
-    public Long getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Long difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public String getDifficultyValue() {
-        return difficultyValue;
-    }
-
-    public void setDifficultyValue(String difficultyValue) {
-        this.difficultyValue = difficultyValue;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public Date getCombExamTime() {
-        return combExamTime;
-    }
-
-    public void setCombExamTime(Date combExamTime) {
-        this.combExamTime = combExamTime;
-    }
-
-    public Double getScore() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Byte getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(Byte template) {
-        this.template = template;
-    }
-
-    public Long getDownloadTimes() {
-        return downloadTimes;
-    }
-
-    public void setDownloadTimes(Long downloadTimes) {
-        this.downloadTimes = downloadTimes;
-    }
-
-    public Long getPublishTimes() {
-        return publishTimes;
-    }
-
-    public void setPublishTimes(Long publishTimes) {
-        this.publishTimes = publishTimes;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getPaperCreator() {
-        return paperCreator;
-    }
-
-    public void setPaperCreator(String paperCreator) {
-        this.paperCreator = paperCreator;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
     }
 
 }

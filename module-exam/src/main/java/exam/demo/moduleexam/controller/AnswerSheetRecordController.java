@@ -5,10 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordQueryFormDTO;
 import exam.demo.moduleexam.pojo.DTO.answersheet.ExamAnswerSheetRecordTableDataDTO;
 import exam.demo.moduleexam.pojo.VO.answersheet.ExamAnswerSheetRecordQueryFormVO;
@@ -72,7 +72,7 @@ public class AnswerSheetRecordController {
      * @param id
      * @return
      */
-    private String getPublisherName(Long id) {
+    private String getPublisherName(String id) {
         if (id != null) {
             return RPCUtils.parseResponse(userFeignClient.getUserNameById(id), String.class, RPCUtils.USER);
         }

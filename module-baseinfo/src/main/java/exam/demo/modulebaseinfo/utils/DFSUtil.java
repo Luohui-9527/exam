@@ -12,16 +12,16 @@ import java.util.function.Function;
  * @author luohui
  */
 public class DFSUtil<T> {
-    private List<Long> res = new ArrayList<>();
-    private Function<Long, List<T>> getChildrenFunction;
+    private List<String> res = new ArrayList<>();
+    private Function<String, List<T>> getChildrenFunction;
 
     /**
      * 构造函数
      *
-     * @param rootId            根节点ID
+     * @param rootId              根节点ID
      * @param getChildrenFunction 获取子节点的函数
      */
-    public DFSUtil(Long rootId, Function<Long, List<T>> getChildrenFunction) {
+    public DFSUtil(String rootId, Function<String, List<T>> getChildrenFunction) {
         this.getChildrenFunction = getChildrenFunction;
         res.add(rootId);
         dfs(rootId);
@@ -32,24 +32,24 @@ public class DFSUtil<T> {
      *
      * @param currentId 当前节点ID
      */
-    private void dfs(Long currentId) {
+    private void dfs(String currentId) {
         List<T> children = getChildrenFunction.apply(currentId);
         if (children == null || children.isEmpty()) {
             return;
         }
         // 假设每个节点都有getId()方法获取ID
-        List<Long> idList = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
         for (T child : children) {
             try {
                 // 使用反射获取id属性
-                Long id = (Long) child.getClass().getMethod("getId").invoke(child);
+                String id = (String) child.getClass().getMethod("getId").invoke(child);
                 idList.add(id);
                 res.add(id);
             } catch (Exception e) {
                 // 忽略反射异常
             }
         }
-        for (Long id : idList) {
+        for (String id : idList) {
             dfs(id);
         }
     }
@@ -59,7 +59,7 @@ public class DFSUtil<T> {
      *
      * @return 节点ID列表
      */
-    public List<Long> getRes() {
+    public List<String> getRes() {
         return res;
     }
 }

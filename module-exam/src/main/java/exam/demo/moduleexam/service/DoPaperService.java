@@ -14,7 +14,7 @@ public interface DoPaperService {
      * @param userInfoFormDTO
      * @return 考试发布记录id
      */
-    Long saveExaminee(UserInfoFormDTO userInfoFormDTO);
+    String saveExaminee(UserInfoFormDTO userInfoFormDTO);
 
     /**
      * 填写答案 存入答案
@@ -30,5 +30,5 @@ public interface DoPaperService {
      * @param id
      * @return
      */
-    TimeWrapper getExamTime(long id);
+    TimeWrapper getExamTime(String id);
 }

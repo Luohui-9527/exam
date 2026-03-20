@@ -3,7 +3,6 @@ package exam.demo.modulepaper.controller;
 
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
-
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
@@ -72,7 +71,7 @@ public class CreatePaperController {
 
     @MethodEnhancer
     @PostMapping("/templateGen")
-    public CommonResponse templateGen(@RequestParam("templateId") Long templateId) {
+    public CommonResponse templateGen(@RequestParam("templateId") String templateId) {
         checkAccessAuthority();
         PaperDto paperDto = new PaperDto();
         paperDto.setId(templateId);

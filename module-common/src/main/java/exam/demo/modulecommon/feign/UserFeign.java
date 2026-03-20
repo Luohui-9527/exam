@@ -20,10 +20,10 @@ import java.util.List;
 @FeignClient(name = ApiConstant.SERVICE_NAME_USER, path = "/user")
 public interface UserFeign {
     @PostMapping({"/get/user/name"})
-    CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody List<Long> request);
+    CommonResponse<CompanyAndUserVo> getUserInfo(@RequestBody List<String> request);
 
     @PostMapping({"/get/company/name/by/id"})
-    CommonResponse<String> getUserNameById(@RequestBody Long request);
+    CommonResponse<String> getUserNameById(@RequestBody String request);
 
     @PostMapping({"/get/scoring/officer"})
     CommonResponse<List<UserDto>> queryScoringOfficer(@RequestBody UserDto request);
@@ -32,5 +32,5 @@ public interface UserFeign {
     CommonResponse<Long> getUserIdByName(@RequestBody String request);
 
     @PostMapping({"/get/company/name"})
-    CommonResponse<String> getCompanyById(@RequestBody Long request);
+    CommonResponse<String> getCompanyById(@RequestBody String request);
 }

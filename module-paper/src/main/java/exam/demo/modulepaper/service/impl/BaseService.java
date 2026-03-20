@@ -111,7 +111,7 @@ public class BaseService {
             // 类型转换下
             PaperSubject paperSubject = CommonUtils.copyProperties(subject, PaperSubject.class);
             // 副本设置新Id
-            paperSubject.setId(snowFlake.nextId());
+            paperSubject.setId(snowFlake.nextIdStr());
             // 设置试卷Id
             paperSubject.setPaperId(paper.getId());
             // 设置下题目
@@ -121,7 +121,7 @@ public class BaseService {
             // 处理试题答案
             subjectAnswer.forEach((answer -> {
                 PaperSubjectAnswer ans = CommonUtils.copyProperties(answer, PaperSubjectAnswer.class);
-                ans.setId(snowFlake.nextId());
+                ans.setId(snowFlake.nextIdStr());
                 ans.setPaperSubjectId(paperSubject.getId());
                 paperSubjectAnswerList.add(ans);
             }));
@@ -165,7 +165,7 @@ public class BaseService {
             throw new PaperException(PaperError.PAPER_SUBJECT_IS_NULL);
         }
         // 获取试题id，然后去查询这些id对应的答案
-        List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<String> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         List<PaperSubjectAnswer> paperSubjectAnswerList = paperSubjectAnswerService.listAnswerBySubjectIdList(subjectIdList);
         // 复制答案
         // 创建复制的答案集合
@@ -174,12 +174,12 @@ public class BaseService {
         for (PaperSubject subject : subjectList) {
             PaperSubject copiedSubject = CommonUtils.copyProperties(subject, PaperSubject.class);
             copiedSubject.setPaperId(newPaper.getId());
-            copiedSubject.setId(snowFlake.nextId());
+            copiedSubject.setId(snowFlake.nextIdStr());
             for (PaperSubjectAnswer answer : paperSubjectAnswerList) {
                 if (answer.getPaperSubjectId().equals(subject.getId())) {
                     PaperSubjectAnswer copiedAns = CommonUtils.copyProperties(answer, PaperSubjectAnswer.class);
                     copiedAns.setPaperSubjectId(copiedSubject.getId());
-                    copiedAns.setId(snowFlake.nextId());
+                    copiedAns.setId(snowFlake.nextIdStr());
                     copiedAnswerList.add(copiedAns);
                 }
             }
@@ -224,7 +224,7 @@ public class BaseService {
     public Paper setProperties(Paper old, PaperDto paperDto, boolean isTemplate) {
         UserPermission userPermission = TokenUtils.getUser();
         Paper newPaper = CommonUtils.copyProperties(old, Paper.class);
-        newPaper.setId(snowFlake.nextId());
+        newPaper.setId(snowFlake.nextIdStr());
         newPaper.setName(paperDto.getName());
         newPaper.setDifficulty(paperDto.getDifficulty());
         newPaper.setDescription(paperDto.getDescription());
@@ -259,7 +259,7 @@ public class BaseService {
      * @return
      */
     @Nullable
-    public String getBaseInfoCache(Long id, int type) {
+    public String getBaseInfoCache(String id, int type) {
         if (type == CATEGORY) {
             Cache cache = cacheManager.getCache(CacheConstants.CATEGORY_VAL);
             Cache.ValueWrapper valueWrapper = cache.get(id);
@@ -297,7 +297,7 @@ public class BaseService {
     }
 
     @Nullable
-    public String getUserInfoCache(Long id, int type) {
+    public String getUserInfoCache(String id, int type) {
         if (type == COMPANY) {
             Cache companyCache = cacheManager.getCache(CacheConstants.COMPANY_VAL);
             Cache.ValueWrapper wrapper = companyCache.get(id);
@@ -332,14 +332,14 @@ public class BaseService {
      * @param paperIdList
      * @return
      */
-    public void evictPaper(List<Long> paperIdList) {
-        for (Long id : paperIdList) {
+    public void evictPaper(List<String> paperIdList) {
+        for (String id : paperIdList) {
             Cache cache = cacheManager.getCache(CacheConstants.PAPER_DETAIL);
             cache.evict(id);
         }
     }
 
-    public void evictPaper(Long id) {
+    public void evictPaper(String id) {
         Cache cache = cacheManager.getCache(CacheConstants.PAPER_DETAIL);
         cache.evict(id);
     }
@@ -349,14 +349,14 @@ public class BaseService {
      *
      * @param id
      */
-    public void published(Long id) {
+    public void published(String id) {
         CommonResponse response = examFeign.checkEditable(id);
         if (!RPCUtils.parseResponse(response, Boolean.class, RPCUtils.EXAM)) {
             throw new PaperException(PaperError.PAPER_PUBLISHED_CANT_DELETE);
         }
     }
 
-    public PaperDetail queryDetailByPaperId(Long paperId) {
+    public PaperDetail queryDetailByPaperId(String paperId) {
         Cache cache = cacheManager.getCache(CacheConstants.PAPER);
         PaperDetail detail;
         if (cache != null && cache.get(paperId) != null) {

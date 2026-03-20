@@ -23,7 +23,7 @@ public class ResourceListVo extends BaseVo implements Serializable {
      * 资源ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 节点名称
@@ -44,7 +44,7 @@ public class ResourceListVo extends BaseVo implements Serializable {
      * 父亲节点
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private String parentId;
 
     /**
      * URL

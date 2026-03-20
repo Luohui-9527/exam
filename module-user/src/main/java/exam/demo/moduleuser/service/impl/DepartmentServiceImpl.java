@@ -143,7 +143,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
             }
             return res;
         }
-        Long id = null;
+        String id = null;
         if (!CommonUtils.judgeCompanyAndOrg().equals(TokenUtils.getUser().getOrgId())) {
             id = CommonUtils.judgeCompanyAndOrg();
         }

@@ -26,23 +26,23 @@ public interface BaseInfoFeign {
     CommonResponse<BaseDataDto> getBaseDataS(@RequestBody BaseDataDto request);
 
     @PostMapping("/dictionary/val")
-    CommonResponse<String> getBaseData(@RequestBody Long request);
+    CommonResponse<String> getBaseData(@RequestBody String request);
 
     @PostMapping("/subject/package")
-    CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestBody Long request);
+    CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestBody String request);
 
     @PostMapping("/subject/customized")
     CommonResponse<SubjectPackage> getSubjectAndAnswerCustomized(@RequestBody List<CombExamConfigItemDto> request);
 
     @PostMapping("/subject/byId")
-    CommonResponse<SubjectPackage> getSubjectById(@RequestBody List<Long> request);
+    CommonResponse<SubjectPackage> getSubjectById(@RequestBody List<String> request);
 
     @PostMapping("/subjectType/list")
     CommonResponse<BaseDataDto> getSubjectTypeList(@RequestBody BaseDataDto request);
 
     @PostMapping("/category/value")
-    CommonResponse<String> getCategory(@RequestBody Long request);
+    CommonResponse<String> getCategory(@RequestBody String request);
 
     @PostMapping("/subjectType/value")
-    CommonResponse<String> getSubjectTypeValue(@RequestBody Long request);
+    CommonResponse<String> getSubjectTypeValue(@RequestBody String request);
 }

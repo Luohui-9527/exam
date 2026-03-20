@@ -25,17 +25,17 @@ public class Role implements Serializable {
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Long id;
+    private String id;
     /**
      * 公司id
      */
     @ApiModelProperty(value = "公司id")
-    private Long companyId;
+    private String companyId;
     /**
      * 组织机构id
      */
     @ApiModelProperty(value = "组织机构id")
-    private Long orgId;
+    private String orgId;
     /**
      * 角色名
      */
@@ -60,7 +60,7 @@ public class Role implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -72,7 +72,7 @@ public class Role implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */
@@ -102,16 +102,16 @@ public class Role implements Serializable {
      * 资源节点ID
      */
     @TableField(exist = false)
-    private Long resourceId;
+    private String resourceId;
 
     /**
      * 用户ID
      */
     @TableField(exist = false)
-    private Long userId;
+    private String userId;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

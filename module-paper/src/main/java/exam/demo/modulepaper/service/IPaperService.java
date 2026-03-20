@@ -74,7 +74,7 @@ public interface IPaperService extends IService<Paper> {
      * @param paperIds 试卷id数组
      * @return 删除成功的条数
      */
-    boolean paperDelete(List<Long> paperIds);
+    boolean paperDelete(List<String> paperIds);
 
     /**
      * 修改试卷
@@ -90,7 +90,7 @@ public interface IPaperService extends IService<Paper> {
      * @param id 试卷ID
      * @return 试卷详情
      */
-    PaperDetail getPaperInfo(long id);
+    PaperDetail getPaperInfo(String id);
 
     /**
      * 下载模板
@@ -116,7 +116,7 @@ public interface IPaperService extends IService<Paper> {
      * @param paperTemplateIds 模板试卷ID列表
      * @return 删除成功返回 <code>true</code> 否则 <code>false</code>
      */
-    boolean deleteTemplate(List<Long> paperTemplateIds);
+    boolean deleteTemplate(List<String> paperTemplateIds);
 
     /**
      * 查询模板
@@ -132,7 +132,7 @@ public interface IPaperService extends IService<Paper> {
      * @param id 试卷ID
      * @return 发布成功返回 <code>true</code> 否则 <code>false</code>
      */
-    boolean publish(long id);
+    boolean publish(String id);
 
     /**
      * 列出该公司的所有试卷
@@ -140,7 +140,7 @@ public interface IPaperService extends IService<Paper> {
      * @param companyId 公司ID
      * @return 试卷ID和名称列表
      */
-    List<PaperIdWithName> list(long companyId);
+    List<PaperIdWithName> list(String companyId);
 
     /**
      * 列出该公司的所有试卷（详细信息）
@@ -149,7 +149,7 @@ public interface IPaperService extends IService<Paper> {
      * @param queryVo   分页查询参数
      * @return 试卷列表
      */
-    PageVo<PaperListVo> listVo(long companyId, PaperQueryVo queryVo);
+    PageVo<PaperListVo> listVo(String companyId, PaperQueryVo queryVo);
 
     /**
      * 通过试卷名模糊搜索
@@ -165,7 +165,7 @@ public interface IPaperService extends IService<Paper> {
      * @param id 试卷ID
      * @return 试卷信息
      */
-    Paper getPaper(long id);
+    Paper getPaper(String id);
 
     /**
      * 获取试卷分数
@@ -173,5 +173,5 @@ public interface IPaperService extends IService<Paper> {
      * @param id 试卷ID
      * @return 试卷分数
      */
-    Double getScore(long id);
+    Double getScore(String id);
 }

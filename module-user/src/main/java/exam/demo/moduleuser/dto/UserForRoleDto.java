@@ -1,5 +1,7 @@
 package exam.demo.moduleuser.dto;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,12 +10,13 @@ import java.io.Serializable;
  * @date 2019/9/24
  * @describe 用于获取符合条件的用户名单
  */
+@Data
 public class UserForRoleDto implements Serializable {
     private static final long serialVersionUID = -5516751903890460865L;
     /**
      * 用户ID
      */
-    private Long id;
+    private String id;
     /**
      * 用户工号
      */
@@ -39,72 +42,4 @@ public class UserForRoleDto implements Serializable {
      */
     private Long flag;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public String getPositionName() {
-        return positionName;
-    }
-
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
-    }
-
-    public Long getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Long flag) {
-        this.flag = flag;
-    }
-
-    @Override
-    public String toString() {
-        return "UserForRole{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", roleName='" + roleName + '\'' +
-                ", departmentName='" + departmentName + '\'' +
-                ", positionName='" + positionName + '\'' +
-                ", flag=" + flag +
-                '}';
-    }
 }

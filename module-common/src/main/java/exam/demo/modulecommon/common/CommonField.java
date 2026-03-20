@@ -18,25 +18,21 @@ import java.util.Date;
 public class CommonField {
 
     /**
-     * 雪花算法生成Id
+     * UUID生成Id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    public Long id;
+    public String id;
     /**
      * 机构id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    public Long orgId;
+    public String orgId;
     /**
      * 机构下公司id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    public Long companyId;
+    public String companyId;
     /**
      * 通过id到数据字典中查询创建者
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    public Long createdBy;
+    public String createdBy;
     /**
      * 创建日期
      */
@@ -45,8 +41,7 @@ public class CommonField {
     /**
      * 通过id到数据字典中查询修改者
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    public Long updatedBy;
+    public String updatedBy;
     /**
      * 修改日期
      */
@@ -55,6 +50,5 @@ public class CommonField {
     /**
      * 版本，为Date.getTime()
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     protected Long version;
 }

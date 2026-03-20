@@ -25,12 +25,12 @@ public class UserOnlineInfo implements Serializable {
      * 在线ID
      */
     @ApiModelProperty(value = "在线ID")
-    private Long id;
+    private String id;
     /**
      * 用户ID
      */
     @ApiModelProperty(value = "用户ID")
-    private Long userId;
+    private String userId;
     /**
      * 工号
      */
@@ -72,7 +72,7 @@ public class UserOnlineInfo implements Serializable {
     private Integer status;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

@@ -23,28 +23,28 @@ public class PaperSubjectDto {
      * 试题id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     /**
      * 试卷id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperId;
+    private String paperId;
     /**
      * 题目
      */
     private String subject;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private String categoryId;
     /**
      * 难度
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
     /**
      * 题目类型从基础数据中取
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private String subjectTypeId;
     /**
      * 是否为客观题
      */

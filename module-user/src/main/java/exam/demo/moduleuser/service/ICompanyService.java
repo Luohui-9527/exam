@@ -54,7 +54,7 @@ public interface ICompanyService extends IService<Company> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    List<TreeListDto> getCompanyTree(Long id);
+    List<TreeListDto> getCompanyTree(String id);
 
     /**
      * 功能描述
@@ -64,7 +64,7 @@ public interface ICompanyService extends IService<Company> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    String getNameById(Long id);
+    String getNameById(String id);
 
     /**
      * 功能描述
@@ -74,5 +74,5 @@ public interface ICompanyService extends IService<Company> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    List<Company> listByOrgId(Long orgId);
+    List<Company> listByOrgId(String orgId);
 }

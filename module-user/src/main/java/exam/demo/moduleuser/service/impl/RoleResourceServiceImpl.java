@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, RoleResource> implements IRoleResourceService {
 
     @Override
-    public void removeByRoleId(Long roleId) {
+    public void removeByRoleId(String roleId) {
         QueryWrapper<RoleResource> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.ROLE_ID, roleId);
         this.remove(wrapper);
@@ -32,7 +32,7 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
 
     @Override
     public void removeByRoleList(List<Role> roleList) {
-        List<Long> roleIdList = roleList.stream().map(Role::getId).collect(Collectors.toList());
+        List<String> roleIdList = roleList.stream().map(Role::getId).collect(Collectors.toList());
         QueryWrapper<RoleResource> wrapper = new QueryWrapper<>();
         wrapper.in(MagicPointConstant.ROLE_ID, roleIdList);
         this.remove(wrapper);

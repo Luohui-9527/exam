@@ -44,7 +44,7 @@ public class OnlineUserTask {
         List<UserOnlineInfo> userOnlineInfoList = userOnlineInfoService.listOnlineUser();
         Cache cache = cacheManager.getCache(CacheConstants.TOKEN);
         // 离线的Id
-        List<Long> updateToLogoutId = new ArrayList<>();
+        List<String> updateToLogoutId = new ArrayList<>();
         for (UserOnlineInfo userOnlineInfo : userOnlineInfoList) {
             Cache.ValueWrapper tokenWrapper = cache.get(userOnlineInfo.getUserId());
             if (tokenWrapper == null) {
@@ -55,7 +55,7 @@ public class OnlineUserTask {
             log.info("离线用户处理完成");
             return;
         }
-        for (Long id : updateToLogoutId) {
+        for (String id : updateToLogoutId) {
             UpdateWrapper<UserOnlineInfo> updateWrapper = new UpdateWrapper<>();
             updateWrapper.set("status", 0);
             updateWrapper.eq("user_id", id);

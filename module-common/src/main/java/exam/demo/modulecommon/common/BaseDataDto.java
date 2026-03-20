@@ -23,8 +23,8 @@ import java.util.Map;
 public class BaseDataDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Map<Long, String> baseInfoMap;
-    private Long id;
+    private Map<String, String> baseInfoMap;
+    private String id;
     private String name;
     private String code;
 

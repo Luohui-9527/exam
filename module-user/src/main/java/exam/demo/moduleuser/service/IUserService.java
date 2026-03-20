@@ -27,7 +27,7 @@ public interface IUserService extends IService<User> {
      * @param name 用户名
      * @return 用户ID
      */
-    Long getMostPossibleUserId(String name);
+    String getMostPossibleUserId(String name);
 
     /**
      * 通过名字查询符合条件的阅卷官信息
@@ -43,7 +43,7 @@ public interface IUserService extends IService<User> {
      * @param longList 用户ID列表
      * @return 公司和用户信息
      */
-    CompanyAndUserVo getUserData(List<Long> longList);
+    CompanyAndUserVo getUserData(List<String> longList);
 
     /**
      * 根据用户ID获取用户名
@@ -51,7 +51,7 @@ public interface IUserService extends IService<User> {
      * @param id 用户ID
      * @return 用户名
      */
-    String getUserName(Long id);
+    String getUserName(String id);
 
     /**
      * 保存用户信息
@@ -99,15 +99,15 @@ public interface IUserService extends IService<User> {
      * @param judgeId 组织机构Id或公司Id
      * @return 以树（treelist）形式返回数据
      */
-    List<TreeList> getQueryListData(Long judgeId);
+    List<TreeList> getQueryListData(String judgeId);
 
     /**
      * 分配角色后需要更新用户公司
      *
-     * @param userId 用户ID
+     * @param userId    用户ID
      * @param companyId 公司ID
      */
-    void updateUserAfterAllocRole(Long userId, Long companyId);
+    void updateUserAfterAllocRole(String userId, String companyId);
 
     /**
      * 查询用户所拥有的角色
@@ -115,7 +115,7 @@ public interface IUserService extends IService<User> {
      * @param userId 用户ID
      * @return 拥有的角色集合
      */
-    List<RoleDto> queryRoleOfUser(Long userId);
+    List<RoleDto> queryRoleOfUser(String userId);
 
     /**
      * 判断是否存在该用户工号

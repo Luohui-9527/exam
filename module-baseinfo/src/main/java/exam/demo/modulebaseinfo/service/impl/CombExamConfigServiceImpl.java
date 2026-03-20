@@ -51,7 +51,7 @@ public class CombExamConfigServiceImpl extends ServiceImpl<CombExamConfigDao, Co
         for (CombExamConfigDetail item : itemList) {
             // 需要判断该题数目是否满足
             subjectService.isEnough(item.getCategoryId(), item.getSubjectTypeId(), item.getNum());
-            item.setId(snowFlake.nextId());
+            item.setId(snowFlake.nextIdStr());
             item.setCombExamConfigId(combExamConfigDto.getId());
         }
         CombExamConfig config = CommonUtils.copyProperties(combExamConfigDto, CombExamConfig.class);
@@ -100,7 +100,7 @@ public class CombExamConfigServiceImpl extends ServiceImpl<CombExamConfigDao, Co
             subjectService.isEnough(itemDto.getCategoryId(), itemDto.getSubjectTypeId(), itemDto.getNum());
             CombExamConfigDetail item = CommonUtils.copyProperties(itemDto, CombExamConfigDetail.class);
             if (itemDto.getSave()) {
-                item.setId(snowFlake.nextId());
+                item.setId(snowFlake.nextIdStr());
                 item.setCombExamConfigId(config.getId());
                 saveCombExamConfigDetailList.add(item);
             } else {

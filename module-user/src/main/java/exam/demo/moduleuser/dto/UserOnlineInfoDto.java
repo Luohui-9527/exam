@@ -18,12 +18,12 @@ public class UserOnlineInfoDto extends BaseDto implements Serializable {
     /**
      * 在线ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 工号
@@ -69,6 +69,6 @@ public class UserOnlineInfoDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private String judgeId;
 
 }

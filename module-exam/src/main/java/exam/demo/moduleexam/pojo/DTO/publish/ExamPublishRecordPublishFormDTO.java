@@ -15,9 +15,9 @@ public class ExamPublishRecordPublishFormDTO extends BaseDto {
     private Long limitTime;
     private Long markingMode;
     private Date markingStopTime;
-    private Long paperId;
+    private String paperId;
     private Long planPepoleNum;
     private String title;
-    private List<Long> examinersId;
-    private Long publisher;
+    private List<String> examinersId;
+    private String publisher;
 }

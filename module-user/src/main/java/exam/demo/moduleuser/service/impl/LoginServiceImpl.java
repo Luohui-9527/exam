@@ -62,7 +62,7 @@ public class LoginServiceImpl implements LoginService {
             throw new UserException(UserError.USER_OR_PASSWORD_ERROR);
         }
         UserOnlineInfo userOnlineInfo = CommonUtils.copyProperties(userDTO, UserOnlineInfo.class);
-        userOnlineInfo.setId(snowFlake.nextId());
+        userOnlineInfo.setId(snowFlake.nextIdStr());
         if (userPermission.getId() != null) {
             userOnlineInfo.setUserId(userPermission.getId());
         }
@@ -77,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
         // 根据userId查询是否已经有缓存
         Cache.ValueWrapper valueWrapper = userPermissionCache.get(userPermission.getId());
         if (valueWrapper != null) {
-            List<Long> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add(userPermission.getId());
             logout(ids);
         }
@@ -119,10 +119,10 @@ public class LoginServiceImpl implements LoginService {
      * @throws Exception
      */
     @Override
-    public boolean logout(List<Long> ids) {
+    public boolean logout(List<String> ids) {
         Cache cache = cacheManager.getCache(CacheConstants.TOKEN);
         Cache resourceCache = cacheManager.getCache(CacheConstants.RESOURCE_MAP);
-        for (Long id : ids) {
+        for (String id : ids) {
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper != null) {
                 resourceCache.evict(id);

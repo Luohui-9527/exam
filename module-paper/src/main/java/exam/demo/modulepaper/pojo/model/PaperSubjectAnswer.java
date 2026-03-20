@@ -22,12 +22,12 @@ public class PaperSubjectAnswer implements Serializable {
      * 答案id
      */
     @ApiModelProperty(value = "答案id")
-    private Long id;
+    private String id;
     /**
      * 试题id
      */
     @ApiModelProperty(value = "试题id")
-    private Long paperSubjectId;
+    private String paperSubjectId;
     /**
      * 答案
      */

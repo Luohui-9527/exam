@@ -14,11 +14,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaperListVo {
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     private String name;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperType;
+    private String paperType;
     private String paperTypeName;
     private Double score;
     private Integer status;

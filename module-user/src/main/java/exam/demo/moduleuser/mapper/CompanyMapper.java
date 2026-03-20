@@ -16,9 +16,9 @@ import java.util.Map;
  */
 
 public interface CompanyMapper extends BaseMapper<Company> {
-    List<Company> listByOrgId(@Param("id") Long id);
+    List<Company> listByOrgId(@Param("id") String id);
 
-    String selectNameById(Long id);
+    String selectNameById(String id);
 
     /**
      * 模糊查询
@@ -35,5 +35,5 @@ public interface CompanyMapper extends BaseMapper<Company> {
      * @return 树的相关数据
      */
 
-    List<Map> getQueryListData(Long judgeId);
+    List<Map> getQueryListData(String judgeId);
 }

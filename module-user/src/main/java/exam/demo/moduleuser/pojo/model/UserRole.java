@@ -23,18 +23,18 @@ public class UserRole implements Serializable {
      * 用户权限关联id
      */
     @ApiModelProperty(value = "用户权限关联id")
-    private Long id;
+    private String id;
     /**
      * 用户id
      */
     @ApiModelProperty(value = "用户id")
-    private Long userId;
+    private String userId;
     /**
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Long roleId;
+    private String roleId;
 
     @TableField(exist = false)
-    private Long companyId;
+    private String companyId;
 }

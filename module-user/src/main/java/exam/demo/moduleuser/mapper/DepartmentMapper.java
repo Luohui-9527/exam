@@ -20,7 +20,7 @@ import java.util.Map;
 public interface DepartmentMapper extends BaseMapper<Department> {
 
 
-    List<Department> listByCompanyId(@Param("id") long id);
+    List<Department> listByCompanyId(@Param("id") String id);
 
     /**
      * 根据Id更新部门，判别Version和DepartmentId
@@ -58,7 +58,7 @@ public interface DepartmentMapper extends BaseMapper<Department> {
      *
      * @return treelist记录
      */
-    List<TreeList> getQueryListData(Long judgeId);
+    List<TreeList> getQueryListData(String judgeId);
 
     /**
      * 删除列表

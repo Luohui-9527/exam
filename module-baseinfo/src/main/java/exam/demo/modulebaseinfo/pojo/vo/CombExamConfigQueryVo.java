@@ -1,7 +1,6 @@
 package exam.demo.modulebaseinfo.pojo.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -10,6 +9,7 @@ import java.io.Serializable;
  *
  * @author
  */
+@Data
 public class CombExamConfigQueryVo implements Serializable {
 
     private static final long serialVersionUID = 697915909468078349L;
@@ -17,8 +17,7 @@ public class CombExamConfigQueryVo implements Serializable {
     /**
      * 组卷配置id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 组卷配置名
@@ -28,27 +27,4 @@ public class CombExamConfigQueryVo implements Serializable {
     public CombExamConfigQueryVo() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "CombExamConfigQueryVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

@@ -22,12 +22,12 @@ public class PaperSubject implements Serializable {
      * 试题id
      */
     @ApiModelProperty(value = "试题id")
-    private Long id;
+    private String id;
     /**
      * 试卷id
      */
     @ApiModelProperty(value = "试卷id")
-    private Long paperId;
+    private String paperId;
     /**
      * 题目
      */
@@ -37,22 +37,22 @@ public class PaperSubject implements Serializable {
      * 题目
      */
     @ApiModelProperty(value = "题目")
-    private Long subjectId;
+    private String subjectId;
     /**
      * sb
      */
     @ApiModelProperty(value = "sb")
-    private Long categoryId;
+    private String categoryId;
     /**
      * 题目类型从基础数据中取
      */
     @ApiModelProperty(value = "题目类型从基础数据中取")
-    private Long subjectTypeId;
+    private String subjectTypeId;
     /**
      * 难度
      */
     @ApiModelProperty(value = "难度")
-    private Long difficulty;
+    private String difficulty;
     /**
      * 分数
      */

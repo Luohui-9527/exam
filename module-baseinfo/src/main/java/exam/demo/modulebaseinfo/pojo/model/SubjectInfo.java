@@ -20,7 +20,7 @@ public class SubjectInfo {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private String id;
     /**
      * 机构id
      */
@@ -52,12 +52,12 @@ public class SubjectInfo {
     /**
      * 题目类型id
      */
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题目类别id
      */
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 题目
@@ -67,7 +67,7 @@ public class SubjectInfo {
     /**
      * 难度
      */
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 状态位
@@ -107,7 +107,7 @@ public class SubjectInfo {
      */
     private String difficultyName;
 
-    private Long judgeId;
+    private String judgeId;
 
     private Long oldVersion;
 }

@@ -26,7 +26,7 @@ public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
      * 试卷难度id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 试卷难度

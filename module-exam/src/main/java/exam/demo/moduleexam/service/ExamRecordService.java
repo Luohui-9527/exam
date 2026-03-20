@@ -29,5 +29,5 @@ public interface ExamRecordService extends IService<ExamRecord> {
      * @param examPublishRecordId 考试发布记录ID
      * @return 考试记录列表
      */
-    List<ExamRecord> getListByExamPublishRecordId(Long examPublishRecordId);
+    List<ExamRecord> getListByExamPublishRecordId(String examPublishRecordId);
 }

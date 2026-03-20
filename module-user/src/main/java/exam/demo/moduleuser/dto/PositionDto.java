@@ -1,8 +1,7 @@
 package exam.demo.moduleuser.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseDto;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -11,19 +10,18 @@ import java.io.Serializable;
  *
  * @author
  */
+@Data
 public class PositionDto extends BaseDto implements Serializable {
     private static final long serialVersionUID = 3628861049600787289L;
     /**
      * 职位ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 公司ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private String companyId;
 
     /**
      * 职位名称
@@ -58,86 +56,6 @@ public class PositionDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private String judgeId;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Long getJudgeId() {
-        return judgeId;
-    }
-
-    public void setJudgeId(Long judgeId) {
-        this.judgeId = judgeId;
-    }
-
-    @Override
-    public String toString() {
-        return "PositionDto{" +
-                "id=" + id +
-                ", companyId=" + companyId +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", remark='" + remark + '\'' +
-                ", status=" + status +
-                ", createdBy=" + createdBy +
-                ", createdTime=" + createdTime +
-                ", updatedBy=" + updatedBy +
-                ", updatedTime=" + updatedTime +
-                ", version=" + version +
-                '}';
-    }
 }

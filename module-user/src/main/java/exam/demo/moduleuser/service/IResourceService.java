@@ -75,7 +75,7 @@ public interface IResourceService extends IService<Resource> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    List<Resource> listByIdList(List<Long> idList);
+    List<Resource> listByIdList(List<String> idList);
 
     /**
      * 获取所有资源

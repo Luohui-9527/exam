@@ -31,7 +31,7 @@ public interface UserMapper extends BaseMapper<User> {
      *
      * @return treelist记录
      */
-    List<TreeList> getQueryListData(Long id);
+    List<TreeList> getQueryListData(String id);
 
     /**
      * 查询用户

@@ -1,7 +1,8 @@
 package exam.demo.modulecommon.utils;
 
-
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 /**
  * @author luohui
@@ -123,6 +124,10 @@ public class SnowFlake {
         return result;
     }
 
+    public String nextIdStr() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
     /**
      * 阻塞到下一个毫秒，直到获得新的时间戳
      *
@@ -153,7 +158,7 @@ public class SnowFlake {
         snowFlake.dataCenterId = 5;
 
         for (int i = 0; i < 10000; i++) {
-            System.out.println(snowFlake.nextId());
+            System.out.println(snowFlake.nextIdStr());
         }
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public interface OrganizationMapper extends BaseMapper<Organization> {
 
 
-    String getById(@Param("id") long id);
+    String getById(@Param("id") String id);
 
     /**
      * 模糊查询及查询全部记录

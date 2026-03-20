@@ -37,10 +37,10 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryDao, Dictionary
      * @return
      */
     @Override
-    public List<String> getDictionary(List<Long> idList) {
+    public List<String> getDictionary(List<String> idList) {
         Cache cache = cacheManager.getCache(CacheConstants.DICTIONARY);
         List<String> stringList = new ArrayList<>();
-        for (Long id : idList) {
+        for (String id : idList) {
             Dictionary dictionary;
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper == null) {
@@ -64,7 +64,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryDao, Dictionary
      * @return
      */
     @Override
-    public String getDictionaryValue(Long id) {
+    public String getDictionaryValue(String id) {
         Dictionary dictionary;
         Cache cache = cacheManager.getCache(CacheConstants.DICTIONARY);
         Cache.ValueWrapper valueWrapper = cache.get(id);

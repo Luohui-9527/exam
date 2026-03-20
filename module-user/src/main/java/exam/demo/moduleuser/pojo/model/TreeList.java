@@ -19,26 +19,12 @@ import java.util.Objects;
 @AllArgsConstructor
 public class TreeList implements Serializable {
     private static final long serialVersionUID = -2740873114126068062L;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     private String name;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long rootId;
+    private String parentId;
+    private String rootId;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long version;
-
-    @Override
-    public String toString() {
-        return "TreeList{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", parentId=" + parentId +
-                ", rootId=" + rootId +
-                ", version=" + version +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {

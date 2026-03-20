@@ -12,9 +12,9 @@ public class SubjectAnswer extends Model<SubjectAnswer> {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private String id;
 
-    private Long subjectId;
+    private String subjectId;
 
     private String answer;
 

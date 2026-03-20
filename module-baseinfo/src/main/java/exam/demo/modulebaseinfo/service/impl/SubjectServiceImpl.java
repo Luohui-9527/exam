@@ -1,9 +1,9 @@
 package exam.demo.modulebaseinfo.service.impl;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulebaseinfo.dao.SubjectDao;
 import exam.demo.modulebaseinfo.exception.BaseInfoError;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
@@ -21,7 +21,6 @@ import exam.demo.modulecommon.common.SubjectPackageDto;
 import exam.demo.modulecommon.enums.EnumOperation;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.SnowFlake;
-import exam.demo.modulecommon.utils.SqlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +57,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
         Subject subject = CommonUtils.copyProperties(dto, Subject.class);
         List<SubjectAnswer> answerList = CommonUtils.convertList(subjectAnswerDtoList, SubjectAnswer.class);
         for (SubjectAnswer subjectAnswer : answerList) {
-            subjectAnswer.setId(snowFlake.nextId());
+            subjectAnswer.setId(snowFlake.nextIdStr());
             subjectAnswer.setSubjectId(dto.getId());
         }
         return save(subject) && subjectAnswerService.saveBatch(answerList);
@@ -91,7 +90,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
         subjectAnswerService.removeBySubjectId(subjectDto.getId());
         List<SubjectAnswer> subjectAnswerList = CommonUtils.convertList(answerDtoList, SubjectAnswer.class);
         for (SubjectAnswer subjectAnswer : subjectAnswerList) {
-            subjectAnswer.setId(snowFlake.nextId());
+            subjectAnswer.setId(snowFlake.nextIdStr());
             subjectAnswer.setSubjectId(subjectDto.getId());
         }
         subjectAnswerService.saveBatch(subjectAnswerList);
@@ -113,8 +112,8 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
             if (category != null) {
                 // 使用DFSUtil递归查找子节点
                 DFSUtil<Category> dfs = new DFSUtil<>(category.getId(), categoryService::queryChildNode);
-                List<Long> res = dfs.getRes();
-                for (Long id : res) {
+                List<String> res = dfs.getRes();
+                for (String id : res) {
                     // 创建临时Subject对象，设置categoryId和其他查询条件
                     Subject tempSubject = new Subject();
                     tempSubject.setCategoryId(id);
@@ -211,7 +210,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
     }
 
     @Override
-    public void isEnough(Long category, Long subjectType, int count) {
+    public void isEnough(String category, String subjectType, int count) {
         QueryWrapper<Subject> wrapper = new QueryWrapper<>();
         if (category == null || subjectType == null) {
             throw new BaseInfoException(BaseInfoError.CONFIG_INVALID);

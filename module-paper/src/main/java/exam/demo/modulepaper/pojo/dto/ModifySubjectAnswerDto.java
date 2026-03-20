@@ -18,6 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ModifySubjectAnswerDto {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     private String answer;
 }

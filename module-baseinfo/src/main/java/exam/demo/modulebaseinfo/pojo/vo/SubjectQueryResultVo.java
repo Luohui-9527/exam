@@ -22,8 +22,8 @@ public class SubjectQueryResultVo implements Serializable {
      * 题目id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
-    
+    private String id;
+
     /**
      * 题目
      */
@@ -33,19 +33,19 @@ public class SubjectQueryResultVo implements Serializable {
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 非表对应字段

@@ -13,5 +13,5 @@ public class BaseDataBaseDto extends BaseDto {
     /**
      * 组织机构或者公司id
      */
-    public Long judgeId;
+    public String judgeId;
 }

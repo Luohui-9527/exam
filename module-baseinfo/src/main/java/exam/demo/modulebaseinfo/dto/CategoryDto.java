@@ -28,7 +28,7 @@ public class CategoryDto extends BaseDataBaseDto implements Serializable {
     /**
      * 父亲节点id
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 父亲名

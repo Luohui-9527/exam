@@ -22,35 +22,35 @@ import java.util.List;
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
 
     @Override
-    public List<UserRole> listByRoleIds(List<Long> roleIds) {
+    public List<UserRole> listByRoleIds(List<String> roleIds) {
         QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
         wrapper.in(MagicPointConstant.ROLE_ID, roleIds);
         return this.list(wrapper);
     }
 
     @Override
-    public List<UserRole> listByUserIds(List<Long> userIds) {
+    public List<UserRole> listByUserIds(List<String> userIds) {
         QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
         wrapper.in(MagicPointConstant.ROLE_ID, userIds);
         return this.list(wrapper);
     }
 
     @Override
-    public List<UserRole> listByUserId(Long userId) {
+    public List<UserRole> listByUserId(String userId) {
         QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.USER_ID, userId);
         return this.list(wrapper);
     }
 
     @Override
-    public List<UserRole> selectByRoleId(Long roleId) {
+    public List<UserRole> selectByRoleId(String roleId) {
         QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.ROLE_ID, roleId);
         return this.list(wrapper);
     }
 
     @Override
-    public void deleteByUserId(Long userId) {
+    public void deleteByUserId(String userId) {
         QueryWrapper<UserRole> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.USER_ID, userId);
         this.remove(wrapper);

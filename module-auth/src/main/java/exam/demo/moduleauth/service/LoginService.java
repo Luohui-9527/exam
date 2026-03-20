@@ -1,7 +1,6 @@
 package exam.demo.moduleauth.service;
 
 
-
 import exam.demo.moduleauth.pojo.dto.UserDto;
 import exam.demo.moduleauth.pojo.model.UserInfo;
 import exam.demo.moduleauth.pojo.model.UserMenu;
@@ -15,8 +14,11 @@ import java.util.Map;
  * @since 2020-04-15
  */
 public interface LoginService {
-    Map<String,Object> createToken(UserDto userDTO);
+    Map<String, Object> createToken(UserDto userDTO);
+
     UserInfo getUserInfo(String token);
+
     List<UserMenu> getUserMenu(String token);
-    boolean logout(List<Long> ids);
+
+    boolean logout(List<String> ids);
 }

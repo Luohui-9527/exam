@@ -1,8 +1,7 @@
 package exam.demo.moduleuser.pojo.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseQueryVo;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -12,13 +11,13 @@ import java.io.Serializable;
  * @version V1.0.0
  * @date 2019/8/28
  */
+@Data
 public class DepartmentQueryVo extends BaseQueryVo implements Serializable {
     private static final long serialVersionUID = -7089081877518720169L;
     /**
      * 部门id
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     /**
      * 部门名
      */
@@ -33,36 +32,4 @@ public class DepartmentQueryVo extends BaseQueryVo implements Serializable {
     public DepartmentQueryVo() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "DepartmentQueryVo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", level='" + level + '\'' +
-                '}';
-    }
 }

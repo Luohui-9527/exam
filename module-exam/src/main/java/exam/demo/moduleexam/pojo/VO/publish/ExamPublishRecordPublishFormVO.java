@@ -54,7 +54,7 @@ public class ExamPublishRecordPublishFormVO implements Serializable {
      */
     @NotNull(message = "试卷id不能为空")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paperId;
+    private String paperId;
     /**
      * 计划考试人数
      */

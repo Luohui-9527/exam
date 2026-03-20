@@ -144,7 +144,7 @@ public class UserController {
      */
     @MethodEnhancer
     @PostMapping("/role")
-    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody Long commonRequest) {
+    public CommonResponse<List<RoleListVo>> queryRoleOfUser(@RequestBody String commonRequest) {
         List<RoleDto> roleDtoList = userService.queryRoleOfUser(commonRequest);
         List<RoleListVo> roleListVoList = CommonUtils.convertList(roleDtoList, RoleListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, roleListVoList);

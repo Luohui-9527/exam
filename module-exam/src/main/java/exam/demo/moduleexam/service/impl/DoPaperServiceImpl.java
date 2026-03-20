@@ -37,12 +37,12 @@ public class DoPaperServiceImpl implements DoPaperService {
     private Integer count = 0;
 
     @Override
-    public Long saveExaminee(UserInfoFormDTO userInfoFormDTO) {
+    public String saveExaminee(UserInfoFormDTO userInfoFormDTO) {
         ExamRecord record = examRecordService.getOneByTel(userInfoFormDTO.getTel());
         if (record == null) {
             try {
                 ExamRecord examRecord = new ExamRecord();
-                examRecord.setId(snowFlake.nextId());
+                examRecord.setId(snowFlake.nextIdStr());
                 examRecord.setActualStartTime(new Date());
                 examRecord.setStatus((byte) 0);
                 BeanUtils.copyProperties(userInfoFormDTO, examRecord);
@@ -80,7 +80,7 @@ public class DoPaperServiceImpl implements DoPaperService {
             AnswerRecord answerRecord = answerRecordService.getOneByDoPaperFormDTO(doPaperFormDTO);
             if (answerRecord == null) {
                 AnswerRecord newAnswer = new AnswerRecord();
-                newAnswer.setId(snowFlake.nextId());
+                newAnswer.setId(snowFlake.nextIdStr());
                 BeanUtils.copyProperties(doPaperFormDTO, newAnswer);
                 // 判断是否为客观题
                 if (answerRecordService.save(newAnswer)) {
@@ -100,7 +100,7 @@ public class DoPaperServiceImpl implements DoPaperService {
      * @return
      */
     @Override
-    public TimeWrapper getExamTime(long id) {
+    public TimeWrapper getExamTime(String id) {
         ExamPublishRecord examPublishRecord = examPublishRecordService.getById(id);
         int time = examPublishRecord.getLimitTime();
         TimeWrapper wrapper = new TimeWrapper();

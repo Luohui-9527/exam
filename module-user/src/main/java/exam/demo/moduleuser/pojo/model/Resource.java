@@ -24,7 +24,7 @@ public class Resource implements Serializable {
      * 资源ID
      */
     @ApiModelProperty(value = "资源ID")
-    private Long id;
+    private String id;
     /**
      * 节点名称
      */
@@ -44,7 +44,7 @@ public class Resource implements Serializable {
      * 父亲节点
      */
     @ApiModelProperty(value = "父亲节点")
-    private Long parentId;
+    private String parentId;
     /**
      * URL
      */
@@ -84,7 +84,7 @@ public class Resource implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -96,7 +96,7 @@ public class Resource implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */

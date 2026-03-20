@@ -22,17 +22,17 @@ public class RoleResource implements Serializable {
      * 关联id
      */
     @ApiModelProperty(value = "关联id")
-    private Long id;
+    private String id;
     /**
      * 权限id
      */
     @ApiModelProperty(value = "权限id")
-    private Long roleId;
+    private String roleId;
     /**
      * 资源id
      */
     @ApiModelProperty(value = "资源id")
-    private Long resourceId;
+    private String resourceId;
     /**
      * 是否半选
      */

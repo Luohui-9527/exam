@@ -68,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
             throw new AuthException(AuthError.USER_NOT_EXIST);
         }
         UserOnlineInfo userOnlineInfo = CommonUtils.copyProperties(userDto, UserOnlineInfo.class);
-        userOnlineInfo.setId(snowFlake.nextId());
+        userOnlineInfo.setId(snowFlake.nextIdStr());
         userOnlineInfo.setUserId(userPermission.getId());
         userOnlineInfo.setName(userPermission.getUserName());
         userOnlineInfo.setOnlineTime(new Date());
@@ -82,7 +82,7 @@ public class LoginServiceImpl implements LoginService {
         // 根据userId查询是否已经有缓存，如果有token说明已经登录
         Cache.ValueWrapper valueWrapper = tokenCache.get(userPermission.getId());
         if (valueWrapper != null) {
-            List<Long> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add(userPermission.getId());
             logout(ids);
         }
@@ -104,9 +104,9 @@ public class LoginServiceImpl implements LoginService {
     }
 
 
-    private User findById(long id) {
-        User user = userService.getById(id);
-        List<UserRole> userRoleList = userRoleService.listByUserId(id);
+    private User findById(String id) {
+        User user = userService.getById(Long.parseLong(id));
+        List<UserRole> userRoleList = userRoleService.listByUserId(Long.parseLong(id));
         List<Role> roleList = new ArrayList<>();
         for (UserRole userRole : userRoleList) {
             roleList.add(roleService.getById(userRole.getRoleId()));
@@ -150,7 +150,7 @@ public class LoginServiceImpl implements LoginService {
     public List<UserMenu> getUserMenu(String token) {
         try {
             UserPermission userPermission = JwtUtil.parseJwt(token);
-            List<UserRole> userRoleList = userRoleService.listByUserId(userPermission.getId());
+            List<UserRole> userRoleList = userRoleService.listByUserId(Long.parseLong(userPermission.getId()));
             Set<Resource> resourceSet = new LinkedHashSet<>();
             for (UserRole userRole : userRoleList) {
                 QueryWrapper<RoleResource> roleResourceQueryWrapper = new QueryWrapper<>();
@@ -165,10 +165,10 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public boolean logout(List<Long> ids) {
+    public boolean logout(List<String> ids) {
         Cache cache = cacheManager.getCache(CacheConstants.TOKEN);
         Cache resourceCache = cacheManager.getCache(CacheConstants.RESOURCE_MAP);
-        for (Long id : ids) {
+        for (String id : ids) {
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper != null) {
                 resourceCache.evict(id);

@@ -11,7 +11,7 @@ public class SubjectAnswerDto implements Serializable {
 
     private Long subjectAnswerId;
 
-    private Long subjectId;
+    private String subjectId;
 
     private String answer;
 

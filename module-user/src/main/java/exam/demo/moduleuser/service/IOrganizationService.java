@@ -63,5 +63,5 @@ public interface IOrganizationService extends IService<Organization> {
      * @Author: luohui
      * @date: 2021-12-9
      */
-    String getNameById(long id);
+    String getNameById(String id);
 }

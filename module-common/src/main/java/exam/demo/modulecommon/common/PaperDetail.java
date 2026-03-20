@@ -16,19 +16,18 @@ import java.util.List;
 @Data
 public class PaperDetail {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
     private String name;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long createdBy;
+    private String createdBy;
     private String paperCreator;
     /**
      * 试卷类型
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long category;
+    private String category;
     private String categoryValue;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
     private String difficultyValue;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date combExamTime;

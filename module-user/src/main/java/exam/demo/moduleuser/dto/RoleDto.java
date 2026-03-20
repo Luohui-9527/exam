@@ -1,7 +1,5 @@
 package exam.demo.moduleuser.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,20 +14,17 @@ public class RoleDto extends BaseDto implements Serializable {
     /**
      * 角色ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 公司ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private String companyId;
 
     /**
      * 组织机构ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long orgId;
+    private String orgId;
 
     /**
      * 角色名
@@ -64,12 +59,12 @@ public class RoleDto extends BaseDto implements Serializable {
     /**
      * 资源节点ID
      */
-    private List<Long> resourceId;
+    private List<String> resourceId;
 
     /**
      * 用户ID
      */
-    private List<Long> userId;
+    private List<String> userId;
 
     /**
      * 当前请求页
@@ -80,9 +75,9 @@ public class RoleDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private String judgeId;
 
-    public RoleDto(Long id) {
+    public RoleDto(String id) {
         this.id = id;
     }
 }

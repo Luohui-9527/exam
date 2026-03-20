@@ -1,8 +1,8 @@
 package exam.demo.moduleuser.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.enums.EnumOperation;
 import exam.demo.modulecommon.exception.StarterError;
@@ -118,7 +118,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
         } else if (userPermission.getOrgId() != null) {
             // 查该机构下的所有公司
             List<Company> companyList = companyService.queryCompany(CompanyDto.builder().orgId(userPermission.getOrgId()).build());
-            List<Long> companyIdList = companyList.stream().map(Company::getId).collect(Collectors.toList());
+            List<String> companyIdList = companyList.stream().map(Company::getId).collect(Collectors.toList());
             if (CollUtil.isEmpty(companyIdList)) {
                 return null;
             }

@@ -12,7 +12,7 @@ public class SpUser {
     /**
      * 用户ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 工号
@@ -36,11 +36,11 @@ public class SpUser {
 
     private Set<SpRole> roles;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

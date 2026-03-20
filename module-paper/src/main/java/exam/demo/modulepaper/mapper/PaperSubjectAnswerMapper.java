@@ -20,7 +20,7 @@ public interface PaperSubjectAnswerMapper extends BaseMapper<PaperSubjectAnswer>
      * @param ids
      * @return
      */
-    List<PaperSubjectAnswer> batchQueryAnswerBySubjectId(@Param("ids") List<Long> ids);
+    List<PaperSubjectAnswer> batchQueryAnswerBySubjectId(@Param("ids") List<String> ids);
 
     /**
      * 通过试题id删除答案
@@ -28,5 +28,5 @@ public interface PaperSubjectAnswerMapper extends BaseMapper<PaperSubjectAnswer>
      * @param ids
      * @return
      */
-    boolean deleteBySubjectIdList(@Param("ids") List<Long> ids);
+    boolean deleteBySubjectIdList(@Param("ids") List<String> ids);
 }

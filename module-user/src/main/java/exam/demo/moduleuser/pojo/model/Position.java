@@ -25,12 +25,12 @@ public class Position implements Serializable {
      * 职位ID
      */
     @ApiModelProperty(value = "职位ID")
-    private Long id;
+    private String id;
     /**
      * 公司ID
      */
     @ApiModelProperty(value = "公司ID")
-    private Long companyId;
+    private String companyId;
     /**
      * 职位名称
      */
@@ -55,7 +55,7 @@ public class Position implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -67,7 +67,7 @@ public class Position implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 更新时间
      */
@@ -88,7 +88,7 @@ public class Position implements Serializable {
     private String companyName;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

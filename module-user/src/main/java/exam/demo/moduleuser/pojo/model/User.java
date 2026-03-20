@@ -25,22 +25,22 @@ public class User implements Serializable {
      * 用户ID
      */
     @ApiModelProperty(value = "用户ID")
-    private Long id;
+    private String id;
     /**
      * 职位ID
      */
     @ApiModelProperty(value = "职位ID")
-    private Long positionId;
+    private String positionId;
     /**
      * 部门ID
      */
     @ApiModelProperty(value = "部门ID")
-    private Long departmentId;
+    private String departmentId;
     /**
      * 公司id
      */
     @ApiModelProperty(value = "公司id")
-    private Long companyId;
+    private String companyId;
     /**
      * 工号
      */
@@ -102,7 +102,7 @@ public class User implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -114,7 +114,7 @@ public class User implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */
@@ -156,10 +156,10 @@ public class User implements Serializable {
      * 角色ID
      */
     @TableField(exist = false)
-    private Long roleId;
+    private String roleId;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

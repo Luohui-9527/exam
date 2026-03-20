@@ -12,11 +12,11 @@ import lombok.Data;
 @Data
 public class UserOptionsDto {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long roleId;
+    private String roleId;
     private String roleName;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long positionId;
+    private String positionId;
     private String positionName;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private String companyId;
 }

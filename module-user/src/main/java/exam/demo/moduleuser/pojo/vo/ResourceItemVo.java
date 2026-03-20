@@ -1,8 +1,7 @@
 package exam.demo.moduleuser.pojo.vo;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -12,13 +11,13 @@ import java.io.Serializable;
  * @version V1.0.0
  * @date 2019/8/28
  */
+@Data
 public class ResourceItemVo extends BaseVo implements Serializable {
     private static final long serialVersionUID = -8678302067843260897L;
     /**
      * 资源ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 节点名称
@@ -41,7 +40,7 @@ public class ResourceItemVo extends BaseVo implements Serializable {
     /**
      * 父亲节点
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * URL
@@ -83,117 +82,4 @@ public class ResourceItemVo extends BaseVo implements Serializable {
     public ResourceItemVo() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getOpenImg() {
-        return openImg;
-    }
-
-    public void setOpenImg(String openImg) {
-        this.openImg = openImg;
-    }
-
-    public String getCloseImg() {
-        return closeImg;
-    }
-
-    public void setCloseImg(String closeImg) {
-        this.closeImg = closeImg;
-    }
-
-    public Byte getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(Byte resourceType) {
-        this.resourceType = resourceType;
-    }
-
-    public Byte getLeaf() {
-        return leaf;
-    }
-
-    public void setLeaf(Byte leaf) {
-        this.leaf = leaf;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Long getOrderIndex() {
-        return orderIndex;
-    }
-
-    public void setOrderIndex(Long orderIndex) {
-        this.orderIndex = orderIndex;
-    }
-
-    @Override
-    public String toString() {
-        return "ResourceItemVo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", orderIndex=" + orderIndex +
-                ", parentId=" + parentId +
-                ", url='" + url + '\'' +
-                ", openImg='" + openImg + '\'' +
-                ", closeImg='" + closeImg + '\'' +
-                ", resourceType=" + resourceType +
-                ", leaf=" + leaf +
-                ", remark='" + remark + '\'' +
-                ", status=" + status +
-                '}';
-    }
 }

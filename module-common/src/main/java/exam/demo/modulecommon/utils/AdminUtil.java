@@ -7,6 +7,6 @@ package exam.demo.modulecommon.utils;
  */
 public class AdminUtil {
     public static boolean isSuperAdmin(){
-        return TokenUtils.getUser().getId() == 1;
+        return "1".equals(TokenUtils.getUser().getId());
     }
 }

@@ -68,10 +68,10 @@ public class SubjectTypeServiceImpl extends ServiceImpl<SubjectTypeDao, SubjectT
     }
 
     @Override
-    public List<String> getTypeName(List<Long> idList) {
+    public List<String> getTypeName(List<String> idList) {
         List<String> res = new ArrayList<>();
         Cache cache = cacheManager.getCache(CacheConstants.SUBJECT_TYPE_VAL);
-        for (Long id : idList) {
+        for (String id : idList) {
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper == null) {
                 SubjectType subjectType = getById(id);
@@ -88,7 +88,7 @@ public class SubjectTypeServiceImpl extends ServiceImpl<SubjectTypeDao, SubjectT
     }
 
     @Override
-    public String getTypeName(Long id) {
+    public String getTypeName(String id) {
         Cache cache = cacheManager.getCache(CacheConstants.SUBJECT_TYPE_VAL);
         Cache.ValueWrapper wrapper = cache.get(id);
         if (wrapper != null) {

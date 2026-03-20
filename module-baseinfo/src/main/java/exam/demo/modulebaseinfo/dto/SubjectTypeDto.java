@@ -31,13 +31,13 @@ public class SubjectTypeDto extends BaseDataBaseDto implements Serializable {
      * 题目类型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 状态位

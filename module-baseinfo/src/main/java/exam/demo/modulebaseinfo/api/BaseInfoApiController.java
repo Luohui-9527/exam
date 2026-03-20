@@ -10,7 +10,9 @@ import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class BaseInfoApiController {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, getBaseInfo(baseDataDto, EnumInfoType.CATEGORY));
     }
 
-    private Map<Long, String> resolve(List<Long> idList, List<String> valueList, Map<Long, String> map) {
+    private Map<String, String> resolve(List<String> idList, List<String> valueList, Map<String, String> map) {
         for (int i = 0; i < idList.size(); i++) {
             map.put(idList.get(i), valueList.get(i));
         }
@@ -84,7 +86,7 @@ public class BaseInfoApiController {
      */
     @MethodEnhancer
     @PostMapping("/dictionary/val")
-    public CommonResponse<String> getBaseData(@RequestBody @Valid Long dictionaryId) {
+    public CommonResponse<String> getBaseData(@RequestBody @Valid String dictionaryId) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, dictionaryService.getDictionaryValue(dictionaryId));
     }
 
@@ -96,7 +98,7 @@ public class BaseInfoApiController {
      */
     @MethodEnhancer
     @PostMapping("/subject/package")
-    public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestBody Long combExamConfigId) {
+    public CommonResponse<SubjectPackage> getSubjectAndAnswer(@RequestBody String combExamConfigId) {
         List<CombExamConfigDetail> itemList = combExamConfigItemService.listByConfigId(combExamConfigId);
         SubjectPackage subjectPackage = subjectService.getSubject(itemList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectPackage);
@@ -142,7 +144,7 @@ public class BaseInfoApiController {
     }
 
     private BaseDataDto getBaseInfo(BaseDataDto baseDataDto, EnumInfoType type) {
-        List<Long> idList = new ArrayList<>(baseDataDto.getBaseInfoMap().keySet());
+        List<String> idList = new ArrayList<>(baseDataDto.getBaseInfoMap().keySet());
         List<String> values;
         switch (type) {
             case CATEGORY:
@@ -157,18 +159,18 @@ public class BaseInfoApiController {
             default:
                 throw new BaseInfoException(StarterError.SYSTEM_PARAMETER_VALUE_INVALID);
         }
-        Map<Long, String> map = resolve(idList, values, baseDataDto.getBaseInfoMap());
+        Map<String, String> map = resolve(idList, values, baseDataDto.getBaseInfoMap());
         baseDataDto.setBaseInfoMap(map);
         return baseDataDto;
     }
 
     @PostMapping("/category/value")
-    public CommonResponse<String> getCategory(@RequestBody Long id) {
+    public CommonResponse<String> getCategory(@RequestBody String id) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, categoryService.getCategoryNameById(id));
     }
 
     @PostMapping("/subjectType/value")
-    public CommonResponse<String> getSubjectType(@RequestBody Long id) {
+    public CommonResponse<String> getSubjectType(@RequestBody String id) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, subjectTypeService.getTypeName(id));
     }
 }

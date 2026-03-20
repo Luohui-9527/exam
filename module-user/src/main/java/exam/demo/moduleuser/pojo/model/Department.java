@@ -25,12 +25,12 @@ public class Department implements Serializable {
      * 部门ID
      */
     @ApiModelProperty(value = "部门ID")
-    private Long id;
+    private String id;
     /**
      * 公司ID
      */
     @ApiModelProperty(value = "公司ID")
-    private Long companyId;
+    private String companyId;
     /**
      * 部门名称
      */
@@ -55,7 +55,7 @@ public class Department implements Serializable {
      * 上级部门
      */
     @ApiModelProperty(value = "上级部门")
-    private Long parentId;
+    private String parentId;
     /**
      * 负责人
      */
@@ -75,7 +75,7 @@ public class Department implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -87,7 +87,7 @@ public class Department implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */
@@ -102,7 +102,7 @@ public class Department implements Serializable {
     private Long version;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

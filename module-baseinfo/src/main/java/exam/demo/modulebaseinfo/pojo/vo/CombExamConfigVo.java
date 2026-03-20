@@ -31,7 +31,7 @@ public class CombExamConfigVo extends BaseItemVo implements Serializable {
      */
     @NotNull(message = "难度不能为空！")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 删除的组卷配置明细id

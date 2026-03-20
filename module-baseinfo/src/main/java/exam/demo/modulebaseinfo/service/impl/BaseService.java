@@ -2,11 +2,11 @@ package exam.demo.modulebaseinfo.service.impl;
 
 import exam.demo.modulebaseinfo.constant.EnumUserInfoType;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
-import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.common.CacheConstants;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.exception.StarterError;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -36,7 +36,7 @@ public class BaseService {
      * @param type
      * @return
      */
-    public String getUserInfo(Long id, EnumUserInfoType type) {
+    public String getUserInfo(String id, EnumUserInfoType type) {
         Cache cache;
         switch (type) {
             case ORG:
@@ -63,7 +63,7 @@ public class BaseService {
         return (String) wrapper.get();
     }
 
-    public String queryFromApi(Long id, EnumUserInfoType type) {
+    public String queryFromApi(String id, EnumUserInfoType type) {
         CommonResponse<String> response;
         switch (type) {
             case COMPANY:

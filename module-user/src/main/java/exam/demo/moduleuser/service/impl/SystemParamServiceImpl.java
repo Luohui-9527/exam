@@ -1,8 +1,8 @@
 package exam.demo.moduleuser.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.common.BaseDataDto;
 import exam.demo.modulecommon.common.CommonResponse;
@@ -11,13 +11,12 @@ import exam.demo.modulecommon.constant.MagicPointConstant;
 import exam.demo.modulecommon.enums.EnumOperation;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.exception.StarterException;
+import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.moduleuser.dto.SystemParamDto;
 import exam.demo.moduleuser.dto.TreeListDto;
 import exam.demo.moduleuser.exception.UserError;
 import exam.demo.moduleuser.exception.UserException;
-import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.moduleuser.mapper.SystemParamMapper;
 import exam.demo.moduleuser.pojo.model.SystemParam;
 import exam.demo.moduleuser.pojo.model.TreeList;
@@ -101,7 +100,7 @@ public class SystemParamServiceImpl extends ServiceImpl<SystemParamMapper, Syste
         }
         List<SystemParamListVo> listVoList = CommonUtils.convertList(systemParamList, SystemParamListVo.class);
         // 从基础数据服务获取值
-        Map<Long, String> map = new HashMap<>(systemParamList.size());
+        Map<String, String> map = new HashMap<>(systemParamList.size());
         for (SystemParam param : systemParamList) {
             map.put(param.getParamType(), null);
         }

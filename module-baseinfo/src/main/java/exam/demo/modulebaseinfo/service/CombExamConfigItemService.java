@@ -19,7 +19,7 @@ public interface CombExamConfigItemService extends IService<CombExamConfigDetail
      * @param configId 组卷配置ID
      * @return 是否删除成功
      */
-    boolean removeByConfig(long configId);
+    boolean removeByConfig(String configId);
 
     /**
      * 根据组卷配置ID查询对应的配置明细
@@ -27,6 +27,6 @@ public interface CombExamConfigItemService extends IService<CombExamConfigDetail
      * @param configId 组卷配置ID
      * @return 配置明细列表
      */
-    List<CombExamConfigDetail> listByConfigId(Long configId);
+    List<CombExamConfigDetail> listByConfigId(String configId);
 
 }

@@ -16,5 +16,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = ApiConstant.SERVICE_NAME_EXAM, path = "/exam")
 public interface ExamFeign {
     @PostMapping({"/api/checkEditable"})
-    CommonResponse<Boolean> checkEditable(@RequestBody Long paperId);
+    CommonResponse<Boolean> checkEditable(@RequestBody String paperId);
 }

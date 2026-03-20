@@ -47,7 +47,7 @@ public class SubjectController {
     @PostMapping("/save")
     public CommonResponse<Boolean> saveSubject(@RequestBody SubjectVo subjectVo) {
         SubjectDto subjectDto = CommonUtils.copyProperties(subjectVo, SubjectDto.class);
-        List<SubjectAnswerDto> answerDtoList = CommonUtils.convertList(subjectVo.getSubjectAnswerVOList(), SubjectAnswerDto.class);
+        List<SubjectAnswerDto> answerDtoList = CommonUtils.convertList(subjectVo.getSubjectAnswerVoList(), SubjectAnswerDto.class);
         subjectService.saveSubjectAndAnswer(subjectDto, answerDtoList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -80,7 +80,7 @@ public class SubjectController {
     @PostMapping("/update")
     public CommonResponse<Boolean> updateSubject(@RequestBody SubjectVo subjectVo) {
         SubjectDto subjectDto = CommonUtils.copyProperties(subjectVo, SubjectDto.class);
-        List<SubjectAnswerDto> subjectAnswerDtoList = CommonUtils.convertList(subjectVo.getSubjectAnswerVOList(), SubjectAnswerDto.class);
+        List<SubjectAnswerDto> subjectAnswerDtoList = CommonUtils.convertList(subjectVo.getSubjectAnswerVoList(), SubjectAnswerDto.class);
         try {
             subjectService.updateSubject(subjectDto, subjectAnswerDtoList);
         } catch (Exception e) {
@@ -135,7 +135,7 @@ public class SubjectController {
     @MethodEnhancer
     @PostMapping("/answer")
     public CommonResponse<List> queryAnswer(@RequestBody SubjectAnswerQueryVo subjectAnswerQueryVo) {
-        long subjectId = subjectAnswerQueryVo.getSubjectId();
+        String subjectId = subjectAnswerQueryVo.getSubjectId();
         List<SubjectAnswer> answerList = subjectAnswerService.listAnswerBySubjectId(subjectId);
         List<SubjectAnswerQueryVo> voList = CommonUtils.convertList(answerList, SubjectAnswerQueryVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, voList);

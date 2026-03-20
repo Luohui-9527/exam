@@ -85,7 +85,7 @@ public class TemplatePaperController {
      */
     @MethodEnhancer
     @PostMapping("/delete")
-    public CommonResponse deleteTemplate(@RequestBody List<Long> templateIdList) {
+    public CommonResponse deleteTemplate(@RequestBody List<String> templateIdList) {
         if (paperService.deleteTemplate(templateIdList)) {
             baseService.evictPaper(templateIdList);
             return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, true);

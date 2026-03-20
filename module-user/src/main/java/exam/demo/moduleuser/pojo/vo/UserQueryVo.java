@@ -1,8 +1,7 @@
 package exam.demo.moduleuser.pojo.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseQueryVo;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -11,6 +10,7 @@ import java.io.Serializable;
  * @version V1.0.0
  * @date 2019/8/28
  */
+@Data
 public class UserQueryVo extends BaseQueryVo implements Serializable {
     private static final long serialVersionUID = 1710678390025284785L;
     /**
@@ -33,59 +33,9 @@ public class UserQueryVo extends BaseQueryVo implements Serializable {
     /**
      * 角色ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long roleId;
+    private String roleId;
 
     public UserQueryVo() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getRoleCode() {
-        return roleCode;
-    }
-
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
-    }
-
-    @Override
-    public String toString() {
-        return "UserQueryVo{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", tel='" + tel + '\'' +
-                ", roleCode='" + roleCode + '\'' +
-                '}';
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
 }

@@ -4,10 +4,10 @@ package exam.demo.moduleexam.controller;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PaperDetail;
+import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.moduleexam.pojo.DTO.dopaper.DoPaperFormDTO;
 import exam.demo.moduleexam.pojo.DTO.dopaper.UserInfoFormDTO;
 import exam.demo.moduleexam.pojo.VO.dopaper.DoPaperFormVO;
@@ -46,9 +46,9 @@ public class DoPaperController {
     @RequestMapping(value = "saveexaminer")
     public CommonResponse<String> saveExaminer(@RequestBody @Valid UserInfoFormVO userInfoFormVO) {
         UserInfoFormDTO userInfoFormDTO = CommonUtils.copyProperties(userInfoFormVO, UserInfoFormDTO.class);
-        Long examId = doPaperService.saveExaminee(userInfoFormDTO);
+        String examId = doPaperService.saveExaminee(userInfoFormDTO);
         if (null != examId) {
-            return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, examId.toString());
+            return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, examId);
         }
         return new CommonResponse<>(state.SUCCESS, state.FAIL_MSG, null);
     }
@@ -75,14 +75,14 @@ public class DoPaperController {
      */
     @MethodEnhancer
     @RequestMapping(value = "getPaper")
-    public CommonResponse<PaperDetail> getPaper(@RequestBody Long commonRequest) {
+    public CommonResponse<PaperDetail> getPaper(@RequestBody String commonRequest) {
         PaperDetail detail = RPCUtils.parseResponse(paperFeign.queryDetailByPaperId(commonRequest), PaperDetail.class, RPCUtils.PAPER);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, detail);
     }
 
     @MethodEnhancer
     @RequestMapping(value = "getExamTime")
-    public CommonResponse<TimeWrapper> getExamTime(@RequestBody Long request) {
+    public CommonResponse<TimeWrapper> getExamTime(@RequestBody String request) {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, doPaperService.getExamTime(request));
     }
 }

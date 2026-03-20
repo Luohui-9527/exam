@@ -17,12 +17,12 @@ public class SystemParamDto extends BaseDto implements Serializable {
     /**
      * 系统参数ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 组织机构ID
      */
-    private Long orgId;
+    private String orgId;
 
     /**
      * 参数类型
@@ -56,7 +56,7 @@ public class SystemParamDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private String judgeId;
 
     private Long oldVersion;
 }

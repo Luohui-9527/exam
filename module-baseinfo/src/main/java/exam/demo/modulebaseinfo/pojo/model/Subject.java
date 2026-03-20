@@ -16,7 +16,7 @@ public class Subject extends Model<Subject> {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private String id;
     /**
      * 机构id
      */
@@ -48,12 +48,12 @@ public class Subject extends Model<Subject> {
     /**
      * 题目类型id
      */
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题目类别id
      */
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 题目
@@ -63,7 +63,7 @@ public class Subject extends Model<Subject> {
     /**
      * 难度
      */
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 状态位
@@ -107,7 +107,7 @@ public class Subject extends Model<Subject> {
     private String difficultyName;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

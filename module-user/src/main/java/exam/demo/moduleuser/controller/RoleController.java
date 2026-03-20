@@ -1,7 +1,7 @@
 package exam.demo.moduleuser.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
@@ -112,7 +112,7 @@ public class RoleController {
     @MethodEnhancer
     @PostMapping("/allocResource")
     public CommonResponse<Boolean> updateResourceForRole(@RequestBody List<RoleResourceVo> request) {
-        List<Long> resourceIdList = request.stream().map(RoleResourceVo::getId).collect(Collectors.toList());
+        List<String> resourceIdList = request.stream().map(RoleResourceVo::getId).collect(Collectors.toList());
         Set<RoleResourceVo> set = new HashSet<>(request);
         if (!CollUtil.isEmpty(set)) {
             List<Resource> resourceList = resourceService.listByIdList(resourceIdList);

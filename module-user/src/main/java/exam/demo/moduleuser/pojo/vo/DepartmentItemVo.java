@@ -1,8 +1,7 @@
 package exam.demo.moduleuser.pojo.vo;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -12,19 +11,18 @@ import java.io.Serializable;
  * @version V1.0.0
  * @date 2019/8/28
  */
+@Data
 public class DepartmentItemVo extends BaseVo implements Serializable {
     private static final long serialVersionUID = -6129972664056962573L;
     /**
      * 部门ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 公司ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private String companyId;
 
     /**
      * 部门名称
@@ -52,7 +50,7 @@ public class DepartmentItemVo extends BaseVo implements Serializable {
     /**
      * 上级部门
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 负责人
@@ -73,100 +71,5 @@ public class DepartmentItemVo extends BaseVo implements Serializable {
     public DepartmentItemVo() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMnemonicCode() {
-        return mnemonicCode;
-    }
-
-    public void setMnemonicCode(String mnemonicCode) {
-        this.mnemonicCode = mnemonicCode;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getMaster() {
-        return master;
-    }
-
-    public void setMaster(String master) {
-        this.master = master;
-    }
-
-    public String getDescript() {
-        return descript;
-    }
-
-    public void setDescript(String descript) {
-        this.descript = descript;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "DepartmentItemVo{" +
-                "id=" + id +
-                ", companyId=" + companyId +
-                ", name='" + name + '\'' +
-                ", mnemonicCode='" + mnemonicCode + '\'' +
-                ", code='" + code + '\'' +
-                ", level='" + level + '\'' +
-                ", parentId=" + parentId +
-                ", master='" + master + '\'' +
-                ", descript='" + descript + '\'' +
-                ", status=" + status +
-                '}';
-    }
 }
 

@@ -31,7 +31,7 @@ public class SubjectDto extends BaseDto {
     private String remark;
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 状态位
@@ -42,7 +42,7 @@ public class SubjectDto extends BaseDto {
      * 题目类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 题目类别名字
@@ -62,7 +62,7 @@ public class SubjectDto extends BaseDto {
      * 题型id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long subjectTypeId;
+    private String subjectTypeId;
     /**
      * 题目类型名字
      */

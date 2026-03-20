@@ -6,8 +6,6 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import exam.demo.modulecommon.common.CommonResponse;
-import exam.demo.modulecommon.exception.StarterError;
-import exam.demo.modulecommon.exception.StarterException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,9 +62,9 @@ public class CommonUtils {
     }
 
 
-    public static Long judgeCompanyAndOrg() {
-        Long companyId = TokenUtils.getUser().getCompanyId();
-        Long orgId = TokenUtils.getUser().getOrgId();
+    public static String judgeCompanyAndOrg() {
+        String companyId = TokenUtils.getUser().getCompanyId();
+        String orgId = TokenUtils.getUser().getOrgId();
         if (companyId != null) {
             return companyId;
         } else {

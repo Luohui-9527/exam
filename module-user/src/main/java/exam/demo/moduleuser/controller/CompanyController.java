@@ -50,7 +50,7 @@ public class CompanyController {
     @MethodEnhancer
     @PostMapping("/delete")
     public CommonResponse<Boolean> deleteCompany(@RequestBody @Valid List<CompanyItemVo> itemVoList) {
-        List<Long> idList = itemVoList.stream().map(CompanyItemVo::getId).collect(Collectors.toList());
+        List<String> idList = itemVoList.stream().map(CompanyItemVo::getId).collect(Collectors.toList());
         companyService.removeByIds(idList);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }
@@ -90,7 +90,7 @@ public class CompanyController {
     @MethodEnhancer
     @GetMapping("/list")
     public CommonResponse<List> getCompanyList() {
-        Long judgeId = CommonUtils.judgeCompanyAndOrg();
+        String judgeId = CommonUtils.judgeCompanyAndOrg();
         List<TreeListDto> dtoList = companyService.getCompanyTree(judgeId);
         List<TreeListVo> voList = CommonUtils.convertList(dtoList, TreeListVo.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, voList);
@@ -98,7 +98,7 @@ public class CompanyController {
 
     @MethodEnhancer
     @PostMapping("/get/company/name")
-    public CommonResponse<String> getCompanyById(@RequestBody Long companyId) {
+    public CommonResponse<String> getCompanyById(@RequestBody String companyId) {
         Company company = companyService.getById(companyId);
         if (company == null) {
             return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, "");

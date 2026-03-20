@@ -1,9 +1,9 @@
 package exam.demo.moduleuser.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.hutool.core.collection.CollUtil;
 import exam.demo.modulecommon.annotation.FullCommonFieldU;
 import exam.demo.modulecommon.common.CacheConstants;
 import exam.demo.modulecommon.enums.EnumOperation;
@@ -105,7 +105,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     }
 
     @Override
-    public List<TreeListDto> getCompanyTree(Long id) {
+    public List<TreeListDto> getCompanyTree(String id) {
         // 超级管理员直接返回所有结果
         if (AdminUtil.isSuperAdmin()) {
             List<Company> companyList = list();
@@ -149,12 +149,12 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     }
 
     @Override
-    public String getNameById(Long id) {
+    public String getNameById(String id) {
         return baseMapper.selectNameById(id);
     }
 
     @Override
-    public List<Company> listByOrgId(Long orgId) {
+    public List<Company> listByOrgId(String orgId) {
         return baseMapper.listByOrgId(orgId);
     }
 }

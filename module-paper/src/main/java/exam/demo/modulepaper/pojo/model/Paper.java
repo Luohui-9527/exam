@@ -25,7 +25,7 @@ public class Paper implements Serializable {
      * 试卷id
      */
     @ApiModelProperty(value = "试卷id")
-    private Long id;
+    private String id;
     /**
      * 试卷名
      */
@@ -35,12 +35,12 @@ public class Paper implements Serializable {
      * 试卷类型
      */
     @ApiModelProperty(value = "试卷类型")
-    private Long paperType;
+    private String paperType;
     /**
      * 难度
      */
     @ApiModelProperty(value = "难度")
-    private Long difficulty;
+    private String difficulty;
     /**
      * 组卷日期
      */
@@ -92,17 +92,17 @@ public class Paper implements Serializable {
      * 机构id
      */
     @ApiModelProperty(value = "机构id")
-    private Long orgId;
+    private String orgId;
     /**
      * 公司id
      */
     @ApiModelProperty(value = "公司id")
-    private Long companyId;
+    private String companyId;
     /**
      * 创建者
      */
     @ApiModelProperty(value = "创建者")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -114,7 +114,7 @@ public class Paper implements Serializable {
      * 更新者
      */
     @ApiModelProperty(value = "更新者")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 更新时间
      */

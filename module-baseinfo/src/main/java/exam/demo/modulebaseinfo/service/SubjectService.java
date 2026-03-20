@@ -21,7 +21,7 @@ public interface SubjectService extends IService<Subject> {
     /**
      * 保存试题及答案
      *
-     * @param dto 题目信息
+     * @param dto                  题目信息
      * @param subjectAnswerDtoList 题目答案列表
      * @return 是否保存成功
      */
@@ -39,7 +39,7 @@ public interface SubjectService extends IService<Subject> {
      * 更新试题及答案
      * 首先删除原答案，然后更新题目信息，最后插入新增答案
      *
-     * @param subjectDto 题目信息
+     * @param subjectDto    题目信息
      * @param answerDtoList 题目答案列表
      * @return 是否更新成功
      */
@@ -74,10 +74,10 @@ public interface SubjectService extends IService<Subject> {
     /**
      * 判断当前配置是否满足题目数目要求
      *
-     * @param category 分类ID
+     * @param category    分类ID
      * @param subjectType 题型ID
-     * @param count 题目数量
+     * @param count       题目数量
      * @throws exam.demo.modulebaseinfo.exception.BaseInfoException 如果题目数量不足
      */
-    void isEnough(Long category, Long subjectType, int count);
+    void isEnough(String category, String subjectType, int count);
 }

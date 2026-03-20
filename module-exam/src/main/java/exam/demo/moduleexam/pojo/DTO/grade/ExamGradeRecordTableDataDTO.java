@@ -6,13 +6,13 @@ import java.util.Date;
 
 @Data
 public class ExamGradeRecordTableDataDTO {
-    private Long id;
+    private String id;
     private Date actualEndTime;
     private Long examSession;
     private String examiner;
     private Date markingStopTime;
     private Double objectiveSubjectScore;
-    private Long paperId;
+    private String paperId;
     private Date createdTime;
     private Byte status;
     private Double subjectvieSubjectScore;

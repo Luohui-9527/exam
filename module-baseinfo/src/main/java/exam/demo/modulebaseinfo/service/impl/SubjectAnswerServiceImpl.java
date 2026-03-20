@@ -20,7 +20,7 @@ public class SubjectAnswerServiceImpl extends ServiceImpl<SubjectAnswerDao, Subj
      * @return
      */
     @Override
-    public void removeBatchBySubjectId(List<Long> subjectIdList) {
+    public void removeBatchBySubjectId(List<String> subjectIdList) {
 //        Map<String,Object> map = new HashMap<>();
 //        for (Long id : subjectIdList) {
 //            map.put("subject_id",id);
@@ -30,20 +30,20 @@ public class SubjectAnswerServiceImpl extends ServiceImpl<SubjectAnswerDao, Subj
     }
 
     @Override
-    public boolean removeBySubjectId(long id) {
+    public boolean removeBySubjectId(String id) {
         return baseMapper.removeBySubjectId(id);
     }
 
 
     @Override
-    public List<SubjectAnswer> listAnswerBySubjectId(long subjectId) {
+    public List<SubjectAnswer> listAnswerBySubjectId(String subjectId) {
         LambdaQueryWrapper<SubjectAnswer> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(SubjectAnswer::getSubjectId, subjectId);
         return list(wrapper);
     }
 
     @Override
-    public List<SubjectAnswer> listAnswer(List<Long> subjectList) {
+    public List<SubjectAnswer> listAnswer(List<String> subjectList) {
         return baseMapper.querySubjectAnswerBySubjectId(subjectList);
     }
 }

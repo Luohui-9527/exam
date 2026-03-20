@@ -3,6 +3,7 @@ package exam.demo.modulebaseinfo.pojo.vo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseQueryVo;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  *
  * @author luohui
  */
+@Data
 public class CategoryQueryVo extends BaseQueryVo implements Serializable {
 
 
@@ -24,36 +26,11 @@ public class CategoryQueryVo extends BaseQueryVo implements Serializable {
      * 父亲节点id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private String parentId;
 
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
 
     public CategoryQueryVo() {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryQueryVo{" +
-                "name='" + name + '\'' +
-                ", parentId=" + parentId +
-                ", currentPage=" + pageNum +
-                ", pageSize=" + pageSize +
-                '}';
-    }
 }

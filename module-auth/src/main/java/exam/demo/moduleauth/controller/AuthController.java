@@ -68,7 +68,7 @@ public class AuthController {
 
     @MethodEnhancer
     @RequestMapping(value = "/logout")
-    public CommonResponse<Boolean> logout(@RequestBody List<Long> ids) throws Exception {
+    public CommonResponse<Boolean> logout(@RequestBody List<String> ids) throws Exception {
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.logout(ids));
     }
 

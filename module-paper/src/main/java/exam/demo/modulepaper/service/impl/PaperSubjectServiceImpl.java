@@ -27,7 +27,7 @@ public class PaperSubjectServiceImpl extends ServiceImpl<PaperSubjectMapper, Pap
      * @return
      */
     @Override
-    public List<PaperSubject> listSubjectByPaperId(long paperId) {
+    public List<PaperSubject> listSubjectByPaperId(String paperId) {
         QueryWrapper<PaperSubject> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.PAPER_ID, paperId);
         return list(wrapper);
@@ -40,7 +40,7 @@ public class PaperSubjectServiceImpl extends ServiceImpl<PaperSubjectMapper, Pap
      * @return
      */
     @Override
-    public List<PaperSubject> listSubjectByPaperIdList(List<Long> list) {
+    public List<PaperSubject> listSubjectByPaperIdList(List<String> list) {
         return baseMapper.listSubjectByPaperIdList(list);
     }
 }

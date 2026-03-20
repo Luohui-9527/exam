@@ -25,20 +25,20 @@ public class Category extends Model<Category> {
     /**
      * 雪花算法生成Id
      */
-    private Long id;
+    private String id;
     /**
      * 机构id
      */
-    private Long orgId;
+    private String orgId;
     /**
      * 机构下公司id
      */
     @TableField(exist = false)
-    private Long companyId;
+    private String companyId;
     /**
      * 通过id到数据字典中查询创建者
      */
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建日期
      */
@@ -46,7 +46,7 @@ public class Category extends Model<Category> {
     /**
      * 通过id到数据字典中查询修改者
      */
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改日期
      */
@@ -65,7 +65,7 @@ public class Category extends Model<Category> {
      * 父类别
      */
 
-    private Long parentId;
+    private String parentId;
 
     /**
      * 状态位
@@ -75,7 +75,7 @@ public class Category extends Model<Category> {
     private String remark;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

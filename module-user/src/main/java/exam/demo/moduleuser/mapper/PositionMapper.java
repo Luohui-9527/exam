@@ -24,10 +24,10 @@ public interface PositionMapper extends BaseMapper<Position> {
      *
      * @return 职位集合
      */
-    List<UserOptionsDto> queryPosition(@Param("id") long id);
+    List<UserOptionsDto> queryPosition(@Param("id") String id);
 
 
-    List<Position> listByCompanyId(@Param("ids") List<Long> ids);
+    List<Position> listByCompanyId(@Param("ids") List<String> ids);
 
 
     int update(Position position);

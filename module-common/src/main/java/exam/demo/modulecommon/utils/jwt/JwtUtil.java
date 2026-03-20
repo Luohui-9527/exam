@@ -49,15 +49,15 @@ public class JwtUtil {
         try {
             // 创建payload的私有声明（根据特定的业务需要添加，如果要拿这个做验证，一般是需要和jwt的接收方提前沟通好验证方式的）
             Map<String, String> claims = new HashMap<String, String>();
-            claims.put(ID, userPermission.getId().toString());
+            claims.put(ID, userPermission.getId());
             if (userPermission.getOrgId() != null) {
-                claims.put(ORGANIZATION_ID, userPermission.getOrgId().toString());
+                claims.put(ORGANIZATION_ID, userPermission.getOrgId());
             }
             if (userPermission.getCompanyId() != null) {
-                claims.put(COMPANY_ID, userPermission.getCompanyId().toString());
+                claims.put(COMPANY_ID, userPermission.getCompanyId());
             }
             claims.put(USERNAME, userPermission.getUserName());
-            claims.put(USERONLINE_ID, userPermission.getUserOnlineId().toString());
+            claims.put(USERONLINE_ID, userPermission.getUserOnlineId());
             // 指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
             Algorithm algorithm = Algorithm.HMAC256(KEY);
             //创建jwt,添加发行人,发布的时间点
@@ -100,16 +100,16 @@ public class JwtUtil {
         Map<String, Claim> map = jwt.getClaims();
         Map<String, String> resultMap = new HashMap<>();
         map.forEach((k, v) -> resultMap.put(k, v.asString()));
-        userPermission.setId(Long.valueOf(resultMap.get(ID)));
+        userPermission.setId(resultMap.get(ID));
         userPermission.setUserName(resultMap.get(USERNAME));
         // 直接检查字段是否存在
         if (resultMap.containsKey(ORGANIZATION_ID) && resultMap.get(ORGANIZATION_ID) != null) {
-            userPermission.setOrgId(Long.valueOf(resultMap.get(ORGANIZATION_ID)));
+            userPermission.setOrgId(resultMap.get(ORGANIZATION_ID));
         }
         if (resultMap.containsKey(COMPANY_ID) && resultMap.get(COMPANY_ID) != null) {
-            userPermission.setCompanyId(Long.valueOf(resultMap.get(COMPANY_ID)));
+            userPermission.setCompanyId(resultMap.get(COMPANY_ID));
         }
-        userPermission.setUserOnlineId(Long.valueOf(resultMap.get(USERONLINE_ID)));
+        userPermission.setUserOnlineId(resultMap.get(USERONLINE_ID));
         return userPermission;
     }
 }

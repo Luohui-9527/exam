@@ -21,13 +21,13 @@ public class ResourceQueryVo extends BaseQueryVo implements Serializable {
      * 节点编号
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 父亲节点
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private String parentId;
 
     public ResourceQueryVo() {
     }

@@ -20,7 +20,7 @@ public interface IPaperSubjectService extends IService<PaperSubject> {
      * @param paperId
      * @return
      */
-    List<PaperSubject> listSubjectByPaperId(long paperId);
+    List<PaperSubject> listSubjectByPaperId(String paperId);
 
     /**
      * 通过试卷d集合来获取一批试题
@@ -28,5 +28,5 @@ public interface IPaperSubjectService extends IService<PaperSubject> {
      * @param list
      * @return
      */
-    List<PaperSubject> listSubjectByPaperIdList(List<Long> list);
+    List<PaperSubject> listSubjectByPaperIdList(List<String> list);
 }

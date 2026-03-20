@@ -60,7 +60,7 @@ public class UserOnlineController {
 
     @MethodEnhancer
     @PostMapping("/offline")
-    public CommonResponse<Boolean> kick(@RequestBody List<Long> request) {
+    public CommonResponse<Boolean> kick(@RequestBody List<String> request) {
         loginService.logout(request);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, true);
     }

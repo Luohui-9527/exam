@@ -23,7 +23,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> listByRoleIds(List<Long> roleIds);
+    List<UserRole> listByRoleIds(List<String> roleIds);
 
     /**
      * 功能描述: 根据用户id列表获取对应列表
@@ -33,7 +33,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> listByUserIds(List<Long> userIds);
+    List<UserRole> listByUserIds(List<String> userIds);
 
     /**
      * 功能描述: 根据用户id获取权限
@@ -43,7 +43,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> listByUserId(Long userId);
+    List<UserRole> listByUserId(String userId);
 
     /**
      * 功能描述: 根据角色id获取用户
@@ -53,7 +53,7 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    List<UserRole> selectByRoleId(Long roleId);
+    List<UserRole> selectByRoleId(String roleId);
 
     /**
      * 功能描述: 根据用户id删除关联
@@ -63,5 +63,5 @@ public interface IUserRoleService extends IService<UserRole> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    void deleteByUserId(Long userId);
+    void deleteByUserId(String userId);
 }

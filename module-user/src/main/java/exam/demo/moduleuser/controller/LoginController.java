@@ -55,7 +55,7 @@ public class LoginController {
     public CommonResponse<Boolean> logout(@RequestBody @Valid Object request) {
         LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) request;
         ArrayList<String> data = (ArrayList<String>) map.get("data");
-        List<Long> list = data.stream().map(e -> Long.valueOf(e)).collect(Collectors.toList());
+        List<String> list = data.stream().map(String::valueOf).collect(Collectors.toList());
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, loginService.logout(list));
     }
 }

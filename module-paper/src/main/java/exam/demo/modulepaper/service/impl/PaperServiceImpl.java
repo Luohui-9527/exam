@@ -210,7 +210,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return 删除成功的条数
      */
     @Override
-    public boolean paperDelete(List<Long> delList) {
+    public boolean paperDelete(List<String> delList) {
         List<Paper> deletedPaperList = listByIds(delList);
         // 已经发布的试卷不能删除
         deletedPaperList.forEach(paper -> {
@@ -219,13 +219,13 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             }
         });
         List<PaperSubject> paperSubjectList = paperSubjectService.listSubjectByPaperIdList(delList);
-        List<Long> delSubjectIdList = paperSubjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<String> delSubjectIdList = paperSubjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         PaperServiceImpl service = (PaperServiceImpl) AopContext.currentProxy();
         return service.deletePaper(delList, delSubjectIdList);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean deletePaper(List<Long> paperIdList, List<Long> subjectIdList) {
+    public boolean deletePaper(List<String> paperIdList, List<String> subjectIdList) {
         try {
             return paperSubjectAnswerService.deleteBySubjectId(subjectIdList) &&
                     paperSubjectService.removeByIds(subjectIdList) &&
@@ -246,7 +246,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         PaperServiceImpl paperService = (PaperServiceImpl) AopContext.currentProxy();
         Paper paper = handlePaper(paperDto);
         // 处理已经删除的试题
-        List<Long> deletedIdList = paperDto.getDeletedId();
+        List<String> deletedIdList = paperDto.getDeletedId();
         double deletedScore = 0;
         boolean hasDelete = false;
         // 获取删除的题目分值
@@ -264,7 +264,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         List<ModifyPaperSubjectDto> modifyPaperDtoList = paperDto.getCurrentPaperSubjectDtoList();
         if (!CollUtil.isEmpty(modifyPaperDtoList)) {
             // 获取mark不为9999的试题Id,9999是存在的试题
-            List<Long> addedSubjectIdList = modifyPaperDtoList.stream().filter(s ->
+            List<String> addedSubjectIdList = modifyPaperDtoList.stream().filter(s ->
                     s.getMark() == null || 9999 != (s.getMark())
             ).map(ModifyPaperSubjectDto::getId).collect(Collectors.toList());
             double addedScore = 0;
@@ -280,7 +280,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                     if (CommonUtils.notNull(entry, entry.getKey(), entry.getValue())) {
                         SubjectDto subjectDto = entry.getKey();
                         PaperSubject subject = new PaperSubject();
-                        subject.setId(snowFlake.nextId());
+                        subject.setId(snowFlake.nextIdStr());
                         subject.setPaperId(paper.getId());
                         subject.setCategoryId(subjectDto.getCategoryId());
                         subject.setDifficulty(subjectDto.getDifficulty());
@@ -291,7 +291,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                         subject.setScore((double) 5);
                         for (SubjectAnswerDto answerDto : entry.getValue()) {
                             PaperSubjectAnswer answer = new PaperSubjectAnswer();
-                            answer.setId(snowFlake.nextId());
+                            answer.setId(snowFlake.nextIdStr());
                             answer.setPaperSubjectId(subject.getId());
                             answer.setAnswer(answerDto.getAnswer());
                             addedSubjectAnswer.add(answer);
@@ -309,7 +309,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean modifyPaper(Paper paper, List<Long> deletedIdList, List<PaperSubject> addedSubject,
+    public boolean modifyPaper(Paper paper, List<String> deletedIdList, List<PaperSubject> addedSubject,
                                List<PaperSubjectAnswer> addedAnswer, boolean hasDel, boolean hasNew) {
         if (hasDel && hasNew) {
             boolean f1 = paperSubjectAnswerService.deleteBySubjectId(deletedIdList);
@@ -353,7 +353,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return
      */
     @Override
-    public PaperDetail getPaperInfo(long id) {
+    public PaperDetail getPaperInfo(String id) {
         // 获取试卷
         Paper paper = getById(id);
         if (paper == null) {
@@ -364,7 +364,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             throw new PaperException(PaperError.PAPER_SUBJECT_IS_NULL);
         }
         // 根据题目查询答案
-        List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<String> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         List<PaperSubjectAnswer> answerList = paperSubjectAnswerService.listAnswerBySubjectIdList(subjectIdList);
         if (CollUtil.isEmpty(answerList)) {
             throw new PaperException(PaperError.PAPER_ANSWER_IS_EMPTY);
@@ -379,7 +379,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             List<PaperSubjectAnswerDto> ansList = CommonUtils.convertList(subjectAnswers, PaperSubjectAnswerDto.class);
             subjectDto.setSubjectAnswerVoList(ansList);
             // 判断是否为客观题
-            subjectDto.setObjectiveSubject(checkObjectiveSubject(subjectDto.getSubjectTypeId()));
+            subjectDto.setObjectiveSubject(checkObjectiveSubject(subject.getSubjectId()));
             subjectDto.setMark(9999);
             subjectDtoList.add(subjectDto);
         });
@@ -391,16 +391,21 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     /**
-     * 判断是否为客观题
+     * 判断是否为客观题 选择 填空 判断都是客观题
      *
      * @param id
      * @return
      */
-    private Boolean checkObjectiveSubject(Long id) {
-        Long objectiveSubject1 = 616293886733721600L;
-        Long objectiveSubject2 = 616293908820926464L;
-        Long objectiveSubject3 = 616954547683860480L;
-        return (objectiveSubject1.equals(id) || objectiveSubject2.equals(id) || objectiveSubject3.equals(id));
+    private Boolean checkObjectiveSubject(String id) {
+        // 单选
+        String objectiveSubject1 = "1";
+        // 多选
+        String objectiveSubject2 = "2";
+        // 判断
+        String objectiveSubject3 = "3";
+        // 填空
+        String objectiveSubject4 = "4";
+        return (objectiveSubject1.equals(id) || objectiveSubject2.equals(id) || objectiveSubject3.equals(id) || objectiveSubject4.equals(id));
     }
 
     /**
@@ -443,7 +448,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return the count of removed paper
      */
     @Override
-    public boolean deleteTemplate(List<Long> paperTemplateIds) {
+    public boolean deleteTemplate(List<String> paperTemplateIds) {
         List<Paper> templates = listByIds(paperTemplateIds);
         // 检查参数是否合法
         templates.forEach(p -> {
@@ -452,7 +457,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             }
         });
         List<PaperSubject> subjectList = paperSubjectService.listSubjectByPaperIdList(paperTemplateIds);
-        List<Long> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
+        List<String> subjectIdList = subjectList.stream().map(PaperSubject::getId).collect(Collectors.toList());
         if (CollUtil.isEmpty(subjectList)) {
             return false;
         }
@@ -461,7 +466,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteTemplate(List<Long> paperIdList, List<Long> subjectIdList) {
+    public boolean deleteTemplate(List<String> paperIdList, List<String> subjectIdList) {
         return paperSubjectAnswerService.deleteBySubjectId(subjectIdList) && paperSubjectService.removeByIds(subjectIdList) && removeByIds(paperIdList);
     }
 
@@ -483,7 +488,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return
      */
     @Override
-    public boolean publish(long id) {
+    public boolean publish(String id) {
         Paper paper = getById(id);
         if (paper == null) {
             throw new PaperException(PaperError.PAPER_NOT_EXIST);
@@ -499,7 +504,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return
      */
     @Override
-    public List<PaperIdWithName> list(long companyId) {
+    public List<PaperIdWithName> list(String companyId) {
         QueryWrapper<Paper> wrapper = new QueryWrapper<>();
         wrapper.select(MagicPointConstant.ID, MagicPointConstant.NAME);
         wrapper.eq(MagicPointConstant.COMPANY_ID, companyId);
@@ -510,7 +515,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public PageVo<PaperListVo> listVo(long companyId, PaperQueryVo queryVo) {
+    public PageVo<PaperListVo> listVo(String companyId, PaperQueryVo queryVo) {
         QueryWrapper<Paper> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.COMPANY_ID, companyId);
         wrapper.orderByDesc(MagicPointConstant.CREATED_TIME);
@@ -566,7 +571,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @param id
      */
     @Override
-    public Paper getPaper(long id) {
+    public Paper getPaper(String id) {
         Paper paper = getById(id);
         if (paper == null) {
             throw new PaperException(PaperError.PAPER_NOT_EXIST);
@@ -581,7 +586,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return
      */
     @Override
-    public Double getScore(long id) {
+    public Double getScore(String id) {
         QueryWrapper<Paper> wrapper = new QueryWrapper<>();
         wrapper.eq(MagicPointConstant.ID, id);
         wrapper.select(MagicPointConstant.SCORE);

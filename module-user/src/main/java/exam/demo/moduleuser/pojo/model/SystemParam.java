@@ -25,17 +25,17 @@ public class SystemParam implements Serializable {
      * 系统参数ID
      */
     @ApiModelProperty(value = "系统参数ID")
-    private Long id;
+    private String id;
     /**
      * 组织机构ID
      */
     @ApiModelProperty(value = "组织机构ID")
-    private Long orgId;
+    private String orgId;
     /**
      * 参数类型
      */
     @ApiModelProperty(value = "参数类型")
-    private Long paramType;
+    private String paramType;
     /**
      * 参数项
      */
@@ -55,7 +55,7 @@ public class SystemParam implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -67,7 +67,7 @@ public class SystemParam implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */

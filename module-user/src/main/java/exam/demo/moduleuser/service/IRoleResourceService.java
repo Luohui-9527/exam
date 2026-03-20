@@ -24,7 +24,7 @@ public interface IRoleResourceService extends IService<RoleResource> {
      * @Author: luohui
      * @date: 2021-12-14
      */
-    void removeByRoleId(Long roleId);
+    void removeByRoleId(String roleId);
 
     /**
      * 功能描述: 删除角色资源

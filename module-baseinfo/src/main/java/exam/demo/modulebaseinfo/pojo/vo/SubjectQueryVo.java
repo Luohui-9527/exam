@@ -24,16 +24,16 @@ public class SubjectQueryVo extends BaseQueryVo implements Serializable {
     /**
      * 题目类型id
      */
-    private Long difficulty;
+    private String difficulty;
 
     /**
      * 题目类型id
      */
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题目类别id
      */
-    private Long categoryId;
+    private String categoryId;
 
 }

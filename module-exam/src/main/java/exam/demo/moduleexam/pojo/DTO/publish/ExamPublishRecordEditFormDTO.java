@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class ExamPublishRecordEditFormDTO {
-    private Long id;
+    private String id;
     private String descript;
     private Date startTime;
     private Date endTime;
@@ -14,7 +14,7 @@ public class ExamPublishRecordEditFormDTO {
     private Long limitTime;
     private Long markingMode;
     private Date markingStopTime;
-    private Long paperId;
+    private String paperId;
     private Long planPepoleNum;
     private String title;
 }

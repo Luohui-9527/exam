@@ -39,5 +39,5 @@ public interface ReportService {
      * @param examId
      * @return
      */
-    Double findMaxScore(long examId);
+    Double findMaxScore(String examId);
 }

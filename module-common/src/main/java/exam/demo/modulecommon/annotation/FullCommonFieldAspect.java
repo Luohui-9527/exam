@@ -38,7 +38,7 @@ public class FullCommonFieldAspect {
     @Pointcut("@annotation(exam.demo.modulecommon.annotation.FullCommonFieldU)")
     public void pointCutU(){}
 
-    @Pointcut("@annotation(exam.demo.modulecommon.annotation.FullCommonField)")
+    @Pointcut("@annotation(exam.demo.modulecommon.annotation.FullCommonField) || execution(* exam.demo.*.service..*.*(..))")
     public void pointCut(){}
 
     @Around(value = "pointCut()")
@@ -50,8 +50,23 @@ public class FullCommonFieldAspect {
         }
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         FullCommonField fullCommonField = signature.getMethod().getAnnotation(FullCommonField.class);
+        
+        // 如果没有注解，根据方法名判断
+        EnumOperation operation;
+        if (fullCommonField != null) {
+            operation = fullCommonField.operation();
+        } else {
+            // 根据方法名判断：包含 update/modify/edit 关键字则为更新操作
+            String methodName = signature.getName().toLowerCase();
+            if (methodName.contains("update") || methodName.contains("modify") || methodName.contains("edit")) {
+                operation = EnumOperation.UPDATE;
+            } else {
+                operation = EnumOperation.INSERT;
+            }
+        }
+        
         Object[] handledParams = new Object[params.length];
-        if (EnumOperation.INSERT.equals(fullCommonField.operation())){
+        if (EnumOperation.INSERT.equals(operation)){
             for (int i = 0; i < params.length; i++) {
                 // 判断是否为BaseDto子类
                 if (params[i] instanceof BaseDto){
@@ -69,7 +84,7 @@ public class FullCommonFieldAspect {
                     handledParams[i] = params[i];
                 }
             }
-        }else {
+        } else {
             for (int i = 0; i < params.length; i++) {
                 if (params[i] instanceof BaseDto){
                     handledParams[i] = handleDtoObjectUpdate((BaseDto) params[i]);
@@ -97,10 +112,10 @@ public class FullCommonFieldAspect {
      */
     public Object handleDtoObjectInsert(BaseDto dto){
         UserPermission userPermission = TokenUtils.getUser();
-        Long orgId  = userPermission.getOrgId();
-        Long companyId = userPermission.getCompanyId();
-        Long operator = userPermission.getId();
-        dto.setId(snowFlake.nextId());
+        String orgId  = userPermission.getOrgId();
+        String companyId = userPermission.getCompanyId();
+        String operator = userPermission.getId();
+        dto.setId(snowFlake.nextIdStr());
         dto.setCompanyId(companyId);
         dto.setOrgId(orgId);
         dto.setCreatedBy(operator);
@@ -140,7 +155,7 @@ public class FullCommonFieldAspect {
      */
     public Object handleDtoObjectInsertU(BaseDto dto){
         UserPermission userPermission = TokenUtils.getUser();
-        dto.setId(snowFlake.nextId());
+        dto.setId(snowFlake.nextIdStr());
         dto.setCreatedBy(userPermission.getId());
         dto.setCreatedTime(new Date());
         dto.setUpdatedBy(userPermission.getId());

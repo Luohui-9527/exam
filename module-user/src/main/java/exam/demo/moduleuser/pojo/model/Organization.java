@@ -25,7 +25,7 @@ public class Organization implements Serializable {
      * 组织机构ID
      */
     @ApiModelProperty(value = "组织机构ID")
-    private Long id;
+    private String id;
     /**
      * 机构名
      */
@@ -60,7 +60,7 @@ public class Organization implements Serializable {
      * 创建人
      */
     @ApiModelProperty(value = "创建人")
-    private Long createdBy;
+    private String createdBy;
     /**
      * 创建时间
      */
@@ -72,7 +72,7 @@ public class Organization implements Serializable {
      * 修改人
      */
     @ApiModelProperty(value = "修改人")
-    private Long updatedBy;
+    private String updatedBy;
     /**
      * 修改时间
      */
@@ -87,7 +87,7 @@ public class Organization implements Serializable {
     private Long version;
 
     @TableField(exist = false)
-    private Long judgeId;
+    private String judgeId;
 
     @TableField(exist = false)
     private Long oldVersion;

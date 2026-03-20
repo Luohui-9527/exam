@@ -60,7 +60,7 @@ public interface SubjectTypeService extends IService<SubjectType> {
      * @param idList 题目类型ID列表
      * @return 类型名称列表
      */
-    List<String> getTypeName(List<Long> idList);
+    List<String> getTypeName(List<String> idList);
 
     /**
      * 根据题目类型ID获取类型名称
@@ -68,5 +68,5 @@ public interface SubjectTypeService extends IService<SubjectType> {
      * @param id 题目类型ID
      * @return 类型名称
      */
-    String getTypeName(Long id);
+    String getTypeName(String id);
 }

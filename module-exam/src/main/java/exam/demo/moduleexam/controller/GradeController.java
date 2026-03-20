@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
 import exam.demo.modulecommon.common.PageVo;
+import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
-import exam.demo.modulecommon.feign.PaperFeign;
 import exam.demo.moduleexam.pojo.DTO.grade.*;
 import exam.demo.moduleexam.pojo.VO.grade.ExamGradeRecordQueryFormVO;
 import exam.demo.moduleexam.pojo.VO.grade.ExamGradeRecordTableDataVO;
@@ -88,7 +88,7 @@ public class GradeController {
      */
     @MethodEnhancer
     @RequestMapping(value = "getPaperAnswer")
-    public CommonResponse<List> getPaperAnswer(@RequestBody Long examRecordId) {
+    public CommonResponse<List> getPaperAnswer(@RequestBody String examRecordId) {
         List<MyAnswerDTO> myAnswerDTOS = gradeService.getMyAnswer(examRecordId);
         List<MyAnswerVO> myAnswerVOS = CommonUtils.convertList(myAnswerDTOS, MyAnswerVO.class);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, myAnswerVOS);
@@ -106,7 +106,7 @@ public class GradeController {
         }
     }
 
-    private String getPaperName(Long id) {
+    private String getPaperName(String id) {
         if (id != null) {
             return RPCUtils.parseResponse(paperFeign.queryPaperNameByPaperId(id), String.class, RPCUtils.PAPER);
         }

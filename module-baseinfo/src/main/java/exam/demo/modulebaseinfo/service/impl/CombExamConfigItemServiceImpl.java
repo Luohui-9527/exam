@@ -24,7 +24,7 @@ public class CombExamConfigItemServiceImpl extends ServiceImpl<CombExamConfigIte
      * @return 是否删除成功
      */
     @Override
-    public boolean removeByConfig(long configId) {
+    public boolean removeByConfig(String configId) {
         QueryWrapper<CombExamConfigDetail> wrapper = new QueryWrapper<>();
         wrapper.eq(CombExamConfigDetail.COMB_EXAM_CONFIG_ID, configId);
         return remove(wrapper);
@@ -37,7 +37,7 @@ public class CombExamConfigItemServiceImpl extends ServiceImpl<CombExamConfigIte
      * @return 配置明细列表
      */
     @Override
-    public List<CombExamConfigDetail> listByConfigId(Long configId) {
+    public List<CombExamConfigDetail> listByConfigId(String configId) {
         return baseMapper.listByConfigId(configId);
     }
 }

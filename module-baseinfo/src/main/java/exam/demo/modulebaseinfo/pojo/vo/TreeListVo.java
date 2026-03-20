@@ -18,7 +18,7 @@ public class TreeListVo implements Serializable {
      * id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 名字
@@ -29,7 +29,7 @@ public class TreeListVo implements Serializable {
      * 父亲id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private String parentId;
 
     /**
      * 版本

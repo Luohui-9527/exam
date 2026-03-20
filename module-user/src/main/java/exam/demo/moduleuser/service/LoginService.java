@@ -45,5 +45,5 @@ public interface LoginService {
      * @return
      * @throws Exception
      */
-    boolean logout(List<Long> ids);
+    boolean logout(List<String> ids);
 }

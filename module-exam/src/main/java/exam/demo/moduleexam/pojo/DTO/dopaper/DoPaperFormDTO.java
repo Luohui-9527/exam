@@ -6,7 +6,7 @@ import lombok.Data;
 public class DoPaperFormDTO {
     private String standardAnswer;
     private String myAnswer;
-    private Long examRecordId;
-    private Long paperSubjectId;
+    private String examRecordId;
+    private String paperSubjectId;
     private String subjectType;
 }

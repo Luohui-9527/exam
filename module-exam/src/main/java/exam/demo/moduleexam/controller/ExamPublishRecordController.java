@@ -3,14 +3,14 @@ package exam.demo.moduleexam.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import exam.demo.modulecommon.common.*;
+import exam.demo.modulecommon.feign.PaperFeign;
+import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
 import exam.demo.modulecommon.utils.PageMapUtil;
 import exam.demo.modulecommon.utils.RPCUtils;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
-import exam.demo.modulecommon.feign.PaperFeign;
-import exam.demo.modulecommon.feign.UserFeign;
 import exam.demo.moduleexam.pojo.DTO.publish.*;
 import exam.demo.moduleexam.pojo.VO.IdAndName;
 import exam.demo.moduleexam.pojo.VO.publish.*;
@@ -172,12 +172,12 @@ public class ExamPublishRecordController {
      * @param ids
      * @return
      */
-    private String getExaminersName(List<Long> ids) {
+    private String getExaminersName(List<String> ids) {
         if (ids != null) {
             List<String> names = new ArrayList<>();
             StringBuffer examiners = new StringBuffer();
             //去用户服务获取姓名
-            for (Long id : ids) {
+            for (String id : ids) {
                 names.add(getPublisherName(id));
             }
             for (String name : names) {
@@ -194,7 +194,7 @@ public class ExamPublishRecordController {
      * @param id
      * @return
      */
-    private String getPublisherName(Long id) {
+    private String getPublisherName(String id) {
         if (id != null) {
             return RPCUtils.parseResponse(userFeign.getUserNameById(id), String.class, RPCUtils.USER);
         }

@@ -10,7 +10,7 @@ public class UserForRole implements Serializable {
     /**
      * 用户ID
      */
-    private Long id;
+    private String id;
     /**
      * 用户工号
      */

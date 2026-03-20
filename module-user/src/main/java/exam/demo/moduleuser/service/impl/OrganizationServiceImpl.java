@@ -51,7 +51,7 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean delete(List<OrganizationDto> list) {
-        List<Long> ids = list.stream().map(OrganizationDto::getId).collect(Collectors.toList());
+        List<String> ids = list.stream().map(OrganizationDto::getId).collect(Collectors.toList());
         try {
             if (removeByIds(ids)) {
                 return true;
@@ -81,7 +81,7 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
     }
 
     @Override
-    public String getNameById(long id) {
+    public String getNameById(String id) {
         return baseMapper.getById(id);
     }
 }

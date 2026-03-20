@@ -22,19 +22,19 @@ public class RoleItemVo extends BaseVo implements Serializable {
      * 角色ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long companyId;
+    private String companyId;
 
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long orgId;
+    private String orgId;
 
     /**
      * 角色名

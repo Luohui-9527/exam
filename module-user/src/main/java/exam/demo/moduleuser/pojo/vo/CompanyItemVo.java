@@ -19,13 +19,13 @@ public class CompanyItemVo extends BaseVo implements Serializable {
      * 公司ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
      * 组织机构ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long orgId;
+    private String orgId;
 
     /**
      * 公司名

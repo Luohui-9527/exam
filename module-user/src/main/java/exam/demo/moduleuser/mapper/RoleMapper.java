@@ -56,7 +56,7 @@ public interface RoleMapper extends BaseMapper<Role> {
      */
     List<UserOptionsDto> queryRole();
 
-    List<UserOptionsDto> queryRoleByCompany(Long companyId);
+    List<UserOptionsDto> queryRoleByCompany(String companyId);
 
-    List<UserOptionsDto> queryRoleByOrg(Long orgId);
+    List<UserOptionsDto> queryRoleByOrg(String orgId);
 }

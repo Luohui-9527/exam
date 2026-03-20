@@ -15,12 +15,12 @@ public class CombExamConfigDetail extends Model<CombExamConfigDetail> {
     /**
      * 组卷配置明细id
      */
-    private Long id;
+    private String id;
 
     /**
      * 题型ID
      */
-    private Long subjectTypeId;
+    private String subjectTypeId;
 
     /**
      * 题型名
@@ -31,12 +31,12 @@ public class CombExamConfigDetail extends Model<CombExamConfigDetail> {
     /**
      * 组卷配置ID
      */
-    private Long combExamConfigId;
+    private String combExamConfigId;
 
     /**
      * 题目类别ID
      */
-    private Long categoryId;
+    private String categoryId;
 
     /**
      * 题目类别名字

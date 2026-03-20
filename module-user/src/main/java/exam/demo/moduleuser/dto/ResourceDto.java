@@ -29,7 +29,7 @@ public class ResourceDto extends BaseDto implements Serializable {
     /**
      * 父亲节点
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * URL
@@ -79,6 +79,6 @@ public class ResourceDto extends BaseDto implements Serializable {
      */
     private int pageSize;
 
-    private Long judgeId;
+    private String judgeId;
 
 }

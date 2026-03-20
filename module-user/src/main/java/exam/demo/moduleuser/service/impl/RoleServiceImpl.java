@@ -177,7 +177,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
             // 删掉该用户的角色
             userRoleService.deleteByUserId(userRoleList.get(0).getUserId());
             for (UserRole userRole : userRoleList) {
-                userRole.setId(snowFlake.nextId());
+                userRole.setId(snowFlake.nextIdStr());
                 userRoleService.save(userRole);
                 // 同时要更新用户的companyId
                 userService.updateUserAfterAllocRole(userRole.getUserId(), userRole.getCompanyId());
@@ -192,13 +192,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
     public void addResourceForRole(List<RoleResourceDto> resourceDtos) {
         List<RoleResource> roles = CommonUtils.convertList(resourceDtos, RoleResource.class);
-        List<Long> roleIdList = roles.stream().map(RoleResource::getRoleId).distinct().toList();
-        for (Long roleId : roleIdList) {
+        List<String> roleIdList = roles.stream().map(RoleResource::getRoleId).distinct().toList();
+        for (String roleId : roleIdList) {
             roleResourceService.removeByRoleId(roleId);
         }
         if (!roles.isEmpty()) {
             for (RoleResource resource : roles) {
-                resource.setId(snowFlake.nextId());
+                resource.setId(snowFlake.nextIdStr());
             }
             roleResourceService.saveBatch(roles);
         } else {

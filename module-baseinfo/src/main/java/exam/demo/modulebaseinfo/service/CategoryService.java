@@ -57,7 +57,7 @@ public interface CategoryService extends IService<Category> {
      * @param categoryIdList 分类ID列表
      * @return 分类名称列表
      */
-    List<String> getCategoryName(List<Long> categoryIdList);
+    List<String> getCategoryName(List<String> categoryIdList);
 
     /**
      * 根据节点ID查询子节点
@@ -66,7 +66,7 @@ public interface CategoryService extends IService<Category> {
      * @param parentId 父节点ID
      * @return 子节点列表
      */
-    List<Category> queryChildNode(Long parentId);
+    List<Category> queryChildNode(String parentId);
 
     /**
      * 根据分类ID获取分类名称
@@ -74,5 +74,5 @@ public interface CategoryService extends IService<Category> {
      * @param id 分类ID
      * @return 分类名称
      */
-    String getCategoryNameById(Long id);
+    String getCategoryNameById(String id);
 }

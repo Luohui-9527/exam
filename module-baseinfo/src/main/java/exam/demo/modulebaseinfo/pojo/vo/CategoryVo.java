@@ -2,6 +2,7 @@ package exam.demo.modulebaseinfo.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  *
  * @author
  */
+@Data
 public class CategoryVo extends BaseItemVo implements Serializable {
 
     private static final long serialVersionUID = -700878102267633514L;
@@ -25,36 +27,8 @@ public class CategoryVo extends BaseItemVo implements Serializable {
      * 父类别id
      */
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
+    private String parentId;
 
     public CategoryVo() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryVO{" +
-                "name='" + name + '\'' +
-                ", parentId=" + parentId +
-                ", id=" + id +
-                ", status=" + status +
-                ", version=" + version +
-                ", remark='" + remark + '\'' +
-                '}';
     }
 }

@@ -18,7 +18,7 @@ public interface SubjectAnswerService extends IService<SubjectAnswer> {
      *
      * @param subjectIdList 题目ID列表
      */
-    void removeBatchBySubjectId(List<Long> subjectIdList);
+    void removeBatchBySubjectId(List<String> subjectIdList);
 
     /**
      * 删除指定题目ID的答案
@@ -26,7 +26,7 @@ public interface SubjectAnswerService extends IService<SubjectAnswer> {
      * @param id 题目ID
      * @return 是否删除成功
      */
-    boolean removeBySubjectId(long id);
+    boolean removeBySubjectId(String id);
 
     /**
      * 根据题目ID查询答案列表
@@ -34,7 +34,7 @@ public interface SubjectAnswerService extends IService<SubjectAnswer> {
      * @param subjectId 题目ID
      * @return 答案列表
      */
-    List<SubjectAnswer> listAnswerBySubjectId(long subjectId);
+    List<SubjectAnswer> listAnswerBySubjectId(String subjectId);
 
     /**
      * 根据题目ID列表查询答案列表
@@ -42,5 +42,5 @@ public interface SubjectAnswerService extends IService<SubjectAnswer> {
      * @param subjectList 题目ID列表
      * @return 答案列表
      */
-    List<SubjectAnswer> listAnswer(List<Long> subjectList);
+    List<SubjectAnswer> listAnswer(List<String> subjectList);
 }
