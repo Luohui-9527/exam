@@ -112,6 +112,12 @@ public class Subject extends Model<Subject> {
     @TableField(exist = false)
     private Long oldVersion;
 
+    @TableField(exist = false)
+    private Long pageNum;
+
+    @TableField(exist = false)
+    private Long pageSize;
+
     @Override
     public Serializable pkVal() {
         return id;

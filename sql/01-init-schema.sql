@@ -401,6 +401,22 @@ CREATE TABLE IF NOT EXISTS `answer_record` (
   KEY `idx_paper_subject_id` (`paper_subject_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='答案记录表';
 
+-- 用户在线信息表
+CREATE TABLE IF NOT EXISTS `user_online_info` (
+  `id` BIGINT NOT NULL COMMENT '在线ID',
+  `user_id` BIGINT DEFAULT NULL COMMENT '用户ID',
+  `code` VARCHAR(50) DEFAULT NULL COMMENT '工号',
+  `name` VARCHAR(50) DEFAULT NULL COMMENT '用户名',
+  `ip` VARCHAR(50) DEFAULT NULL COMMENT 'IP',
+  `online_time` DATETIME DEFAULT NULL COMMENT '上线时间',
+  `offline_time` DATETIME DEFAULT NULL COMMENT '下线时间',
+  `stop_time` BIGINT DEFAULT NULL COMMENT '在线时长',
+  `status` TINYINT DEFAULT NULL COMMENT '状态位',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户在线信息表';
+
 -- 系统参数表
 CREATE TABLE IF NOT EXISTS `system_param` (
   `id` VARCHAR(50) NOT NULL COMMENT '参数ID',

@@ -16,6 +16,11 @@ public class BaseQueryVo implements Serializable {
 
     private static final long serialVersionUID = -8750679123979588164L;
     /**
+     * 当前页码
+     */
+    protected Long currentPage;
+
+    /**
      * 当前分页
      */
     protected Long pageNum;
@@ -32,6 +37,9 @@ public class BaseQueryVo implements Serializable {
      * @return 当前分页
      */
     public Long getPageNumOrDefault() {
+        if (currentPage != null) {
+            return currentPage;
+        }
         return pageNum != null ? pageNum : 1L;
     }
 

@@ -28,6 +28,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 2020-03-05
  */
+@Slf4j
 @Service
 public class BaseService {
     public static final int COMPANY = 1;
@@ -79,7 +81,12 @@ public class BaseService {
 
 
     public Map<SubjectDto, List<SubjectAnswerDto>> parseSubjectPackage(SubjectPackage subjectPackage) {
+        log.info("[parseSubjectPackage] 开始解析题目包, subjectPackage为null: {}", subjectPackage == null);
+        if (subjectPackage == null) {
+            throw new PaperException(PaperError.PAPER_SUBJECT_CANT_BE_NULL);
+        }
         List<SubjectPackageDto> dtoList = subjectPackage.getDtoList();
+        log.info("[parseSubjectPackage] dtoList大小: {}", dtoList == null ? "null" : dtoList.size());
         if (CollUtil.isEmpty(dtoList)) {
             throw new PaperException(PaperError.PAPER_SUBJECT_CANT_BE_NULL);
         }
@@ -88,8 +95,11 @@ public class BaseService {
         for (SubjectPackageDto dto : dtoList) {
             SubjectDto subjectDto = CommonUtils.copyProperties(dto.getSubjectDTO(), SubjectDto.class);
             List<SubjectAnswerDto> subjectAnswerDtoList = CommonUtils.convertList(dto.getSubjectAnswerDtoList(), SubjectAnswerDto.class);
+            log.info("[parseSubjectPackage] 处理题目, subjectId: {}, subjectName: {}, answerCount: {}",
+                subjectDto.getId(), subjectDto.getName(), subjectAnswerDtoList == null ? 0 : subjectAnswerDtoList.size());
             map.put(subjectDto, subjectAnswerDtoList);
         }
+        log.info("[parseSubjectPackage] 解析完成, map大小: {}", map.size());
         return map;
     }
 
@@ -101,10 +111,12 @@ public class BaseService {
      * @return
      */
     public boolean insertNewPaper(PaperDto paper, Map<SubjectDto, List<SubjectAnswerDto>> map) {
+        log.info("[insertNewPaper] 开始插入试卷, paperId: {}, map为null: {}", paper.getId(), map == null);
         if (map == null) {
             throw new PaperException(PaperError.PAPER_CANT_BE_NULL);
         }
         Paper paperModel = CommonUtils.copyProperties(paper, Paper.class);
+        log.info("[insertNewPaper] paperModel转换完成, paperId: {}", paperModel.getId());
         List<PaperSubject> paperSubjectList = new ArrayList<>(64);
         List<PaperSubjectAnswer> paperSubjectAnswerList = new ArrayList<>(256);
         map.forEach((subject, subjectAnswer) -> {
@@ -117,6 +129,8 @@ public class BaseService {
             // 设置下题目
             paperSubject.setSubjectName(subject.getName());
             paperSubject.setSubjectId(subject.getId());
+            log.info("[insertNewPaper] 处理题目, subjectId: {}, paperSubjectId: {}, score: {}",
+                subject.getId(), paperSubject.getId(), paperSubject.getScore());
             paperSubjectList.add(paperSubject);
             // 处理试题答案
             subjectAnswer.forEach((answer -> {
@@ -126,10 +140,15 @@ public class BaseService {
                 paperSubjectAnswerList.add(ans);
             }));
         });
+        log.info("[insertNewPaper] 题目和答案处理完成, subjectList大小: {}, answerList大小: {}",
+            paperSubjectList.size(), paperSubjectAnswerList.size());
         // 计算试卷总分
         paperModel.setScore(countScore(paperSubjectList));
+        log.info("[insertNewPaper] 计算总分, score: {}", paperModel.getScore());
         // 插入
-        return paperService.insertPaper(paperModel, paperSubjectList, paperSubjectAnswerList);
+        boolean result = paperService.insertPaper(paperModel, paperSubjectList, paperSubjectAnswerList);
+        log.info("[insertNewPaper] 插入试卷结果: {}", result);
+        return result;
     }
 
     /**

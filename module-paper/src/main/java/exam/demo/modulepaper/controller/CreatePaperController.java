@@ -44,13 +44,14 @@ public class CreatePaperController {
     public CommonResponse<String> fastGen(@RequestBody CombExamConfigVo vo) {
         UserPermission userPermission = checkAccessAuthority();
         PaperDto paperDto = CommonUtils.copyProperties(vo, PaperDto.class);
+        paperDto.setId(null);
         paperDto.setConfigId(vo.getId());
         paperDto.setDescription(vo.getRemark());
         paperDto.setPaperCreator(userPermission.getUserName());
         paperDto.setStatus((byte) 1);
-        boolean res = paperService.generateFastMode(paperDto);
-        if (res) {
-            return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, state.SUCCESS_MSG);
+        String paperId = paperService.generateFastMode(paperDto);
+        if (paperId != null) {
+            return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, paperId);
         }
         return new CommonResponse<>(state.getVersion(), state.FAIL, state.FAIL, state.FAIL_MSG);
     }

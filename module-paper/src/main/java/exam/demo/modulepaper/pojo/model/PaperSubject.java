@@ -1,5 +1,7 @@
 package exam.demo.modulepaper.pojo.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class PaperSubject implements Serializable {
      * 试题id
      */
     @ApiModelProperty(value = "试题id")
+    @TableId(type = IdType.INPUT)
     private String id;
     /**
      * 试卷id
@@ -58,19 +61,4 @@ public class PaperSubject implements Serializable {
      */
     @ApiModelProperty(value = "分数")
     private Double score;
-    /**
-     * 预留
-     */
-    @ApiModelProperty(value = "预留")
-    private String field1;
-    /**
-     * 预留
-     */
-    @ApiModelProperty(value = "预留")
-    private String field2;
-    /**
-     * 预留
-     */
-    @ApiModelProperty(value = "预留")
-    private String field3;
 }

@@ -1,5 +1,7 @@
 package exam.demo.modulepaper.pojo.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,6 +27,7 @@ public class Paper implements Serializable {
      * 试卷id
      */
     @ApiModelProperty(value = "试卷id")
+    @TableId(type = IdType.INPUT)
     private String id;
     /**
      * 试卷名

@@ -2,6 +2,7 @@ package exam.demo.modulebaseinfo.pojo.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @author
  */
+@Data
 public class CombExamConfigVo extends BaseItemVo implements Serializable {
 
     private static final long serialVersionUID = -8342846611386764998L;
@@ -47,49 +49,4 @@ public class CombExamConfigVo extends BaseItemVo implements Serializable {
     public CombExamConfigVo() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Long difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public List<Long> getDeleteIds() {
-        return deleteIds;
-    }
-
-    public void setDeleteIds(List<Long> deleteIds) {
-        this.deleteIds = deleteIds;
-    }
-
-    public List<CombExamConfigItemVo> getCombExamConfigItemVOs() {
-        return combExamConfigItemVOs;
-    }
-
-    public void setCombExamConfigItemVOs(List<CombExamConfigItemVo> combExamConfigItemVOs) {
-        this.combExamConfigItemVOs = combExamConfigItemVOs;
-    }
-
-    @Override
-    public String toString() {
-        return "CombExamConfigVO{" +
-                "name='" + name + '\'' +
-                ", difficulty=" + difficulty +
-                ", deleteIds=" + deleteIds +
-                ", combExamConfigItemVOs=" + combExamConfigItemVOs +
-                ", id=" + id +
-                ", status=" + status +
-                ", version=" + version +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import exam.demo.modulecommon.common.BaseDataBaseDto;
 import exam.demo.modulecommon.common.CombExamConfigItemDto;
+import lombok.Data;
 
 import javax.validation.constraints.Max;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author luohui
  */
+@Data
 public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
     private static final long serialVersionUID = 6193674149029494679L;
 
@@ -58,99 +60,4 @@ public class CombExamConfigDto extends BaseDataBaseDto implements Serializable {
     public CombExamConfigDto() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Long difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public String getDifficultyName() {
-        return difficultyName;
-    }
-
-    public void setDifficultyName(String difficultyName) {
-        this.difficultyName = difficultyName;
-    }
-
-    public List<Long> getDeleteIds() {
-        return deleteIds;
-    }
-
-    public void setDeleteIds(List<Long> deleteIds) {
-        this.deleteIds = deleteIds;
-    }
-
-    public List<CombExamConfigItemDto> getCombExamConfigItemDtoList() {
-        return combExamConfigItemDtoList;
-    }
-
-    public void setCombExamConfigItemDtoList(List<CombExamConfigItemDto> combExamConfigItemDtoList) {
-        this.combExamConfigItemDtoList = combExamConfigItemDtoList;
-    }
-
-    public String getUpdatedByName() {
-        return updatedByName;
-    }
-
-    public void setUpdatedByName(String updatedByName) {
-        this.updatedByName = updatedByName;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    @Override
-    public String toString() {
-        return "CombExamConfigDto{" +
-                "name='" + name + '\'' +
-                ", difficulty=" + difficulty +
-                ", difficultyName='" + difficultyName + '\'' +
-                ", deleteIds=" + deleteIds +
-                ", CombExamConfigItemDTOList=" + combExamConfigItemDtoList +
-                ", status=" + status +
-                ", remark='" + remark + '\'' +
-                ", updatedByName='" + updatedByName + '\'' +
-                ", company='" + company + '\'' +
-                ", judgeId=" + judgeId +
-                ", id=" + id +
-                ", orgId=" + orgId +
-                ", companyId=" + companyId +
-                ", createdBy=" + createdBy +
-                ", createdTime=" + createdTime +
-                ", updatedBy=" + updatedBy +
-                ", updatedTime=" + updatedTime +
-                ", version=" + version +
-                '}';
-    }
 }

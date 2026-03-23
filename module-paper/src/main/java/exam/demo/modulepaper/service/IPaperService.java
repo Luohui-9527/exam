@@ -28,9 +28,9 @@ public interface IPaperService extends IService<Paper> {
      * 快速组卷
      *
      * @param paperDTO 试卷信息
-     * @return 成功返回 <code>true</code> 否则 <code>false</code>
+     * @return 成功返回试卷ID，否则返回null
      */
-    boolean generateFastMode(PaperDto paperDTO);
+    String generateFastMode(PaperDto paperDTO);
 
     /**
      * 标准组卷

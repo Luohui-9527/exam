@@ -11,6 +11,7 @@ import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
 import exam.demo.modulepaper.pojo.vo.ModifyPaperVo;
+import exam.demo.modulepaper.pojo.vo.PaperIdVo;
 import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
 import exam.demo.modulepaper.service.IPaperService;
 import exam.demo.modulepaper.service.impl.BaseService;
@@ -99,14 +100,14 @@ public class MaintainPaperController {
      */
     @MethodEnhancer
     @PostMapping("/detail")
-    public CommonResponse<PaperDetail> paperDetail(@RequestParam("paperId") String paperId) {
-        return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperId));
+    public CommonResponse<PaperDetail> paperDetail(@RequestBody PaperIdVo paperIdVo) {
+        return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, baseService.queryDetailByPaperId(paperIdVo.getPaperId()));
     }
 
     @MethodEnhancer
     @PostMapping("/publish")
-    public CommonResponse<Boolean> publishPaper(@RequestParam("paperId") String paperId) {
-        boolean result = paperService.publish(paperId);
+    public CommonResponse<Boolean> publishPaper(@RequestBody PaperIdVo paperIdVo) {
+        boolean result = paperService.publish(paperIdVo.getPaperId());
         return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, result);
     }
 

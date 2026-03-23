@@ -1,6 +1,8 @@
 package exam.demo.modulebaseinfo.service;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import exam.demo.modulebaseinfo.pojo.model.CombExamConfigDetail;
 import exam.demo.modulebaseinfo.pojo.model.Subject;
@@ -53,6 +55,25 @@ public interface SubjectService extends IService<Subject> {
      * @return 题目信息列表
      */
     List<SubjectInfo> listSubject(Subject subject);
+
+    /**
+     * 分页查询题目列表
+     * 支持按分类、题型、难度等条件过滤
+     *
+     * @param page 分页对象
+     * @param subject 查询条件
+     * @return 分页后的题目信息列表
+     */
+    IPage<SubjectInfo> listSubjectPage(Page<SubjectInfo> page, Subject subject);
+
+    /**
+     * 分页查询题目列表（自动分页）
+     * 支持按分类、题型、难度等条件过滤
+     *
+     * @param subject 查询条件（包含pageNum和pageSize）
+     * @return 分页后的题目信息列表
+     */
+    IPage<SubjectInfo> listSubjectPage(Subject subject);
 
     /**
      * 根据配置获取题目包

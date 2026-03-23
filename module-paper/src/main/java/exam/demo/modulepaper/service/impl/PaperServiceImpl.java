@@ -32,6 +32,7 @@ import exam.demo.modulepaper.pojo.vo.PaperVo;
 import exam.demo.modulepaper.service.IPaperService;
 import exam.demo.modulepaper.service.IPaperSubjectAnswerService;
 import exam.demo.modulepaper.service.IPaperSubjectService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ import java.util.stream.Collectors;
  * @since 2020-03-04
  */
 
+@Slf4j
 @Service
 public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements IPaperService {
     @Autowired
@@ -76,17 +78,26 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * 快速组卷
      *
      * @param paperDTO
-     * @return 成功返回 <code>true</code> 否则 <code>false</code>
+     * @return 成功返回试卷ID，否则返回null
      */
     @FullCommonField
     @Override
-    public boolean generateFastMode(PaperDto paperDTO) {
+    public String generateFastMode(PaperDto paperDTO) {
+        paperDTO.setId(snowFlake.nextIdStr());
         paperDTO.setCombExamTime(paperDTO.getUpdatedTime());
-        // 从基础数据获取题目
+        log.info("[fastGen] 开始快速组卷, configId: {}, paperId: {}", paperDTO.getConfigId(), paperDTO.getId());
         CommonResponse response = baseInfoFeign.getSubjectAndAnswer(paperDTO.getConfigId());
+        log.info("[fastGen] 获取题目响应, code: {}, msg: {}", response.getCode(), response.getMsg());
         SubjectPackage subjectPackage = RPCUtils.parseResponse(response, SubjectPackage.class, RPCUtils.BASEINFO);
+        log.info("[fastGen] 解析题目包成功, subjectPackage: {}", subjectPackage);
         Map<SubjectDto, List<SubjectAnswerDto>> map = baseService.parseSubjectPackage(subjectPackage);
-        return baseService.insertNewPaper(paperDTO, map);
+        log.info("[fastGen] 解析题目包为map, map大小: {}", map.size());
+        boolean result = baseService.insertNewPaper(paperDTO, map);
+        log.info("[fastGen] 插入试卷结果: {}", result);
+        if (result) {
+            return paperDTO.getId();
+        }
+        return null;
     }
 
     /**
@@ -157,7 +168,9 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     @Override
     public Map<String, Object> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate) {
         UserPermission userPermission = TokenUtils.getUser();
-        Page<Paper> page = new Page<>(paperQueryDTO.getCurrentPage(), paperQueryDTO.getPageSize());
+        long pageNum = paperQueryDTO.getPageNum() != null && paperQueryDTO.getPageNum() > 0 ? paperQueryDTO.getPageNum() : 1L;
+        long pageSize = paperQueryDTO.getPageSize() != null && paperQueryDTO.getPageSize() > 0 ? Math.min(paperQueryDTO.getPageSize(), 100L) : 10L;
+        Page<Paper> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Paper> wrapper = new QueryWrapper<>();
         if (isTemplate) {
             wrapper.eq(MagicPointConstant.TEMPLATE, 1);
@@ -198,7 +211,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             vo.setDifficultyValue(baseService.getBaseInfoCache(vo.getDifficulty(), BaseService.DICTIONARY));
             paperVoList.add(vo);
         }
-        map.put("paperVO", paperVoList);
+        map.put("list", paperVoList);
         map.put("total", total);
         return map;
     }
@@ -520,7 +533,9 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         wrapper.eq(MagicPointConstant.COMPANY_ID, companyId);
         wrapper.orderByDesc(MagicPointConstant.CREATED_TIME);
 
-        Page<Paper> page = new Page<>(queryVo.getPageNumOrDefault(), queryVo.getPageSizeOrDefault());
+        long pageNum = queryVo.getPageNum() != null && queryVo.getPageNum() > 0 ? queryVo.getPageNum() : 1L;
+        long pageSize = queryVo.getPageSize() != null && queryVo.getPageSize() > 0 ? Math.min(queryVo.getPageSize(), 100L) : 10L;
+        Page<Paper> page = new Page<>(pageNum, pageSize);
         IPage<Paper> paperPage = page(page, wrapper);
 
         List<PaperListVo> voList = paperPage.getRecords().stream().map(p -> {

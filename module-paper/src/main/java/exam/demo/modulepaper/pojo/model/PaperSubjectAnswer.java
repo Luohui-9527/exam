@@ -1,5 +1,7 @@
 package exam.demo.modulepaper.pojo.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class PaperSubjectAnswer implements Serializable {
      * 答案id
      */
     @ApiModelProperty(value = "答案id")
+    @TableId(type = IdType.INPUT)
     private String id;
     /**
      * 试题id

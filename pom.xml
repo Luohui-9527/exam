@@ -18,7 +18,7 @@
         <java.version>17</java.version>
         <spring-boot.version>2.7.18</spring-boot.version>
         <spring-cloud.version>2021.0.8</spring-cloud.version>
-        <mybatis-plus.version>3.5.15</mybatis-plus.version>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <shiro.version>2.0.6</shiro.version>
         <fastjson.version>2.0.33</fastjson.version>
         <lombok.version>1.18.38</lombok.version>

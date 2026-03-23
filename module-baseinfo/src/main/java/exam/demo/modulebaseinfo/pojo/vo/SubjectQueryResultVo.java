@@ -18,6 +18,9 @@ public class SubjectQueryResultVo implements Serializable {
 
     private static final long serialVersionUID = 1902508370783136321L;
 
+    public SubjectQueryResultVo() {
+    }
+
     /**
      * 题目id
      */

@@ -3,6 +3,8 @@ package exam.demo.modulebaseinfo.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import exam.demo.modulebaseinfo.dao.SubjectDao;
 import exam.demo.modulebaseinfo.exception.BaseInfoError;
@@ -131,6 +133,28 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
             subjectInfoList = baseMapper.querySubject(subject);
         }
         return subjectInfoList;
+    }
+
+
+    @Override
+    public IPage<SubjectInfo> listSubjectPage(Page<SubjectInfo> page, Subject subject) {
+        if (subject.getCategoryId() != null) {
+            Category category = categoryService.getById(subject.getCategoryId());
+            if (category != null) {
+                DFSUtil<Category> dfs = new DFSUtil<>(category.getId(), categoryService::queryChildNode);
+                List<String> categoryIds = dfs.getRes();
+                return baseMapper.queryByCategoryIds(page, categoryIds, subject);
+            }
+        }
+        return baseMapper.queryByCategory(page, subject);
+    }
+
+    @Override
+    public IPage<SubjectInfo> listSubjectPage(Subject subject) {
+        long pageNum = subject.getPageNum() != null && subject.getPageNum() > 0 ? subject.getPageNum() : 1L;
+        long pageSize = subject.getPageSize() != null && subject.getPageSize() > 0 ? Math.min(subject.getPageSize(), 100L) : 10L;
+        Page<SubjectInfo> page = new Page<>(pageNum, pageSize);
+        return listSubjectPage(page, subject);
     }
 
 

@@ -1,6 +1,6 @@
 package exam.demo.modulebaseinfo.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import exam.demo.modulebaseinfo.exception.BaseInfoError;
 import exam.demo.modulebaseinfo.exception.BaseInfoException;
 import exam.demo.modulebaseinfo.pojo.model.Subject;
@@ -15,15 +15,15 @@ import exam.demo.modulebaseinfo.service.SubjectService;
 import exam.demo.modulecommon.common.*;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
-import exam.demo.modulecommon.utils.PageMapUtil;
+import exam.demo.modulecommon.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping("/subject")
@@ -98,18 +98,14 @@ public class SubjectController {
     @MethodEnhancer
     @PostMapping("/query")
     public CommonResponse<PageVo<SubjectQueryResultVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
-        Long pageNum = queryVo.getPageNum() != null ? queryVo.getPageNum() : 1L;
-        Long pageSize = queryVo.getPageSize() != null ? queryVo.getPageSize() : 10L;
-        Page<SubjectQueryResultVo> page = new Page<>(pageNum, pageSize);
         Subject subject = CommonUtils.copyProperties(queryVo, Subject.class);
         try {
             subject.setJudgeId(CommonUtils.judgeCompanyAndOrg());
         } catch (Exception e) {
-            // 没有登录时，不设置 judgeId
         }
-        List<SubjectInfo> subjectList = subjectService.listSubject(subject);
-        List<SubjectQueryResultVo> resultList = new ArrayList<>();
-        for (SubjectInfo subjectInfo : subjectList) {
+        IPage<SubjectInfo> subjectPage = subjectService.listSubjectPage(subject);
+
+        Function<SubjectInfo, SubjectQueryResultVo> converter = subjectInfo -> {
             SubjectQueryResultVo resultVo = new SubjectQueryResultVo();
             resultVo.setId(subjectInfo.getId());
             resultVo.setName(subjectInfo.getName());
@@ -120,9 +116,10 @@ public class SubjectController {
             resultVo.setSubjectTypeName(subjectInfo.getSubjectTypeName());
             resultVo.setDifficultyName(subjectInfo.getDifficultyName());
             resultVo.setUpdatedTime(subjectInfo.getUpdatedTime());
-            resultList.add(resultVo);
-        }
-        PageVo<SubjectQueryResultVo> pageVo = PageMapUtil.getPageMap(resultList, page);
+            return resultVo;
+        };
+
+        PageVo<SubjectQueryResultVo> pageVo = PageUtil.convertPage(subjectPage, converter);
         return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
 
