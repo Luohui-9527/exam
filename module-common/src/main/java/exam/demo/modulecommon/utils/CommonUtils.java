@@ -6,6 +6,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import exam.demo.modulecommon.common.CommonResponse;
+import exam.demo.modulecommon.utils.jwt.UserPermission;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,13 +64,21 @@ public class CommonUtils {
 
 
     public static String judgeCompanyAndOrg() {
-        String companyId = TokenUtils.getUser().getCompanyId();
-        String orgId = TokenUtils.getUser().getOrgId();
-        if (companyId != null) {
-            return companyId;
-        } else {
-            return orgId;
+        try {
+            UserPermission user = TokenUtils.getUser();
+            if (user != null) {
+                String companyId = user.getCompanyId();
+                String orgId = user.getOrgId();
+                if (companyId != null) {
+                    return companyId;
+                } else {
+                    return orgId;
+                }
+            }
+        } catch (Exception e) {
+            // 忽略异常，返回null
         }
+        return null;
     }
 
 }

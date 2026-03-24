@@ -1,11 +1,14 @@
 package exam.demo.modulepaper.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
+import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.exception.StarterError;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
+import exam.demo.modulecommon.utils.PageUtil;
 import exam.demo.modulecommon.utils.TokenUtils;
 import exam.demo.modulecommon.utils.jwt.UserPermission;
 import exam.demo.modulepaper.exception.PaperException;
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author luohui
@@ -95,9 +97,10 @@ public class TemplatePaperController {
 
     @MethodEnhancer
     @PostMapping("/query")
-    public CommonResponse<List<PaperVo>> queryTemplate(@RequestBody PaperQueryVo paperQueryVo) {
-        Map map = paperService.queryTemplate(CommonUtils.copyProperties(paperQueryVo, PaperQueryDto.class));
-        return new CommonResponse<>(state.getVersion(), state.SUCCESS, state.SUCCESS_MSG, (List<PaperVo>) map.get("paperVO"));
+    public CommonResponse<PageVo<PaperVo>> queryTemplate(@RequestBody PaperQueryVo paperQueryVo) {
+        IPage<PaperVo> paperPage = paperService.queryTemplate(CommonUtils.copyProperties(paperQueryVo, PaperQueryDto.class));
+        PageVo<PaperVo> pageVo = PageUtil.convertPage(paperPage, paperVo -> paperVo);
+        return new CommonResponse<>(state.SUCCESS, state.SUCCESS_MSG, pageVo);
     }
 
     private void checkCompany() {

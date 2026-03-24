@@ -123,7 +123,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
                     tempSubject.setSubjectTypeId(subject.getSubjectTypeId());
                     tempSubject.setDifficulty(subject.getDifficulty());
                     tempSubject.setJudgeId(subject.getJudgeId());
-                    subjectInfoList.addAll(baseMapper.queryByCategory(tempSubject));
+                    subjectInfoList.addAll(baseMapper.queryByCategoryList(tempSubject));
                 }
             }
         } else {
@@ -154,7 +154,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectDao, Subject> impleme
         long pageNum = subject.getPageNum() != null && subject.getPageNum() > 0 ? subject.getPageNum() : 1L;
         long pageSize = subject.getPageSize() != null && subject.getPageSize() > 0 ? Math.min(subject.getPageSize(), 100L) : 10L;
         Page<SubjectInfo> page = new Page<>(pageNum, pageSize);
-        return listSubjectPage(page, subject);
+        return this.listSubjectPage(page, subject);
     }
 
 

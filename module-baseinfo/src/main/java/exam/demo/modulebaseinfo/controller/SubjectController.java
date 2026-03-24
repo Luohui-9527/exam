@@ -99,6 +99,9 @@ public class SubjectController {
     @PostMapping("/query")
     public CommonResponse<PageVo<SubjectQueryResultVo>> querySubject(@RequestBody SubjectQueryVo queryVo) {
         Subject subject = CommonUtils.copyProperties(queryVo, Subject.class);
+        // 手动设置分页参数
+        subject.setPageNum(queryVo.getPageNumOrDefault());
+        subject.setPageSize(queryVo.getPageSizeOrDefault());
         try {
             subject.setJudgeId(CommonUtils.judgeCompanyAndOrg());
         } catch (Exception e) {

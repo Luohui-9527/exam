@@ -40,6 +40,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -166,10 +167,10 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return 返回满足此参数的试卷列表
      */
     @Override
-    public Map<String, Object> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate) {
+    public IPage<PaperVo> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate) {
         UserPermission userPermission = TokenUtils.getUser();
-        long pageNum = paperQueryDTO.getPageNum() != null && paperQueryDTO.getPageNum() > 0 ? paperQueryDTO.getPageNum() : 1L;
-        long pageSize = paperQueryDTO.getPageSize() != null && paperQueryDTO.getPageSize() > 0 ? Math.min(paperQueryDTO.getPageSize(), 100L) : 10L;
+        long pageNum = paperQueryDTO.getPageNumOrDefault();
+        long pageSize = Math.min(paperQueryDTO.getPageSizeOrDefault(), 100L);
         Page<Paper> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Paper> wrapper = new QueryWrapper<>();
         if (isTemplate) {
@@ -195,25 +196,22 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
             wrapper.likeRight(MagicPointConstant.NAME, paperQueryDTO.getName());
         }
         wrapper.orderByDesc(MagicPointConstant.UPDATE_TIME);
-        page = baseMapper.selectPage(page, wrapper);
-        List<Paper> paperList = page.getRecords();
-        return convertId(paperList, page.getTotal());
-    }
-
-    private Map<String, Object> convertId(List<Paper> paperList, long total) {
-        Map<String, Object> map = new HashMap<>(2);
-        List<PaperVo> paperVoList = new ArrayList<>(paperList.size());
-        for (Paper paper : paperList) {
+        IPage<Paper> paperPage = baseMapper.selectPage(page, wrapper);
+        
+        // Convert to PageVo
+        Function<Paper, PaperVo> converter = paper -> {
             PaperVo vo = CommonUtils.copyProperties(paper, PaperVo.class);
             vo.setCompanyValue(baseService.getUserInfoCache(vo.getCompanyId(), BaseService.COMPANY));
             vo.setUpdatedByValue(baseService.getUserInfoCache(vo.getUpdatedBy(), BaseService.USER));
             vo.setPaperTypeValue(baseService.getBaseInfoCache(vo.getPaperType(), BaseService.DICTIONARY));
             vo.setDifficultyValue(baseService.getBaseInfoCache(vo.getDifficulty(), BaseService.DICTIONARY));
-            paperVoList.add(vo);
-        }
-        map.put("list", paperVoList);
-        map.put("total", total);
-        return map;
+            return vo;
+        };
+        
+        Page<PaperVo> resultPage = new Page<>(pageNum, pageSize, paperPage.getTotal());
+        resultPage.setPages(paperPage.getPages());
+        resultPage.setRecords(paperPage.getRecords().stream().map(converter).collect(Collectors.toList()));
+        return resultPage;
     }
 
     /**
@@ -490,7 +488,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
      * @return
      */
     @Override
-    public Map<String, Object> queryTemplate(PaperQueryDto paperQueryDTO) {
+    public IPage<PaperVo> queryTemplate(PaperQueryDto paperQueryDTO) {
         return queryPaper(paperQueryDTO, true);
     }
 

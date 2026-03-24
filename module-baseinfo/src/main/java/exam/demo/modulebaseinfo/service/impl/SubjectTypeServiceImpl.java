@@ -54,7 +54,7 @@ public class SubjectTypeServiceImpl extends ServiceImpl<SubjectTypeDao, SubjectT
     @Override
     public List<SubjectType> list(SubjectType subjectType) {
         QueryWrapper<SubjectType> wrapper = new QueryWrapper<>();
-        wrapper.eq(SubjectType.ORG_ID, subjectType.getOrgId());
+        wrapper.eq(SubjectType.ORG_ID, subjectType.orgId);
         if (StringUtils.isNotBlank(subjectType.getName())) {
             wrapper.likeRight(SubjectType.NAME, subjectType.getName());
         }

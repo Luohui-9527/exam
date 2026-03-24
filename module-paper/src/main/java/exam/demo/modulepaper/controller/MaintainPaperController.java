@@ -1,18 +1,22 @@
 package exam.demo.modulepaper.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import exam.demo.modulecommon.common.CommonResponse;
 import exam.demo.modulecommon.common.CommonState;
+import exam.demo.modulecommon.common.PageVo;
 import exam.demo.modulecommon.common.PaperDetail;
 import exam.demo.modulecommon.feign.BaseInfoFeign;
 import exam.demo.modulecommon.logging.annotation.MethodEnhancer;
 import exam.demo.modulecommon.utils.CommonUtils;
+import exam.demo.modulecommon.utils.PageUtil;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperSubjectDto;
 import exam.demo.modulepaper.pojo.dto.PaperQueryDto;
 import exam.demo.modulepaper.pojo.vo.ModifyPaperVo;
 import exam.demo.modulepaper.pojo.vo.PaperIdVo;
 import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
+import exam.demo.modulepaper.pojo.vo.PaperVo;
 import exam.demo.modulepaper.service.IPaperService;
 import exam.demo.modulepaper.service.impl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +59,10 @@ public class MaintainPaperController {
      */
     @MethodEnhancer
     @PostMapping("/query")
-    public CommonResponse<Map> queryPaper(@RequestBody PaperQueryVo paperQueryVo) {
-        Map res = paperService.queryPaper(CommonUtils.copyProperties(paperQueryVo, PaperQueryDto.class), false);
-        return new CommonResponse<>(commonState.getVersion(), commonState.SUCCESS, commonState.SUCCESS_MSG, res);
+    public CommonResponse<PageVo<PaperVo>> queryPaper(@RequestBody PaperQueryVo paperQueryVo) {
+        IPage<PaperVo> paperPage = paperService.queryPaper(CommonUtils.copyProperties(paperQueryVo, PaperQueryDto.class), false);
+        PageVo<PaperVo> pageVo = PageUtil.convertPage(paperPage, paperVo -> paperVo);
+        return new CommonResponse<>(commonState.SUCCESS, commonState.SUCCESS_MSG, pageVo);
     }
 
     /**

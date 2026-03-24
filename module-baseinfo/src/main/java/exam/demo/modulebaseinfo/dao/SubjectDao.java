@@ -24,7 +24,7 @@ public interface SubjectDao extends BaseMapper<Subject> {
      * @param subject 题目查询条件
      * @return 题目信息列表
      */
-    List<SubjectInfo> querySubject(Subject subject);
+    List<SubjectInfo> querySubject(@Param("subject") Subject subject);
 
     /**
      * 根据分类ID查询题目（带分页）
@@ -46,12 +46,12 @@ public interface SubjectDao extends BaseMapper<Subject> {
     IPage<SubjectInfo> queryByCategoryIds(Page<SubjectInfo> page, @Param("categoryIds") List<String> categoryIds, @Param("subject") Subject subject);
 
     /**
-     * 根据分类ID查询题目
+     * 根据分类ID查询题目（非分页）
      *
      * @param subject 题目查询条件
      * @return 题目信息列表
      */
-    List<SubjectInfo> queryByCategory(Subject subject);
+    List<SubjectInfo> queryByCategoryList(@Param("subject") Subject subject);
 
     /**
      * 查询题目ID列表

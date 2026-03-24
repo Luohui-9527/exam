@@ -1,5 +1,6 @@
 package exam.demo.modulepaper.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import exam.demo.modulecommon.common.*;
 import exam.demo.modulepaper.pojo.dto.ModifyPaperDto;
@@ -10,6 +11,7 @@ import exam.demo.modulepaper.pojo.model.PaperSubject;
 import exam.demo.modulepaper.pojo.model.PaperSubjectAnswer;
 import exam.demo.modulepaper.pojo.vo.CustomizedCombExamConfigVo;
 import exam.demo.modulepaper.pojo.vo.PaperQueryVo;
+import exam.demo.modulepaper.pojo.vo.PaperVo;
 
 import java.util.List;
 import java.util.Map;
@@ -66,7 +68,7 @@ public interface IPaperService extends IService<Paper> {
      * @param isTemplate    是否为模板
      * @return 返回满足此参数的试卷列表
      */
-    Map<String, Object> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate);
+    IPage<PaperVo> queryPaper(PaperQueryDto paperQueryDTO, boolean isTemplate);
 
     /**
      * 删除试卷
@@ -124,7 +126,7 @@ public interface IPaperService extends IService<Paper> {
      * @param paperQueryDTO 查询参数
      * @return 模板列表
      */
-    Map<String, Object> queryTemplate(PaperQueryDto paperQueryDTO);
+    IPage<PaperVo> queryTemplate(PaperQueryDto paperQueryDTO);
 
     /**
      * 发布试卷，也就是将试卷中publishedTime加一
